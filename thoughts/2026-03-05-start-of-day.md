@@ -1,6 +1,9 @@
-> **Title:** I Replaced My Morning Routine with a Single Command
-> **Date:** 2026-03-05 · **Author:** Abhi Basu
-> **Tags:** `start-of-day` `workflow` `slack` `gmail` `calendar` `inbox-zero`
+---
+title: "I Replaced My Morning Routine with a Single Command"
+date: 2026-03-05
+author: Abhi Basu
+tags: [start-of-day, workflow, slack, gmail, calendar, inbox-zero]
+---
 
 # I Replaced My Morning Routine with a Single Command
 
