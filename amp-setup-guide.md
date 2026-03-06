@@ -294,12 +294,24 @@ Your `~/AGENTS.md` file is the master configuration. It tells Amp your identity,
     ├── index.html    # Web viewer UI
     └── serve.py      # Local dev server
 
-~/bin/amp-mem          # CLI tool (16 subcommands)
+~/bin/amp-mem          # CLI tool (21 subcommands)
 
 ~/.agents/skills/
 ├── memory/SKILL.md    # Teaches agents to use amp-mem
 └── kb-distill/SKILL.md # Distills observations into knowledge
 ```
+
+#### amp-mem Plugin
+
+The **amp-mem plugin** (`~/.config/amp/plugins/amp-mem.ts`) wraps the CLI and provides passive memory capture:
+
+- **Passive capture**: Automatically captures observations from Linear, Gmail, Slack, Notion, Google Drive, and Bash tool results
+- **Noise filtering**: Ignores read-only tools (Read, Grep, finder, oracle, librarian), orchestration (Task, handoff, skill), and noisy ops (Gmail labels, Slack list)
+- **AI gating**: Uses `ctx.ai.ask()` at agent.end to classify turn observations (p>0.65 threshold)
+- **File edit batching**: Accumulates file edits per turn and saves as a single observation
+- **Privacy tags**: Detects `<private>` in user messages and passes `--private` to all saves from that turn
+- **Context injection**: Injects budgeted memory context at agent.start (private observations excluded)
+- **Registered tools**: `amp_mem_search`, `amp_mem_save` (with `private` option), `amp_mem_stats`
 
 ### Setup
 
@@ -330,7 +342,11 @@ CREATE TABLE IF NOT EXISTS observations (
     ts TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now')),
     type TEXT NOT NULL DEFAULT 'observation',
     topic TEXT NOT NULL, summary TEXT NOT NULL,
-    project TEXT, file_path TEXT, tags TEXT, metadata TEXT
+    project TEXT, file_path TEXT, tags TEXT, metadata TEXT,
+    confidence REAL NOT NULL DEFAULT 1.0,
+    access_count INTEGER NOT NULL DEFAULT 0,
+    last_accessed TEXT,
+    private INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE VIRTUAL TABLE IF NOT EXISTS observations_fts USING fts5(
@@ -362,14 +378,9 @@ amp-mem init
 
 #### Step 5: Configure AGENTS.md
 
-Add to your `~/AGENTS.md` Session Start section:
+Add to your `~/AGENTS.md` Session Start section a reference to the amp-mem plugin handling init, backup, context injection, and distill-status checks automatically.
 
-```
-amp-mem init (idempotent) → amp-mem context --lines 50
-amp-mem distill-status → if pending > 50 or last > 7 days, auto-run kb-distill
-```
-
-Add a Memory System section covering: aggressive capture, proactive recall, session-end summary, and implicit pattern learning.
+Add a Memory System section covering: passive capture (via the plugin), noise filtering, privacy tags (`<private>` markers), proactive recall, context injection, and implicit pattern learning.
 
 #### Step 6: Verify
 
@@ -400,6 +411,8 @@ amp-mem serve         # Web viewer at localhost:37777
 | `distill-dump` | Dump observations for distillation |
 | `distill-record` | Record distillation run |
 | `distill-status` | Check pending count |
+| `decay` | Apply confidence decay to aging observations |
+| `ingest-thread` | Ingest an Amp thread (de-duplicated) |
 
 ### Observation Types
 
@@ -451,6 +464,8 @@ amp-mem init
 | `knowledge.md` alongside SQLite | Plain-text for human readability |
 | Distillation | Compresses raw observations into structured knowledge |
 | Idempotent init | Safe to run every session start |
+| Privacy tags | `<private>` markers exclude observations from context injection and default search |
+| Confidence decay | Time-based decay with type-specific half-lives; permanent types never decay |
 
 ---
 

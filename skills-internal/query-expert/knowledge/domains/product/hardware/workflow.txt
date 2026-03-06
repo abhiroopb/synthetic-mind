@@ -1,0 +1,27 @@
+If asked how many active devices there are, please always follow up and ask: do you want this based on if the device took a payment or if the device turned on? 
+- If active by payment, then use YOUR_HARDWARE_SCHEMA.FACT_TRANSACTIONS_DAILY. 
+- If active by turned on, then use YOUR_HARDWARE_SCHEMA.DAILY_ACTIVE_DEVICE
+
+If asked a question about emoney transactions:
+- Use the YOUR_HARDWARE_SCHEMA.EMONEY_TRANSACTIONS table
+- Do not use YOUR_HARDWARE_SCHEMA.FACT_TRANSACTIONS_DAILY
+
+Query Guidelines for Hardware Data:
+- Always ask the user about the date range they want for their analysis to avoid scanning entire tables
+- Use reader_type and reader_type_key appropriately for device analysis
+- Handle NULL values in hardware fields appropriately
+
+Before executing hardware queries, verify:
+- Used correct table for emoney questions (adhoc.emoney_transactions)
+- Clarified active device definition with user
+- Applied appropriate device type/version defaults
+- Used reader_type and reader_type_key appropriately
+- Considered data refresh timing for date ranges
+- Checked if third-party retail tracking limitations apply
+
+If there is a data issue, the user seeing “does not exist or not authorized” for hardware data:
+- Users need to request access via the Hardware Data Users role in your access management system 
+- Tell the user once it is approved, it will take an hour to give you access.
+
+If the user is having trouble finding the right answer using hardware data:
+- Recommend reaching out to your #hardware-analytics-channel

@@ -1,0 +1,46 @@
+Device Types and Identifiers:
+- reader_type: Hardware device types (e.g., Terminal, Register, Reader, Stand)
+- reader_type_key: Specific hardware model versions
+- reader_type_family: Higher level grouping of related reader types
+- fatp_serial: Unique serial number for hardware devices (also referred to as: serial number, FATP, or unique identifier for a hardware/reader type). 
+- location_id: Unique identifier for customer's physical location 
+- customer_id: Unique identifier for the customer
+- WOM: Week of Manufacture (derived from first 3 characters of FATP serial)
+
+Device Details: 
+- vertical or app_name: Point of Sale (POS) product used for the transaction or app
+- app_version: point of sale (POS) version 
+- os_name: Name of the operating system
+- os_version: Full version number of the operating system 
+- firmware version: the version of the firmware 
+
+Data Update Frequency:
+- Event tables are typically refreshed once per day
+- All dimension tables are refreshed once per day 
+
+Device Purchase and Distribution
+- Shop purchases can be tracked through YOUR_HARDWARE_SCHEMA.FACT_SHOP_LINE_ITEM
+- Third-party retail purchases (Amazon, Best Buy) aren't directly tracked. A device is sent to the retailer and sits on the shelf. We do not know about this device until the customer turns it on / takes a payment
+- Can identify device usage through activation events in product_events
+
+Important Metrics:
+- Payment methods: dips, swipes, taps (counts and volume)
+- Performance metrics: connectivity, transactions, errors, crashes 
+- Firmware metrics: adoption rates, update success/failure
+- Warranty and returns tracking
+- Transaction success rates and error tracking
+
+Two ways to measure active devices:
+- Payment-based: Device took a payment
+- Telemetry-based: Device sent heartbeat signals
+
+Golden Datasets:
+- YOUR_HARDWARE_SCHEMA.FACT_TRANSACTIONS_DAILY
+- YOUR_HARDWARE_SCHEMA.FACT_DEVICE_PERFORMANCE
+- YOUR_HARDWARE_SCHEMA.EMONEY_TRANSACTIONS
+- YOUR_HARDWARE_SCHEMA.HARDWARE_WARRANTIES
+- YOUR_HARDWARE_SCHEMA.FACT_READER
+- YOUR_HARDWARE_SCHEMA.DAILY_ACTIVE_DEVICE
+- YOUR_HARDWARE_SCHEMA.FACT_SHOP_READER
+- YOUR_HARDWARE_SCHEMA.FACT_SHOP_LINE_ITEM
+- YOUR_HARDWARE_SCHEMA.FACT_PRINT_JOB

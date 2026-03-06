@@ -34,6 +34,7 @@ A living collection of learnings from working deeply with AI agents, LLMs, and a
 
 ## Latest Updates
 
+- **2026-03-05** — [Building a Persistent Memory System for Amp — From Zero to Cross-Session Intelligence](./thoughts/2026-03-05-building-amp-mem.md) *(thought)*
 - **2026-03-05** — [I Replaced My Morning Routine with a Single Command](./thoughts/2026-03-05-start-of-day.md) *(thought)*
 - **2025-06-02** — [Amp Setup Guide: Skills, Memory & Configuration](./amp-setup-guide.md) *(guide)*
 

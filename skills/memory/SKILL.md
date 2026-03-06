@@ -36,12 +36,12 @@ Use these types when saving to enable filtering:
 
 ### Save an observation
 ```bash
-amp-mem save <type> "<topic>" "<summary>" [--project NAME] [--file PATH] [--tags "a,b,c"] [--session ID]
+amp-mem save <type> "<topic>" "<summary>" [--project NAME] [--file PATH] [--tags "a,b,c"] [--session ID] [--private]
 ```
 
 ### Search memory (FTS5 — ranked results, compact index)
 ```bash
-amp-mem search "query" [--type TYPE] [--project PROJECT] [--after DATE] [--before DATE] [--limit N]
+amp-mem search "query" [--type TYPE] [--project PROJECT] [--after DATE] [--before DATE] [--limit N] [--include-private]
 ```
 
 ### Progressive Disclosure (3-layer retrieval)
@@ -80,6 +80,7 @@ amp-mem serve --port 37777       # Start web viewer
 amp-mem session-start            # Start a new session (returns ID)
 amp-mem session-end --session 1  # End a session
 amp-mem migrate                  # Import legacy sessions.jsonl
+amp-mem decay                    # Apply confidence decay to aging observations
 ```
 
 ## Auto-Capture Protocol
@@ -87,6 +88,8 @@ amp-mem migrate                  # Import legacy sessions.jsonl
 ### What to capture (be aggressive)
 
 Save a memory entry whenever ANY of these occur:
+
+> **Note:** When the amp-mem plugin (`~/.config/amp/plugins/amp-mem.ts`) is installed, most of this capture happens automatically. The plugin passively captures tool results (Linear, Gmail, Slack, Notion, Google Drive, Bash), batches file edits, and AI-gates observations at agent.end with p>0.65 threshold. The protocol below describes what gets captured — you don't need to do it manually.
 
 1. **Every file edit** — "Edited X to do Y" (with file path)
 2. **Every significant bash command** — commands that reveal system state or produce important output
@@ -136,3 +139,6 @@ Features:
 - No external APIs or network calls
 - User can directly edit/delete entries in the SQLite database
 - The knowledge.md file can be manually edited for quick corrections
+- **Privacy tags:** When a user's message contains `<private>`, all observations from that turn are saved with `--private` and excluded from context injection and default search
+- **Explicit private saves:** Use `amp_mem_save` with `private: true` or `amp-mem save ... --private` to mark specific observations as private
+- **Revealing private entries:** Use `amp-mem search <query> --include-private` to include private observations in search results

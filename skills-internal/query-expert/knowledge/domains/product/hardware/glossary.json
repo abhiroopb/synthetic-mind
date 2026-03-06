@@ -1,0 +1,302 @@
+{
+  "terminals": {
+    "T2": {
+      "marketing_name": "Hardware Terminal",
+      "description": "Handheld all-in-one payment device with integrated receipt printer",
+      "release_year": 2018,
+      "variants": {
+        "T2a": {
+          "description": "Original generation",
+          "chipset": "msm8916_64",
+          "status": "EOL"
+        },
+        "T2b": {
+          "description": "Updated generation with faster chip, more RAM, EMoney support",
+          "chipset": "sdm660_64",
+          "status": "Current"
+        }
+      }
+    },
+    "T2J": {
+      "marketing_name": "Hardware Terminal Japan",
+      "description": "Japan-specific variant of Hardware Terminal",
+      "region": "Japan"
+    },
+    "T3": {
+      "marketing_name": "Hardware Handheld",
+      "description": "Next-generation handheld device without printer, dip/tap only, with camera and barcode scanner",
+      "release_year": 2025,
+      "variants": {
+        "T3a": {
+          "description": "Current generation",
+          "skus": ["Wi-Fi only", "Cellular"]
+        }
+      }
+    }
+  },
+  "registers": {
+    "X2": {
+      "marketing_name": "Hardware Register",
+      "description": "Tabletop all-in-one payment device with dual displays",
+      "release_year": 2017,
+      "components": {
+        "Hodor": {
+          "description": "Seller-facing display (SFD) - larger screen",
+          "type": "SFD"
+        },
+        "Bran": {
+          "description": "Buyer-facing display (BFD) - smaller customer screen",
+          "type": "BFD"
+        }
+      },
+      "variants": {
+        "X2a": {
+          "description": "Original generation",
+          "chipset": "msm8916_64",
+          "status": "EOL"
+        },
+        "X2b": {
+          "description": "Updated generation with faster chip, more RAM, EMoney support",
+          "chipset": "sdm660_64",
+          "status": "Current"
+        },
+        "X2c": {
+          "description": "Latest generation hardware revision",
+          "status": "Latest"
+        }
+      }
+    }
+  },
+  "readers": {
+    "R4": {
+      "marketing_name": "Hardware Credit Card Reader",
+      "description": "Credit Card Reader for iPhone, iPad and Android",
+      "variants": {
+        "R4_RED": "RED edition variant"
+      }
+    },
+    "R6": {
+      "marketing_name": "Hardware EMV Reader",
+      "description": "EMV chip card reader"
+    },
+    "R9": {
+      "marketing_name": "Vertical EMV Reader",
+      "description": "Vertical EMV dip Reader without Contactless",
+      "code_name": "A9"
+    },
+    "R12": {
+      "marketing_name": "Hardware Contactless and Chip Reader",
+      "description": "Current generation contactless and chip card reader",
+      "variants": {
+        "R12a": {
+          "description": "Original version",
+          "status": "EOL"
+        },
+        "R12b": {
+          "description": "Updated version",
+          "status": "EOL"
+        },
+        "R12c": {
+          "description": "Further revision",
+          "status": "EOL"
+        },
+        "R12d": {
+          "description": "Latest version",
+          "status": "Current"
+        }
+      }
+    },
+    "R41": {
+      "marketing_name": "Terminal Reader",
+      "description": "Specific terminal device reader"
+    },
+    "R42": {
+      "marketing_name": "3.5mm Readhead",
+      "description": "3.5mm audio jack card reader"
+    }
+  },
+  "stands": {
+    "S1": {
+      "marketing_name": "Hardware Stand (Legacy)",
+      "description": "Original Hardware Stand for iPad",
+      "status": "EOL",
+      "variants": {
+        "S1a": "Original version",
+        "S1b": "Second generation",
+        "S1c": "Third generation", 
+        "S1d": "Fourth generation",
+        "S1e": "Fifth generation"
+      }
+    },
+    "S3": {
+      "marketing_name": "Hardware Stand",
+      "description": "Current generation Hardware Stand",
+      "variants": {
+        "S3a": {
+          "description": "Current Stand version",
+          "configurations": ["Stand", "Kiosk Mount"]
+        },
+        "S3b": {
+          "description": "Updated Stand version",
+          "configurations": ["Stand", "Kiosk Mount"]
+        }
+      }
+    },
+    "S3M": {
+      "marketing_name": "Hardware Kiosk",
+      "description": "Stand mounted configuration for kiosk use"
+    }
+  },
+  "hubs": {
+    "H1": {
+      "description": "USB hub for S1, connects peripherals",
+      "compatibility": ["S1", "D1", "P1"]
+    },
+    "H2": {
+      "description": "USB hub for iPad connections"
+    },
+    "H3": {
+      "description": "X2 USB Hub",
+      "variants": {
+        "H3b": "X2b USB Hub",
+        "H3c": "X2c USB Hub"
+      }
+    },
+    "H4": {
+      "description": "T2 USB Hub"
+    },
+    "H41": {
+      "description": "S3 USB Hub without Ethernet",
+      "variants": {
+        "H41_Richtek": "Richtek version"
+      }
+    },
+    "H51": {
+      "description": "S3a USB Hub for USB-C host without Ethernet"
+    },
+    "H52": {
+      "description": "T2b USB Hub for USB-C host with Ethernet"
+    }
+  },
+  "power_supplies": {
+    "P1D": {
+      "description": "24W power supply (universal AC input, 12V DC output)"
+    },
+    "P2": {
+      "description": "X2 Power supply"
+    },
+    "P4": {
+      "description": "T2 Power supply"
+    },
+    "P5": {
+      "description": "USB-C 45W power supply",
+      "variants": {
+        "P5b": "Cost-reduced version for S3x/T2b"
+      }
+    },
+    "P6": {
+      "description": "T3 power supplies",
+      "regional_variants": {
+        "Type_A": ["US", "CA", "JP"],
+        "Type_C": ["FR", "ES"], 
+        "Type_G": ["UK", "IE"],
+        "Type_I": ["AU"]
+      }
+    },
+    "P7": {
+      "description": "X2c power supplies",
+      "regional_variants": {
+        "Type_A": ["US", "CA", "JP"]
+      }
+    },
+    "P8": {
+      "description": "K1 100W power supply"
+    }
+  },
+  "cables": {
+    "C6": {
+      "description": "Power Cable for S3, T2, X2",
+      "variants": {
+        "C61": "Upgraded AC with Ground Pin"
+      }
+    },
+    "C9": {
+      "description": "X2 1m right angle cable"
+    },
+    "C19": {
+      "description": "X2 2m right angle cable"
+    },
+    "C20": {
+      "description": "R12d cable"
+    },
+    "C21": {
+      "description": "2m USB-C to A cable"
+    },
+    "C29": {
+      "description": "X2 active cable"
+    },
+    "C35": {
+      "description": "T3 3.5mm to USB-C Audio Adapter"
+    },
+    "C71": {
+      "description": "P6 1m USB-C cable"
+    },
+    "C72": {
+      "description": "P6 2m USB-C cable"
+    },
+    "C91": {
+      "description": "X2c 1m right angle cable"
+    },
+    "C92": {
+      "description": "X2c 2m extended right angle cable"
+    }
+  },
+  "accessories": {
+    "D1": {
+      "description": "Cash drawer"
+    },
+    "K1": {
+      "description": "Hardware Case"
+    }
+  },
+  "development_hardware": {
+    "form_factors": {
+      "FF": {
+        "name": "Form Factor",
+        "description": "Production-like devices that look like retail units sold to merchants"
+      },
+      "NED": {
+        "name": "Non Enclosed Device", 
+        "description": "Development devices in flat plastic casing for easier component access"
+      }
+    }
+  },
+  "chipsets": {
+    "msm8916_64": {
+      "description": "Original chipset used in 'a' generation devices (X2a, T2a)",
+      "generation": "Generation A"
+    },
+    "sdm660_64": {
+      "description": "Updated chipset used in 'b' generation devices (X2b, T2b)",
+      "generation": "Generation B",
+      "improvements": ["Faster processing", "More RAM", "EMoney payment support"]
+    }
+  },
+  "software": {
+    "SQUID": {
+      "full_name": "Brand A Android",
+      "description": "Brand A's custom Android operating system fork",
+      "runs_on": ["T2", "T3", "X2"]
+    }
+  },
+  "regional_variants": {
+    "Japan": {
+      "special_features": ["EMoney payment support"],
+      "devices": ["T2J"]
+    },
+    "regulatory_variants": {
+      "L": "Lethal - devices requiring regulatory approval",
+      "N/L": "Non-Lethal - devices not requiring special regulatory approval"
+    }
+  }
+}
