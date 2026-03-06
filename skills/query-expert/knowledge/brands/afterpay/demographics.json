@@ -1,0 +1,535 @@
+{
+  "consumer_segmentation": {
+    "habituation_segments": {
+      "description": "Global segmentation designating consumer's position in habituation journey based on recency and frequency, with regional nuances",
+      "source_tables": [
+        "ap_cur_strat_g.curated_strategy_green.crm_customer_segmentation_us (current segments)",
+        "ap_cur_strat_g.curated_strategy_green.crm_customer_segmentation_hist_cutoffs (historical SCD2)",
+        "ap_cur_strat_g.curated_strategy_green.crm_customer_segmentation_hist_monthly (monthly snapshots)",
+        "ap_cur_strat_g.curated_strategy_green.order_full (habituation_cohort field)"
+      ],
+      "segments": {
+        "power_users": {
+          "definition": "Highest frequency and most recent shoppers. Top tier of engagement.",
+          "characteristics": "Contribute majority of GPV. Highest lifetime value. Most engaged with app.",
+          "typical_behavior": "Shop multiple times per month. High AOV. Low churn risk.",
+          "marketing_strategy": "Retention and loyalty programs. VIP treatment. Exclusive offers."
+        },
+        "habituated": {
+          "definition": "Regular shoppers with consistent purchase patterns. Established habit.",
+          "characteristics": "Moderate to high frequency. Predictable purchase cycles.",
+          "typical_behavior": "Shop every few weeks. Reliable revenue stream.",
+          "marketing_strategy": "Maintain engagement. Cross-sell new products. Prevent churn."
+        },
+        "occasional": {
+          "definition": "Infrequent shoppers. Lower engagement but not churned.",
+          "characteristics": "Purchase a few times per year. Lower frequency than habituated.",
+          "typical_behavior": "Shop for specific occasions or needs. Price sensitive.",
+          "marketing_strategy": "Increase frequency. Promote new use cases. Seasonal campaigns."
+        },
+        "occasional_at_risk": {
+          "definition": "Occasional shoppers showing signs of decreased engagement.",
+          "characteristics": "Declining purchase frequency. Extended time since last order.",
+          "typical_behavior": "May be exploring competitors. Needs re-engagement.",
+          "marketing_strategy": "Win-back campaigns. Incentives to return. Address pain points."
+        },
+        "power_users_at_risk": {
+          "definition": "Previously high-value customers showing churn signals.",
+          "characteristics": "Historically high frequency but recent decline. High risk of churn.",
+          "typical_behavior": "Extended gap since last purchase. May have found alternatives.",
+          "marketing_strategy": "Urgent retention efforts. Personalized outreach. Premium incentives."
+        },
+        "power_users_lapsed": {
+          "definition": "Former power users who have stopped shopping.",
+          "characteristics": "Long period of inactivity. Previously high value.",
+          "typical_behavior": "No recent orders. Likely using competitors.",
+          "marketing_strategy": "Aggressive win-back. Understand churn reasons. Competitive offers."
+        },
+        "churned": {
+          "definition": "Consumers who have stopped using Afterpay for extended period.",
+          "characteristics": "No activity for 12+ months. Low probability of return.",
+          "typical_behavior": "Inactive account. May have switched to competitors.",
+          "marketing_strategy": "Reactivation campaigns. Understand barriers. New value propositions."
+        },
+        "onboarder": {
+          "definition": "New consumers in first few months. Still establishing habits.",
+          "characteristics": "Recently signed up. May have 0-2 orders.",
+          "typical_behavior": "Exploring product. Learning how to use. High potential.",
+          "marketing_strategy": "Onboarding education. First purchase incentives. Build habit."
+        },
+        "never_active": {
+          "definition": "Signed up but never completed first order within 12 months.",
+          "characteristics": "Registered account with no purchase history.",
+          "typical_behavior": "Abandoned onboarding. May have concerns or barriers.",
+          "marketing_strategy": "Activation campaigns. Remove barriers. First order incentives."
+        },
+        "oncers": {
+          "definition": "Consumers who made exactly one purchase and never returned.",
+          "characteristics": "Single order only. Did not establish habit.",
+          "typical_behavior": "One-time use. May have had poor experience.",
+          "marketing_strategy": "Second purchase campaigns. Address experience issues. Build loyalty."
+        }
+      },
+      "regional_variations": {
+        "note": "Segment definitions vary by region (AU, NZ, US, UK, CA) based on local consumer behavior patterns",
+        "example": "Power user thresholds differ between ANZ (higher frequency) and US markets"
+      }
+    },
+    "lifecycle_stages": {
+      "description": "Consumer journey stages from acquisition through retention",
+      "stages": {
+        "signed_up": "Created account. Event: production.event.paylater.consumer.registration.v1",
+        "credit_contract_accepted": "Accepted terms. Ready to shop. Event: production.event.paylater.consumer.account.credit-contract-accepted.v1",
+        "first_order": "Completed first purchase. Becomes NAC (New Active Customer)",
+        "established": "3+ successful money movements in 30 days. ESTABLISHMENT_DATE tracked",
+        "repeat_customer": "Multiple orders. Building habit and loyalty",
+        "loyal_customer": "Consistent purchases over extended period. High lifetime value",
+        "at_risk": "Declining engagement. Needs intervention",
+        "churned": "Stopped using. Requires reactivation"
+      }
+    },
+    "generation_segments": {
+      "description": "Age-based consumer segmentation. Calculated from birth_year obtained during IDV",
+      "note": "~25% of consumers haven't completed IDV so generation data is incomplete",
+      "segments": {
+        "gen_z": {
+          "definition": "Born 1997-2012. Ages 13-28 (as of 2025)",
+          "characteristics": "Digital natives. Mobile-first. Value transparency and authenticity.",
+          "afterpay_relevance": "Core target demographic. High BNPL adoption. Prefer flexible payments over credit cards.",
+          "shopping_behavior": "Fashion, beauty, lifestyle. Influenced by social media. Frequent small purchases."
+        },
+        "gen_alpha": {
+          "definition": "Born 2013+. Ages 12 and under (as of 2025)",
+          "characteristics": "Youngest generation. Limited purchasing power currently.",
+          "afterpay_relevance": "Future opportunity. May use through Families/Teen accounts.",
+          "shopping_behavior": "Emerging. Influenced by parents and online content."
+        },
+        "millennial": {
+          "definition": "Born 1981-1996. Ages 29-44 (as of 2025)",
+          "characteristics": "Tech-savvy. Value experiences. Budget-conscious.",
+          "afterpay_relevance": "Significant user base. Higher AOV than Gen Z. Established shopping habits.",
+          "shopping_behavior": "Home goods, electronics, travel. Value convenience and flexibility."
+        },
+        "gen_x": {
+          "definition": "Born 1965-1980. Ages 45-60 (as of 2025)",
+          "characteristics": "Independent. Skeptical of marketing. Value quality.",
+          "afterpay_relevance": "Growing segment. Higher income. Larger purchases.",
+          "shopping_behavior": "Practical purchases. Home improvement. Quality over quantity."
+        },
+        "baby_boomer": {
+          "definition": "Born 1946-1964. Ages 61-79 (as of 2025)",
+          "characteristics": "Traditional values. Less tech-native. Higher disposable income.",
+          "afterpay_relevance": "Smaller segment. Requires education on BNPL benefits.",
+          "shopping_behavior": "Established brands. Higher ticket items. Less frequent purchases."
+        }
+      },
+      "data_fields": {
+        "birth_year": "Year of birth from IDV. Used to calculate age and generation",
+        "age": "Calculated from birth_year. Current age of consumer",
+        "generation": "Derived field categorizing consumer by birth year cohort"
+      }
+    },
+    "gender_segments": {
+      "description": "Gender-based consumer segmentation",
+      "note": "Gender data obtained during IDV or inferred from consumer behavior",
+      "segments": ["male", "female", "non_binary", "prefer_not_to_say", "unknown"],
+      "data_usage": "Used for demographic analysis and targeted marketing campaigns"
+    },
+    "geographic_segments": {
+      "description": "Location-based consumer segmentation",
+      "levels": {
+        "country": {
+          "field": "country_code or consumer_country_code",
+          "values": ["AU", "US", "GB", "NZ", "CA"],
+          "usage": "Primary geographic segmentation. Determines currency, regulations, product availability"
+        },
+        "state_province": {
+          "field": "state",
+          "usage": "State-level analysis. Identifies regional opportunities and penetration",
+          "top_markets": {
+            "US": ["CA", "TX", "FL", "NY", "IL"],
+            "AU": ["NSW", "VIC", "QLD", "WA", "SA"]
+          }
+        },
+        "metro_flag": {
+          "field": "metro_flag",
+          "values": ["metro", "non_metro"],
+          "usage": "Urban vs rural segmentation. Metro areas typically have higher penetration"
+        },
+        "suburb_city": {
+          "field": "suburb",
+          "usage": "Granular geographic analysis. Identifies specific neighborhoods and communities"
+        },
+        "postcode": {
+          "field": "postcode",
+          "usage": "Zip/postal code level analysis. Used for UK region mapping and DMA analysis"
+        },
+        "dma": {
+          "field": "loc_dma",
+          "description": "Designated Market Area for US. Used for advertising and regional analysis"
+        }
+      },
+      "regional_groupings": {
+        "anz": "Australia and New Zealand combined",
+        "na": "North America (US and Canada)",
+        "uk": "United Kingdom (GB)",
+        "apac": "Asia-Pacific region"
+      }
+    },
+    "income_segments": {
+      "description": "Household income segmentation based on zip code data",
+      "note": "Inferred from geographic data, not directly collected",
+      "segments": {
+        "low_income": "0-30k household income",
+        "middle_income": "30k-70k household income",
+        "high_income": "70k+ household income"
+      },
+      "usage": "Aligns with banking product strategy. Core customers often in 30k-70k range"
+    }
+  },
+  "merchant_segmentation": {
+    "vertical_categories": {
+      "description": "Industry-based merchant classification",
+      "source_tables": [
+        "AP_CUR_MARTECH_G.PUBLIC.TBL_R_IQ_VERTICAL",
+        "AP_CUR_BI_G.CURATED_ANALYTICS_GREEN.MERCHANT_MASTER_2"
+      ],
+      "major_verticals": {
+        "fashion": {
+          "description": "Apparel, footwear, accessories",
+          "characteristics": "High volume. Frequent purchases. Strong Gen Z appeal.",
+          "top_merchants": "Fashion Nova, SHEIN, Zara, H&M",
+          "typical_aov": "$50-150"
+        },
+        "beauty": {
+          "description": "Cosmetics, skincare, haircare, fragrances",
+          "characteristics": "Loyal customer base. High repeat rate. Premium pricing.",
+          "top_merchants": "Sephora, Ulta, LookFantastic",
+          "typical_aov": "$60-120"
+        },
+        "retail": {
+          "description": "General merchandise, department stores, specialty retail",
+          "characteristics": "Broad product range. Varied AOV. Omnichannel presence.",
+          "top_merchants": "Target, Macy's, Nordstrom",
+          "typical_aov": "$80-200"
+        },
+        "health_beauty": {
+          "description": "Health products, wellness, beauty services",
+          "characteristics": "Growing category. Health-conscious consumers.",
+          "typical_aov": "$50-100"
+        },
+        "home_garden": {
+          "description": "Home goods, furniture, decor, gardening",
+          "characteristics": "Higher AOV. Less frequent purchases. Project-based.",
+          "typical_aov": "$150-500"
+        },
+        "electronics": {
+          "description": "Consumer electronics, gadgets, tech accessories",
+          "characteristics": "High AOV. Considered purchases. Tech-savvy audience.",
+          "typical_aov": "$200-800"
+        },
+        "sports_outdoors": {
+          "description": "Athletic wear, sporting goods, outdoor equipment",
+          "characteristics": "Active lifestyle consumers. Seasonal patterns.",
+          "typical_aov": "$80-250"
+        },
+        "jewelry_accessories": {
+          "description": "Fine jewelry, watches, fashion accessories",
+          "characteristics": "Premium pricing. Gift purchases. Special occasions.",
+          "typical_aov": "$100-500"
+        },
+        "travel": {
+          "description": "Travel booking, accommodations, experiences",
+          "characteristics": "High AOV. Infrequent purchases. Planning-based.",
+          "typical_aov": "$300-2000",
+          "note": "Growing vertical for Afterpay"
+        },
+        "food_dining": {
+          "description": "Food delivery, restaurants, meal kits",
+          "characteristics": "High frequency. Lower AOV. Convenience-driven.",
+          "top_merchants": "DoorDash, Uber Eats",
+          "typical_aov": "$20-60",
+          "note": "Strong Cash App Pay presence"
+        },
+        "pets_vets": {
+          "description": "Pet supplies, veterinary services, pet care",
+          "characteristics": "Loyal customer base. Recurring needs.",
+          "typical_aov": "$50-150"
+        },
+        "entertainment": {
+          "description": "Events, tickets, gaming, streaming",
+          "characteristics": "Experience-based. Varied AOV. Impulse purchases.",
+          "top_merchants": "StubHub, Ticketmaster",
+          "typical_aov": "$50-300"
+        }
+      }
+    },
+    "merchant_size_segments": {
+      "description": "Segmentation based on merchant GPV and scale",
+      "segments": {
+        "enterprise": {
+          "definition": "Largest merchants. Multi-million dollar annual GPV",
+          "characteristics": "National/international brands. Omnichannel. Complex integrations.",
+          "examples": "Amazon (via SUP), Target, Sephora"
+        },
+        "mid_market": {
+          "definition": "Medium-sized merchants. Strong regional or category presence",
+          "characteristics": "Growing brands. Multi-location. Professional operations.",
+          "typical_gpv": "$1M-10M annually"
+        },
+        "smb": {
+          "definition": "Small to medium businesses. Independent retailers",
+          "characteristics": "Local or online-only. Single or few locations. Owner-operated.",
+          "typical_gpv": "$100K-1M annually"
+        },
+        "emerging": {
+          "definition": "New or small merchants just starting with Afterpay",
+          "characteristics": "Testing BNPL. Building customer base. Limited volume.",
+          "typical_gpv": "<$100K annually"
+        }
+      }
+    },
+    "channel_segments": {
+      "description": "How merchants accept Afterpay payments",
+      "channels": {
+        "online": {
+          "field_value": "sales_channel = 'Online'",
+          "description": "E-commerce checkout integration. Largest channel.",
+          "characteristics": "Higher conversion. Broader reach. Digital-first merchants."
+        },
+        "instore": {
+          "field_value": "sales_channel = 'Instore'",
+          "description": "Physical retail locations using Afterpay card or barcode",
+          "characteristics": "Immediate gratification. Brick-and-mortar presence. Strong in AU.",
+          "note": "Requires app download and card setup by consumer"
+        },
+        "omnichannel": {
+          "description": "Merchants accepting both online and instore",
+          "characteristics": "Highest value consumers. Cross-channel shopping behavior.",
+          "note": "Omnichannel consumers have higher lifetime value"
+        }
+      }
+    },
+    "product_segments": {
+      "description": "Which Afterpay products merchants offer",
+      "products": {
+        "pi4_only": "Standard Pay-in-4 only",
+        "pi4_pay_monthly": "Both Pi4 and Pay Monthly options",
+        "plus_card_enabled": "Accept Afterpay Plus Card",
+        "gift_cards": "Merchant gift cards available in Afterpay app",
+        "sup_enabled": "Accessible via Single Use Payment (major retailers)",
+        "ads_affiliates": "Participating in Afterpay advertising and shop directory"
+      }
+    },
+    "merchant_lifecycle": {
+      "description": "Stages in merchant relationship with Afterpay",
+      "stages": {
+        "prospect": "Not yet live. In sales pipeline.",
+        "onboarding": "Signed contract. Integration in progress.",
+        "newly_launched": "Recently went live. First 90 days. Honeymoon period may apply.",
+        "established": "Consistent volume. Stable performance. Beyond 90 days.",
+        "growing": "Increasing GPV. Expanding relationship.",
+        "at_risk": "Declining volume. Needs attention.",
+        "churned": "No longer processing. Relationship ended."
+      }
+    }
+  },
+  "marketing_audience_naming": {
+    "description": "Standardized naming conventions for marketing campaigns and audience lists",
+    "format": "YYYY-MM-DD_region_type_channel_campaign_name",
+    "components": {
+      "date": {
+        "format": "YYYY-MM-DD",
+        "example": "24-10-09",
+        "description": "Campaign start date"
+      },
+      "region": {
+        "format": "Two-letter country code",
+        "values": ["au", "nz", "us", "uk", "ca", "anz"],
+        "example": "au"
+      },
+      "type": {
+        "values": {
+          "newsl": "Newsletter campaigns for updates and curated content",
+          "lifecl": "Lifecycle campaigns based on customer stage",
+          "acquisition": "New customer acquisition campaigns",
+          "paid": "Paid advertising channels",
+          "multi": "Multi-channel campaigns",
+          "other": "Surveys, special campaigns"
+        }
+      },
+      "channel": {
+        "values": {
+          "push": "Mobile app push notifications",
+          "email": "Email campaigns",
+          "sms": "Text message campaigns",
+          "inapp": "In-app messages",
+          "journey": "Automated journey campaigns",
+          "xchannel": "Cross-channel unified campaigns",
+          "social": "Social media (paid)",
+          "video": "Video platforms (paid)",
+          "audio": "Audio platforms like Spotify (paid)",
+          "display": "Display advertising (paid)"
+        }
+      },
+      "campaign_name": {
+        "format": "lowercase_with_underscores",
+        "examples": [
+          "fathers_day",
+          "bau_habituated_all",
+          "intent_occasional",
+          "higher-limits_>$4k",
+          "lapsed_180d_giftcards"
+        ]
+      }
+    },
+    "common_audience_segments": {
+      "by_habituation": [
+        "power-users",
+        "habituated",
+        "occasional",
+        "occasional-at-risk",
+        "power-users-at-risk",
+        "power-users-lapsed",
+        "churned",
+        "never-active-12m",
+        "oncers"
+      ],
+      "by_behavior": [
+        "shopped_L12M (shopped last 12 months)",
+        "shopped-cyber-23 (shopped during Cyber Monday 2023)",
+        "in-store-lapsed",
+        "online-only-instore-lapsed",
+        "card-setup (completed instore card setup)",
+        "has-downloaded-app",
+        "has-shopped-instore"
+      ],
+      "by_vertical": [
+        "beauty",
+        "fashion",
+        "travel",
+        "food-dining",
+        "health-beauty",
+        "pets-vets"
+      ],
+      "by_product": [
+        "giftcards",
+        "flexible-payments-active",
+        "afterpay-plus",
+        "sup"
+      ],
+      "by_lifecycle": [
+        "signed-up-2d (signed up 2 days ago)",
+        "first-order-2d (first order 2 days ago)",
+        "welcome-series",
+        "churn-50d (at risk, 50 days since last order)",
+        "lapsed-11m (lapsed 11 months)"
+      ],
+      "by_demographics": [
+        "18-24 (age range)",
+        "gen-z",
+        "millennial"
+      ]
+    },
+    "exclusion_lists": [
+      "opt-out",
+      "all-customers-exclusion",
+      "shopped-instore-EXCLUSION"
+    ]
+  },
+  "data_tables_for_demographics": {
+    "consumer_demographics": {
+      "primary_table": "AP_CUR_BI_G.CURATED_ANALYTICS_GREEN.CUR_C_M_CONSUMER_MASTER",
+      "description": "Source of truth for consumer master data",
+      "key_fields": [
+        "consumer_id",
+        "consumer_uuid",
+        "country_code",
+        "state",
+        "suburb",
+        "postcode",
+        "metro_flag",
+        "birth_year",
+        "generation",
+        "gender",
+        "created_date",
+        "order_cnt (lifetime order count)",
+        "order_amt_sum (lifetime spend)",
+        "account_limit"
+      ]
+    },
+    "habituation_segments": {
+      "current": "ap_cur_strat_g.curated_strategy_green.crm_customer_segmentation_us",
+      "historical_scd2": "ap_cur_strat_g.curated_strategy_green.crm_customer_segmentation_hist_cutoffs",
+      "monthly_snapshots": "ap_cur_strat_g.curated_strategy_green.crm_customer_segmentation_hist_monthly",
+      "order_level": "ap_cur_strat_g.curated_strategy_green.order_full (habituation_cohort field)"
+    },
+    "merchant_demographics": {
+      "primary_table": "AP_CUR_BI_G.CURATED_ANALYTICS_GREEN.MERCHANT_MASTER_2",
+      "description": "Source of truth for merchant master data",
+      "key_fields": [
+        "merchant_id",
+        "merchant_name",
+        "country_code",
+        "merchant_status",
+        "vertical",
+        "category",
+        "online_first_order_date",
+        "instore_first_order_date",
+        "honeymoon_rate_online",
+        "honeymoon_end_date_online"
+      ]
+    },
+    "vertical_mapping": {
+      "table": "AP_CUR_MARTECH_G.PUBLIC.TBL_R_IQ_VERTICAL",
+      "description": "Vertical data assigned to each merchant"
+    },
+    "order_demographics": {
+      "table": "AP_CUR_BI_G.CURATED_ANALYTICS_GREEN.CUR_C_M_ORDER_MASTER",
+      "description": "Order-level data with consumer and merchant demographics",
+      "key_fields": [
+        "order_id",
+        "consumer_id",
+        "merchant_id",
+        "order_date",
+        "order_source (online/instore)",
+        "country_code",
+        "order_amount_local",
+        "order_amount_usd"
+      ]
+    }
+  },
+  "thoughtspot_dashboards": {
+    "consumer_demographics": [
+      "Global Merchant QBR Template (2024) - includes generation, gender, location demographics",
+      "Afterpay Orders - Habituation Segment field available",
+      "Order date cohort - Consumer's segment at beginning of month"
+    ],
+    "geographic_analysis": [
+      "Portfolio dashboard for account management",
+      "Geographic performance by region/state/metro"
+    ]
+  },
+  "key_insights": {
+    "consumer_behavior": [
+      "Power users contribute majority of GPV despite being smaller segment",
+      "Gen Z is core demographic but growing across all age groups",
+      "Metro areas have higher penetration than non-metro",
+      "Omnichannel consumers have significantly higher lifetime value",
+      "Habituation segments vary by region due to cultural shopping differences"
+    ],
+    "merchant_patterns": [
+      "Fashion and beauty are largest verticals by volume",
+      "Online channel dominates but instore strong in Australia",
+      "Enterprise merchants drive bulk of GPV but SMB important for diversity",
+      "Honeymoon periods help new merchants test Afterpay with lower fees",
+      "Vertical performance varies significantly by country"
+    ],
+    "regional_differences": [
+      "ANZ: Higher instore adoption, more established market, higher frequency",
+      "US: Largest market, online-focused, growing Pay Monthly",
+      "UK: Strong Clearpay brand, online-dominant, fashion-heavy",
+      "CA: Smaller market, similar patterns to US"
+    ]
+  }
+}

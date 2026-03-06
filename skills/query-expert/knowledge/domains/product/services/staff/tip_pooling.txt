@@ -1,0 +1,75 @@
+# Square Staff Tip Pooling - Data Guide
+
+## Business Context
+
+Tip Pooling is a Square Staff feature that allows merchants to distribute tips among employees using different methods beyond direct attribution. This feature is critical for Food & Beverage businesses where equitable tip distribution is a core operational need.
+
+**Key Business Facts:**
+- #1 product request for Shifts among F&B sellers
+- Primary adoption in Food & Beverage businesses
+- Part of Shifts Plus/Premium pricing tier
+- Launched to "kill the tipping spreadsheet" for sellers
+- Four distribution methods available (Direct, By Transaction, By Hours Worked, By Percentage)
+- Percentage-based pooling launched in 2024 (go/TipPoolPercent)
+
+## Tip Distribution Methods
+
+Square offers four types of tip distribution:
+
+1. **Tip Directly (DIRECT):** Tips attributed to the team member who collected the tip
+2. **Pool by Transaction (POOLED):** Tips split equally among all tip-eligible team members clocked in at time of transaction
+3. **Pool by Hours Worked (POOLED_BY_HOURS):** Tips split based on hours worked
+   - **Workday (POOLED_BY_HOURS_WORKDAY):** 24-hour workday period
+   - **Workweek (POOLED_BY_HOURS_WORKWEEK):** 7-day workweek period
+4. **Pool by Percentage (POOLED_BY_PERCENTAGE):** Tips split by user-defined percentage per job role
+   - **Workday (POOLED_BY_PERCENTAGE_WORKDAY):** Daily percentage allocation
+   - **Workweek (POOLED_BY_PERCENTAGE_WORKWEEK):** Weekly percentage allocation
+
+## Primary Tables
+
+### APP_PA.APP_SQS.SQS_FEATURE_USAGE (VERIFIED)
+**Purpose:** Primary table for tracking tip pooling adoption and activity
+**Grain:** One row per merchant per feature per day
+**Key for:** Historical tip pooling trends and active merchant counts
+
+**Tip Pooling Feature Names:**
+- `labor_tip_pooling_by_transaction` - Pool by transaction method
+- `labor_tip_pooling_by_hours_workday` - Pool by hours (24-hour workday)
+- `labor_tip_pooling_by_hours_workweek` - Pool by hours (7-day workweek)
+- `labor_tip_pooling_by_percentage_workday` - Pool by percentage (daily)
+- `labor_tip_pooling_by_percentage_workweek` - Pool by percentage (weekly)
+
+Important Business Rules
+Feature Usage Table is Primary: Always use APP_PA.APP_SQS.SQS_FEATURE_USAGE for historical tip pooling trends and active merchant counts, not UNIT_TIP_DISTRIBUTION_SETTINGS
+
+Tip Eligibility Required: Only employees marked as "tip eligible" in their profile receive pooled tips
+
+Percentage Allocation Rules:
+
+Percentages must add up to 100%
+Allocated by job role, not individual employees
+Employees with same job split their role's percentage by hours worked
+Unattributed Tips: If no one is clocked in during a tip period, tips can be distributed equally among all tip-eligible employees who worked that workday (if enabled)
+
+Time Period Definitions:
+
+Workday: 24-hour period
+Workweek: 7-day period
+Legal Compliance: Tip pooling methods must comply with federal, state, and local laws. Square provides disclaimers but merchants are responsible for compliance
+
+Pricing: Percentage-based pooling is part of Shifts Plus/Premium tier
+
+Geographic Availability: Available in all markets except Japan (where tipping is not supported)
+
+Key Metrics: 
+
+Tip Pooling Attach Rate: % of eligible sellers using any tip pooling method
+F&B Attach Rate: % of Food & Beverage sellers using tip pooling
+Active Tip Pooling Sellers: Merchants with m_events > 0 in last 30 days
+Pool Duration: Time between start_utc and end_utc of tip pool
+Average Tip Rate: Total pool tips / pool duration hours
+Employee Work Hours: Overlapping hours between employee shift and pool period
+
+Data Experts:
+- PAZAR
+- MSTRINGER 

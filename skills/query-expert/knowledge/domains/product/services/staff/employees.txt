@@ -1,0 +1,386 @@
+================================================================================
+SQUARE STAFF EMPLOYEE DATA REFERENCE GUIDE
+Table: APP_PA.APP_SQS.EMPLOYEES
+Last Updated: December 19, 2025
+================================================================================
+
+================================================================================
+TABLE OVERVIEW
+================================================================================
+
+TABLE NAME: APP_PA.APP_SQS.EMPLOYEES
+DATABASE: APP_PA
+SCHEMA: APP_PA.APP_SQS
+VERIFICATION STATUS: VERIFIED (Human reviewed and approved)
+BRAND: Square
+TABLE TYPE: Analytics
+TOTAL RECENT USERS: 64 active users (past 91 days)
+
+PRIMARY KEY: EMPLOYEE_TOKEN
+
+TABLE PURPOSE:
+This table contains comprehensive employee data for Square Merchants. It tracks 
+employee creation, setup, permissions, activities, and first/last engagement 
+with various Square and Staff features. The table is designed for analyzing 
+employee onboarding, engagement, and utilization of Square's team management, 
+payroll, appointments, shifts, and other business management features.
+
+================================================================================
+DATA EXPERTS & OWNERSHIP
+================================================================================
+
+PRIMARY DATA OWNERS (Connections Data Science Team):
+- Philip Azar (PAZAR) - pazar@squareup.com
+  * Primary table owner and maintainer
+  * Last updated table: November 20, 2025
+  * Most frequent query user in the system
+  
+- Daniel Gole (DGOLE) - dgole@squareup.com
+  * Data Science lead for Staff analytics
+  * Host of Staff Data Insights Review Time (DIRT)
+  
+- Matt Stringer (MSTRINGER) - mstringer@squareup.com
+  * Data Science, Connections team
+  * Frequent user of employee data
+
+SECONDARY USERS:
+- Scott Van Brunt (SVANBRUNT) - Product Management, Staff teams
+- Matias Razuri (MATIASRAZURI) - Lifecycle Data Science
+- Vanessa Qian - Analytics and reporting
+- Ian Cornwall (ICORNWALL) - Data analysis
+
+TEAM CONTACT:
+- Primary Slack Channel: #connections-data
+- Secondary Channel: #staff-data
+- Email: staff-data@squareup.com
+
+================================================================================
+KEY BUSINESS CONCEPTS
+================================================================================
+
+ACTIVE EMPLOYEE DEFINITIONS:
+The table supports 4 tiers of "active" status:
+
+1. ENABLED: A non-account owner employee has is_enabled = TRUE. This is a production label and is only as of current date. DONT use for historical tracking. 
+2. ENGAGED OR UTILIZED: last_engaged_ts OR last_utilized_ts within past 30 days
+3. ENGAGED: last_engaged_ts within past 30 days
+4. UTILIZED: last_utilized_ts within past 30 days
+
+For historical metrics, use deactivated_ts to determine if employee was 
+"enabled" during a specific timeframe.
+
+EMPLOYEE ONBOARDING MILESTONES:
+The table tracks key setup events anchored on employee_created_ts and windowed 
+to FIRST_* feature engagement timestamps (typically 7 or 30 days):
+
+SQL: COUNT(DISTINCT CASE WHEN FIRST_*_TS BETWEEN employee_created_ts AND DATEADD('days', 7, employee_created_ts) THEN employee_token END) AS onboarding_rate 
+
+- Employee creation (employee_created_ts)
+- Job assignment (first_job_assigned_ts)
+- Invitation sent/accepted (first_invitation_sent_ts, first_invitation_accepted_ts)
+- First login (first_login_ts)
+- Payroll setup (payroll_employee_created_ts, payroll_invitation_sent_ts)
+- Payout method setup (first_payout_method_setup_ts)
+- Feature engagement (shifts, appointments, team app, etc.)
+
+EMPLOYEE CREATION FLOWS (employee_created_in):
+- api
+- appointments_legacy
+- appointments_unified_onboarding
+- auth_rep_dashboard
+- auth_rep_register_android/ios/ipados
+- dashboard_legacy
+- payroll_legacy
+- team_applet_register-android/ios
+- team_applet_restaurant-pos-android/ios
+- team_applet_retail-pos-android/ios
+- unified_onboarding
+
+================================================================================
+CRITICAL DATA DEFINITIONS
+================================================================================
+
+UNIQUE IDENTIFIERS:
+- employee_token: Primary key, unique identifier for employee
+- person_token: Unique identifier for the person associated with employee
+- merchant_token: Unique identifier for the seller/merchant
+- employee_facet_id: Payroll unique employee identifier
+- cash_customer_id: Cash App unique identifier for employee
+
+EMPLOYEE STATUS & ROLES:
+- is_enabled: Employee account is active (can login, work, etc.)
+- is_owner_role: Employee is the account owner for the Square merchant
+- is_auth_representative: Employee can act on owner's behalf
+- is_deactivated: Employee is currently deactivated
+- role_name: Permission set name assigned to employee
+- role_type: Type of role assigned to employee
+
+PERMISSIONS & ACCESS:
+- can_access_shared_pos: Can access shared point of sale
+- can_access_mobile_pos: Can access mobile point of sale
+- can_access_dashboard: Can access the dashboard
+- can_take_transactions: Can process transactions
+- can_access_appointments: Can access appointment features
+
+JOB & COMPENSATION:
+- primary_job_title: Employee's primary job title
+- primary_job_wage_type: Wage type (hourly, salary, none)
+- primary_job_wage_amount: Wage amount for primary job
+- is_tip_eligible_employee: Eligible to receive tips
+- all_job_titles: Array of all job titles assigned
+
+PAYROLL DATA:
+- is_payroll_contractor: Classified as contractor for payroll
+- payroll_employee_created_ts: When employee created on payroll
+- payroll_invitation_sent_ts: When payroll invitation sent
+- first_payout_method_setup_ts: When first payout method set up
+- first_payment_method_instrument_setup: First payment method type
+- first_payout_method_setup_by: Who set up (Employer or Employee)
+- current_payout_method: Current payout method
+- payroll_onboarding_method: Who onboarded (employee or employer)
+- payroll_lifetime_payrun_count: Total payruns since first payout
+- payroll_lifetime_gross_pay: Lifetime gross pay amount
+
+CASH APP INTEGRATION:
+- first_linked_cash_app_ts: When Cash App account first linked
+- cash_customer_created_ts: When Cash App customer record created
+- first_cash_app_payout_ts: First payout to Cash App
+- last_cash_app_payout_ts: Most recent payout to Cash App
+- first_cash_app_id_payout_ts: First instant deposit to Cash App
+- last_cash_app_id_payout_ts: Most recent instant deposit to Cash App
+- payroll_lifetime_cash_app_payruns: Total Cash App payruns
+- payroll_lifetime_cash_app_gross_pay: Lifetime gross pay via Cash App
+
+ENGAGEMENT METRICS:
+- first_utilized_ts: First time employee was utilized by employer
+- last_utilized_ts: Most recent utilization by employer
+- first_engaged_ts: First engagement with system
+- last_engaged_ts: Most recent engagement with system
+- first_login_ts: First login timestamp
+- last_login_ts: Most recent login timestamp
+
+SHIFTS & TIME TRACKING:
+- first_shift_scheduled_ts: First scheduled shift
+- last_shift_scheduled_ts: Most recent scheduled shift
+- first_timecard_ts: First timecard created
+- last_timecard_ts: Most recent timecard created
+- first_team_app_login_ts: First Team App session
+- last_team_app_login_ts: Most recent Team App session
+
+APPOINTMENTS:
+- appointments_employee_is_bookable_ts: When employee became bookable
+- first_appointments_calendar_view_ts: First calendar view
+- last_appointments_calendar_view_ts: Most recent calendar view
+- first_appointments_booking_ts: First appointment booking
+- last_appointments_booking_ts: Most recent appointment booking
+
+TIPS & COMMISSIONS:
+- first_direct_tip_ts: First direct tip received
+- last_direct_tip_ts: Most recent direct tip
+- first_tip_pool_ts: First tip pool participation
+- last_tip_pool_ts: Most recent tip pool participation
+- first_commission_ts: First commission taken
+- last_commission_ts: Most recent commission taken
+- first_attributable_sale_ts: First attributable transaction
+- last_attributable_sale_ts: Most recent attributable transaction
+
+BENEFITS:
+- first_has_retirement_ts: First had retirement benefits
+- first_has_workers_comp_ts: First had workers compensation
+- first_has_insurance_ts: First had insurance benefits
+- benefits_insurance_enrolled_ts: When enrolled in insurance
+- benefits_retirement_enrolled_ts: When enrolled in retirement
+- benefits_workers_comp_enrolled_ts: When enrolled in workers comp
+
+NEW HIRE ONBOARDING (NHO):
+- first_nho_task_completed_ts: First NHO task completed
+- first_nho_task_assigned_ts: First NHO task assigned
+- nho_tasks_assigned_f30: Tasks assigned in last 30 days
+- nho_tasks_completed_f30: Tasks completed in last 30 days
+
+================================================================================
+COMMON QUERY PATTERNS
+================================================================================
+
+COUNTING CURRENT ENGAGED OR UTILIZED EMPLOYEES (Most Common Pattern):
+```sql
+SELECT 
+    COUNT(DISTINCT employee_token) AS total_employees,
+    COUNT(DISTINCT merchant_token) AS total_merchants
+FROM app_pa.app_sqs.employees
+WHERE is_enabled = TRUE # not deleted from system 
+  AND (is_owner_role = FALSE OR is_owner_role IS NULL)
+  AND employee_created_in IN (
+      'api', 'appointments_legacy', 'appointments_unified_onboarding',
+      'auth_rep_dashboard', 'auth_rep_register_android', 'auth_rep_register_ios',
+      'auth_rep_register_ipados', 'dashboard_legacy', 'payroll_legacy',
+      'team_applet_register-android', 'team_applet_register-ios',
+      'team_applet_restaurant-pos-android', 'team_applet_restaurant-pos-ios',
+      'team_applet_retail-pos-android', 'team_applet_retail-pos-ios',
+      'unified_onboarding'
+  )
+  AND (
+      TO_DATE(last_engaged_ts) >= DATEADD('day', -31, CURRENT_TIMESTAMP())
+      OR TO_DATE(last_utilized_ts) >= DATEADD('day', -31, CURRENT_TIMESTAMP())
+  );
+```
+
+FILTERING NON-OWNER EMPLOYEES:
+Always use: (is_owner_role = FALSE OR is_owner_role IS NULL)
+
+PAYROLL EMPLOYEES:
+Filter by: employee_facet_id IS NOT NULL
+
+EMPLOYEE ONBOARDING ANALYSIS:
+```sql
+SELECT 
+    merchant_token,
+    employee_token,
+    employee_created_ts,
+    first_job_assigned_ts,
+    first_invitation_sent_ts,
+    first_login_ts,
+    payroll_employee_created_ts,
+    first_payout_method_setup_ts
+FROM app_pa.app_sqs.employees
+WHERE employee_created_ts >= '2025-01-01'
+  AND is_owner_role = FALSE;
+```
+
+CASH APP INTEGRATION ANALYSIS:
+```sql
+SELECT 
+    merchant_token,
+    employee_token,
+    employee_created_ts, 
+    payroll_invitation_sent_ts, 
+    first_linked_cash_app_ts,
+    first_cash_app_payout_ts,
+    payroll_lifetime_cash_app_payruns,
+    payroll_lifetime_cash_app_gross_pay
+FROM app_pa.app_sqs.employees
+WHERE employee_facet_id IS NOT NULL 
+; 
+```
+
+================================================================================
+BUSINESS CONTEXT: EMPLOYEE ONBOARDING
+================================================================================
+
+EMPLOYEE ONBOARDING JOURNEY:
+Square Staff focuses on seamless employee onboarding across multiple touchpoints:
+
+1. EMPLOYEE CREATION
+   - Sellers create employees via Dashboard, POS, Team App, or Payroll
+   - Unified onboarding flow consolidates creation across products
+   - Appointments merged their flow with Staff's Team list (Nov 2024)
+   - 85% of appointment employees made bookable (up from 68%)
+
+2. INVITATION & SETUP
+   - Invitations sent via email or phone (first_invitation_sent_method)
+   - Employees accept and create accounts
+   - Job titles and wage information assigned
+   - Permissions and access rights configured
+
+3. PAYROLL ONBOARDING
+   - Separate payroll invitation flow (payroll_invitation_sent_ts)
+   - EIN setup required for payroll activation
+   - Employee profile and tax page visits tracked
+   - Payout method setup (Cash App, direct deposit, manual check)
+   - Critical metric: Time from invitation to first payout
+
+4. FEATURE ENGAGEMENT
+   - First login to various platforms (mobile POS, dashboard, team app)
+   - First use of shifts, appointments, communications
+   - First attributable sale or transaction
+   - Ongoing engagement tracked via last_engaged_ts and last_utilized_ts
+
+STAFF SETUP GUIDE:
+- Launched to improve onboarding experience
+- Guides sellers through employee creation, payroll setup, shifts configuration
+- A/B testing shows impact on setup rates and feature adoption
+- V2 prioritizes Team Member creation before Payroll setup
+
+KEY ONBOARDING METRICS:
+- Employee creation rate (7D, 30D)
+- EIN setup rate (for payroll)
+- First payout timing
+- Feature adoption rates (shifts, appointments, team app)
+- Cash App linking and payout adoption
+
+================================================================================
+STRATEGIC INITIATIVES (2025-2026)
+================================================================================
+
+EMPLOYEE NETWORK STRATEGY:
+Square is building an "employee network" to connect buyers, staff, and sellers:
+
+1. CASH APP INTEGRATION
+   - Move employee experience into Cash App
+   - Team Member Accounts become Cash App accounts
+   - Team App experience as Cash App applet
+   - Goal: $8B+ addressable annual inflows from Square to Cash App
+
+2. DAILY TIP PAYOUTS
+   - GA launch of instant tip payouts to Cash App
+   - Automated daily payouts without seller intervention
+   - Free tip payouts for employees
+   - Prerequisite: Next-gen tip pooling and attribution
+
+3. TIP MANAGEMENT
+   - Multiple tip pools support
+   - Points-based pooling
+   - Attribution improvements (46% of tips currently unattributed)
+   - Day parts, cash tips, auto gratuity, tip-outs
+
+4. PAYROLL SCALING
+   - KYB integration with PayON
+   - Multi-EIN support for sellers with multiple businesses
+   - Churn return capabilities
+   - Target: Increase SMB+ F&B Payroll attach rate
+
+5. AI/MANAGERBOT SUPPORT
+   - Data and API infrastructure for AI-powered staff management
+   - Intelligent interface for managers
+   - Automated scheduling, insights, task management
+
+CURRENT CHALLENGES:
+- 46% of tip dollars go unattributed to employees
+- Only 63% of employees marked as tip eligible (74% in F&B)
+- Employee creation doesn't always lead to payroll enrollment
+- Mobile POS permission issues (51% encounter "permission required" screen)
+- Setup guide effectiveness varies by seller type
+
+================================================================================
+DATA QUALITY & USAGE NOTES
+================================================================================
+
+IMPORTANT FILTERS:
+- Always exclude account owners for employee counts: 
+  (is_owner_role = FALSE OR is_owner_role IS NULL)
+- Use employee_created_in to filter valid creation flows
+- Consider is_enabled for current active status
+- Use last_engaged_ts/last_utilized_ts for recent activity
+
+LOOKER DASHBOARDS:
+- Staff Employee Onboarding & Engagement Dash (go/employeeonboardingdash)
+- Multiple team dashboards reference this table
+- Query context preserved in Looker-generated queries
+
+================================================================================
+CONTACT & RESOURCES
+================================================================================
+
+FOR QUESTIONS ABOUT:
+- Table structure/schema: Philip Azar (PAZAR)
+- Onboarding metrics: Daniel Gole (DGOLE)
+- Feature engagement: Matt Stringer (MSTRINGER)
+- Product context: Scott Van Brunt (SVANBRUNT)
+
+SLACK CHANNELS:
+- #connections-data (primary support)
+- #proj-connections-daily-tip-payouts (tip payouts)
+
+================================================================================
+END OF DOCUMENT
+================================================================================

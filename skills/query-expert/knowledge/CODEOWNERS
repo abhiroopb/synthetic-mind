@@ -1,0 +1,34 @@
+# Knowledge Store CODEOWNERS
+# 
+# This file defines ownership for domain-specific knowledge resources.
+# Data domain steering committees are responsible for reviewing and approving
+# changes to their respective domain knowledge files.
+#
+# See go/data-domains for more information about data domain steering committees.
+
+# Default owners for the knowledge directory structure
+* @query-expert-maintainers
+
+# Domain-specific metrics ownership
+/domains/customer_support/ @squareup/customer_support_data_domain_stewards
+/domains/financial/ @squareup/financial_data_domain_stewards
+/domains/internal/ @squareup/internal_data_domain_stewards
+/domains/marketing/ @squareup/marketing_data_domain_stewards
+/domains/operations/ @squareup/operations_data_domain_stewards
+/domains/risk/ @squareup/risk_data_domain_stewards
+/domains/sales/ @squareup/sales_data_domain_stewards
+
+# Product domain metrics ownership
+/domains/product/ @squareup/product_data_domain_stewards
+/domains/product/artist/ @squareup/artist_data_domain_stewards
+/domains/product/banking/ @squareup/banking_data_domain_stewards
+/domains/product/bitcoin/ @squareup/bitcoin_data_domain_stewards
+/domains/product/commerce/ @squareup/commerce_data_domain_stewards
+/domains/product/hardware/ @squareup/hardware_data_domain_stewards
+/domains/product/lending/ @squareup/lending_data_domain_stewards
+/domains/product/payments/ @squareup/payments_data_domain_stewards
+/domains/product/services/ @squareup/services_data_domain_stewards
+/domains/product/subscriptions/ @squareup/subscriptions_data_domain_stewards
+/domains/product/taxes/ @squareup/taxes_data_domain_stewards
+/domains/product/engagement/ @squareup/engagement_data_domain_stewards
+/domains/product/notifications @squareup/notifications_data_domain_stewards

@@ -1,0 +1,401 @@
+{
+  "cash_app_customer_insights_segments": {
+    "description": "Customer Insights segmentation developed by the Customer Insights team based on money attitudes, usage behaviors, and socioeconomic data of Cash App users. This is an attitudinal segmentation that provides deep understanding of customer motivations and financial behaviors.",
+    "tables": ["APP_CASH_BETA.CUSTOMERINSIGHTS.CASH_CUSTOMER_SEGMENTS", "PERSONAL_YKHABAI.PUBLIC.UPDATED_CI_SEGMENT_MARCH24"],
+    "fields": "UPDATED_SEGMENTS (numeric 1-6) or SEGMENTS (text)",
+    "values": {
+      "Access": "Lowest income segment, constantly worried about finances. Looking for basic financial access. Represents customers who need better access to the financial system.",
+      "Simplicity": "Looking to simplify money management, avoid complexity and fees. Values straightforward financial tools.",
+      "Growth": "Seeking financial freedom and willing to take risks for reward. Growth-oriented mindset.",
+      "Security": "Prioritizing safety and protection of their money. Risk-averse customers.",
+      "Certainty": "Seeking predictability and stability in their financial lives.",
+      "Wealth": "Highest income segment (~3X higher than Access). Financially sophisticated with more income, investments, and financial products used."
+    },
+    "uses": [
+      "Product feature prioritization based on segment needs",
+      "Marketing message personalization and targeting",
+      "Customer journey optimization by segment",
+      "Understanding money attitudes and motivations",
+      "Identifying product-market fit opportunities"
+    ],
+    "important_notes": [
+      "Core Customers = Access + Simplicity + Growth segments (represent 50% of customer base)",
+      "Core customers use Cash App for more than just P2P and embody the mission",
+      "ML solution classifies 63M quarterly active users with tenure ≥3 months",
+      "Segmentation uses Artificial Neural Network with Keras (three hierarchical models)",
+      "Sample size N=14K is included in Experian data pulls for enhanced financial insights"
+    ],
+    "data_freshness": "Predictions as of 9/1/2023 for ~63M customer tokens",
+    "primary_users": ["Customer Insights", "Product Teams", "Marketing", "Lifecycle Marketing"],
+    "documentation": "go/cashsegments, go/cashsegmentation"
+  },
+  "cash_app_age_generation_segments": {
+    "description": "Age and generational segmentation based on birth year obtained from Identity Verification (IDV). Critical for understanding life stage needs and product fit. Note: ~25% of customers haven't IDV'd so age is unknown.",
+    "tables": ["APP_CASH.INFLOWS_FRAMEWORK.DIM_CUSTOMER_SEGMENTATIONS", "APP_CASH.GLOBAL.CUSTOMER_PROFILE", "APP_CASH.APP.CUSTOMER_SUMMARY"],
+    "fields": "BIRTH_YEAR, AGE_GROUP, CUSTOMER_GENERATION",
+    "values": {
+      "Teen": "Under 18 years old. Special account type with restrictions.",
+      "Gen Z": "Born 1995-2015, currently under 29 years old. Digital natives, mobile-first users.",
+      "Millennial / Gen Y": "Born 1980-1994, currently 29-45 years old. Largest segment, 1 in 2 customers are Millennial or Gen Z.",
+      "Gen X": "Born 1965-1979, currently 45-60 years old. Established careers and families.",
+      "Baby Boomer": "Born 1944-1964, currently 60+ years old. Approaching or in retirement.",
+      "Not IDVed": "Customers who haven't completed identity verification. Age unknown, represents ~25% of customer base."
+    },
+    "uses": [
+      "Life stage targeting for product features (e.g., savings, investing, banking)",
+      "Age-appropriate marketing campaigns and messaging",
+      "Compliance and regulatory requirements (teen accounts)",
+      "Product adoption analysis by generation",
+      "Understanding generational financial behaviors and preferences"
+    ],
+    "common_sql_pattern": "CASE WHEN (2025 - birth_year) < 29 THEN '1995-2015 Gen Z' WHEN (2025 - birth_year) BETWEEN 29 AND 45 THEN '1980-1994 Gen Y Millennial' WHEN (2025 - birth_year) BETWEEN 45 AND 60 THEN '1965-1979 Gen X' WHEN (2025 - birth_year) >= 60 THEN '1944-1964 Baby Boomer' END AS Generation",
+    "important_notes": [
+      "Birth year only available after successful IDV completion",
+      "Teen accounts have special restrictions and compliance requirements",
+      "Update year in calculation (currently 2025) for accurate age calculations",
+      "Consider filtering out 'Not IDVed' for age-specific analysis"
+    ],
+    "primary_users": ["Product Analytics", "Marketing", "Compliance", "Customer Insights"]
+  },
+  "cash_app_geographic_segments": {
+    "description": "Geographic segmentation based on customer location from IDV and geolocation signals. Critical for regional strategy, network effects analysis, and localized product features.",
+    "tables": ["APP_CASH.INFLOWS_FRAMEWORK.DIM_CUSTOMER_SEGMENTATIONS", "APP_CASH.GLOBAL.CUSTOMER_PROFILE"],
+    "fields": "LOC_COUNTRY, LOC_REGION, LOC_DIVISION, LOC_STATE, LOC_COUNTY, LOC_DMA, BEST_HOME_CITY, BEST_HOME_STATE, BEST_HOME_POSTAL_CODE",
+    "values": {
+      "South": "Nearly 2/3 of Cash App customers are in the Southern U.S. Highest long-term retention rate.",
+      "West": "~16% of new establishments (up from 14% in 2019). Lowest retention rate with sharpest negative slope.",
+      "Midwest": "Similar retention to Northeast. Moderate customer concentration.",
+      "Northeast": "Similar retention to Midwest. Moderate customer concentration."
+    },
+    "uses": [
+      "Regional marketing campaigns and partnerships",
+      "State-specific compliance and regulatory requirements",
+      "Network effects analysis by geography",
+      "Localized product feature rollouts",
+      "Understanding regional financial behavior differences",
+      "DMA-level advertising and media buying"
+    ],
+    "important_notes": [
+      "South region has highest concentration (~66%) and best retention",
+      "West region shows declining cohort health and lowest retention",
+      "Location data combines IDV information with geolocation signals",
+      "DMA (Designated Market Area) useful for advertising campaigns",
+      "Zip code-level data available for granular analysis"
+    ],
+    "primary_users": ["Marketing", "Growth", "Product Strategy", "Regional Operations"],
+    "related_segments": ["network_segments", "income_segments"]
+  },
+  "cash_app_income_segments": {
+    "description": "Income segmentation based on zip code household income data, adjusted using survey and census data. Designed to align with priority of moving up-market through banking products.",
+    "tables": ["APP_CASH.INFLOWS_FRAMEWORK.DIM_CUSTOMER_SEGMENTATIONS", "QUANT_FINANCE.INFLOWS_FRAMEWORK.DIM_CUSTOMER_SEGMENTATIONS"],
+    "fields": "ZIP_HOUSEHOLD_INCOME_ADJUSTED, INCOME_SEGMENT",
+    "values": {
+      "0-30k": "Lowest income segment. Often overlaps with Access customer segment.",
+      "30k-70k": "Core income segment. Primary target for banking products.",
+      "70k+": "Higher income segment. Target for wealth-building products like investing and savings.",
+      "Core Income": "Combination of 30k-70k segment, represents primary banking product opportunity."
+    },
+    "uses": [
+      "Product targeting for banking, investing, and savings features",
+      "Understanding financial capacity and product affordability",
+      "Credit and lending risk assessment",
+      "Pricing strategy and fee structure optimization",
+      "Up-market growth strategy and measurement"
+    ],
+    "important_notes": [
+      "Income is zip code-based, not individual customer income",
+      "Adjusted using survey and census data for accuracy",
+      "Wealth segment has ~3X higher income than Access segment",
+      "Income segmentation aligns with banking product adoption strategy",
+      "Consider combining with network_segment for 'Core' vs 'Non-Core' classification"
+    ],
+    "common_sql_pattern": "CASE WHEN income_segment IN ('3.30k-70k','4.0-30k') OR network_segment = 'Self-sustain' THEN 'Core' ELSE 'Non Core' END AS Core_Grouping",
+    "primary_users": ["Product Strategy", "Banking Team", "Credit & Lending", "Marketing"],
+    "related_segments": ["customer_insights_segments", "network_segments"]
+  },
+  "cash_app_network_segments": {
+    "description": "Geography-based segmentation that captures the virality and network effects of specific zip codes. Measures the health and strength of Cash App's social network in different areas. Network effects are fundamental to Cash App's competitive advantage.",
+    "tables": ["APP_CASH.INFLOWS_FRAMEWORK.DIM_CUSTOMER_SEGMENTATIONS", "QUANT_FINANCE.INFLOWS_FRAMEWORK.DIM_CUSTOMER_SEGMENTATIONS"],
+    "fields": "NETWORK_SEGMENT, NETWORK_SEGMENT_SCORE, SUBNETWORK_NAME",
+    "values": {
+      "Self-sustain": "Strongest networks with highest virality. High in-group P2P activity. Self-sustaining growth through network effects. Best retention and engagement.",
+      "Invest": "Growing networks requiring investment. Moderate network health. Opportunity for growth with proper investment.",
+      "Reassess": "Weakest networks with lowest virality. May require strategic reassessment or different approach."
+    },
+    "network_segment_scores": {
+      "1": "Strongest network health. Highest engagement and virality.",
+      "2": "Strong network health. Good engagement.",
+      "3": "Moderate network health. Room for improvement.",
+      "4": "Weakest network health. Requires attention."
+    },
+    "uses": [
+      "Identifying high-potential growth markets",
+      "Resource allocation for market development",
+      "Understanding viral growth patterns",
+      "Network effects measurement and optimization",
+      "Cohort retention analysis by network strength",
+      "Referral and invitation campaign targeting"
+    ],
+    "important_notes": [
+      "Network effects differentiate Cash App from competitors like Venmo",
+      "People use Cash App BECAUSE their social network uses Cash App",
+      "Subnetworks are groupings of zip codes based on high in-group P2P activity",
+      "Self-sustain segment often combined with income segments for 'Core' classification",
+      "Network strength correlates with retention and long-term value",
+      "More new establishments occurring in higher penetration areas"
+    ],
+    "common_sql_pattern": "CASE WHEN network_segment = 'Self-sustain' OR income_segment IN ('30k-70k') THEN 'Core' ELSE 'Non Core' END",
+    "primary_users": ["Growth Team", "Network Strategy", "Product Analytics", "Marketing"],
+    "related_segments": ["geographic_segments", "income_segments"],
+    "competitive_advantage": "Cash App's network is fundamentally different from competitors. People engage more on Cash App than Venmo, with more local use cases (buying goods/services in-person) and participatory activities (lending money, sharing expenses)."
+  },
+  "cash_app_account_type_segments": {
+    "description": "Account type segmentation distinguishing between personal, business, family, and teen accounts. Critical for product features, compliance, and user experience customization.",
+    "tables": ["APP_CASH.INFLOWS_FRAMEWORK.DIM_CUSTOMER_SEGMENTATIONS", "APP_CASH.GLOBAL.CUSTOMER_PROFILE", "APP_CASH.FAMILIES.SPONSORED_ACCOUNTS"],
+    "fields": "ACCOUNT_TYPE, ACCOUNT_TYPE_BUSINESS, ACCOUNT_TYPE_FAMILIES, IS_SPONSORED",
+    "values": {
+      "Personal": "Standard individual consumer accounts. Majority of customer base.",
+      "Business": "Business accounts for merchants and service providers. Different fee structures and features.",
+      "Teen": "Accounts for users under 18. Special restrictions and parental controls. Growing segment.",
+      "Families - Sponsor": "Parent/guardian account sponsoring dependent accounts. Access to family features.",
+      "Families - Dependent": "Teen or dependent account linked to sponsor. Limited features and spending controls.",
+      "Families - None": "Not participating in families program."
+    },
+    "uses": [
+      "Feature access control and permissions",
+      "Compliance and regulatory requirements (especially for teens)",
+      "Product development for family features",
+      "Business vs consumer analytics separation",
+      "Pricing and fee structure application",
+      "Parental controls and spending limits"
+    ],
+    "important_notes": [
+      "Teen accounts have specific compliance requirements",
+      "Business accounts may have different rate plans and fees",
+      "Families program enables sponsored dependent accounts",
+      "Some accounts were 'forced business' due to transaction patterns",
+      "Account type affects available features and product access"
+    ],
+    "primary_users": ["Product Teams", "Compliance", "Families Team", "Business Banking"],
+    "related_tables": ["APP_CASH.FAMILIES.SPONSORED_ACCOUNTS", "APP_COMPLIANCE.CASH.CASH_TM_SEGMENTS"]
+  },
+  "cash_app_lifecycle_cohorts": {
+    "description": "Customer lifecycle segmentation based on key milestone dates including account creation, first money movement, and establishment. Critical for cohort analysis and retention measurement.",
+    "tables": ["APP_CASH.INFLOWS_FRAMEWORK.DIM_CUSTOMER_SEGMENTATIONS", "QUANT_FINANCE.INFLOWS_FRAMEWORK.DIM_CUSTOMER_SEGMENTATIONS"],
+    "fields": "NEW_CUSTOMER_AT, FIRST_SUCCESSFUL_MOVEMENT_DATE, MOVEMENT_COHORT_MONTH, MOVEMENT_COHORT_YEAR, ESTABLISHMENT_DATE, CUSTOMER_CREATED_AT",
+    "values": {
+      "Pre-2020": "Customers who joined before 2020. Most established user base. ~50% of customers.",
+      "2020 Cohort": "Largest acquisition cohort ever. Pandemic-driven growth. Unique behavioral patterns.",
+      "2021 Cohort": "Second largest acquisition cohort. Continued pandemic growth.",
+      "2022+ Cohorts": "Post-pandemic cohorts. Different acquisition dynamics and retention patterns."
+    },
+    "key_milestones": {
+      "NEW_CUSTOMER_AT": "When user became a Cash App customer (requires app install and linked alias)",
+      "FIRST_SUCCESSFUL_MOVEMENT_DATE": "Date of first successful money movement (proxy for active date)",
+      "ESTABLISHMENT_DATE": "When customer became 'established' (3+ successful money movements in 30-day window)",
+      "MOVEMENT_COHORT_MONTH/YEAR": "Cohort based on first money movement timing"
+    },
+    "uses": [
+      "Cohort retention analysis and measurement",
+      "Understanding cohort quality differences over time",
+      "Product adoption timing analysis",
+      "Long-term value (LTV) projections by cohort",
+      "Identifying cohort degradation trends",
+      "Measuring time-to-activation and engagement"
+    ],
+    "important_notes": [
+      "2020 and 2021 were largest acquisition cohorts in Cash App history",
+      "Cohort retention has been deteriorating, especially in recent cohorts",
+      "Establishment requires 3+ successful money movements in 30 days",
+      "Different cohorts show different product adoption patterns",
+      "Cohort degradation most pronounced in low penetration MSAs and West region"
+    ],
+    "primary_users": ["Growth Analytics", "Product Strategy", "Finance", "Data Science"],
+    "related_segments": ["geographic_segments", "network_segments"]
+  },
+  "cash_app_acquisition_channels": {
+    "description": "Customer acquisition channel segmentation tracking how customers discovered and signed up for Cash App. Critical for marketing attribution and CAC optimization.",
+    "tables": ["APP_CASH.INFLOWS_FRAMEWORK.DIM_CUSTOMER_SEGMENTATIONS", "APP_CASH.GLOBAL.CUSTOMER_PROFILE"],
+    "fields": "CHANNEL, SUBCHANNEL, ACQUISITION_SUBCHANNEL, FIRST_PLATFORM",
+    "values": {
+      "Organic": "Largest channel. Most sign-ups are organic. Note: Due to privacy changes on mobile, 'organic' likely contains consumers driven by paid marketing.",
+      "Invitations": "Second largest channel. Users invited by existing customers.",
+      "Referrals": "Third largest channel. Formal referral program participants.",
+      "Paid Marketing": "Paid acquisition channels including social, search, display.",
+      "Partner Channels": "Partnerships and integrations with other platforms."
+    },
+    "first_platform_values": {
+      "iOS": "Apple iPhone/iPad users. Typically higher income demographic.",
+      "Android": "Android device users. Broader demographic reach.",
+      "Web": "Web-based signups (less common)."
+    },
+    "uses": [
+      "Marketing attribution and ROI measurement",
+      "Customer Acquisition Cost (CAC) analysis by channel",
+      "Channel optimization and budget allocation",
+      "Understanding organic vs paid growth dynamics",
+      "Cohort quality comparison across channels",
+      "Platform-specific feature development"
+    ],
+    "important_notes": [
+      "Organic is largest channel but may include unattributed paid marketing",
+      "Privacy changes (iOS 14+) have impacted deterministic attribution",
+      "Invitations and referrals leverage network effects",
+      "Cohort degradation exists across all channels but most pronounced in Organic",
+      "Subchannel provides more granular attribution including partner channels"
+    ],
+    "primary_users": ["Marketing", "Growth", "Finance", "Product Analytics"],
+    "related_segments": ["lifecycle_cohorts", "network_segments"]
+  },
+  "cash_app_product_usage_segments": {
+    "description": "Segmentation based on product adoption and usage patterns. Measures customer engagement across Cash App's product suite including P2P, Banking, Investing, and other features.",
+    "tables": ["APP_CASH.INFLOWS_FRAMEWORK.CUSTOMER_ACTIVITY_BASE", "APP_CASH_BETA.KELSEYP.ACTIVE_SEGMENTATION_AND_HABITUATION"],
+    "fields": "PRODUCT_PERSONA, HABITUATION_STATUS, HABITUATION_SEGMENT, ACTIVE_IN_YEAR_[PRODUCT]",
+    "values": {
+      "P2P Only": "Customers only use Cash App for peer-to-peer payments. Single product users.",
+      "Banking Users": "Using Cash Card, Direct Deposit, or other banking features. Fastest growing segment.",
+      "Multi-Product Users": "Using 2+ product lines. Higher engagement and retention.",
+      "Primary Banking Actives": "Customers using Cash App as their primary bank. Highest value segment.",
+      "Bitcoin Users": "Active with Bitcoin buying/selling. Includes Sat Stackers and Crypto Traders.",
+      "Stocks Users": "Active with stock investing features.",
+      "Borrow Users": "Using Cash App Borrow (lending) feature.",
+      "Savings Users": "Active with savings features.",
+      "Cash App Pay Users": "Using Cash App Pay for merchant payments.",
+      "Cash for Business (C4B)": "Using business features."
+    },
+    "habituation_segments": {
+      "Daily Actives": "1 in 10 customers use Cash App every day. Highest engagement.",
+      "Weekly Actives": "Just under 50% use Cash App at least weekly. Core engaged users.",
+      "Monthly Actives (MAU+)": "Active on monthly basis. Customers active weekly or daily have distinctly different value.",
+      "Occasional Users": "Less than monthly usage. Lower engagement."
+    },
+    "product_specific_fields": {
+      "ACTIVE_IN_YEAR_P2P": "Active with peer-to-peer payments",
+      "ACTIVE_IN_YEAR_CASH_CARD": "Active with Cash Card",
+      "ACTIVE_IN_YEAR_DIRECT_DEPOSIT": "Has direct deposit",
+      "ACTIVE_IN_YEAR_BITCOIN": "Active with Bitcoin",
+      "ACTIVE_IN_YEAR_STOCK": "Active with Stocks",
+      "ACTIVE_IN_YEAR_BORROW": "Active with Borrow",
+      "ACTIVE_IN_YEAR_SAVINGS": "Active with Savings",
+      "ACTIVE_IN_YEAR_CASH_APP_PAY": "Active with Cash App Pay",
+      "ACTIVE_IN_YEAR_C4B": "Active with Cash for Business",
+      "MONTHS_ACTIVE_IN_YEAR_[PRODUCT]": "Count of months active with each product"
+    },
+    "uses": [
+      "Product adoption analysis and forecasting",
+      "Cross-sell and upsell opportunity identification",
+      "Feature engagement measurement",
+      "Churn prediction and prevention",
+      "Product-market fit assessment",
+      "Understanding path to primary banking",
+      "Habituation and retention analysis"
+    ],
+    "important_notes": [
+      "50% of customers still P2P-only, but multi-product usage is growing",
+      "Banking suite (Cash Card, Direct Deposit) leads multi-product growth",
+      "Weekly+ actives produce distinctly different LTV than less frequent users",
+      "BTC & Equities early attachers show weaker cohort retention than P2P/Banking",
+      "Primary Banking Actives represent highest value customer segment",
+      "Habituation status critical for retention and long-term value"
+    ],
+    "primary_users": ["Product Teams", "Growth", "Data Science", "Product Analytics"],
+    "related_segments": ["customer_insights_segments", "lifecycle_cohorts"]
+  },
+  "cash_app_financial_behavior_segments": {
+    "description": "Segmentation based on financial behaviors including linked payment methods, money movement patterns, and banking engagement. Critical for understanding customer financial health and product fit.",
+    "tables": ["APP_CASH.INFLOWS_FRAMEWORK.DIM_CUSTOMER_SEGMENTATIONS", "APP_CASH.GLOBAL.CUSTOMER_PROFILE"],
+    "fields": "IS_BANK_ACCOUNT_LINKED, IS_CARD_LINKED, IS_MONEY_MOVER, DEBIT_CARD_CURRENTLY_LINKED, CREDIT_CARD_CURRENTLY_LINKED",
+    "values": {
+      "Bank Account Linked": "Has active bank account linked. Indicates banking relationship and trust.",
+      "Debit Card Linked": "Has debit card linked. Most common payment method.",
+      "Credit Card Linked": "Has credit card linked. May indicate different spending patterns.",
+      "Money Mover": "Has successfully moved money through platform. Key activation milestone.",
+      "No Payment Method": "No linked payment methods. Friction point for activation."
+    },
+    "key_milestones": {
+      "FIRST_BANK_ACCOUNT_LINKED_AT": "When customer first linked bank account",
+      "FIRST_DEBIT_CARD_LINKED_AT": "When customer first linked debit card",
+      "FIRST_CREDIT_CARD_LINKED_AT": "When customer first linked credit card",
+      "FIRST_CARD_LINKED_AT": "When customer first linked any card",
+      "FIRST_SUCCESSFUL_MOVEMENT_DATE": "First successful money movement"
+    },
+    "uses": [
+      "Activation funnel optimization",
+      "Understanding payment method preferences",
+      "Risk assessment and fraud prevention",
+      "Product feature eligibility (e.g., Direct Deposit requires bank link)",
+      "Customer financial health indicators",
+      "Identifying friction points in onboarding"
+    ],
+    "important_notes": [
+      "Bank account linking indicates higher trust and engagement",
+      "Money movement is critical activation milestone",
+      "Multiple payment methods linked indicates higher engagement",
+      "Payment method availability affects feature access",
+      "Timing of payment method linking affects retention"
+    ],
+    "primary_users": ["Product Teams", "Growth", "Risk & Compliance", "Banking Team"],
+    "related_segments": ["product_usage_segments", "lifecycle_cohorts"]
+  },
+  "cash_app_demographic_ethnicity_age": {
+    "description": "Zip code-level demographic data including ethnicity and age distributions. Useful for understanding community demographics and targeting.",
+    "tables": ["APP_CASH.INFLOWS_FRAMEWORK.DIM_CUSTOMER_SEGMENTATIONS"],
+    "fields": "ZIP_PRIMARY_ETHNICITY, ZIP_MEDIAN_AGE",
+    "values": {
+      "ZIP_PRIMARY_ETHNICITY": "Majority ethnicity in customer's zip code based on census data",
+      "ZIP_MEDIAN_AGE": "Median age in customer's zip code"
+    },
+    "uses": [
+      "Understanding community demographics",
+      "Culturally relevant marketing and messaging",
+      "Product localization opportunities",
+      "Community-based targeting",
+      "Demographic trend analysis"
+    ],
+    "important_notes": [
+      "Data is zip code-level, not individual customer level",
+      "Based on census and demographic data sources",
+      "Useful for community-level insights",
+      "Hispanic/Latino opportunity identified as strategic focus",
+      "Consider combining with individual-level data when available"
+    ],
+    "primary_users": ["Marketing", "Customer Insights", "Product Strategy"],
+    "related_segments": ["geographic_segments", "network_segments"]
+  },
+  "cash_app_risk_compliance_segments": {
+    "description": "Risk and compliance-based segmentation for fraud prevention, regulatory compliance, and customer protection. Critical for platform safety and regulatory adherence.",
+    "tables": ["APP_COMPLIANCE.CASH.CASH_TM_SEGMENTS", "APP_CASH.GLOBAL.CUSTOMER_PROFILE", "APP_COMPLIANCE.CASH.CASH_DENYLISTS"],
+    "fields": "BLACKLISTED, DENYLIST_STATUS, IS_DENYLISTED, IS_CLOSED, SPECIAL_STATUS_LEVEL, SEGMENT",
+    "values": {
+      "Not Denylisted": "Good standing customers. No risk flags.",
+      "Denylisted": "Customers blocked due to fraud, compliance, or risk issues.",
+      "Payment Blocks": "~35% of established cohorts. Affects both authentic and inauthentic customers. Largest drag on cohort quality.",
+      "Closed Accounts": "Accounts that have been closed.",
+      "Special Status": "Customers requiring additional monitoring or review."
+    },
+    "denylist_reasons": {
+      "BLACKLIST_REASON": "Primary reason for denylisting",
+      "BLACKLIST_SUBREASON": "More specific reason for denylisting",
+      "BLACKLIST_REGULATOR_WORKSTREAM": "Regulatory workstream associated with denylisting",
+      "BLACKLIST_REGULATOR_REASON": "Regulatory reason for denylisting"
+    },
+    "uses": [
+      "Fraud prevention and detection",
+      "Regulatory compliance reporting",
+      "Risk assessment and scoring",
+      "Customer protection measures",
+      "Cohort quality analysis",
+      "Understanding impact of risk actions on retention"
+    ],
+    "important_notes": [
+      "Payment blocks cause most drag on cohort quality (~35% of cohorts)",
+      "Payment blocks affect both authentic and inauthentic customers",
+      "Perceptions of scams outweigh actual scams on Cash App",
+      "Trust issues can decrease non-customer adoption",
+      "Risk actions have significant impact on cohort retention",
+      "Filter out denylisted customers for clean analytics (use denylist_status = 'Not Denylisted')"
+    ],
+    "primary_users": ["Risk & Compliance", "Fraud Prevention", "Legal", "Data Science"],
+    "related_segments": ["lifecycle_cohorts", "financial_behavior_segments"]
+  }
+}

@@ -1,0 +1,30 @@
+Shifts is the combination of 4 workforce management features: timecards, tip pooling, scheduling and commissions 
+
+Active on Shifts 
+- This means accepting a tip pool, creating a timecard, publishing a schedule or taking a commission 
+- Use app_pa.app_sqs.sqs_feature_usage joined to app_pa.app_sqs.sqs_feature_dim joined by feature_name = feature_key where dim.product = 'Shifts' and is_product_active_feature = 1 
+- Active is on a rolling 30 day basis or truncated to a month depending on usage 
+
+Shifts Subscription 
+- Shifts subscription is known as Shifts Plus 
+- There is a free subscription that requires a seller to have fewer than 5 employees currently enabled 
+- Shifts Free is included in Payroll (W2) without the employee cap 
+- Use table_name app_bi.hexagon.vfact_subscription_states_expanded to find in_trial% or paying% merchants 
+- Starting in 2025, Shifts is a part of Square One Plus available to new merchants 
+
+Shifts Disambiguation
+- Often user prompts might say Shifts when they mean specifically timecards, shift schedules or the entire product suite (Shifts)
+
+Experts:
+- pazar
+- mstringer 
+- dgole 
+
+Analytics Schemas - preferred for analytics and data analysis:
+- app_pa.app_sqs
+- app_pa.app_team_management 
+
+Production Databases (replicated, low quality for analysis)
+- tm_attribution 
+- timecards 
+

@@ -1,0 +1,27 @@
+If asked how many active devices there are, please always follow up and ask: do you want this based on if the device took a payment or if the device turned on? 
+- If active by payment, then use app_hardware.hdm.vfact_transactions_daily. 
+- If active by turned on, then use app_hardware.hdm.daily_active_device
+
+If asked a question about emoney transactions:
+- Use the app_hardware.adhoc.emoney_transactions table
+- Do not use app_hardware.hdm.vfact_transactions_daily
+
+Query Guidelines for Hardware Data:
+- Always ask the user about the date range they want for their analysis to avoid scanning entire tables
+- Use reader_type and reader_type_key appropriately for device analysis
+- Handle NULL values in hardware fields appropriately
+
+Before executing hardware queries, verify:
+- Used correct table for emoney questions (adhoc.emoney_transactions)
+- Clarified active device definition with user
+- Applied appropriate device type/version defaults
+- Used reader_type and reader_type_key appropriately
+- Considered data refresh timing for date ranges
+- Checked if third-party retail tracking limitations apply
+
+If there is a data issue, the user seeing “does not exist or not authorized” for hardware data:
+- Users need to request access via Hardware Data Users using this link: https://registry.sqprod.co/roles/hardware-data-users 
+- Tell the user once it is approved, it will take an hour to give you access.
+
+If the user is having trouble finding the right answer using hardware data:
+- Recommend reaching out to the #hardware-analytics channel
