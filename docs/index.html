@@ -539,74 +539,26 @@
     </div>
     <div class="mem-grid">
       <div class="mem-card">
-        <h3>🏗️ Architecture</h3>
-        <pre>~/.amp/memory/
-├── amp-mem.db        # SQLite (WAL mode)
-├── schema.sql        # Database schema
-├── knowledge.md      # Plain-text log
-└── web/              # Web viewer
-
-~/bin/amp-mem          # CLI (16 commands)
-~/.agents/skills/
-├── memory/SKILL.md
-└── kb-distill/SKILL.md</pre>
-      </div>
-      <div class="mem-card">
-        <h3>💡 Design Decisions</h3>
+        <h3>🧠 What it does</h3>
         <ul>
-          <li><strong>No vector embeddings</strong> — the LLM is the semantic engine</li>
-          <li><strong>SQLite + FTS5</strong> — porter stemming, single file, WAL mode</li>
-          <li><strong>Progressive disclosure</strong> — search → timeline → detail</li>
-          <li><strong>On-demand web viewer</strong> — no persistent service</li>
-          <li><strong>Idempotent init</strong> — safe to run every session</li>
-          <li><strong>Distillation</strong> — compresses observations into knowledge</li>
+          <li>Passively captures decisions, discoveries, workflows, and preferences as you work</li>
+          <li>Full-text search across all past sessions via SQLite + FTS5</li>
+          <li>Automatically primes new sessions with relevant context</li>
+          <li>Distills raw observations into structured knowledge over time</li>
         </ul>
       </div>
-      <div class="mem-card mem-card-full">
-        <h3>⌨️ CLI Commands</h3>
-        <table class="cmd-table">
-          <thead><tr><th>Command</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td>init</td><td>Create/migrate database</td></tr>
-            <tr><td>save</td><td>Save an observation</td></tr>
-            <tr><td>search</td><td>FTS5 full-text search</td></tr>
-            <tr><td>timeline</td><td>Context around an observation</td></tr>
-            <tr><td>context</td><td>Recent context for session priming</td></tr>
-            <tr><td>compact</td><td>Compress old entries into summaries</td></tr>
-            <tr><td>session-start / end</td><td>Begin or end a tracked session</td></tr>
-            <tr><td>stats</td><td>Database statistics</td></tr>
-            <tr><td>serve</td><td>Web viewer at localhost:37777</td></tr>
-            <tr><td>distill-status</td><td>Check pending observation count</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="mem-card mem-card-full">
-        <h3>🏷️ Observation Types</h3>
-        <div class="type-grid">
-          <div class="type-badge"><strong>observation</strong><span>General codebase/tool knowledge</span></div>
-          <div class="type-badge"><strong>decision</strong><span>Design decisions, trade-offs</span></div>
-          <div class="type-badge"><strong>discovery</strong><span>Bugs found, root causes</span></div>
-          <div class="type-badge"><strong>preference</strong><span>How you want things done</span></div>
-          <div class="type-badge"><strong>bugfix</strong><span>Bug fixes with context</span></div>
-          <div class="type-badge"><strong>config</strong><span>URLs, credentials, env details</span></div>
-          <div class="type-badge"><strong>workflow</strong><span>Command sequences, processes</span></div>
-          <div class="type-badge"><strong>people</strong><span>Team structure, ownership</span></div>
-          <div class="type-badge"><strong>session</strong><span>End-of-session summary</span></div>
-        </div>
-      </div>
-      <div class="mem-card mem-card-full">
-        <h3>🔄 Distillation Pipeline</h3>
-        <div class="steps-row">
-          <div class="step"><div class="step-num">1</div><h4>Gather</h4><p>Dump raw observations since last distillation</p></div>
-          <div class="step"><div class="step-num">2</div><h4>Analyze</h4><p>Cluster by topic, identify repeated patterns</p></div>
-          <div class="step"><div class="step-num">3</div><h4>Produce</h4><p>Save distilled notes, propose AGENTS.md rules</p></div>
-          <div class="step"><div class="step-num">4</div><h4>Record</h4><p>Mark complete — rules need your approval</p></div>
-        </div>
+      <div class="mem-card">
+        <h3>⚡ How it works</h3>
+        <ul>
+          <li><strong>CLI</strong> — <code>amp-mem</code> with 16 commands (search, save, compact, serve, etc.)</li>
+          <li><strong>Plugin</strong> — passive capture from tools like Slack, Gmail, Linear</li>
+          <li><strong>Storage</strong> — single SQLite file, no external services</li>
+          <li><strong>Web viewer</strong> — on-demand at <code>localhost:37777</code></li>
+        </ul>
       </div>
     </div>
     <div style="text-align:center;margin-top:2rem;">
-      <a href="memory/#install" class="btn btn-ghost">📦 Install amp-mem →</a>
-      <a href="memory/" class="btn btn-ghost" style="margin-left:0.5rem;">How it works →</a>
+      <a href="memory/" class="btn btn-ghost">Learn more & install →</a>
     </div>
   </div>
 </section>
