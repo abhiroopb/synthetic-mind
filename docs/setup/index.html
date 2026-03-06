@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amp Setup Guide — synthetic-mind</title>
+  <meta name="description" content="Turn Amp from a code assistant into a full command center — with skills, persistent memory, and an AGENTS.md that makes it yours.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .page-header {
+      padding: 8rem 2rem 3rem; text-align: center; max-width: 800px; margin: 0 auto;
+    }
+    .page-header h1 {
+      font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #fff 0%, #a3a3a3 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .page-header p { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+    .setup-section { padding: 0 0 4rem; }
+    .workflow-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 1.5rem 0; }
+    .workflow-table th {
+      text-align: left; padding: 0.6rem 0.75rem; color: var(--text-dim);
+      font-weight: 500; font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 0.05em; border-bottom: 2px solid var(--border);
+    }
+    .workflow-table td {
+      padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border-subtle); color: var(--text-muted);
+    }
+    .workflow-table td:first-child { color: var(--text-dim); }
+    .workflow-table td:last-child { color: var(--text-muted); }
+    @media (max-width: 768px) {
+      .page-header h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../skills/">Skills</a>
+      <a href="../memory/">Memory</a>
+      <a href="./" class="active">Setup</a>
+      <a href="../thoughts/">Thoughts</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Amp Setup Guide</h1>
+  <p>Turn Amp from a code assistant into a full command center — with skills, persistent memory, and an AGENTS.md that makes it yours.</p>
+</div>
+
+<section class="setup-section">
+  <div class="container">
+    <div class="page-content" style="padding: 0; max-width: 100%;">
+
+      <h2>What is Amp?</h2>
+      <p><a href="https://ampcode.com">Amp</a> is an AI coding agent that lives in your terminal (or VS Code). Out of the box it can read/write files, run shell commands, and search code. <strong>Skills</strong> are plug-in instruction sets that teach Amp how to use specific tools — Slack, Gmail, Google Calendar, Linear, Snowflake, and more — so it can perform complex, multi-step tasks on your behalf.</p>
+      <p>Think of skills as "recipes" that give Amp the know-how to operate tools you already use daily. With the right skills installed, Amp becomes a command center for your entire workflow — not just coding.</p>
+
+      <h2>Amp as Your Command Center</h2>
+
+      <h3>Start of Day</h3>
+      <p>Just type <strong>"start my day"</strong> and Amp will:</p>
+      <ul>
+        <li><strong>Slack</strong> — Surface unread messages and thread replies, with options to reply inline</li>
+        <li><strong>Gmail</strong> — Triage your inbox, draft replies, flag items for follow-up</li>
+        <li><strong>Google Calendar</strong> — Show today's schedule, flag conflicts, let you accept/decline</li>
+        <li><strong>Linear</strong> — Show issues assigned to you, upcoming due dates</li>
+        <li><strong>Notion</strong> — Surface pages with new comments or mentions</li>
+      </ul>
+      <p>All presented in your terminal with action options — no context switching.</p>
+
+      <h3>Throughout the Day</h3>
+      <table class="workflow-table">
+        <thead><tr><th>Instead of...</th><th>Just tell Amp...</th></tr></thead>
+        <tbody>
+          <tr><td>Opening Slack, finding a channel</td><td>"search Slack for checkout updates this week"</td></tr>
+          <tr><td>Switching to Linear, creating an issue</td><td>"create a Linear issue for the login bug, assign to me"</td></tr>
+          <tr><td>Opening Google Docs, formatting a PRD</td><td>"write a PRD from these notes about onboarding improvements"</td></tr>
+          <tr><td>Navigating to Snowflake, writing SQL</td><td>"what's the conversion rate for last month?"</td></tr>
+          <tr><td>Opening Looker dashboards</td><td>"run Looker dashboard 1234 and summarize the key metrics"</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Multi-Step Workflows</h3>
+      <p>Amp shines when chaining tools together in a single prompt:</p>
+      <ul>
+        <li><em>"Find the latest Slack discussion about tipping, summarize it, and create a Linear issue"</em></li>
+        <li><em>"Check my calendar for conflicts tomorrow and decline the overlapping ones"</em></li>
+        <li><em>"Search feedback about checkout speed, create a Google Doc with findings, and share it with the team"</em></li>
+      </ul>
+
+      <h2>How Skills Work</h2>
+      <ol>
+        <li><strong>You ask</strong> — e.g., "search Slack for mentions of feature X this week"</li>
+        <li><strong>Amp loads the matching skill</strong> — automatically with <code>auto-pilot</code>, or manually</li>
+        <li><strong>The skill provides instructions</strong> — tells Amp which CLI tools to call, auth flows, output format</li>
+        <li><strong>Amp executes</strong> — runs commands, processes results, returns them to you</li>
+      </ol>
+      <p>Skills are just markdown files (<code>SKILL.md</code>) stored in <code>~/.agents/skills/</code>. They don't contain secrets — your API tokens stay in separate credential files.</p>
+
+      <h2>Prerequisites</h2>
+      <table class="workflow-table">
+        <thead><tr><th>Tool</th><th>Install</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Amp CLI</strong></td><td>Install and authenticate via <a href="https://ampcode.com">ampcode.com</a></td></tr>
+          <tr><td><strong>GitHub CLI</strong></td><td><code>brew install gh</code> then <code>gh auth login</code></td></tr>
+          <tr><td><strong>uv</strong> (for gdrive, gcal skills)</td><td><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Installing Skills</h2>
+      <p>Skills live in GitHub repositories. Install them with:</p>
+      <pre><code>amp skill add &lt;repo&gt;/&lt;skill-name&gt;</code></pre>
+      <p>For example:</p>
+<pre><code># Install a single skill
+amp skill add my-org/agent-skills/slack
+
+# Install with overwrite (for updates)
+amp skill add my-org/agent-skills/slack --overwrite</code></pre>
+
+      <h3>Bulk Install Script</h3>
+<pre><code>#!/usr/bin/env bash
+set -euo pipefail
+
+REPO="your-org/your-skills-repo"
+SKILLS=(
+  slack gcal gdrive linear notion
+  snowflake auto-pilot rpi rpi-research
+  rpi-plan rpi-implement
+)
+
+echo "📦 Installing ${#SKILLS[@]} skills from $REPO..."
+for skill in "${SKILLS[@]}"; do
+  printf "  %-40s" "$skill"
+  if amp skill add "$REPO/$skill" --overwrite 2>/dev/null; then
+    echo "✓"
+  else
+    echo "✗"
+  fi
+done
+echo "✅ Done! Run 'amp skill list' to verify."</code></pre>
+
+      <h2>First-Time Authentication</h2>
+      <p>After installing, some skills need one-time auth:</p>
+      <table class="workflow-table">
+        <thead><tr><th>Tool</th><th>Auth command</th></tr></thead>
+        <tbody>
+          <tr><td>Google Drive / Calendar</td><td><code>cd ~/.agents/skills/gdrive && uv run gdrive-cli.py auth login</code></td></tr>
+          <tr><td>Slack</td><td>Automatic on first use (opens browser)</td></tr>
+          <tr><td>Snowflake</td><td>Uses Okta SSO</td></tr>
+          <tr><td>Linear</td><td>Enable the Linear MCP in Amp settings</td></tr>
+          <tr><td>GitHub</td><td><code>gh auth login</code></td></tr>
+          <tr><td>Notion</td><td>Enable the Notion MCP in Amp settings</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Creating Your Own Skills</h2>
+<pre><code># Scaffold a new skill
+amp skill create my-skill-name</code></pre>
+      <p>Or just create a <code>SKILL.md</code> file in <code>~/.agents/skills/my-skill-name/</code>. Look at existing skills for examples of structure and conventions.</p>
+
+      <h2>Updating &amp; Removing Skills</h2>
+<pre><code># Re-run install with --overwrite
+amp skill add my-org/skills/slack --overwrite
+
+# Remove a skill
+amp skill remove slack</code></pre>
+
+      <hr>
+
+      <h2>Tips for Getting the Most Out of Amp</h2>
+
+      <h3>💬 Just Ask Naturally</h3>
+      <p>If you have <code>auto-pilot</code> installed, you don't need to remember skill names:</p>
+      <ul>
+        <li>❌ "Use the slack skill to search for messages about the release"</li>
+        <li>✅ "Search Slack for release updates this week"</li>
+      </ul>
+
+      <h3>🔬 Use RPI for Big Tasks</h3>
+      <p>For complex, multi-step work (refactors, new features, migrations), use the <strong>RPI</strong> framework:</p>
+      <ol>
+        <li><strong>Research</strong> — understand the existing code and systems</li>
+        <li><strong>Plan</strong> — create a phased plan with success criteria</li>
+        <li><strong>Implement</strong> — execute one phase at a time</li>
+      </ol>
+      <p>Each phase runs in its own session so context stays fresh.</p>
+
+      <h3>🧠 Let Amp Remember</h3>
+      <p>With <code>amp-mem</code>, Amp remembers context across sessions — workflows you've established, decisions made, people and team structures, and tool configurations. You teach it once, and it remembers forever.</p>
+
+      <h3>⚙️ Configure AGENTS.md</h3>
+      <p>Your <code>~/AGENTS.md</code> file is the master configuration. It tells Amp your identity, preferences, and automated behaviors (like running start-of-day on session start). Treat it as your personal operating system for Amp.</p>
+
+      <hr>
+
+      <h2>FAQ</h2>
+
+      <h3>Do skills have access to my passwords?</h3>
+      <p>No. Skills are just markdown files. Credentials are stored separately.</p>
+
+      <h3>Can I create my own skills?</h3>
+      <p>Yes! Run <code>amp skill create my-skill-name</code> or look at existing skills in <code>~/.agents/skills/</code>.</p>
+
+      <h3>How do I update skills?</h3>
+      <p>Re-run the install command with <code>--overwrite</code>.</p>
+
+      <h3>How do I remove a skill?</h3>
+      <p><code>amp skill remove &lt;skill-name&gt;</code></p>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+      <a href="https://github.com/abhiroopb/synthetic-mind/blob/main/amp-setup-guide.md" class="btn btn-ghost" target="_blank">Full guide on GitHub ↗</a>
+      <a href="../skills/" class="btn btn-ghost" style="margin-left:0.5rem;">Browse skills ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>
