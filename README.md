@@ -34,4 +34,18 @@ A living collection of learnings from working deeply with AI agents, LLMs, and a
 
 ## Latest Updates
 
-*Coming soon.*
+- **2026-03-05** — [I Replaced My Morning Routine with a Single Command](./thoughts/2026-03-05-start-of-day.md) *(thought)*
+- **2025-06-02** — [Amp Setup Guide: Skills, Memory & Configuration](./amp-setup-guide.md) *(guide)*
+
+---
+
+## Contributing New Content
+
+From any Amp session, just say:
+
+| Prompt | What happens |
+|--------|-------------|
+| **"post a thought about [topic]"** | Creates a write-up in `/thoughts/` |
+| **"document a process for [topic]"** | Creates a playbook in `/processes/` |
+| **"add [skill] to synthetic-mind"** | Copies and showcases a skill in `/skills/` |
+| **"update synthetic-mind"** | Updates indexes and README |
