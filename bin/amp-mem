@@ -1,0 +1,960 @@
+#!/usr/bin/env bash
+# amp-mem — Persistent cross-session memory CLI for Amp
+# Inspired by claude-mem. SQLite + FTS5 backed.
+#
+# Usage:
+#   amp-mem init                                    Initialize/migrate database
+#   amp-mem save <type> <topic> <summary> [opts]    Save an observation (--private to hide from context/search)
+#   amp-mem search <query> [opts]                   Search memory (compact index, --include-private to show private)
+#   amp-mem timeline <id> [--window N]              Chronological context around an observation
+#   amp-mem detail <id> [<id2> ...]                 Full observation details
+#   amp-mem context [--lines N]                     Output recent context for session priming
+#   amp-mem compact [--older-than DAYS]             Compress old entries into summaries
+#   amp-mem session-start [--thread-url URL]        Start a new session
+#   amp-mem session-end [--session ID] [--summary]  End a session
+#   amp-mem stats                                   Memory statistics
+#   amp-mem export [--format md|json]               Export all memory
+#   amp-mem serve [--port PORT]                     Start web viewer
+#   amp-mem migrate                                 Migrate knowledge.md into SQLite
+#   amp-mem ingest-thread <id> <title> <summary>    Ingest an Amp thread (de-duped)
+#   amp-mem distill-dump [--since DATE]             Dump observations for distillation
+#   amp-mem distill-record <n> <notes> <rules>      Record distillation run
+#   amp-mem distill-status                          Last distillation info
+#   amp-mem decay                                   Apply confidence decay to aging observations
+
+set -euo pipefail
+
+DB="$HOME/.amp/memory/amp-mem.db"
+SCHEMA="$HOME/.amp/memory/schema.sql"
+KNOWLEDGE_FILE="$HOME/.amp/memory/knowledge.md"
+
+# ── Helpers ──────────────────────────────────────────────────────────────
+
+_db() {
+    sqlite3 -batch "$DB" "$@"
+}
+
+_db_json() {
+    sqlite3 -json -batch "$DB" "$@"
+}
+
+_ensure_db() {
+    if [ ! -f "$DB" ]; then
+        cmd_init
+    fi
+}
+
+_escape() {
+    # Escape single quotes for SQL
+    echo "${1//\'/\'\'}"
+}
+
+# Jaccard word-overlap similarity (0.0–1.0)
+_jaccard() {
+    python3 -c "
+import sys
+a = set(sys.argv[1].lower().split())
+b = set(sys.argv[2].lower().split())
+if not a or not b: print('0.0')
+else: print(f'{len(a & b) / len(a | b):.3f}')
+" "$1" "$2"
+}
+
+# Migrate schema: add new columns if they don't exist
+_migrate_schema() {
+    # Check if confidence column exists
+    local has_confidence
+    has_confidence=$(_db "SELECT COUNT(*) FROM pragma_table_info('observations') WHERE name='confidence';")
+    if [ "$has_confidence" -eq 0 ]; then
+        _db "ALTER TABLE observations ADD COLUMN confidence REAL NOT NULL DEFAULT 1.0;"
+        _db "ALTER TABLE observations ADD COLUMN access_count INTEGER NOT NULL DEFAULT 0;"
+        _db "ALTER TABLE observations ADD COLUMN last_accessed TEXT;"
+        echo "✅ Migrated schema: added confidence, access_count, last_accessed columns"
+    fi
+
+    local has_private
+    has_private=$(_db "SELECT COUNT(*) FROM pragma_table_info('observations') WHERE name='private';")
+    if [ "$has_private" -eq 0 ]; then
+        _db "ALTER TABLE observations ADD COLUMN private INTEGER NOT NULL DEFAULT 0;"
+        echo "✅ Migrated schema: added private column"
+    fi
+}
+
+# ── Commands ─────────────────────────────────────────────────────────────
+
+cmd_init() {
+    mkdir -p "$(dirname "$DB")"
+    if [ -f "$SCHEMA" ]; then
+        _db < "$SCHEMA"
+        _migrate_schema
+        echo "✅ Database initialized at $DB"
+    else
+        echo "❌ Schema file not found at $SCHEMA" >&2
+        exit 1
+    fi
+}
+
+cmd_save() {
+    _ensure_db
+    local type="${1:-observation}"
+    local topic="${2:?Usage: amp-mem save <type> <topic> <summary> [--project P] [--file F] [--tags T] [--session S]}"
+    local summary="${3:?Usage: amp-mem save <type> <topic> <summary>}"
+    shift 3
+
+    local project="" file_path="" tags="" session_id="" metadata=""
+    local private=0
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --project)  project="$2"; shift 2 ;;
+            --file)     file_path="$2"; shift 2 ;;
+            --tags)     tags="$2"; shift 2 ;;
+            --session)  session_id="$2"; shift 2 ;;
+            --meta)     metadata="$2"; shift 2 ;;
+            --private)  private=1; shift ;;
+            *) shift ;;
+        esac
+    done
+
+    local esc_topic; esc_topic=$(_escape "$topic")
+    local esc_summary; esc_summary=$(_escape "$summary")
+    local esc_project; esc_project=$(_escape "$project")
+    local esc_file; esc_file=$(_escape "$file_path")
+    local esc_tags; esc_tags=$(_escape "$tags")
+    local esc_meta; esc_meta=$(_escape "$metadata")
+
+    local sid="NULL"
+    [ -n "$session_id" ] && sid="$session_id"
+
+    # ── Deduplication: check for similar existing observations ──
+    local new_text="$topic $summary"
+    local dup_id=""
+    local dup_sim="0.0"
+
+    # Search FTS5 for candidates with matching topic words
+    local fts_query
+    fts_query=$(echo "$esc_topic" | sed "s/[^a-zA-Z0-9 ]//g" | head -c 100)
+    # Skip dedup if topic is too short for FTS
+    if [ ${#fts_query} -gt 3 ]; then
+        local candidates
+        candidates=$(_db <<DEDUP_SQL
+.mode tabs
+SELECT o.id, o.topic || ' ' || o.summary AS text
+FROM observations_fts f
+JOIN observations o ON o.id = f.rowid
+WHERE observations_fts MATCH '$fts_query'
+AND o.type = '$(_escape "$type")'
+ORDER BY rank LIMIT 5;
+DEDUP_SQL
+        ) 2>/dev/null
+
+    if [ -n "$candidates" ]; then
+        while IFS=$'\t' read -r cand_id cand_text; do
+            [ -z "$cand_id" ] && continue
+            local sim
+            sim=$(_jaccard "$new_text" "$cand_text")
+            # If similarity > 0.6, this is a duplicate — supersede it
+            if awk "BEGIN{exit !($sim > 0.6)}" 2>/dev/null; then
+                dup_id="$cand_id"
+                dup_sim="$sim"
+                break
+            fi
+        done <<< "$candidates"
+    fi
+    fi  # end fts_query length check
+
+    local id
+    if [ -n "$dup_id" ]; then
+        # Supersede: update existing observation with new content, boost confidence
+        _db "UPDATE observations SET
+                topic = '$esc_topic',
+                summary = '$esc_summary',
+                ts = strftime('%Y-%m-%dT%H:%M:%SZ', 'now'),
+                confidence = MIN(1.0, confidence + 0.1),
+                project = COALESCE(NULLIF('$esc_project',''), project),
+                tags = COALESCE(NULLIF('$esc_tags',''), tags),
+                metadata = COALESCE(NULLIF('$esc_meta',''), metadata)
+             WHERE id = $dup_id;"
+        id="$dup_id"
+        echo "🔄 Superseded observation #$id (similarity: $dup_sim): $topic"
+    else
+        id=$(_db "INSERT INTO observations (session_id, type, topic, summary, project, file_path, tags, metadata, confidence, private)
+                  VALUES ($sid, '$(_escape "$type")', '$esc_topic', '$esc_summary',
+                          NULLIF('$esc_project',''), NULLIF('$esc_file',''),
+                          NULLIF('$esc_tags',''), NULLIF('$esc_meta',''), 1.0, $private);
+                  SELECT last_insert_rowid();")
+        echo "✅ Saved observation #$id: $topic"
+    fi
+
+    # Also append to knowledge.md for backward compatibility
+    local date; date=$(date +"%Y-%m-%d")
+    cat >> "$KNOWLEDGE_FILE" <<EOF
+
+## [$date] $topic
+
+$summary
+
+---
+
+EOF
+}
+
+cmd_search() {
+    _ensure_db
+    local query="${1:?Usage: amp-mem search <query> [--type T] [--project P] [--after DATE] [--before DATE] [--limit N]}"
+    shift
+
+    local type="" project="" after="" before="" limit="20"
+    local include_private=0
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --type)    type="$2"; shift 2 ;;
+            --project) project="$2"; shift 2 ;;
+            --after)   after="$2"; shift 2 ;;
+            --before)  before="$2"; shift 2 ;;
+            --limit)   limit="$2"; shift 2 ;;
+            --include-private) include_private=1; shift ;;
+            *) shift ;;
+        esac
+    done
+
+    local esc_query; esc_query=$(_escape "$query")
+
+    # Build WHERE clauses for additional filters
+    local where_extra=""
+    [ -n "$type" ]    && where_extra="$where_extra AND o.type = '$(_escape "$type")'"
+    [ -n "$project" ] && where_extra="$where_extra AND o.project = '$(_escape "$project")'"
+    [ -n "$after" ]   && where_extra="$where_extra AND o.ts >= '$(_escape "$after")'"
+    [ -n "$before" ]  && where_extra="$where_extra AND o.ts <= '$(_escape "$before")'"
+    [ "$include_private" -eq 0 ] && where_extra="$where_extra AND o.private = 0"
+
+    _db <<SQL
+.mode column
+.headers on
+.width 5 20 12 40 30
+SELECT o.id,
+       substr(o.ts, 1, 10) AS date,
+       o.type,
+       substr(o.topic, 1, 40) AS topic,
+       substr(o.summary, 1, 60) AS summary_preview
+FROM observations_fts f
+JOIN observations o ON o.id = f.rowid
+WHERE observations_fts MATCH '$esc_query'
+$where_extra
+ORDER BY rank
+LIMIT $limit;
+SQL
+
+    # Track access: increment access_count for returned observations
+    _db "UPDATE observations SET
+            access_count = access_count + 1,
+            last_accessed = strftime('%Y-%m-%dT%H:%M:%SZ', 'now')
+         WHERE id IN (
+            SELECT o.id FROM observations_fts f
+            JOIN observations o ON o.id = f.rowid
+            WHERE observations_fts MATCH '$esc_query'
+            $where_extra
+            ORDER BY rank LIMIT $limit
+         );" 2>/dev/null
+}
+
+cmd_timeline() {
+    _ensure_db
+    local id="${1:?Usage: amp-mem timeline <id> [--window N]}"
+    shift
+    local window=5
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --window) window="$2"; shift 2 ;;
+            *) shift ;;
+        esac
+    done
+
+    # Get the timestamp of the target observation
+    local target_ts
+    target_ts=$(_db "SELECT ts FROM observations WHERE id = $id;")
+
+    if [ -z "$target_ts" ]; then
+        echo "❌ Observation #$id not found" >&2
+        exit 1
+    fi
+
+    _db <<SQL
+.mode column
+.headers on
+.width 5 20 12 50 80
+SELECT id,
+       ts AS timestamp,
+       type,
+       topic,
+       summary
+FROM observations
+WHERE ts BETWEEN datetime('$target_ts', '-${window} hours') 
+              AND datetime('$target_ts', '+${window} hours')
+ORDER BY ts;
+SQL
+}
+
+cmd_detail() {
+    _ensure_db
+    if [ $# -eq 0 ]; then
+        echo "Usage: amp-mem detail <id1> [<id2> ...]" >&2
+        exit 1
+    fi
+
+    local ids
+    ids=$(printf "%s," "$@")
+    ids="${ids%,}"
+
+    _db <<SQL
+.mode column
+.headers on
+.width 5 20 12 12 50 0 15 30 20
+SELECT id, ts AS timestamp, type, project, topic, summary, file_path, tags, metadata
+FROM observations
+WHERE id IN ($ids)
+ORDER BY ts;
+SQL
+}
+
+cmd_context() {
+    _ensure_db
+    local lines=50
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --lines) lines="$2"; shift 2 ;;
+            *) shift ;;
+        esac
+    done
+
+    # Use python3 for decay computation and budgeted output
+    python3 - "$DB" "$lines" <<'PYEOF'
+import sqlite3, sys, math
+from datetime import datetime, timezone
+
+db_path = sys.argv[1]
+max_lines = int(sys.argv[2])
+
+conn = sqlite3.connect(db_path)
+conn.row_factory = sqlite3.Row
+
+# Half-life in days for decaying types (0 = permanent)
+HALF_LIVES = {
+    'architecture': 0, 'decision': 0, 'pattern': 0, 'gotcha': 0,
+    'preference': 0, 'config': 0, 'workflow': 0, 'people': 0,
+    'observation': 14, 'bugfix': 30, 'discovery': 21,
+    'session': 7, 'thread': 7,
+}
+
+# Line budgets per type (total ~150 lines like claude-mem)
+BUDGETS = {
+    'decision': 25, 'preference': 15, 'config': 15,
+    'workflow': 15, 'discovery': 15, 'people': 10,
+    'bugfix': 10, 'observation': 20, 'pattern': 10,
+    'architecture': 10, 'gotcha': 10,
+    'session': 5, 'thread': 5,
+}
+
+def effective_confidence(row):
+    """Compute confidence with time-based decay."""
+    base = row['confidence'] if row['confidence'] else 1.0
+    obs_type = row['type'] or 'observation'
+    half_life = HALF_LIVES.get(obs_type, 14)
+    if half_life == 0:
+        return base  # permanent type
+    try:
+        ts = datetime.fromisoformat(row['ts'].replace('Z', '+00:00'))
+        now = datetime.now(timezone.utc)
+        days = (now - ts).total_seconds() / 86400
+        decay = math.pow(0.5, days / half_life)
+        return base * decay
+    except:
+        return base
+
+def score(row):
+    """Rank by effective_confidence × (access_count + 1)."""
+    ec = effective_confidence(row)
+    ac = (row['access_count'] or 0) + 1
+    return ec * ac
+
+# Fetch all active observations
+rows = conn.execute("""
+    SELECT id, ts, type, topic, summary, project, tags,
+           confidence, access_count
+    FROM observations
+    WHERE private = 0
+    ORDER BY ts DESC
+""").fetchall()
+
+if not rows:
+    print("# Amp Memory — No observations yet")
+    sys.exit(0)
+
+# Filter out very low confidence (< 0.15)
+active = [(r, effective_confidence(r)) for r in rows]
+active = [(r, ec) for r, ec in active if ec >= 0.15]
+
+# Group by type
+by_type = {}
+for r, ec in active:
+    t = r['type'] or 'observation'
+    by_type.setdefault(t, []).append((r, ec))
+
+# Sort each group by score descending
+for t in by_type:
+    by_type[t].sort(key=lambda x: score(x[0]), reverse=True)
+
+# Compute used/unused budgets
+used_budgets = {}
+unused_lines = 0
+for t, budget in BUDGETS.items():
+    count = len(by_type.get(t, []))
+    used = min(count, budget)
+    used_budgets[t] = used
+    unused_lines += budget - used
+
+# Redistribute unused budget to types that have more entries
+overflow_types = [t for t in BUDGETS if len(by_type.get(t, [])) > BUDGETS[t]]
+if overflow_types and unused_lines > 0:
+    per_type = unused_lines // len(overflow_types)
+    for t in overflow_types:
+        used_budgets[t] = min(len(by_type.get(t, [])), BUDGETS[t] + per_type)
+
+# Output
+print("# Amp Memory — Recent Context")
+print()
+
+# Show compacted summaries first (if any)
+summaries = conn.execute("SELECT COUNT(*) as c FROM summaries").fetchone()
+if summaries and summaries['c'] > 0:
+    print("## Archived Knowledge")
+    print()
+    for s in conn.execute("""
+        SELECT period_start, period_end, summary
+        FROM summaries ORDER BY created_at DESC LIMIT 3
+    """):
+        print(f"### {s['period_start'][:10]} to {s['period_end'][:10]}")
+        print(s['summary'][:300])
+        print("---")
+    print()
+
+# Output each type section
+TYPE_LABELS = {
+    'decision': '🎯 Decisions', 'preference': '⭐ Preferences',
+    'config': '⚙️ Configuration', 'workflow': '🔄 Workflows',
+    'discovery': '💡 Discoveries', 'people': '👥 People',
+    'bugfix': '🐛 Bug Fixes', 'observation': '📝 Observations',
+    'pattern': '🧩 Patterns', 'architecture': '🏗️ Architecture',
+    'gotcha': '⚠️ Gotchas', 'session': '📋 Sessions',
+    'thread': '🧵 Threads',
+}
+
+# Order: permanent types first, then decaying
+type_order = ['decision', 'preference', 'config', 'workflow', 'architecture',
+              'pattern', 'gotcha', 'people', 'discovery', 'bugfix',
+              'observation', 'session', 'thread']
+
+total_lines = 0
+for t in type_order:
+    entries = by_type.get(t, [])
+    if not entries:
+        continue
+    budget = used_budgets.get(t, BUDGETS.get(t, 10))
+    label = TYPE_LABELS.get(t, t.title())
+
+    print(f"## {label}")
+    print()
+    for i, (r, ec) in enumerate(entries[:budget]):
+        if total_lines >= max_lines:
+            break
+        date = r['ts'][:10] if r['ts'] else '?'
+        conf_indicator = '●' if ec > 0.7 else '◐' if ec > 0.4 else '○'
+        project_tag = f" [{r['project']}]" if r['project'] else ""
+        print(f"- {conf_indicator} **[{date}] {r['topic']}**{project_tag}")
+        # Print summary (truncated to ~2 lines)
+        summary_text = (r['summary'] or '').replace('\n', ' ')[:150]
+        if summary_text:
+            print(f"  {summary_text}")
+        total_lines += 2
+    if total_lines >= max_lines:
+        remaining = len(entries) - budget
+        if remaining > 0:
+            print(f"  _...{remaining} more (use amp_mem_search)_")
+        break
+    print()
+
+conn.close()
+PYEOF
+}
+
+cmd_compact() {
+    _ensure_db
+    local older_than=30
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --older-than) older_than="$2"; shift 2 ;;
+            *) shift ;;
+        esac
+    done
+
+    local cutoff
+    cutoff=$(date -v-${older_than}d +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null || date -d "${older_than} days ago" +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null)
+
+    # Count observations to compact
+    local count
+    count=$(_db "SELECT COUNT(*) FROM observations WHERE ts < '$cutoff' AND id NOT IN (SELECT json_each.value FROM summaries, json_each(summaries.observation_ids));")
+
+    if [ "$count" -eq 0 ]; then
+        echo "ℹ️  No observations older than $older_than days to compact."
+        return
+    fi
+
+    echo "📦 Compacting $count observations older than $older_than days..."
+
+    # Get all observations to compact, grouped by week
+    local weeks
+    weeks=$(_db "SELECT DISTINCT strftime('%Y-W%W', ts) FROM observations WHERE ts < '$cutoff' ORDER BY 1;")
+
+    while IFS= read -r week; do
+        [ -z "$week" ] && continue
+
+        local period_start period_end obs_ids obs_text
+
+        period_start=$(_db "SELECT MIN(ts) FROM observations WHERE strftime('%Y-W%W', ts) = '$week' AND ts < '$cutoff';")
+        period_end=$(_db "SELECT MAX(ts) FROM observations WHERE strftime('%Y-W%W', ts) = '$week' AND ts < '$cutoff';")
+        obs_ids=$(_db "SELECT json_group_array(id) FROM observations WHERE strftime('%Y-W%W', ts) = '$week' AND ts < '$cutoff';")
+
+        # Concatenate all observations for that week into a summary
+        obs_text=$(_db "SELECT group_concat(type || ': ' || topic || ' — ' || summary, char(10)) FROM observations WHERE strftime('%Y-W%W', ts) = '$week' AND ts < '$cutoff';")
+
+        local esc_text; esc_text=$(_escape "$obs_text")
+        local esc_ids; esc_ids=$(_escape "$obs_ids")
+
+        _db "INSERT INTO summaries (period_start, period_end, summary, observation_ids)
+             VALUES ('$period_start', '$period_end', '$esc_text', '$esc_ids');"
+
+        echo "  ✓ Compacted week $week ($(echo "$obs_ids" | python3 -c 'import json,sys; print(len(json.load(sys.stdin)))' 2>/dev/null || echo '?') observations)"
+
+    done <<< "$weeks"
+
+    echo "✅ Compaction complete. Original observations preserved (not deleted)."
+}
+
+cmd_session_start() {
+    _ensure_db
+    local thread_url=""
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --thread-url) thread_url="$2"; shift 2 ;;
+            *) shift ;;
+        esac
+    done
+
+    local esc_url; esc_url=$(_escape "$thread_url")
+
+    local id
+    id=$(_db "INSERT INTO sessions (thread_url) VALUES (NULLIF('$esc_url', ''));
+              SELECT last_insert_rowid();")
+
+    echo "$id"
+}
+
+cmd_session_end() {
+    _ensure_db
+    local session_id="" summary=""
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --session) session_id="$2"; shift 2 ;;
+            --summary) summary="$2"; shift 2 ;;
+            *) shift ;;
+        esac
+    done
+
+    if [ -z "$session_id" ]; then
+        session_id=$(_db "SELECT id FROM sessions ORDER BY id DESC LIMIT 1;")
+    fi
+
+    if [ -n "$summary" ]; then
+        local esc; esc=$(_escape "$summary")
+        _db "UPDATE sessions SET ended_at = strftime('%Y-%m-%dT%H:%M:%SZ', 'now'), summary = '$esc' WHERE id = $session_id;"
+    else
+        _db "UPDATE sessions SET ended_at = strftime('%Y-%m-%dT%H:%M:%SZ', 'now') WHERE id = $session_id;"
+    fi
+
+    echo "✅ Session #$session_id ended."
+}
+
+cmd_stats() {
+    _ensure_db
+    echo "📊 Amp Memory Statistics"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+
+    local total obs_types sessions summaries db_size first_entry last_entry
+
+    total=$(_db "SELECT COUNT(*) FROM observations;")
+    sessions=$(_db "SELECT COUNT(*) FROM sessions;")
+    summaries=$(_db "SELECT COUNT(*) FROM summaries;")
+    db_size=$(du -h "$DB" 2>/dev/null | cut -f1)
+    first_entry=$(_db "SELECT MIN(ts) FROM observations;" 2>/dev/null)
+    last_entry=$(_db "SELECT MAX(ts) FROM observations;" 2>/dev/null)
+
+    echo "  Observations:    $total"
+    echo "  Sessions:        $sessions"
+    echo "  Compacted:       $summaries weekly summaries"
+    echo "  Database size:   $db_size"
+    echo "  First entry:     ${first_entry:-n/a}"
+    echo "  Last entry:      ${last_entry:-n/a}"
+    echo ""
+
+    echo "  By type:"
+    _db <<SQL
+.mode column
+.width 20 8
+SELECT type, COUNT(*) AS count FROM observations GROUP BY type ORDER BY count DESC;
+SQL
+
+    echo ""
+    echo "  By project:"
+    _db <<SQL
+.mode column
+.width 30 8
+SELECT COALESCE(project, '(none)') AS project, COUNT(*) AS count FROM observations GROUP BY project ORDER BY count DESC LIMIT 10;
+SQL
+}
+
+cmd_export() {
+    _ensure_db
+    local format="md"
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --format) format="$2"; shift 2 ;;
+            *) shift ;;
+        esac
+    done
+
+    case "$format" in
+        json)
+            _db_json "SELECT * FROM observations ORDER BY ts;"
+            ;;
+        md)
+            echo "# Amp Memory Export"
+            echo ""
+            echo "Exported: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+            echo ""
+            echo "---"
+
+            _db <<SQL
+.mode list
+.separator "\n"
+SELECT char(10) || '## [' || substr(ts, 1, 10) || '] ' || topic || char(10) || char(10) ||
+       '**Type:** ' || type ||
+       CASE WHEN project IS NOT NULL THEN ' | **Project:** ' || project ELSE '' END ||
+       CASE WHEN file_path IS NOT NULL THEN ' | **File:** ' || file_path ELSE '' END ||
+       CASE WHEN tags IS NOT NULL THEN ' | **Tags:** ' || tags ELSE '' END ||
+       char(10) || char(10) || summary || char(10) || char(10) || '---'
+FROM observations ORDER BY ts;
+SQL
+            ;;
+        *)
+            echo "❌ Unknown format: $format (use md or json)" >&2
+            exit 1
+            ;;
+    esac
+}
+
+cmd_serve() {
+    local port=37777
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --port) port="$2"; shift 2 ;;
+            *) shift ;;
+        esac
+    done
+
+    echo "🌐 Starting Amp Memory web viewer on http://localhost:$port"
+    echo "   Press Ctrl+C to stop."
+    python3 "$HOME/.amp/memory/web/serve.py" "$port"
+}
+
+cmd_migrate() {
+    _ensure_db
+
+    # Check if sessions.jsonl exists and has content
+    local jsonl="$HOME/.amp/memory/sessions.jsonl"
+    if [ ! -f "$jsonl" ] || [ ! -s "$jsonl" ]; then
+        echo "ℹ️  No sessions.jsonl to migrate."
+        return
+    fi
+
+    local count=0
+    while IFS= read -r line; do
+        [ -z "$line" ] && continue
+        local ts topic summary
+        ts=$(echo "$line" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('ts',''))" 2>/dev/null) || continue
+        topic=$(echo "$line" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('topic',''))" 2>/dev/null) || continue
+        summary=$(echo "$line" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('summary',''))" 2>/dev/null) || continue
+
+        [ -z "$topic" ] && continue
+
+        local esc_topic; esc_topic=$(_escape "$topic")
+        local esc_summary; esc_summary=$(_escape "$summary")
+
+        _db "INSERT INTO observations (ts, type, topic, summary) VALUES ('$ts', 'observation', '$esc_topic', '$esc_summary');"
+        count=$((count + 1))
+    done < "$jsonl"
+
+    echo "✅ Migrated $count entries from sessions.jsonl"
+}
+
+cmd_ingest_thread() {
+    _ensure_db
+
+    # Usage: amp-mem ingest-thread <thread_id> <title> <summary> [--date DATE] [--url URL] [--tags T]
+    local thread_id="${1:?Usage: amp-mem ingest-thread <thread_id> <title> <summary> [--date DATE] [--url URL] [--tags T]}"
+    local title="${2:?Usage: amp-mem ingest-thread <thread_id> <title> <summary>}"
+    local summary="${3:?Usage: amp-mem ingest-thread <thread_id> <title> <summary>}"
+    shift 3
+
+    local date="" url="" tags=""
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --date) date="$2"; shift 2 ;;
+            --url)  url="$2"; shift 2 ;;
+            --tags) tags="$2"; shift 2 ;;
+            *) shift ;;
+        esac
+    done
+
+    [ -z "$url" ] && url="https://ampcode.com/threads/$thread_id"
+
+    # De-duplicate: skip if this thread_id is already stored
+    local existing
+    existing=$(_db "SELECT COUNT(*) FROM observations WHERE type = 'thread' AND metadata LIKE '%$(_escape "$thread_id")%';")
+    if [ "$existing" -gt 0 ]; then
+        echo "⏭️  Thread $thread_id already ingested, skipping."
+        return 0
+    fi
+
+    local esc_title; esc_title=$(_escape "$title")
+    local esc_summary; esc_summary=$(_escape "$summary")
+    local esc_url; esc_url=$(_escape "$url")
+    local esc_tags; esc_tags=$(_escape "$tags")
+    local esc_meta; esc_meta=$(_escape "{\"thread_id\":\"$thread_id\",\"url\":\"$url\"}")
+
+    local ts_clause=""
+    if [ -n "$date" ]; then
+        ts_clause="'$(_escape "$date")'"
+    else
+        ts_clause="strftime('%Y-%m-%dT%H:%M:%SZ', 'now')"
+    fi
+
+    local id
+    id=$(_db "INSERT INTO observations (ts, type, topic, summary, tags, metadata)
+              VALUES ($ts_clause, 'thread', '$esc_title', '$esc_summary',
+                      NULLIF('$esc_tags',''), '$esc_meta');
+              SELECT last_insert_rowid();")
+
+    echo "✅ Ingested thread #$id: $title"
+}
+
+cmd_distill_dump() {
+    _ensure_db
+
+    # Ensure distillations table exists
+    _db "CREATE TABLE IF NOT EXISTS distillations (
+        id              INTEGER PRIMARY KEY AUTOINCREMENT,
+        created_at      TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+        observation_count INTEGER NOT NULL,
+        notes_produced  INTEGER NOT NULL DEFAULT 0,
+        rules_proposed  INTEGER NOT NULL DEFAULT 0,
+        summary         TEXT
+    );"
+
+    local since=""
+    local limit=500
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --since) since="$2"; shift 2 ;;
+            --limit) limit="$2"; shift 2 ;;
+            *) shift ;;
+        esac
+    done
+
+    # Default: since last distillation, or all time if never run
+    if [ -z "$since" ]; then
+        since=$(_db "SELECT COALESCE(MAX(created_at), '1970-01-01T00:00:00Z') FROM distillations;")
+    fi
+
+    local count
+    count=$(_db "SELECT COUNT(*) FROM observations WHERE ts > '$since';")
+
+    echo "# Distillation Input"
+    echo "# Since: $since"
+    echo "# Observations: $count"
+    echo "---"
+    echo ""
+
+    if [ "$count" -eq 0 ]; then
+        echo "No new observations since last distillation."
+        return
+    fi
+
+    # Dump observations grouped by type, with full details
+    _db -header -column "SELECT id, ts, type, topic, summary, COALESCE(project,'') as project, COALESCE(tags,'') as tags
+         FROM observations
+         WHERE ts > '$since'
+         ORDER BY ts ASC
+         LIMIT $limit;"
+}
+
+cmd_distill_record() {
+    _ensure_db
+
+    # Ensure distillations table exists
+    _db "CREATE TABLE IF NOT EXISTS distillations (
+        id              INTEGER PRIMARY KEY AUTOINCREMENT,
+        created_at      TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+        observation_count INTEGER NOT NULL,
+        notes_produced  INTEGER NOT NULL DEFAULT 0,
+        rules_proposed  INTEGER NOT NULL DEFAULT 0,
+        summary         TEXT
+    );"
+
+    local obs_count="${1:?Usage: amp-mem distill-record <obs_count> <notes_produced> <rules_proposed> [summary]}"
+    local notes_produced="${2:-0}"
+    local rules_proposed="${3:-0}"
+    local summary="${4:-}"
+
+    local esc_summary; esc_summary=$(_escape "$summary")
+
+    _db "INSERT INTO distillations (observation_count, notes_produced, rules_proposed, summary)
+         VALUES ($obs_count, $notes_produced, $rules_proposed, NULLIF('$esc_summary',''));"
+
+    echo "✅ Distillation recorded (obs=$obs_count, notes=$notes_produced, rules_proposed=$rules_proposed)"
+}
+
+cmd_distill_status() {
+    _ensure_db
+
+    # Ensure distillations table exists
+    _db "CREATE TABLE IF NOT EXISTS distillations (
+        id              INTEGER PRIMARY KEY AUTOINCREMENT,
+        created_at      TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+        observation_count INTEGER NOT NULL,
+        notes_produced  INTEGER NOT NULL DEFAULT 0,
+        rules_proposed  INTEGER NOT NULL DEFAULT 0,
+        summary         TEXT
+    );"
+
+    local last_run
+    last_run=$(_db "SELECT COALESCE(MAX(created_at), 'never') FROM distillations;")
+
+    local pending
+    if [ "$last_run" = "never" ]; then
+        pending=$(_db "SELECT COUNT(*) FROM observations;")
+    else
+        pending=$(_db "SELECT COUNT(*) FROM observations WHERE ts > '$last_run';")
+    fi
+
+    local total_distillations
+    total_distillations=$(_db "SELECT COUNT(*) FROM distillations;")
+
+    echo "📊 Distillation Status"
+    echo "  Last run:            $last_run"
+    echo "  Pending observations: $pending"
+    echo "  Total distillations:  $total_distillations"
+}
+
+cmd_decay() {
+    _ensure_db
+
+    # Apply confidence decay to all decaying-type observations
+    # This is idempotent — decay is based on age, not repeated application
+    _db <<SQL
+UPDATE observations SET confidence = CASE
+    WHEN type IN ('architecture','decision','pattern','gotcha','preference','config','workflow','people')
+        THEN confidence  -- permanent types: no decay
+    WHEN type IN ('session','thread')
+        THEN MAX(0.05, 1.0 * (1.0 - MIN(1.0, (julianday('now') - julianday(ts)) / 14.0)))
+    WHEN type = 'bugfix'
+        THEN MAX(0.05, 1.0 * (1.0 - MIN(1.0, (julianday('now') - julianday(ts)) / 60.0)))
+    WHEN type = 'discovery'
+        THEN MAX(0.05, 1.0 * (1.0 - MIN(1.0, (julianday('now') - julianday(ts)) / 42.0)))
+    ELSE
+        MAX(0.05, 1.0 * (1.0 - MIN(1.0, (julianday('now') - julianday(ts)) / 28.0)))
+    END
+WHERE type NOT IN ('architecture','decision','pattern','gotcha','preference','config','workflow','people');
+SQL
+
+    local updated
+    updated=$(_db "SELECT changes();")
+    echo "✅ Decay applied to $updated observations"
+}
+
+# ── Main dispatch ────────────────────────────────────────────────────────
+
+cmd="${1:-help}"
+shift 2>/dev/null || true
+
+case "$cmd" in
+    init)           cmd_init ;;
+    save)           cmd_save "$@" ;;
+    search)         cmd_search "$@" ;;
+    timeline)       cmd_timeline "$@" ;;
+    detail)         cmd_detail "$@" ;;
+    context)        cmd_context "$@" ;;
+    compact)        cmd_compact "$@" ;;
+    session-start)  cmd_session_start "$@" ;;
+    session-end)    cmd_session_end "$@" ;;
+    stats)          cmd_stats ;;
+    export)         cmd_export "$@" ;;
+    serve)          cmd_serve "$@" ;;
+    migrate)        cmd_migrate ;;
+    ingest-thread)  cmd_ingest_thread "$@" ;;
+    distill-dump)   cmd_distill_dump "$@" ;;
+    distill-record) cmd_distill_record "$@" ;;
+    distill-status) cmd_distill_status ;;
+    decay)          cmd_decay ;;
+    help|--help|-h)
+        echo "amp-mem — Persistent cross-session memory for Amp"
+        echo ""
+        echo "Commands:"
+        echo "  init                          Initialize database"
+        echo "  save <type> <topic> <summary> Save an observation"
+        echo "       [--project P] [--file F] [--tags T] [--session S] [--private]"
+        echo "  search <query>                FTS5 search (compact index)"
+        echo "       [--type T] [--project P] [--after D] [--before D] [--limit N] [--include-private]"
+        echo "  timeline <id> [--window N]    Context around an observation"
+        echo "  detail <id> [<id2> ...]       Full observation details"
+        echo "  context [--lines N]           Recent context for session priming"
+        echo "  compact [--older-than DAYS]   Compress old entries"
+        echo "  session-start [--thread-url]  Start a new session"
+        echo "  session-end [--session ID]    End a session"
+        echo "  stats                         Memory statistics"
+        echo "  export [--format md|json]     Export all memory"
+        echo "  serve [--port PORT]           Start web viewer (default: 37777)"
+        echo "  migrate                       Import sessions.jsonl into SQLite"
+        echo "  ingest-thread <id> <title> <summary>  Ingest an Amp thread (de-duped)"
+        echo "       [--date D] [--url U] [--tags T]"
+        echo "  distill-dump [--since DATE]   Dump observations for distillation"
+        echo "  distill-record <n> <notes> <rules> [summary]  Record distillation run"
+        echo "  distill-status                Last distillation info"
+        echo "  decay                         Apply confidence decay"
+        ;;
+    *)
+        echo "❌ Unknown command: $cmd" >&2
+        echo "   Run 'amp-mem help' for usage." >&2
+        exit 1
+        ;;
+esac

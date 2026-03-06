@@ -144,60 +144,46 @@
 
     <hr class="divider" style="margin: 3rem 0;">
 
-    <div class="section-header">
-      <h2>Setup</h2>
-      <p>Get amp-mem running in 6 steps</p>
+    <div class="section-header" id="install">
+      <h2>Installation</h2>
+      <p>Get amp-mem running in under 5 minutes</p>
     </div>
 
     <div class="page-content" style="padding: 0; max-width: 100%;">
-      <h3>Step 1: Create directories</h3>
-      <pre><code>mkdir -p ~/.amp/memory/web</code></pre>
+      <div style="background: linear-gradient(135deg, #1a2a1a 0%, #0d1f0d 100%); border: 1px solid #2d4a2d; border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 2rem;">
+        <p style="margin: 0; font-size: 0.95rem; color: #a3d9a3;">
+          <strong style="color: #6ee86e;">📦 Quick install:</strong> Download the CLI script and plugin from the
+          <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/bin" target="_blank" style="color: #6ee86e; text-decoration: underline;">bin/ directory on GitHub</a>,
+          then run the commands below.
+        </p>
+      </div>
 
-      <h3>Step 2: Create the database schema</h3>
-      <p>Save to <code>~/.amp/memory/schema.sql</code>:</p>
-<pre><code>PRAGMA journal_mode=WAL;
-PRAGMA foreign_keys=ON;
+      <h3>Step 1: Download &amp; install the CLI</h3>
+<pre><code># Download the CLI script
+curl -fsSL https://raw.githubusercontent.com/abhiroopb/synthetic-mind/main/bin/amp-mem \
+  -o ~/bin/amp-mem
 
-CREATE TABLE IF NOT EXISTS sessions (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    thread_url TEXT,
-    started_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now')),
-    ended_at TEXT, summary TEXT
-);
+# Make it executable
+chmod +x ~/bin/amp-mem
 
-CREATE TABLE IF NOT EXISTS observations (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    session_id INTEGER REFERENCES sessions(id),
-    ts TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now')),
-    type TEXT NOT NULL DEFAULT 'observation',
-    topic TEXT NOT NULL, summary TEXT NOT NULL,
-    project TEXT, file_path TEXT, tags TEXT, metadata TEXT,
-    confidence REAL NOT NULL DEFAULT 1.0,
-    access_count INTEGER NOT NULL DEFAULT 0,
-    last_accessed TEXT,
-    private INTEGER NOT NULL DEFAULT 0
-);
-
-CREATE VIRTUAL TABLE IF NOT EXISTS observations_fts USING fts5(
-    topic, summary, project, tags,
-    content='observations', content_rowid='id',
-    tokenize='porter unicode61'
-);</code></pre>
-
-      <h3>Step 3: Install the CLI</h3>
-<pre><code># Ensure ~/bin is in PATH
+# Ensure ~/bin is in your PATH (add to ~/.zshrc if not already)
 echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc</code></pre>
 
-# Place the amp-mem script at ~/bin/amp-mem
-chmod +x ~/bin/amp-mem</code></pre>
+      <h3>Step 2: Install the plugin (optional — enables passive capture)</h3>
+<pre><code># Download the Amp plugin
+curl -fsSL https://raw.githubusercontent.com/abhiroopb/synthetic-mind/main/bin/amp-mem-plugin.ts \
+  -o ~/.config/amp/plugins/amp-mem.ts</code></pre>
+      <p style="font-size: 0.85rem; color: var(--text-muted);">The plugin passively captures observations from tool usage (Linear, Gmail, Slack, etc.) and injects memory context at session start. It's optional — the CLI works standalone.</p>
 
-      <h3>Step 4: Initialize</h3>
-      <pre><code>amp-mem init</code></pre>
+      <h3>Step 3: Initialize the database</h3>
+<pre><code>amp-mem init</code></pre>
+      <p style="font-size: 0.85rem; color: var(--text-muted);">This creates <code>~/.amp/memory/</code>, the SQLite database, and the FTS5 search index. Safe to run multiple times (idempotent).</p>
 
-      <h3>Step 5: Configure AGENTS.md</h3>
+      <h3>Step 4: Configure AGENTS.md</h3>
       <p>Add to your <code>~/AGENTS.md</code> Session Start section a reference to the amp-mem plugin handling init, backup, context injection, and distill-status checks automatically.</p>
 
-      <h3>Step 6: Verify</h3>
+      <h3>Step 5: Verify</h3>
 <pre><code>amp-mem init          # "Database initialized"
 amp-mem stats         # 0 observations
 amp-mem save observation "Test" "Testing memory"
