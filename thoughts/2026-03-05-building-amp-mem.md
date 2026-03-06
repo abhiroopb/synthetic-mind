@@ -1,10 +1,3 @@
----
-title: "Building a Persistent Memory System for Amp — From Zero to Cross-Session Intelligence"
-date: 2026-03-05
-author: Abhi Basu
-tags: [amp-plugin, memory-system, sqlite, ai-agents, amp-mem, cross-session]
----
-
 # Building a Persistent Memory System for Amp — From Zero to Cross-Session Intelligence
 
 ## TL;DR
