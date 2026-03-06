@@ -126,8 +126,10 @@
 
     /* ── What's Inside ── */
     .pillars {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
     }
+    .pillar-thoughts { order: 4; }
+    .pillar-skills { order: 1; }
     .pillar {
       background: var(--surface); border: 1px solid var(--border-subtle);
       border-radius: var(--radius); padding: 2rem; text-align: center;
@@ -176,6 +178,7 @@
     .skill-card {
       background: var(--surface); border: 1px solid var(--border-subtle);
       border-radius: var(--radius-sm); padding: 1rem 1.15rem; transition: all 0.15s;
+      cursor: pointer;
     }
     .skill-card:hover { border-color: var(--border); background: var(--surface-hover); }
     .skill-card.hidden { display: none; }
@@ -334,7 +337,11 @@
     /* ── Responsive ── */
     @media (max-width: 768px) {
       .hero h1 { font-size: 2.2rem; }
-      .pillars { grid-template-columns: 1fr; }
+      .pillars { grid-template-columns: 1fr 1fr; }
+      .pillar-thoughts { order: 1; }
+      .pillar-skills { order: 2; }
+      .pillar-memory { order: 3; }
+      .pillar-processes { order: 4; }
       .skills-grid { grid-template-columns: 1fr; }
       .mem-grid, .setup-grid { grid-template-columns: 1fr; }
       .tips-grid { grid-template-columns: 1fr; }
@@ -389,23 +396,29 @@
       <p>Each entry captures something useful — a workflow that clicked, a skill that shipped, or a process worth sharing</p>
     </div>
     <div class="pillars">
-      <div class="pillar">
+      <div class="pillar pillar-skills">
         <div class="pillar-icon">🛠</div>
         <h3>Skills</h3>
         <p>90+ reusable AI agent skills for Slack, Gmail, Calendar, Linear, Snowflake, Figma, and more. Install in one command.</p>
         <a href="#skills" class="pillar-link">Browse catalog ↓</a>
       </div>
-      <div class="pillar">
+      <div class="pillar pillar-memory">
         <div class="pillar-icon">🧠</div>
         <h3>Memory</h3>
         <p>amp-mem — a persistent memory system using SQLite + FTS5. No vector embeddings. The LLM is the semantic engine.</p>
         <a href="#memory" class="pillar-link">How it works ↓</a>
       </div>
-      <div class="pillar">
+      <div class="pillar pillar-processes">
         <div class="pillar-icon">💡</div>
         <h3>Processes</h3>
         <p>Documented workflows for AI-augmented product work — RPI methodology, knowledge distillation, auto-pilot routing.</p>
         <a href="https://github.com/abhiroopb/synthetic-mind" class="pillar-link" target="_blank">View on GitHub ↗</a>
+      </div>
+      <div class="pillar pillar-thoughts">
+        <div class="pillar-icon">✍️</div>
+        <h3>Thoughts</h3>
+        <p>Blog posts on building with AI agents — what worked, what didn't, and things worth sharing along the way.</p>
+        <a href="#thoughts" class="pillar-link">Read posts ↓</a>
       </div>
     </div>
   </div>
@@ -596,49 +609,37 @@
 
 <hr class="divider">
 
-<!-- ── Amp Setup (compact) ── -->
+<!-- ── Amp Setup ── -->
 <section id="setup">
   <div class="container">
     <div class="section-header">
       <h2>Amp Setup</h2>
-      <p>Get <a href="https://ampcode.com" style="color:var(--accent);text-decoration:none">Amp</a> configured with skills and memory in minutes</p>
+      <p>Get up and running in four steps</p>
     </div>
-    <div class="setup-grid">
-      <div class="setup-card">
-        <h3>📋 Prerequisites</h3>
-        <ul>
-          <li><strong>Amp CLI</strong> — install via <a href="https://ampcode.com" style="color:var(--accent)">ampcode.com</a></li>
-          <li><strong>GitHub CLI</strong> — <code style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;background:rgba(255,255,255,0.05);padding:0.1rem 0.3rem;border-radius:4px">brew install gh && gh auth login</code></li>
-          <li><strong>uv</strong> (for gdrive/gcal) — <code style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;background:rgba(255,255,255,0.05);padding:0.1rem 0.3rem;border-radius:4px">curl -LsSf https://astral.sh/uv/install.sh | sh</code></li>
-        </ul>
+    <div class="steps-row">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Install Amp</h4>
+        <p>Download from <a href="https://ampcode.com" style="color:var(--accent);text-decoration:none">ampcode.com</a> — CLI or VS Code extension</p>
       </div>
-      <div class="setup-card">
-        <h3>📦 Install Skills</h3>
-        <pre># Install a skill from a GitHub repo
-amp skill add your-org/skills/slack
-
-# Update existing
-amp skill add your-org/skills/slack --overwrite
-
-# Remove
-amp skill remove slack
-
-# Create your own
-amp skill create my-skill-name</pre>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Add Skills</h4>
+        <p><code style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;background:rgba(255,255,255,0.05);padding:0.1rem 0.3rem;border-radius:4px">amp skill add your-org/skills/slack</code></p>
       </div>
-      <div class="setup-card setup-card-full">
-        <h3>🔐 First-Time Auth</h3>
-        <table class="cmd-table">
-          <thead><tr><th>Tool</th><th>Auth</th></tr></thead>
-          <tbody>
-            <tr><td>Google Drive / Cal</td><td><code style="font-family:'JetBrains Mono',monospace;font-size:0.78rem">cd ~/.agents/skills/gdrive && uv run gdrive-cli.py auth login</code></td></tr>
-            <tr><td>Slack</td><td>Automatic on first use (opens browser)</td></tr>
-            <tr><td>Linear</td><td>Enable the Linear MCP in Amp settings</td></tr>
-            <tr><td>GitHub</td><td><code style="font-family:'JetBrains Mono',monospace;font-size:0.78rem">gh auth login</code></td></tr>
-            <tr><td>Notion</td><td>Enable the Notion MCP in Amp settings</td></tr>
-          </tbody>
-        </table>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Configure AGENTS.md</h4>
+        <p>Set your identity, preferences, and automated behaviors in <code style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;background:rgba(255,255,255,0.05);padding:0.1rem 0.3rem;border-radius:4px">~/AGENTS.md</code></p>
       </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Set Up Memory</h4>
+        <p>Install amp-mem for persistent, cross-session context</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2rem;">
+      <a href="https://github.com/abhiroopb/synthetic-mind/blob/main/amp-setup-guide.md" class="btn btn-ghost" target="_blank">Full setup guide ↗</a>
     </div>
   </div>
 </section>
@@ -731,6 +732,12 @@ tabs.forEach(tab => {
   });
 });
 searchInput.addEventListener('input', filterCards);
+cards.forEach(card => {
+  card.addEventListener('click', () => {
+    const name = card.querySelector('.skill-name')?.textContent?.trim();
+    if (name) window.open('https://github.com/abhiroopb/synthetic-mind/tree/main/skills/' + name, '_blank');
+  });
+});
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();

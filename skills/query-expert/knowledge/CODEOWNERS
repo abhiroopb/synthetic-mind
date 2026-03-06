@@ -1,0 +1,27 @@
+# Knowledge Store CODEOWNERS
+# 
+# This file defines ownership for domain-specific knowledge resources.
+# Data domain steering committees are responsible for reviewing and approving
+# changes to their respective domain knowledge files.
+
+# Default owners for the knowledge directory structure
+* @query-expert-maintainers
+
+# Domain-specific metrics ownership
+/domains/customer_support/ @your-org/customer_support_data_domain_stewards
+/domains/financial/ @your-org/financial_data_domain_stewards
+/domains/internal/ @your-org/internal_data_domain_stewards
+/domains/marketing/ @your-org/marketing_data_domain_stewards
+/domains/operations/ @your-org/operations_data_domain_stewards
+/domains/risk/ @your-org/risk_data_domain_stewards
+/domains/sales/ @your-org/sales_data_domain_stewards
+
+# Product domain metrics ownership
+/domains/product/ @your-org/product_data_domain_stewards
+/domains/product/banking/ @your-org/banking_data_domain_stewards
+/domains/product/commerce/ @your-org/commerce_data_domain_stewards
+/domains/product/hardware/ @your-org/hardware_data_domain_stewards
+/domains/product/lending/ @your-org/lending_data_domain_stewards
+/domains/product/payments/ @your-org/payments_data_domain_stewards
+/domains/product/services/ @your-org/services_data_domain_stewards
+/domains/product/subscriptions/ @your-org/subscriptions_data_domain_stewards
