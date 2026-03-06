@@ -1,6 +1,6 @@
 ---
-name: summarize-video
-description: Summarize a go/media (video.square.com) video — extract transcript via Kaltura API, generate AI summary with key takeaways and timestamped quotes, build styled HTML page, and publish to Blockcell. Requires Chrome DevTools MCP and Blockcell MCP.
+Skill name: summarize-video
+Skill description: Summarize a go/media (video.square.com) video — extract transcript via Kaltura API, generate AI summary with key takeaways and timestamped quotes, build styled HTML page, and publish to Blockcell. Requires Chrome DevTools MCP and Blockcell MCP.
 argument-hint: <video_url>
 allowed-tools:
   - mcp__chrome-devtools__new_page
@@ -25,10 +25,6 @@ allowed-tools:
   - Grep
   - Task
   - AskUserQuestion
-metadata:
-  author: tmellor
-  version: "1.1"
-  status: experimental
 ---
 
 # Summarize a go/media Video

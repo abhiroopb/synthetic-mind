@@ -1,10 +1,6 @@
 ---
-name: airtable
-description: Integrate with Airtable's cloud database platform API for managing bases, tables, records, and automations with powerful filtering, sorting, and real-time collaboration features.
-metadata:
-  author: rbarnwell
-  version: "1.0.0"
-  status: experimental
+Skill name: airtable
+Skill description: Integrate with Airtable's cloud database platform API for managing bases, tables, records, and automations with powerful filtering, sorting, and real-time collaboration features.
 ---
 
 # Airtable API Integration

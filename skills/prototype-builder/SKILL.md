@@ -1,6 +1,6 @@
 ---
-name: prototype-builder
-description: Scaffold and build interactive HTML prototypes for product features, using templates and iterating based on spec requirements.
+Skill name: prototype-builder
+Skill description: Scaffold and build interactive HTML prototypes for product features, using templates and iterating based on spec requirements.
 ---
 
 # Prototype Builder

@@ -1,6 +1,6 @@
 ---
-name: controlling-computer
-description: "Control this Mac via AppleScript and shell commands. Open/quit/switch apps, manage windows, adjust volume/brightness, toggle dark mode, lock screen, send notifications, read clipboard, query system info. Use when asked to control the computer, manage windows, change settings, or automate macOS actions."
+Skill name: controlling-computer
+Skill description: Control this Mac via AppleScript and shell commands. Open/quit/switch apps, manage windows, adjust volume/brightness, toggle dark mode, lock screen, send notifications, read clipboard, query system info. Use when asked to control the computer, manage windows, change settings, or automate macOS actions.
 ---
 
 # Controlling Computer

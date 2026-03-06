@@ -1,6 +1,6 @@
 ---
-name: spec-creator
-description: Create and iterate on product requirement specs using a structured template, pulling from various data sources, and syncing to Linear projects.
+Skill name: spec-creator
+Skill description: Create and iterate on product requirement specs using a structured template, pulling from various data sources, and syncing to Linear projects.
 ---
 
 # Spec Creator

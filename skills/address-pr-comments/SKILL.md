@@ -1,14 +1,11 @@
 ---
-name: address-pr-comments
-description: Address and resolve GitHub Pull Request review comments. Fetches unresolved PR comments, critically evaluates feedback, makes changes, commits per-comment, and resolves threads with confirmation. Use when asked to address PR comments, fix review feedback, or resolve PR threads.
+Skill name: address-pr-comments
+Skill description: Address and resolve GitHub Pull Request review comments. Fetches unresolved PR comments, critically evaluates feedback, makes changes, commits per-comment, and resolves threads with confirmation. Use when asked to address PR comments, fix review feedback, or resolve PR threads.
 allowed-tools:
   - Bash(gh repo view:*)
   - Bash(gh pr view:*)
   - Bash(gh api:*)
   - Bash(bash ~/.agents/skills/address-pr-comments/fetch-comments.sh:*)
-metadata:
-  author: jtennant
-  status: experimental
 ---
 
 # Address Pull Request Review Comments

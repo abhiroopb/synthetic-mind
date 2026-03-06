@@ -1,14 +1,10 @@
 ---
-name: gcal
-description: "Use when scheduling, booking, creating, updating, deleting, cancelling, RSVPing to, checking, looking up, querying, finding, or managing calendar events. Also use for checking availability, free/busy lookups, adding Google Meet links, or working with recurring events."
+Skill name: gcal
+Skill description: Use when scheduling, booking, creating, updating, deleting, cancelling, RSVPing to, checking, looking up, querying, finding, or managing calendar events. Also use for checking availability, free/busy lookups, adding Google Meet links, or working with recurring events.
 roles: [frontend]
 allowed-tools:
   - Bash(cd {{SKILL_DIR}} && uv run gcal-cli.py:*)
   - Read
-metadata:
-  author: osman
-  version: "0.1.0"
-  status: "beta"
 ---
 
 # Google Calendar Skill

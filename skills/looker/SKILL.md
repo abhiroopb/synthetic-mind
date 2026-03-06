@@ -1,9 +1,6 @@
 ---
-name: looker
-description: "Interact with Looker dashboards, tiles, queries, looks, explores, folders, and models via the Looker Python SDK. Use when given a Looker URL, dashboard/look ID, explore qid, or asked to search, run, or update Looker content."
-metadata:
-  version: "0.0.1"
-  status: experimental
+Skill name: looker
+Skill description: Interact with Looker dashboards, tiles, queries, looks, explores, folders, and models via the Looker Python SDK. Use when given a Looker URL, dashboard/look ID, explore qid, or asked to search, run, or update Looker content.
 ---
 
 # Looker

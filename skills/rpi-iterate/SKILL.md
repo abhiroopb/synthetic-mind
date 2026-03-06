@@ -1,6 +1,6 @@
 ---
-name: rpi-iterate
-description: Iterate on existing RPI implementation plans with research and targeted updates. Use when a plan needs adjustments, revisions, modifications, refinements, corrections, or rework based on feedback, new requirements, or discoveries during implementation.
+Skill name: rpi-iterate
+Skill description: Iterate on existing RPI implementation plans with research and targeted updates. Use when a plan needs adjustments, revisions, modifications, refinements, corrections, or rework based on feedback, new requirements, or discoveries during implementation.
 ---
 
 # RPI Iterate

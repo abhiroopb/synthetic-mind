@@ -1,6 +1,6 @@
 ---
-name: logging-feature-requests
-description: "Digest feature requests from Slack links and log them to a Feature Requests Google Sheet. Use when pasting a Slack thread link to capture a feature request, or asked to log/record a feature request."
+Skill name: logging-feature-requests
+Skill description: Digest feature requests from Slack links and log them to a Feature Requests Google Sheet. Use when pasting a Slack thread link to capture a feature request, or asked to log/record a feature request.
 ---
 
 # Log Feature Request from Slack

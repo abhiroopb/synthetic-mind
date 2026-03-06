@@ -1,9 +1,6 @@
 ---
-name: reflect
-description: Reflection coach for performance reviews. Guides users through thoughtful questions, then synthesizes responses into a polished reflection. Helps engineers produce meaningful insights.
-metadata:
-  status: experimental
-  version: 2.0.0
+Skill name: reflect
+Skill description: Reflection coach for performance reviews. Guides users through thoughtful questions, then synthesizes responses into a polished reflection. Helps engineers produce meaningful insights.
 allowed-tools: []
 ---
 

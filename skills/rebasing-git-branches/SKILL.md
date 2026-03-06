@@ -1,6 +1,6 @@
 ---
-name: rebasing-git-branches
-description: Rebases git branches onto their upstream target. Use when asked to rebase, update a branch, resolve rebase conflicts, or sync a branch with main/master.
+Skill name: rebasing-git-branches
+Skill description: Rebases git branches onto their upstream target. Use when asked to rebase, update a branch, resolve rebase conflicts, or sync a branch with main/master.
 ---
 
 # Rebasing Git Branches

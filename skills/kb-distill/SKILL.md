@@ -1,6 +1,6 @@
 ---
-name: kb-distill
-description: "Distill raw observations into structured knowledge notes and propose AGENTS.md rules. Use when asked to distill, synthesize, compress, review, or summarize accumulated memory/observations. Also runs automatically when triggered by session-start or weekly cadence."
+Skill name: kb-distill
+Skill description: Distill raw observations into structured knowledge notes and propose AGENTS.md rules. Use when asked to distill, synthesize, compress, review, or summarize accumulated memory/observations. Also runs automatically when triggered by session-start or weekly cadence.
 ---
 
 # kb-distill — Knowledge Distillation

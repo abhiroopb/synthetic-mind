@@ -1,6 +1,6 @@
 ---
-name: notion
-description: "Access Block's Notion workspace to read, search, create, and update pages and databases. Use when asked to fetch Notion pages, search Notion, query Notion databases, or interact with any Notion content."
+Skill name: notion
+Skill description: Access Block's Notion workspace to read, search, create, and update pages and databases. Use when asked to fetch Notion pages, search Notion, query Notion databases, or interact with any Notion content.
 ---
 
 # Notion

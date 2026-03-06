@@ -1,6 +1,6 @@
 ---
-name: converting-gdocs-to-markdown
-description: Convert Google Docs to markdown files for the repository. Use when importing documentation from Google Drive or converting gdocs to local markdown.
+Skill name: converting-gdocs-to-markdown
+Skill description: Convert Google Docs to markdown files for the repository. Use when importing documentation from Google Drive or converting gdocs to local markdown.
 ---
 
 # Converting Google Docs to Markdown

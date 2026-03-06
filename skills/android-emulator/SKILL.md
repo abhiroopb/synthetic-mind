@@ -1,6 +1,6 @@
 ---
-name: android-emulator
-description: Manage Android emulators (AVDs) - use when user wants to start, stop, create, list, or manage Android emulators for testing
+Skill name: android-emulator
+Skill description: Manage Android emulators (AVDs) - use when user wants to start, stop, create, list, or manage Android emulators for testing
 allowed-tools:
   - Bash(bash ~/.agents/skills/android-emulator/scripts/android-emulator.sh:*)
   - Bash(uname:*)

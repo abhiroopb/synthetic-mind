@@ -1,6 +1,6 @@
 ---
-name: writing-feedback
-description: "Write and format performance feedback for self-reflections, peer reviews, and manager evaluations using the IBB (Impact, Behaviors, Betterment) model. Use when writing, drafting, formatting, structuring, or reviewing performance feedback, self-reflections, peer feedback, manager evaluations, or performance review submissions."
+Skill name: writing-feedback
+Skill description: Write and format performance feedback for self-reflections, peer reviews, and manager evaluations using the IBB (Impact, Behaviors, Betterment) model. Use when writing, drafting, formatting, structuring, or reviewing performance feedback, self-reflections, peer feedback, manager evaluations, or performance review submissions.
 ---
 
 # Writing Feedback (IBB Model)

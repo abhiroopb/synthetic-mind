@@ -1,9 +1,6 @@
 ---
-name: skill-management
-description: "Manage Amp agent skills: list, add, remove, inspect, and edit skills. Use when asked to manage skills, create new skills, or work with the skills directory."
-metadata:
-  author: abhiroop
-  version: "1.0"
+Skill name: skill-management
+Skill description: Manage Amp agent skills: list, add, remove, inspect, and edit skills. Use when asked to manage skills, create new skills, or work with the skills directory.
 ---
 
 # Skill Management

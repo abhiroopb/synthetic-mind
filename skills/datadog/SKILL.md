@@ -1,12 +1,8 @@
 ---
-name: datadog
+Skill name: datadog
+Skill description: Query Datadog for logs, metrics, traces, monitors, RUM, and CI visibility. Use when user needs observability data, investigating production issues, checking service health, analyzing frontend performance, or debugging CI/CD pipelines.
 roles:
   - frontend
-description: "Query Datadog for logs, metrics, traces, monitors, RUM, and CI visibility. Use when user needs observability data, investigating production issues, checking service health, analyzing frontend performance, or debugging CI/CD pipelines."
-metadata:
-  author: anonymous
-  version: "0.3.0"
-  status: "experimental"
 ---
 
 # Datadog Skill

@@ -1,6 +1,6 @@
 ---
-name: test-plan-creator
-description: Create test plans and acceptance criteria for product features by reading the related spec and generating structured test scenarios.
+Skill name: test-plan-creator
+Skill description: Create test plans and acceptance criteria for product features by reading the related spec and generating structured test scenarios.
 ---
 
 # Test Plan Creator

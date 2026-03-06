@@ -1,6 +1,6 @@
 ---
-name: rpi-plan
-description: Create detailed implementation plans using RPI methodology. Use after research phase when ready to design, architect, outline, specify, or draft an implementation plan. Creates actionable, phased plans with success criteria.
+Skill name: rpi-plan
+Skill description: Create detailed implementation plans using RPI methodology. Use after research phase when ready to design, architect, outline, specify, or draft an implementation plan. Creates actionable, phased plans with success criteria.
 ---
 
 # RPI Plan

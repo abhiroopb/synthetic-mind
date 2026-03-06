@@ -1,6 +1,6 @@
 ---
-name: kb-promote
-description: "Promote high-value memory notes into permanent AGENTS.md rules or new skills. Use when asked to promote notes, graduate knowledge, review promotion candidates, or formalize learned behaviors."
+Skill name: kb-promote
+Skill description: Promote high-value memory notes into permanent AGENTS.md rules or new skills. Use when asked to promote notes, graduate knowledge, review promotion candidates, or formalize learned behaviors.
 ---
 
 # kb-promote — Knowledge Promotion
