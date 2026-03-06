@@ -126,10 +126,8 @@
 
     /* ── What's Inside ── */
     .pillars {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
     }
-    .pillar-thoughts { order: 4; }
-    .pillar-skills { order: 1; }
     .pillar {
       background: var(--surface); border: 1px solid var(--border-subtle);
       border-radius: var(--radius); padding: 2rem; text-align: center;
@@ -337,11 +335,7 @@
     /* ── Responsive ── */
     @media (max-width: 768px) {
       .hero h1 { font-size: 2.2rem; }
-      .pillars { grid-template-columns: 1fr 1fr; }
-      .pillar-thoughts { order: 1; }
-      .pillar-skills { order: 2; }
-      .pillar-memory { order: 3; }
-      .pillar-processes { order: 4; }
+      .pillars { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr; }
       .mem-grid, .setup-grid { grid-template-columns: 1fr; }
       .tips-grid { grid-template-columns: 1fr; }
@@ -405,12 +399,6 @@
         <h3>Memory</h3>
         <p>amp-mem — a persistent memory system using SQLite + FTS5. No vector embeddings. The LLM is the semantic engine.</p>
         <a href="memory/" class="pillar-link">How it works →</a>
-      </div>
-      <div class="pillar pillar-processes">
-        <div class="pillar-icon">💡</div>
-        <h3>Processes</h3>
-        <p>Documented workflows for AI-augmented product work — RPI methodology, knowledge distillation, auto-pilot routing.</p>
-        <a href="https://github.com/abhiroopb/synthetic-mind" class="pillar-link" target="_blank">View on GitHub ↗</a>
       </div>
       <div class="pillar pillar-thoughts">
         <div class="pillar-icon">✍️</div>
