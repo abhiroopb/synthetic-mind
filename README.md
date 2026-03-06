@@ -10,6 +10,8 @@ AI thoughts, processes, skills, and experiments — a showcase of AI-augmented w
 
 A living collection of learnings from working deeply with AI agents, LLMs, and automation. Each entry captures something useful — a workflow that clicked, a skill that shipped, or a process worth sharing.
 
+Built primarily with [Amp](https://ampcode.com), these skills power a PM's daily workflow — from morning triage to PRD writing to data analysis to deploying prototypes. Everything here is real, battle-tested, and actively used.
+
 ## Structure
 
 | Directory | Contents |
@@ -20,18 +22,60 @@ A living collection of learnings from working deeply with AI agents, LLMs, and a
 
 ## Skills at a Glance
 
-**98 skills** across 20+ categories including:
+**98 skills** across 20+ categories:
 
-- 🤖 **Agent Behavior** — Auto-pilot routing, multi-model loops, swarm exploration
-- 🧠 **Memory** — Persistent cross-session memory, knowledge distillation, style profiling
-- 🔬 **Methodology** — RPI (Research → Plan → Implement) structured task execution
-- 📊 **Data & Analytics** — Snowflake, Databricks, Looker, metrics queries
-- 🔀 **Git & PRs** — PR creation, review management, rebasing, stacked PRs
-- 📝 **Product** — PRDs, specs, feature requests, experiments
-- 💬 **Communication** — Slack, Gmail, calendar, writing coaching
+| Category | Skills | Examples |
+|----------|--------|----------|
+| 🤖 **Agent Behavior** | 3 | Auto-pilot routing, swarm exploration, requirement clarification |
+| 🧠 **Memory & Context** | 5 | Cross-session memory, knowledge distillation, voice profiling |
+| 🔬 **Methodology** | 7 | RPI (Research → Plan → Implement), multi-model review loops |
+| 📊 **Data & Analytics** | 8 | Snowflake, Databricks, Looker, Datadog, Airtable |
+| 🔀 **Git & PRs** | 8 | PR creation, code review, rebasing, stacked PRs, worktrees |
+| 📝 **Product** | 7 | PRDs, specs, feature requests, feedback tracking |
+| 💬 **Communication** | 3 | Slack, Gmail, email triage |
+| ✍️ **Writing** | 4 | Brand voice, communication coaching, performance feedback |
+| 📄 **Documents** | 4 | Google Drive, Notion, video summaries, doc conversion |
+| 🧪 **Experimentation** | 3 | A/B testing, LaunchDarkly flags, flag evaluation |
+| 📱 **Mobile** | 5 | iOS/Android simulators, app builds, release trains |
+| 🚀 **Deployment** | 4 | Static sites, staging environments, prototypes |
+| 🔍 **Search** | 7 | Code search, enterprise knowledge, employee directory |
+| 📋 **Project Mgmt** | 5 | Linear, task creation, project status aggregation |
+| 🧪 **Testing** | 4 | Test accounts, test plans, QA docs |
+| 🔧 **Infrastructure** | 4 | Permissions, service registry, audience segments |
+| 🖥️ **System** | 3 | macOS control, disk cleanup, screenshots |
+| 🎨 **Design** | 1 | Figma file inspection |
+| + more | 13 | Calendar, CI/CD, browser automation, web research, etc. |
 
-**[See all 98 skills →](./skills/README.md)**
+**[Browse the full catalog →](./skills/README.md)**
 
-## Latest Updates
+## What makes this different
 
-*Coming soon.*
+These aren't toy examples. Each skill is:
+
+- **Production-grade** — YAML frontmatter, reference docs, helper scripts, setup guides
+- **Composable** — Skills call other skills. `auto-pilot` routes to the right one automatically
+- **Battle-tested** — Used daily across product management, data analysis, and engineering workflows
+- **Sanitized** — Enterprise-pattern skills have all internal references stripped and replaced with generic placeholders, so you can adapt the patterns for your own environment
+
+## How to use these skills
+
+Each skill is an [Amp](https://ampcode.com) skill module. To use one:
+
+```bash
+amp skills add <path-to-skill-folder>
+```
+
+Or clone the repo and point Amp at the `skills/` directory. The `auto-pilot` skill will automatically route your requests to the right skill.
+
+## Changelog
+
+| Date | Update |
+|------|--------|
+| 2026-03-05 | 🚀 Initial release — 98 skills uploaded, categorized, and indexed |
+| 2026-03-05 | 🔒 Secrets scrubbed (OAuth credentials, API tokens) |
+| 2026-03-05 | 🧹 54 enterprise skills sanitized — all internal URLs, brand names, Slack channels, Snowflake tables, and proprietary tool references replaced with generic placeholders |
+| 2026-03-05 | 📚 Unified all skills into single `/skills` directory with full categorized README |
+
+## License
+
+MIT
