@@ -1,0 +1,202 @@
+#!/usr/bin/env python3
+"""Search and read product documentation from the squareup/product repository."""
+
+import argparse
+import json
+import subprocess
+import sys
+
+
+REPO = "squareup/product"
+
+
+def run_gh(args, check=True):
+    """Run a gh CLI command and return stdout."""
+    cmd = ["gh"] + args
+    result = subprocess.run(cmd, capture_output=True, text=True, check=False)
+    if result.returncode != 0:
+        if check:
+            print(f"Error: {result.stderr.strip()}", file=sys.stderr)
+            sys.exit(1)
+        return None
+    return result.stdout
+
+
+def cmd_search(args):
+    """Search for files in the product repo."""
+    query = args.query
+    if not args.all_files:
+        query += " extension:md"
+
+    gh_args = [
+        "search", "code",
+        "--repo", REPO,
+        "--limit", str(args.limit),
+        "--json", "path,textMatches",
+        query,
+    ]
+    output = run_gh(gh_args)
+    if output is None:
+        return
+
+    results = json.loads(output)
+
+    if args.json:
+        compact = [{"path": r["path"], "matches": [
+            m["fragment"].strip().splitlines()[0][:120]
+            for m in r.get("textMatches", []) if m.get("fragment")
+        ]} for r in results]
+        print(json.dumps(compact, indent=2))
+        return
+
+    if not results:
+        print("No results found.")
+        return
+
+    for r in results:
+        path = r.get("path", "")
+        # Show first non-empty fragment line as a one-line summary
+        summary = ""
+        for match in r.get("textMatches", []):
+            fragment = match.get("fragment", "").strip()
+            if fragment:
+                for line in fragment.splitlines():
+                    line = line.strip()
+                    if line:
+                        summary = line[:100]
+                        break
+            if summary:
+                break
+        if summary:
+            print(f"{path} — {summary}")
+        else:
+            print(path)
+
+
+def cmd_read(args):
+    """Read a specific file from the product repo."""
+    ref = args.ref
+    path = args.path
+
+    # Use the GitHub API to fetch file contents
+    api_path = f"/repos/{REPO}/contents/{path}?ref={ref}"
+    gh_args = ["api", api_path, "--jq", ".content"]
+    encoded = run_gh(gh_args)
+    if encoded is None:
+        print(f"Error: could not read {path} at ref {ref}", file=sys.stderr)
+        sys.exit(1)
+
+    # GitHub API returns base64-encoded content
+    import base64
+
+    try:
+        content = base64.b64decode(encoded.strip()).decode("utf-8")
+    except Exception:
+        # Try the raw endpoint instead
+        raw_args = [
+            "api",
+            f"/repos/{REPO}/contents/{path}?ref={ref}",
+            "-H", "Accept: application/vnd.github.raw+json",
+        ]
+        content = run_gh(raw_args)
+        if content is None:
+            print(f"Error: could not decode {path}", file=sys.stderr)
+            sys.exit(1)
+
+    lines = content.splitlines(keepends=True)
+    max_lines = args.max_lines
+    if max_lines and len(lines) > max_lines:
+        sys.stdout.write("".join(lines[:max_lines]))
+        print(f"\n... truncated ({len(lines) - max_lines} more lines, use --max-lines to adjust)")
+    else:
+        sys.stdout.write(content)
+
+
+def cmd_tree(args):
+    """List the directory tree of the product repo."""
+    ref = args.ref
+    prefix = args.path or ""
+
+    # Fetch the git tree recursively
+    # First get the tree SHA for the ref
+    gh_args = [
+        "api",
+        f"/repos/{REPO}/git/trees/{ref}?recursive=1",
+        "--jq", ".tree[] | .path + \"\\t\" + .type",
+    ]
+    output = run_gh(gh_args)
+    if output is None:
+        print("Error: could not fetch repository tree", file=sys.stderr)
+        sys.exit(1)
+
+    entries = []
+    for line in output.strip().splitlines():
+        parts = line.split("\t", 1)
+        if len(parts) != 2:
+            continue
+        path, entry_type = parts
+
+        # Skip dotfiles/dotdirs
+        if any(part.startswith(".") for part in path.split("/")):
+            continue
+
+        # Filter by prefix
+        if prefix and not path.startswith(prefix):
+            continue
+
+        # Filter by depth
+        relative = path[len(prefix):].lstrip("/") if prefix else path
+        depth = relative.count("/")
+        if depth >= args.depth:
+            continue
+
+        # Filter markdown only
+        if args.md_only and entry_type != "tree" and not path.endswith(".md"):
+            continue
+
+        entries.append((path, entry_type))
+
+    if not entries:
+        print(f"No entries found under '{prefix}'." if prefix else "No entries found.")
+        return
+
+    for path, entry_type in sorted(entries):
+        suffix = "/" if entry_type == "tree" else ""
+        print(f"{path}{suffix}")
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Search and read product documentation from squareup/product",
+    )
+    subparsers = parser.add_subparsers(dest="command", required=True)
+
+    # search
+    sp_search = subparsers.add_parser("search", help="Search for documents")
+    sp_search.add_argument("query", help="Search query")
+    sp_search.add_argument("--all-files", action="store_true", help="Search all file types, not just markdown")
+    sp_search.add_argument("--limit", type=int, default=10, help="Max results (default: 10)")
+    sp_search.add_argument("--json", action="store_true", help="Output as JSON")
+    sp_search.set_defaults(func=cmd_search)
+
+    # read
+    sp_read = subparsers.add_parser("read", help="Read a specific file")
+    sp_read.add_argument("path", help="File path in the repository")
+    sp_read.add_argument("--max-lines", type=int, default=200, help="Truncate after N lines (default: 200, 0=unlimited)")
+    sp_read.add_argument("--ref", default="main", help="Git ref (default: main)")
+    sp_read.set_defaults(func=cmd_read)
+
+    # tree
+    sp_tree = subparsers.add_parser("tree", help="List directory structure")
+    sp_tree.add_argument("path", nargs="?", default="", help="Subdirectory to list")
+    sp_tree.add_argument("--depth", type=int, default=3, help="Max depth (default: 3)")
+    sp_tree.add_argument("--md-only", action="store_true", help="Show only markdown files")
+    sp_tree.add_argument("--ref", default="main", help="Git ref (default: main)")
+    sp_tree.set_defaults(func=cmd_tree)
+
+    args = parser.parse_args()
+    args.func(args)
+
+
+if __name__ == "__main__":
+    main()
