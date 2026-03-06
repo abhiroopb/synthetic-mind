@@ -17,8 +17,8 @@ Built primarily with [Amp](https://ampcode.com), these skills power a PM's daily
 | Directory | Contents |
 |-----------|----------|
 | **[`/skills`](./skills)** | 98 AI agent skills — [browse the full catalog →](./skills/README.md) |
-| **`/thoughts`** | Write-ups on AI workflows, observations, and takeaways |
-| **`/processes`** | Documented processes for AI-augmented work |
+| **[`/thoughts`](./thoughts)** | Write-ups on AI workflows, observations, and takeaways |
+| **[`/processes`](./processes)** | Documented processes for AI-augmented work |
 
 ## Skills at a Glance
 
