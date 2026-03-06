@@ -187,7 +187,7 @@ searchInput.addEventListener('input', filterCards);
 cards.forEach(card => {
   card.addEventListener('click', () => {
     const name = card.querySelector('.skill-name')?.textContent?.trim();
-    if (name) window.open('https://github.com/abhiroopb/synthetic-mind/tree/main/skills/' + name, '_blank');
+    if (name) window.location.href = name;
   });
 });
 

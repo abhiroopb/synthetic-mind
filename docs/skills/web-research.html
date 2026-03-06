@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web research — Skills — synthetic-mind</title>
+  <meta name="description" content="Search the web and synthesize external information into structured research briefs for product decisions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    .gh-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; padding: 0.5rem 1rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--surface); transition: all 0.15s;
+    }
+    .gh-link:hover { color: var(--text); border-color: var(--text-dim); }
+    .gh-link svg { width: 16px; height: 16px; fill: currentColor; }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="./" class="active">Skills</a>
+      <a href="../memory/">Memory</a>
+      <a href="../setup/">Setup</a>
+      <a href="../thoughts/">Thoughts</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All skills</a>
+
+  <h1>Web research</h1>
+  <div class="article-meta">
+    <span class="article-tag">skill</span>
+    <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/skills/web-research" class="gh-link" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+  </div>
+
+  <blockquote>Search the web and synthesize external information into structured research briefs for product decisions.</blockquote>
+
+  <h2>What it does</h2>
+
+  <p>Generates diverse search queries from a research topic, searches the web, reads and extracts key content from the most promising sources, and synthesizes findings into a structured brief with categorized insights, source attribution, and actionable recommendations. Designed to complement PRD-writing and spec-creation workflows by providing competitor analysis, market trends, best practices, and technical context.</p>
+
+  <h2>Usage</h2>
+
+  <p>Describe what you want to research and why. The skill handles query generation, search, extraction, and synthesis.</p>
+
+  <ul>
+    <li>&quot;Research [topic] for a PRD&quot;</li>
+    <li>&quot;What do competitors do for [feature]?&quot;</li>
+    <li>&quot;Find best practices for [design pattern]&quot;</li>
+  </ul>
+
+  <h2>Examples</h2>
+
+  <ul>
+    <li><code>&quot;Research how competitors handle cash rounding at checkout&quot;</code></li>
+    <li><code>&quot;What&#x27;s the state of the art for offline payment processing in 2026?&quot;</code></li>
+    <li><code>&quot;Find best practices for split payment UX — I&#x27;m writing a PRD&quot;</code></li>
+  </ul>
+
+  <h2>Why it was created</h2>
+
+  <p>Product decisions benefit from external context — what competitors do, what customers expect, and what industry trends suggest. This skill automates the research step that PMs typically do manually across dozens of browser tabs, producing a sourced, structured brief ready to feed into a PRD or spec.</p>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>
