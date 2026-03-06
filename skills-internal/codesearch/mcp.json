@@ -1,7 +1,0 @@
-{
-  "block-codesearch": {
-    "command": "uvx",
-    "args": ["mcp_codesearch@latest"],
-    "includeTools": ["search_code"]
-  }
-}
