@@ -1,0 +1,9 @@
+{
+  "notionApi": {
+    "command": "npx",
+    "args": ["-y", "@notionhq/notion-mcp-server"],
+    "env": {
+      "NOTION_TOKEN": "${file:~/.secrets-notion:NOTION_TOKEN}"
+    }
+  }
+}

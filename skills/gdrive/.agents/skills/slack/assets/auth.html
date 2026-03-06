@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Slack Token Setup</title>
+    <link rel="stylesheet" href="/assets/auth.css">
+</head>
+<body>
+    <h1>Slack Token Setup</h1>
+    <p class="subtitle">Complete authentication for the Slack skill</p>
+
+    <div id="form-container">
+        <div class="step">
+            <span class="step-number">1</span>
+            <strong>Get your token</strong>
+            <p>Click the link below and authorize the app. Copy the <code>SLACK_TOKEN</code> value shown after authorization.</p>
+            <p><a href="{{OAUTH_URL}}" target="_blank" class="oauth-link">Open Slack Authorization &rarr;</a></p>
+        </div>
+
+        <div class="step">
+            <span class="step-number">2</span>
+            <strong>Paste your token</strong>
+            <input type="text" id="token" placeholder="xoxp-..." autocomplete="off" spellcheck="false">
+            <button onclick="submitToken()">Save Token</button>
+            <div id="status"></div>
+        </div>
+    </div>
+
+    <div id="success-container" style="display: none;">
+        <div class="success">
+            <h2>Authentication Successful!</h2>
+            <p id="user-info"></p>
+            <p style="color: #888; margin-top: 15px;">You can close this tab now.</p>
+        </div>
+    </div>
+
+    <script src="/assets/auth.js"></script>
+</body>
+</html>

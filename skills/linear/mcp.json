@@ -1,0 +1,49 @@
+{
+  "linear": {
+    "command": "npx",
+    "args": ["-y", "@tacticlaunch/mcp-linear"],
+    "env": {
+      "LINEAR_API_TOKEN": "${LINEAR_API_TOKEN}"
+    },
+    "includeTools": [
+      "linear_getViewer",
+      "linear_getOrganization",
+      "linear_getUsers",
+      "linear_getTeams",
+      "linear_getLabels",
+      "linear_getWorkflowStates",
+      "linear_getIssues",
+      "linear_getIssueById",
+      "linear_searchIssues",
+      "linear_createIssue",
+      "linear_updateIssue",
+      "linear_assignIssue",
+      "linear_setIssuePriority",
+      "linear_archiveIssue",
+      "linear_transferIssue",
+      "linear_duplicateIssue",
+      "linear_convertIssueToSubtask",
+      "linear_getIssueHistory",
+      "linear_addIssueLabel",
+      "linear_removeIssueLabel",
+      "linear_createComment",
+      "linear_getComments",
+      "linear_getProjects",
+      "linear_createProject",
+      "linear_updateProject",
+      "linear_getProjectIssues",
+      "linear_addIssueToProject",
+      "linear_getCycles",
+      "linear_getActiveCycle",
+      "linear_addIssueToCycle",
+      "linear_getInitiatives",
+      "linear_getInitiativeById",
+      "linear_createInitiative",
+      "linear_updateInitiative",
+      "linear_archiveInitiative",
+      "linear_getInitiativeProjects",
+      "linear_addProjectToInitiative",
+      "linear_removeProjectFromInitiative"
+    ]
+  }
+}
