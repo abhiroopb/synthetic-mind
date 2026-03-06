@@ -160,7 +160,6 @@ amp skill remove slack
 | `reviewing-calendar` | Visual weekly calendar with conflict detection | "review my calendar this week" |
 | `gdrive` | Read/write Google Docs, Sheets, Slides | "create a Google Doc titled Q1 Plan" |
 | `notion` | Read, search, create, update Notion pages | "search Notion for the roadmap" |
-| `jack-guidance` | Concise communication coaching | "help me write a status update" |
 | `reflect` | Guided reflection for performance reviews | "start a reflection" |
 | `writing-feedback` | Performance feedback drafting | "draft my self-reflection" |
 | `controlling-computer` | macOS control via AppleScript | "turn on dark mode" |
