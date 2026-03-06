@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amp Setup Guide — Skills, Memory & Configuration</title>
-  <meta name="description" content="Turn Amp from a code assistant into a full command center. 90+ skills, persistent memory, and AGENTS.md configuration.">
+  <title>synthetic-mind — AI-augmented work by Abhi Basu</title>
+  <meta name="description" content="AI thoughts, processes, skills, and experiments. A showcase of AI-augmented work.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0a0a0a;
       --surface: #141414;
       --surface-hover: #1a1a1a;
+      --surface-2: #1e1e1e;
       --border: #262626;
       --border-subtle: #1e1e1e;
       --text: #e5e5e5;
@@ -36,9 +37,7 @@
       --radius: 12px;
       --radius-sm: 8px;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
@@ -47,267 +46,154 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Navigation ── */
+    /* ── Nav ── */
     nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(10,10,10,0.85);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-subtle);
       padding: 0 2rem;
     }
     .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 60px;
     }
     .nav-brand {
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--text);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-weight: 700; font-size: 1.1rem; color: var(--text);
+      text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
     }
-    .nav-brand span { opacity: 0.5; font-weight: 400; }
     .nav-links { display: flex; gap: 0.25rem; }
     .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      padding: 0.4rem 0.75rem;
-      border-radius: 6px;
-      transition: all 0.15s;
+      color: var(--text-muted); text-decoration: none; font-size: 0.875rem;
+      font-weight: 500; padding: 0.4rem 0.75rem; border-radius: 6px; transition: all 0.15s;
     }
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--text);
-      background: var(--surface);
-    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--surface); }
     .nav-gh {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.875rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: color 0.15s;
+      color: var(--text-muted); text-decoration: none; font-size: 0.875rem;
+      display: flex; align-items: center; gap: 0.4rem; transition: color 0.15s;
     }
     .nav-gh:hover { color: var(--text); }
     .nav-gh svg { width: 20px; height: 20px; fill: currentColor; }
 
     /* ── Hero ── */
     .hero {
-      padding: 8rem 2rem 4rem;
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
+      padding: 9rem 2rem 5rem; text-align: center; max-width: 800px; margin: 0 auto;
     }
     .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--accent-dim);
-      color: var(--accent);
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 0.35rem 1rem;
-      border-radius: 100px;
-      border: 1px solid rgba(59,130,246,0.2);
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.02em;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--surface); color: var(--text-muted); font-size: 0.8rem;
+      font-weight: 600; padding: 0.35rem 1rem; border-radius: 100px;
+      border: 1px solid var(--border); margin-bottom: 1.5rem; letter-spacing: 0.02em;
     }
     .hero h1 {
-      font-size: 3.2rem;
-      font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
+      font-size: 3.5rem; font-weight: 800; line-height: 1.1; letter-spacing: -0.04em;
       margin-bottom: 1rem;
       background: linear-gradient(135deg, #fff 0%, #a3a3a3 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
     .hero p {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto 2rem;
-      line-height: 1.7;
+      font-size: 1.2rem; color: var(--text-muted); max-width: 580px;
+      margin: 0 auto 2.5rem; line-height: 1.7;
     }
-    .hero-actions {
-      display: flex;
-      gap: 0.75rem;
-      justify-content: center;
-      flex-wrap: wrap;
+    .hero-links {
+      display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
     }
+    .hero-link {
+      color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+      display: flex; align-items: center; gap: 0.4rem; transition: color 0.15s;
+    }
+    .hero-link:hover { color: var(--text); }
+
+    /* ── Shared ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 5rem 0; }
+    .section-header { text-align: center; margin-bottom: 3rem; }
+    .section-header h2 {
+      font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem;
+    }
+    .section-header p { color: var(--text-muted); font-size: 1.05rem; }
+    .divider { border: none; border-top: 1px solid var(--border-subtle); margin: 0; }
     .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.65rem 1.4rem;
-      border-radius: var(--radius-sm);
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.15s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.6rem 1.3rem; border-radius: var(--radius-sm);
+      font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;
       border: 1px solid transparent;
     }
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
+    .btn-primary { background: var(--accent); color: #fff; }
     .btn-primary:hover { background: #2563eb; }
-    .btn-secondary {
-      background: var(--surface);
-      color: var(--text);
-      border-color: var(--border);
-    }
-    .btn-secondary:hover { background: var(--surface-hover); border-color: var(--text-dim); }
+    .btn-ghost { color: var(--text-muted); border-color: var(--border); background: transparent; }
+    .btn-ghost:hover { color: var(--text); border-color: var(--text-dim); }
 
-    /* ── Sections ── */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
+    /* ── What's Inside ── */
+    .pillars {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
     }
-    section { padding: 4rem 0; }
-    .section-header {
-      text-align: center;
-      margin-bottom: 3rem;
+    .pillar {
+      background: var(--surface); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius); padding: 2rem; text-align: center;
+      transition: border-color 0.15s;
     }
-    .section-header h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
+    .pillar:hover { border-color: var(--border); }
+    .pillar-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .pillar h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .pillar p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+    .pillar-link {
+      display: inline-block; margin-top: 1rem; font-size: 0.85rem; font-weight: 500;
+      color: var(--accent); text-decoration: none;
     }
-    .section-header p {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-    }
+    .pillar-link:hover { text-decoration: underline; }
 
-    /* ── How it Works ── */
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-    }
-    .step {
-      background: var(--surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      position: relative;
-    }
-    .step-num {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--accent-dim);
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-    .step h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
-    .step p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
-
-    /* ── Category Tabs + Grid ── */
+    /* ── Skills ── */
     .tabs {
-      display: flex;
-      gap: 0.25rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 2rem;
+      display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem;
     }
     .tab {
-      padding: 0.45rem 1rem;
-      border-radius: 100px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      cursor: pointer;
-      border: 1px solid var(--border-subtle);
-      background: var(--surface);
-      color: var(--text-muted);
-      transition: all 0.15s;
+      padding: 0.4rem 0.9rem; border-radius: 100px; font-size: 0.8rem; font-weight: 500;
+      cursor: pointer; border: 1px solid var(--border-subtle); background: var(--surface);
+      color: var(--text-muted); transition: all 0.15s;
     }
     .tab:hover { color: var(--text); border-color: var(--border); }
-    .tab.active {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
+    .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    .search-wrap {
+      max-width: 380px; margin: 0 auto 1.5rem; position: relative;
+    }
+    .search-wrap input {
+      width: 100%; padding: 0.55rem 1rem 0.55rem 2.3rem; border-radius: 100px;
+      border: 1px solid var(--border); background: var(--surface); color: var(--text);
+      font-size: 0.85rem; font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.15s;
+    }
+    .search-wrap input::placeholder { color: var(--text-dim); }
+    .search-wrap input:focus { border-color: var(--accent); }
+    .search-wrap svg {
+      position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%);
+      width: 15px; height: 15px; color: var(--text-dim);
     }
 
     .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 0.75rem;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 0.6rem;
     }
     .skill-card {
-      background: var(--surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-      transition: all 0.15s;
-      cursor: default;
+      background: var(--surface); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm); padding: 1rem 1.15rem; transition: all 0.15s;
     }
-    .skill-card:hover {
-      border-color: var(--border);
-      background: var(--surface-hover);
-    }
-    .skill-card-header {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      margin-bottom: 0.5rem;
-    }
+    .skill-card:hover { border-color: var(--border); background: var(--surface-hover); }
+    .skill-card.hidden { display: none; }
+    .skill-card-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem; }
     .skill-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      flex-shrink: 0;
+      width: 28px; height: 28px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0;
     }
     .skill-name {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text);
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600;
     }
-    .skill-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 0.75rem;
-    }
+    .skill-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.5rem; }
     .skill-example {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--text-dim);
-      background: rgba(255,255,255,0.03);
-      padding: 0.4rem 0.6rem;
-      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-dim);
+      background: rgba(255,255,255,0.03); padding: 0.3rem 0.5rem; border-radius: 5px;
       border: 1px solid var(--border-subtle);
     }
-    .skill-example::before {
-      content: '→ ';
-      color: var(--accent);
-    }
-
-    /* Category colors */
+    .skill-example::before { content: '→ '; color: var(--accent); }
     .cat-comm .skill-icon { background: var(--accent-dim); color: var(--accent); }
     .cat-proj .skill-icon { background: var(--green-dim); color: var(--green); }
     .cat-code .skill-icon { background: var(--purple-dim); color: var(--purple); }
@@ -317,242 +203,143 @@
     .cat-prod .skill-icon { background: var(--yellow-dim); color: var(--yellow); }
     .cat-adv .skill-icon  { background: var(--red-dim); color: var(--red); }
 
-    /* ── amp-mem Section ── */
-    .mem-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
+    /* ── Memory ── */
+    .mem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
     .mem-card {
-      background: var(--surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius);
-      padding: 1.75rem;
+      background: var(--surface); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius); padding: 1.5rem;
     }
     .mem-card h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-size: 0.95rem; font-weight: 600; margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 0.5rem;
     }
-    .mem-card-full {
-      grid-column: 1 / -1;
-    }
+    .mem-card-full { grid-column: 1 / -1; }
     .mem-card pre {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      line-height: 1.6;
-      color: var(--text-muted);
-      background: var(--bg);
-      padding: 1rem 1.25rem;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border-subtle);
-      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; line-height: 1.6;
+      color: var(--text-muted); background: var(--bg); padding: 1rem;
+      border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); overflow-x: auto;
     }
     .mem-card code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      background: rgba(255,255,255,0.05);
-      padding: 0.15rem 0.4rem;
-      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+      background: rgba(255,255,255,0.05); padding: 0.12rem 0.35rem; border-radius: 4px;
     }
-    .mem-card ul {
-      list-style: none;
-      padding: 0;
-    }
+    .mem-card ul { list-style: none; padding: 0; }
     .mem-card li {
-      padding: 0.4rem 0;
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: baseline;
-      gap: 0.5rem;
+      padding: 0.35rem 0; font-size: 0.85rem; color: var(--text-muted);
+      display: flex; align-items: baseline; gap: 0.5rem;
     }
     .mem-card li::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      flex-shrink: 0;
-      margin-top: 0.4rem;
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0; margin-top: 0.4rem;
     }
-
-    /* Command table */
-    .cmd-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-    }
+    .cmd-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
     .cmd-table th {
-      text-align: left;
-      padding: 0.6rem 0.75rem;
-      color: var(--text-dim);
-      font-weight: 500;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      border-bottom: 1px solid var(--border-subtle);
+      text-align: left; padding: 0.5rem 0.6rem; color: var(--text-dim);
+      font-weight: 500; font-size: 0.7rem; text-transform: uppercase;
+      letter-spacing: 0.06em; border-bottom: 1px solid var(--border-subtle);
     }
-    .cmd-table td {
-      padding: 0.5rem 0.75rem;
-      border-bottom: 1px solid var(--border-subtle);
-    }
+    .cmd-table td { padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--border-subtle); }
     .cmd-table td:first-child {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--green);
-      white-space: nowrap;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+      color: var(--green); white-space: nowrap;
     }
     .cmd-table td:last-child { color: var(--text-muted); }
     .cmd-table tr:last-child td { border-bottom: none; }
 
-    /* Type badges */
-    .type-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.5rem;
-    }
+    .type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
     .type-badge {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-sm);
-      padding: 0.6rem 0.75rem;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle);
+      border-radius: 6px; padding: 0.5rem 0.6rem;
     }
     .type-badge strong {
-      display: block;
-      font-size: 0.8rem;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--text);
-      margin-bottom: 0.2rem;
+      display: block; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace;
+      color: var(--text); margin-bottom: 0.15rem;
     }
-    .type-badge span {
-      font-size: 0.75rem;
-      color: var(--text-dim);
+    .type-badge span { font-size: 0.7rem; color: var(--text-dim); }
+
+    .steps-row {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;
+    }
+    .step {
+      background: var(--bg); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm); padding: 1.15rem; position: relative;
+    }
+    .step-num {
+      width: 24px; height: 24px; border-radius: 50%; background: var(--accent-dim);
+      color: var(--accent); display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 700; margin-bottom: 0.6rem;
+    }
+    .step h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .step p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* ── Amp Setup (compact) ── */
+    .setup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .setup-card {
+      background: var(--surface); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius); padding: 1.5rem;
+    }
+    .setup-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.75rem; }
+    .setup-card-full { grid-column: 1 / -1; }
+    .setup-card ul { list-style: none; padding: 0; }
+    .setup-card li {
+      padding: 0.35rem 0; font-size: 0.85rem; color: var(--text-muted);
+      display: flex; align-items: baseline; gap: 0.5rem;
+    }
+    .setup-card li::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--green); flex-shrink: 0; margin-top: 0.4rem;
+    }
+    .setup-card pre {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; line-height: 1.6;
+      color: var(--text-muted); background: var(--bg); padding: 0.85rem 1rem;
+      border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); overflow-x: auto;
     }
 
     /* ── Tips ── */
-    .tips-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-    }
+    .tips-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
     .tip {
-      background: var(--surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius);
-      padding: 1.5rem;
+      background: var(--surface); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius); padding: 1.5rem;
     }
-    .tip h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-    .tip p {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-    .tip .example {
-      margin-top: 0.75rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-    }
+    .tip h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .tip p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+    .tip .example { margin-top: 0.6rem; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; }
     .tip .bad { color: var(--red); }
     .tip .good { color: var(--green); }
 
     /* ── Footer ── */
     footer {
-      border-top: 1px solid var(--border-subtle);
-      padding: 2rem;
-      text-align: center;
-      color: var(--text-dim);
-      font-size: 0.85rem;
+      border-top: 1px solid var(--border-subtle); padding: 2rem;
+      text-align: center; color: var(--text-dim); font-size: 0.85rem;
     }
     footer a { color: var(--text-muted); text-decoration: none; }
     footer a:hover { color: var(--text); }
 
     /* ── Responsive ── */
     @media (max-width: 768px) {
-      .hero h1 { font-size: 2rem; }
-      .steps { grid-template-columns: 1fr 1fr; }
+      .hero h1 { font-size: 2.2rem; }
+      .pillars { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr; }
-      .mem-grid { grid-template-columns: 1fr; }
+      .mem-grid, .setup-grid { grid-template-columns: 1fr; }
       .tips-grid { grid-template-columns: 1fr; }
       .type-grid { grid-template-columns: 1fr 1fr; }
+      .steps-row { grid-template-columns: 1fr 1fr; }
       .nav-links { display: none; }
-    }
-
-    /* ── Divider ── */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border-subtle);
-      margin: 0;
-    }
-
-    /* skill count badge */
-    .count-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 20px;
-      height: 20px;
-      border-radius: 100px;
-      background: rgba(255,255,255,0.08);
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--text-dim);
-      padding: 0 6px;
-      margin-left: 0.35rem;
-    }
-
-    /* hidden by filter */
-    .skill-card.hidden { display: none; }
-
-    /* search */
-    .search-wrap {
-      max-width: 400px;
-      margin: 0 auto 1.5rem;
-      position: relative;
-    }
-    .search-wrap input {
-      width: 100%;
-      padding: 0.6rem 1rem 0.6rem 2.4rem;
-      border-radius: 100px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 0.875rem;
-      font-family: 'Inter', sans-serif;
-      outline: none;
-      transition: border-color 0.15s;
-    }
-    .search-wrap input::placeholder { color: var(--text-dim); }
-    .search-wrap input:focus { border-color: var(--accent); }
-    .search-wrap svg {
-      position: absolute;
-      left: 0.85rem;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 16px;
-      height: 16px;
-      color: var(--text-dim);
+      .hero-links { gap: 1rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── Nav ── -->
 <nav>
   <div class="nav-inner">
-    <a href="#" class="nav-brand">⚡ synthetic-mind</a>
+    <a href="#" class="nav-brand">🧠 synthetic-mind</a>
     <div class="nav-links">
-      <a href="#skills" class="active">Skills</a>
+      <a href="#explore">Explore</a>
+      <a href="#skills">Skills</a>
       <a href="#memory">Memory</a>
+      <a href="#setup">Amp Setup</a>
       <a href="#tips">Tips</a>
-      <a href="#setup">Setup</a>
     </div>
     <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
       <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
@@ -563,43 +350,44 @@
 
 <!-- ── Hero ── -->
 <section class="hero">
-  <div class="hero-badge">⚡ OPEN SOURCE</div>
-  <h1>Amp Setup Guide</h1>
-  <p>Turn <a href="https://ampcode.com" style="color:var(--accent);text-decoration:none">Amp</a> from a code assistant into a full command center — with 90+ skills, persistent memory, and an <code style="background:var(--surface);padding:0.15rem 0.4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.9rem">AGENTS.md</code> that makes it yours.</p>
-  <div class="hero-actions">
-    <a href="#skills" class="btn btn-primary">Browse Skills</a>
-    <a href="#memory" class="btn btn-secondary">amp-mem →</a>
-    <a href="https://github.com/abhiroopb/synthetic-mind" class="btn btn-secondary" target="_blank">View on GitHub</a>
+  <div class="hero-badge">by Abhi Basu</div>
+  <h1>synthetic-mind</h1>
+  <p>AI thoughts, processes, skills, and experiments — a living collection from working deeply with AI agents, LLMs, and automation.</p>
+  <div class="hero-links">
+    <a href="#skills" class="hero-link">🛠 90+ Skills</a>
+    <a href="#memory" class="hero-link">🧠 Persistent Memory</a>
+    <a href="#setup" class="hero-link">⚡ Amp Setup</a>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="hero-link" target="_blank">↗ GitHub</a>
   </div>
 </section>
 
-<!-- ── How Skills Work ── -->
-<section>
+<hr class="divider">
+
+<!-- ── What's Inside ── -->
+<section id="explore">
   <div class="container">
     <div class="section-header">
-      <h2>How Skills Work</h2>
-      <p>Skills are markdown "recipes" that teach Amp to use your tools</p>
+      <h2>What's Inside</h2>
+      <p>Each entry captures something useful — a workflow that clicked, a skill that shipped, or a process worth sharing</p>
     </div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <h3>You ask</h3>
-        <p>"Search Slack for release updates this week"</p>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon">🛠</div>
+        <h3>Skills</h3>
+        <p>90+ reusable AI agent skills for Slack, Gmail, Calendar, Linear, Snowflake, Figma, and more. Install in one command.</p>
+        <a href="#skills" class="pillar-link">Browse catalog ↓</a>
       </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <h3>Amp loads the skill</h3>
-        <p>Auto-pilot routes to the right skill automatically</p>
+      <div class="pillar">
+        <div class="pillar-icon">🧠</div>
+        <h3>Memory</h3>
+        <p>amp-mem — a persistent memory system using SQLite + FTS5. No vector embeddings. The LLM is the semantic engine.</p>
+        <a href="#memory" class="pillar-link">How it works ↓</a>
       </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <h3>Skill provides instructions</h3>
-        <p>CLI tools, auth flow, output format — all defined in SKILL.md</p>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <h3>Amp executes</h3>
-        <p>Runs commands, processes results, returns them to you</p>
+      <div class="pillar">
+        <div class="pillar-icon">💡</div>
+        <h3>Processes</h3>
+        <p>Documented workflows for AI-augmented product work — RPI methodology, knowledge distillation, auto-pilot routing.</p>
+        <a href="https://github.com/abhiroopb/synthetic-mind" class="pillar-link" target="_blank">View on GitHub ↗</a>
       </div>
     </div>
   </div>
@@ -612,7 +400,7 @@
   <div class="container">
     <div class="section-header">
       <h2>Skills Catalog</h2>
-      <p>90+ skills across 8 categories — just ask naturally</p>
+      <p>Plug-in instruction sets that teach AI agents to use your everyday tools</p>
     </div>
 
     <div class="search-wrap">
@@ -634,490 +422,90 @@
 
     <div class="skills-grid" id="skills-grid">
       <!-- Communication -->
-      <div class="skill-card cat-comm" data-cat="comm">
-        <div class="skill-card-header">
-          <div class="skill-icon">💬</div>
-          <div class="skill-name">start-of-day</div>
-        </div>
-        <div class="skill-desc">Morning triage: Slack → Gmail → Calendar. Surfaces unreads, drafts replies, shows schedule.</div>
-        <div class="skill-example">"start my day"</div>
-      </div>
-      <div class="skill-card cat-comm" data-cat="comm">
-        <div class="skill-card-header">
-          <div class="skill-icon">💬</div>
-          <div class="skill-name">slack</div>
-        </div>
-        <div class="skill-desc">Search, read, and post messages across Slack workspaces.</div>
-        <div class="skill-example">"search Slack for project updates"</div>
-      </div>
-      <div class="skill-card cat-comm" data-cat="comm">
-        <div class="skill-card-header">
-          <div class="skill-icon">📅</div>
-          <div class="skill-name">gcal</div>
-        </div>
-        <div class="skill-desc">Create, update, RSVP, and check availability on Google Calendar.</div>
-        <div class="skill-example">"what meetings do I have tomorrow?"</div>
-      </div>
-      <div class="skill-card cat-comm" data-cat="comm">
-        <div class="skill-card-header">
-          <div class="skill-icon">📅</div>
-          <div class="skill-name">reviewing-calendar</div>
-        </div>
-        <div class="skill-desc">Visual weekly calendar with conflict detection and color coding.</div>
-        <div class="skill-example">"review my calendar this week"</div>
-      </div>
-      <div class="skill-card cat-comm" data-cat="comm">
-        <div class="skill-card-header">
-          <div class="skill-icon">📄</div>
-          <div class="skill-name">gdrive</div>
-        </div>
-        <div class="skill-desc">Read/write Google Docs, Sheets, Slides. Search and manage Drive files.</div>
-        <div class="skill-example">"create a Google Doc titled Q1 Plan"</div>
-      </div>
-      <div class="skill-card cat-comm" data-cat="comm">
-        <div class="skill-card-header">
-          <div class="skill-icon">📝</div>
-          <div class="skill-name">gmail</div>
-        </div>
-        <div class="skill-desc">Search, read, send, draft, and manage emails, labels, and filters.</div>
-        <div class="skill-example">"draft a reply to the latest email from Sarah"</div>
-      </div>
-      <div class="skill-card cat-comm" data-cat="comm">
-        <div class="skill-card-header">
-          <div class="skill-icon">📓</div>
-          <div class="skill-name">notion</div>
-        </div>
-        <div class="skill-desc">Read, search, create, and update pages in your Notion workspace.</div>
-        <div class="skill-example">"search Notion for the roadmap"</div>
-      </div>
-      <div class="skill-card cat-comm" data-cat="comm">
-        <div class="skill-card-header">
-          <div class="skill-icon">🪞</div>
-          <div class="skill-name">reflect</div>
-        </div>
-        <div class="skill-desc">Guided reflection for performance reviews. Asks questions, synthesizes responses.</div>
-        <div class="skill-example">"start a reflection"</div>
-      </div>
-      <div class="skill-card cat-comm" data-cat="comm">
-        <div class="skill-card-header">
-          <div class="skill-icon">✍️</div>
-          <div class="skill-name">writing-feedback</div>
-        </div>
-        <div class="skill-desc">Draft performance feedback — self-reflections, peer reviews, manager evaluations.</div>
-        <div class="skill-example">"draft my self-reflection"</div>
-      </div>
-      <div class="skill-card cat-comm" data-cat="comm">
-        <div class="skill-card-header">
-          <div class="skill-icon">🖥️</div>
-          <div class="skill-name">controlling-computer</div>
-        </div>
-        <div class="skill-desc">Control macOS via AppleScript — apps, windows, volume, dark mode, notifications.</div>
-        <div class="skill-example">"turn on dark mode"</div>
-      </div>
-      <div class="skill-card cat-comm" data-cat="comm">
-        <div class="skill-card-header">
-          <div class="skill-icon">🎨</div>
-          <div class="skill-name">viewing-figma-files</div>
-        </div>
-        <div class="skill-desc">Inspect Figma files, view page/frame structure, export images, read comments.</div>
-        <div class="skill-example">"inspect the checkout frame in this Figma"</div>
-      </div>
+      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">💬</div><div class="skill-name">start-of-day</div></div><div class="skill-desc">Morning triage: Slack → Gmail → Calendar. Surfaces unreads, drafts replies, shows schedule.</div><div class="skill-example">"start my day"</div></div>
+      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">💬</div><div class="skill-name">slack</div></div><div class="skill-desc">Search, read, and post messages across Slack workspaces.</div><div class="skill-example">"search Slack for project updates"</div></div>
+      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">📅</div><div class="skill-name">gcal</div></div><div class="skill-desc">Create, update, RSVP, and check availability on Google Calendar.</div><div class="skill-example">"what meetings do I have tomorrow?"</div></div>
+      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">📅</div><div class="skill-name">reviewing-calendar</div></div><div class="skill-desc">Visual weekly calendar with conflict detection and color coding.</div><div class="skill-example">"review my calendar this week"</div></div>
+      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">📄</div><div class="skill-name">gdrive</div></div><div class="skill-desc">Read/write Google Docs, Sheets, Slides. Search and manage Drive files.</div><div class="skill-example">"create a Google Doc titled Q1 Plan"</div></div>
+      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">📝</div><div class="skill-name">gmail</div></div><div class="skill-desc">Search, read, send, draft, and manage emails, labels, and filters.</div><div class="skill-example">"draft a reply to the latest email from Sarah"</div></div>
+      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">📓</div><div class="skill-name">notion</div></div><div class="skill-desc">Read, search, create, and update pages in your Notion workspace.</div><div class="skill-example">"search Notion for the roadmap"</div></div>
+      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">🪞</div><div class="skill-name">reflect</div></div><div class="skill-desc">Guided reflection for performance reviews. Asks questions, synthesizes responses.</div><div class="skill-example">"start a reflection"</div></div>
+      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">✍️</div><div class="skill-name">writing-feedback</div></div><div class="skill-desc">Draft performance feedback — self-reflections, peer reviews, manager evaluations.</div><div class="skill-example">"draft my self-reflection"</div></div>
+      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">🖥️</div><div class="skill-name">controlling-computer</div></div><div class="skill-desc">Control macOS via AppleScript — apps, windows, volume, dark mode.</div><div class="skill-example">"turn on dark mode"</div></div>
+      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">🎨</div><div class="skill-name">viewing-figma-files</div></div><div class="skill-desc">Inspect Figma files, view structure, export images, read comments.</div><div class="skill-example">"inspect the checkout frame in this Figma"</div></div>
 
       <!-- Projects -->
-      <div class="skill-card cat-proj" data-cat="proj">
-        <div class="skill-card-header">
-          <div class="skill-icon">📌</div>
-          <div class="skill-name">linear</div>
-        </div>
-        <div class="skill-desc">Create, search, update issues and projects in Linear.</div>
-        <div class="skill-example">"create a Linear issue for the login bug"</div>
-      </div>
-      <div class="skill-card cat-proj" data-cat="proj">
-        <div class="skill-card-header">
-          <div class="skill-icon">📋</div>
-          <div class="skill-name">plan-to-linear</div>
-        </div>
-        <div class="skill-desc">Convert a structured plan into Linear issues and projects in bulk.</div>
-        <div class="skill-example">"convert this plan into Linear tickets"</div>
-      </div>
-      <div class="skill-card cat-proj" data-cat="proj">
-        <div class="skill-card-header">
-          <div class="skill-icon">▶️</div>
-          <div class="skill-name">linear-to-execution</div>
-        </div>
-        <div class="skill-desc">Pick up a Linear issue and prepare for implementation.</div>
-        <div class="skill-example">"work on PROJ-42"</div>
-      </div>
-      <div class="skill-card cat-proj" data-cat="proj">
-        <div class="skill-card-header">
-          <div class="skill-icon">📊</div>
-          <div class="skill-name">project-status</div>
-        </div>
-        <div class="skill-desc">Aggregate project status from Slack, Drive, GitHub, and feature flags.</div>
-        <div class="skill-example">"what's the project status?"</div>
-      </div>
-      <div class="skill-card cat-proj" data-cat="proj">
-        <div class="skill-card-header">
-          <div class="skill-icon">🕰️</div>
-          <div class="skill-name">historical-info</div>
-        </div>
-        <div class="skill-desc">Search across sources to find what you've been working on.</div>
-        <div class="skill-example">"what have I worked on this week?"</div>
-      </div>
-      <div class="skill-card cat-proj" data-cat="proj">
-        <div class="skill-card-header">
-          <div class="skill-icon">📥</div>
-          <div class="skill-name">logging-feature-requests</div>
-        </div>
-        <div class="skill-desc">Digest feature requests from Slack and log them to a tracking sheet.</div>
-        <div class="skill-example">"log this as a feature request"</div>
-      </div>
+      <div class="skill-card cat-proj" data-cat="proj"><div class="skill-card-header"><div class="skill-icon">📌</div><div class="skill-name">linear</div></div><div class="skill-desc">Create, search, update issues and projects in Linear.</div><div class="skill-example">"create a Linear issue for the login bug"</div></div>
+      <div class="skill-card cat-proj" data-cat="proj"><div class="skill-card-header"><div class="skill-icon">📋</div><div class="skill-name">plan-to-linear</div></div><div class="skill-desc">Convert a structured plan into Linear issues and projects in bulk.</div><div class="skill-example">"convert this plan into Linear tickets"</div></div>
+      <div class="skill-card cat-proj" data-cat="proj"><div class="skill-card-header"><div class="skill-icon">▶️</div><div class="skill-name">linear-to-execution</div></div><div class="skill-desc">Pick up a Linear issue and prepare for implementation.</div><div class="skill-example">"work on PROJ-42"</div></div>
+      <div class="skill-card cat-proj" data-cat="proj"><div class="skill-card-header"><div class="skill-icon">📊</div><div class="skill-name">project-status</div></div><div class="skill-desc">Aggregate project status from Slack, Drive, GitHub, and feature flags.</div><div class="skill-example">"what's the project status?"</div></div>
+      <div class="skill-card cat-proj" data-cat="proj"><div class="skill-card-header"><div class="skill-icon">🕰️</div><div class="skill-name">historical-info</div></div><div class="skill-desc">Search across sources to find what you've been working on.</div><div class="skill-example">"what have I worked on this week?"</div></div>
+      <div class="skill-card cat-proj" data-cat="proj"><div class="skill-card-header"><div class="skill-icon">📥</div><div class="skill-name">logging-feature-requests</div></div><div class="skill-desc">Digest feature requests from Slack and log them to a tracking sheet.</div><div class="skill-example">"log this as a feature request"</div></div>
 
       <!-- Code -->
-      <div class="skill-card cat-code" data-cat="code">
-        <div class="skill-card-header">
-          <div class="skill-icon">🔍</div>
-          <div class="skill-name">gh-pr-read</div>
-        </div>
-        <div class="skill-desc">Read and summarize GitHub pull requests using the gh CLI.</div>
-        <div class="skill-example">"summarize PR #4521"</div>
-      </div>
-      <div class="skill-card cat-code" data-cat="code">
-        <div class="skill-card-header">
-          <div class="skill-icon">🚀</div>
-          <div class="skill-name">pr-manager</div>
-        </div>
-        <div class="skill-desc">Commit changes, create/update PRs. Supports Graphite stacked PRs.</div>
-        <div class="skill-example">"commit and create a PR"</div>
-      </div>
-      <div class="skill-card cat-code" data-cat="code">
-        <div class="skill-card-header">
-          <div class="skill-icon">⬆️</div>
-          <div class="skill-name">push-pr</div>
-        </div>
-        <div class="skill-desc">Quick push current branch and create a draft PR with AI-generated description.</div>
-        <div class="skill-example">"push pr"</div>
-      </div>
-      <div class="skill-card cat-code" data-cat="code">
-        <div class="skill-card-header">
-          <div class="skill-icon">💬</div>
-          <div class="skill-name">address-pr-comments</div>
-        </div>
-        <div class="skill-desc">Fetch unresolved PR comments, fix them, commit per-comment, resolve threads.</div>
-        <div class="skill-example">"address PR comments"</div>
-      </div>
-      <div class="skill-card cat-code" data-cat="code">
-        <div class="skill-card-header">
-          <div class="skill-icon">✅</div>
-          <div class="skill-name">code-review-general</div>
-        </div>
-        <div class="skill-desc">Address code review feedback — prioritize human comments, verify changes.</div>
-        <div class="skill-example">"fix the review feedback"</div>
-      </div>
-      <div class="skill-card cat-code" data-cat="code">
-        <div class="skill-card-header">
-          <div class="skill-icon">🔀</div>
-          <div class="skill-name">rebasing-git-branches</div>
-        </div>
-        <div class="skill-desc">Rebase branches onto upstream targets, resolve conflicts.</div>
-        <div class="skill-example">"rebase my branch onto main"</div>
-      </div>
-      <div class="skill-card cat-code" data-cat="code">
-        <div class="skill-card-header">
-          <div class="skill-icon">🌳</div>
-          <div class="skill-name">git-worktree</div>
-        </div>
-        <div class="skill-desc">Manage git worktrees for working on multiple branches simultaneously.</div>
-        <div class="skill-example">"create a worktree for the hotfix"</div>
-      </div>
-      <div class="skill-card cat-code" data-cat="code">
-        <div class="skill-card-header">
-          <div class="skill-icon">🗺️</div>
-          <div class="skill-name">walkthrough</div>
-        </div>
-        <div class="skill-desc">Explore and visualize codebase architecture with diagrams.</div>
-        <div class="skill-example">"walk me through the payment flow"</div>
-      </div>
+      <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🔍</div><div class="skill-name">gh-pr-read</div></div><div class="skill-desc">Read and summarize GitHub pull requests using the gh CLI.</div><div class="skill-example">"summarize PR #4521"</div></div>
+      <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🚀</div><div class="skill-name">pr-manager</div></div><div class="skill-desc">Commit changes, create/update PRs. Supports Graphite stacked PRs.</div><div class="skill-example">"commit and create a PR"</div></div>
+      <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">⬆️</div><div class="skill-name">push-pr</div></div><div class="skill-desc">Quick push branch and create a draft PR with AI-generated description.</div><div class="skill-example">"push pr"</div></div>
+      <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">💬</div><div class="skill-name">address-pr-comments</div></div><div class="skill-desc">Fix unresolved PR comments, commit per-comment, resolve threads.</div><div class="skill-example">"address PR comments"</div></div>
+      <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">✅</div><div class="skill-name">code-review-general</div></div><div class="skill-desc">Address code review feedback — prioritize human comments, verify changes.</div><div class="skill-example">"fix the review feedback"</div></div>
+      <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🔀</div><div class="skill-name">rebasing-git-branches</div></div><div class="skill-desc">Rebase branches onto upstream targets, resolve conflicts.</div><div class="skill-example">"rebase my branch onto main"</div></div>
+      <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🌳</div><div class="skill-name">git-worktree</div></div><div class="skill-desc">Manage git worktrees for working on multiple branches simultaneously.</div><div class="skill-example">"create a worktree for the hotfix"</div></div>
+      <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🗺️</div><div class="skill-name">walkthrough</div></div><div class="skill-desc">Explore and visualize codebase architecture with diagrams.</div><div class="skill-example">"walk me through the payment flow"</div></div>
 
       <!-- Data -->
-      <div class="skill-card cat-data" data-cat="data">
-        <div class="skill-card-header">
-          <div class="skill-icon">❄️</div>
-          <div class="skill-name">snowflake</div>
-        </div>
-        <div class="skill-desc">Run SQL queries on Snowflake with SSO authentication.</div>
-        <div class="skill-example">"query conversion rates"</div>
-      </div>
-      <div class="skill-card cat-data" data-cat="data">
-        <div class="skill-card-header">
-          <div class="skill-icon">🧱</div>
-          <div class="skill-name">databricks</div>
-        </div>
-        <div class="skill-desc">Run SQL on Databricks Lakehouse. Search tables and catalogs.</div>
-        <div class="skill-example">"search for the payments table"</div>
-      </div>
-      <div class="skill-card cat-data" data-cat="data">
-        <div class="skill-card-header">
-          <div class="skill-icon">🧠</div>
-          <div class="skill-name">query-expert</div>
-        </div>
-        <div class="skill-desc">Natural-language to SQL — discover tables, search queries, execute on Snowflake.</div>
-        <div class="skill-example">"how many orders last week?"</div>
-      </div>
-      <div class="skill-card cat-data" data-cat="data">
-        <div class="skill-card-header">
-          <div class="skill-icon">📊</div>
-          <div class="skill-name">looker</div>
-        </div>
-        <div class="skill-desc">Interact with Looker dashboards, tiles, queries, explores, and models.</div>
-        <div class="skill-example">"run Looker dashboard 1234"</div>
-      </div>
-      <div class="skill-card cat-data" data-cat="data">
-        <div class="skill-card-header">
-          <div class="skill-icon">📈</div>
-          <div class="skill-name">data-analyst</div>
-        </div>
-        <div class="skill-desc">Full analysis pipeline with follow-up questions, charts, and visualizations.</div>
-        <div class="skill-example">"analyze checkout abandonment trends"</div>
-      </div>
-      <div class="skill-card cat-data" data-cat="data">
-        <div class="skill-card-header">
-          <div class="skill-icon">📑</div>
-          <div class="skill-name">airtable</div>
-        </div>
-        <div class="skill-desc">Manage Airtable bases, tables, records with filtering and sorting.</div>
-        <div class="skill-example">"search Airtable for Q1 features"</div>
-      </div>
+      <div class="skill-card cat-data" data-cat="data"><div class="skill-card-header"><div class="skill-icon">❄️</div><div class="skill-name">snowflake</div></div><div class="skill-desc">Run SQL queries on Snowflake with SSO authentication.</div><div class="skill-example">"query conversion rates"</div></div>
+      <div class="skill-card cat-data" data-cat="data"><div class="skill-card-header"><div class="skill-icon">🧱</div><div class="skill-name">databricks</div></div><div class="skill-desc">Run SQL on Databricks Lakehouse. Search tables and catalogs.</div><div class="skill-example">"search for the payments table"</div></div>
+      <div class="skill-card cat-data" data-cat="data"><div class="skill-card-header"><div class="skill-icon">🧠</div><div class="skill-name">query-expert</div></div><div class="skill-desc">Natural-language to SQL — discover tables, search queries, execute.</div><div class="skill-example">"how many orders last week?"</div></div>
+      <div class="skill-card cat-data" data-cat="data"><div class="skill-card-header"><div class="skill-icon">📊</div><div class="skill-name">looker</div></div><div class="skill-desc">Interact with Looker dashboards, tiles, queries, explores, and models.</div><div class="skill-example">"run Looker dashboard 1234"</div></div>
+      <div class="skill-card cat-data" data-cat="data"><div class="skill-card-header"><div class="skill-icon">📈</div><div class="skill-name">data-analyst</div></div><div class="skill-desc">Full analysis pipeline with follow-up questions, charts, and visualizations.</div><div class="skill-example">"analyze abandonment trends"</div></div>
+      <div class="skill-card cat-data" data-cat="data"><div class="skill-card-header"><div class="skill-icon">📑</div><div class="skill-name">airtable</div></div><div class="skill-desc">Manage Airtable bases, tables, records with filtering and sorting.</div><div class="skill-example">"search Airtable for Q1 features"</div></div>
 
       <!-- Infra -->
-      <div class="skill-card cat-infra" data-cat="infra">
-        <div class="skill-card-header">
-          <div class="skill-icon">🐕</div>
-          <div class="skill-name">datadog</div>
-        </div>
-        <div class="skill-desc">Query logs, metrics, traces, monitors, RUM, and CI visibility.</div>
-        <div class="skill-example">"check Datadog for service errors"</div>
-      </div>
-      <div class="skill-card cat-infra" data-cat="infra">
-        <div class="skill-card-header">
-          <div class="skill-icon">🚩</div>
-          <div class="skill-name">launchdarkly-cli</div>
-        </div>
-        <div class="skill-desc">Create, toggle, list, and manage LaunchDarkly feature flags.</div>
-        <div class="skill-example">"list flags with 'checkout' in the name"</div>
-      </div>
-      <div class="skill-card cat-infra" data-cat="infra">
-        <div class="skill-card-header">
-          <div class="skill-icon">🎯</div>
-          <div class="skill-name">flag-simulator</div>
-        </div>
-        <div class="skill-desc">Evaluate feature flag values for a given context.</div>
-        <div class="skill-example">"evaluate flag new-feature-v2"</div>
-      </div>
-      <div class="skill-card cat-infra" data-cat="infra">
-        <div class="skill-card-header">
-          <div class="skill-icon">🧪</div>
-          <div class="skill-name">creating-experiments</div>
-        </div>
-        <div class="skill-desc">Set up A/B experiments — dual-flag patterns, bucketing, traffic allocation.</div>
-        <div class="skill-example">"create experiment for new onboarding"</div>
-      </div>
-      <div class="skill-card cat-infra" data-cat="infra">
-        <div class="skill-card-header">
-          <div class="skill-icon">🌐</div>
-          <div class="skill-name">blockcell</div>
-        </div>
-        <div class="skill-desc">Deploy static website prototypes and demos for sharing.</div>
-        <div class="skill-example">"deploy prototype to Blockcell"</div>
-      </div>
-      <div class="skill-card cat-infra" data-cat="infra">
-        <div class="skill-card-header">
-          <div class="skill-icon">🧹</div>
-          <div class="skill-name">free-disk-space</div>
-        </div>
-        <div class="skill-desc">Survey and clean up disk space on macOS — Gradle, Xcode, npm caches.</div>
-        <div class="skill-example">"free up disk space"</div>
-      </div>
+      <div class="skill-card cat-infra" data-cat="infra"><div class="skill-card-header"><div class="skill-icon">🐕</div><div class="skill-name">datadog</div></div><div class="skill-desc">Query logs, metrics, traces, monitors, RUM, and CI visibility.</div><div class="skill-example">"check Datadog for service errors"</div></div>
+      <div class="skill-card cat-infra" data-cat="infra"><div class="skill-card-header"><div class="skill-icon">🚩</div><div class="skill-name">launchdarkly-cli</div></div><div class="skill-desc">Create, toggle, list, and manage LaunchDarkly feature flags.</div><div class="skill-example">"list flags with 'checkout' in the name"</div></div>
+      <div class="skill-card cat-infra" data-cat="infra"><div class="skill-card-header"><div class="skill-icon">🎯</div><div class="skill-name">flag-simulator</div></div><div class="skill-desc">Evaluate feature flag values for a given context.</div><div class="skill-example">"evaluate flag new-feature-v2"</div></div>
+      <div class="skill-card cat-infra" data-cat="infra"><div class="skill-card-header"><div class="skill-icon">🧪</div><div class="skill-name">creating-experiments</div></div><div class="skill-desc">Set up A/B experiments — dual-flag patterns, bucketing, traffic allocation.</div><div class="skill-example">"create experiment for new onboarding"</div></div>
+      <div class="skill-card cat-infra" data-cat="infra"><div class="skill-card-header"><div class="skill-icon">🌐</div><div class="skill-name">blockcell</div></div><div class="skill-desc">Deploy static website prototypes and demos for sharing.</div><div class="skill-example">"deploy prototype"</div></div>
+      <div class="skill-card cat-infra" data-cat="infra"><div class="skill-card-header"><div class="skill-icon">🧹</div><div class="skill-name">free-disk-space</div></div><div class="skill-desc">Survey and clean up disk space on macOS.</div><div class="skill-example">"free up disk space"</div></div>
 
       <!-- Testing -->
-      <div class="skill-card cat-test" data-cat="test">
-        <div class="skill-card-header">
-          <div class="skill-icon">📱</div>
-          <div class="skill-name">ios-simulator</div>
-        </div>
-        <div class="skill-desc">Manage iOS simulators — start, stop, create devices for testing.</div>
-        <div class="skill-example">"start an iPhone 15 simulator"</div>
-      </div>
-      <div class="skill-card cat-test" data-cat="test">
-        <div class="skill-card-header">
-          <div class="skill-icon">🤖</div>
-          <div class="skill-name">android-emulator</div>
-        </div>
-        <div class="skill-desc">Manage Android emulators (AVDs) for testing.</div>
-        <div class="skill-example">"list available Android AVDs"</div>
-      </div>
-      <div class="skill-card cat-test" data-cat="test">
-        <div class="skill-card-header">
-          <div class="skill-icon">🌐</div>
-          <div class="skill-name">agent-browser</div>
-        </div>
-        <div class="skill-desc">Browser automation — navigate, click, fill forms, take screenshots.</div>
-        <div class="skill-example">"open the page and take a screenshot"</div>
-      </div>
-      <div class="skill-card cat-test" data-cat="test">
-        <div class="skill-card-header">
-          <div class="skill-icon">📋</div>
-          <div class="skill-name">testing-party-doc</div>
-        </div>
-        <div class="skill-desc">Generate structured QA testing docs from feature documentation.</div>
-        <div class="skill-example">"create testing party doc for feature X"</div>
-      </div>
+      <div class="skill-card cat-test" data-cat="test"><div class="skill-card-header"><div class="skill-icon">📱</div><div class="skill-name">ios-simulator</div></div><div class="skill-desc">Manage iOS simulators — start, stop, create devices for testing.</div><div class="skill-example">"start an iPhone 15 simulator"</div></div>
+      <div class="skill-card cat-test" data-cat="test"><div class="skill-card-header"><div class="skill-icon">🤖</div><div class="skill-name">android-emulator</div></div><div class="skill-desc">Manage Android emulators (AVDs) for testing.</div><div class="skill-example">"list available Android AVDs"</div></div>
+      <div class="skill-card cat-test" data-cat="test"><div class="skill-card-header"><div class="skill-icon">🌐</div><div class="skill-name">agent-browser</div></div><div class="skill-desc">Browser automation — navigate, click, fill forms, take screenshots.</div><div class="skill-example">"open the page and take a screenshot"</div></div>
+      <div class="skill-card cat-test" data-cat="test"><div class="skill-card-header"><div class="skill-icon">📋</div><div class="skill-name">testing-party-doc</div></div><div class="skill-desc">Generate structured QA testing docs from feature documentation.</div><div class="skill-example">"create testing party doc for feature X"</div></div>
 
       <!-- Product -->
-      <div class="skill-card cat-prod" data-cat="prod">
-        <div class="skill-card-header">
-          <div class="skill-icon">📝</div>
-          <div class="skill-name">writing-requirements-docs</div>
-        </div>
-        <div class="skill-desc">Write PRDs from rough notes with auto-sourced evidence from Slack, data, and docs.</div>
-        <div class="skill-example">"write a PRD from these notes"</div>
-      </div>
-      <div class="skill-card cat-prod" data-cat="prod">
-        <div class="skill-card-header">
-          <div class="skill-icon">📐</div>
-          <div class="skill-name">spec-creator</div>
-        </div>
-        <div class="skill-desc">Create product specs using structured templates, synced to Linear projects.</div>
-        <div class="skill-example">"create spec for new feature"</div>
-      </div>
-      <div class="skill-card cat-prod" data-cat="prod">
-        <div class="skill-card-header">
-          <div class="skill-icon">🔎</div>
-          <div class="skill-name">feedback-searcher</div>
-        </div>
-        <div class="skill-desc">Search and synthesize user feedback across CS transcripts, Slack, and trackers.</div>
-        <div class="skill-example">"what are users saying about onboarding?"</div>
-      </div>
-      <div class="skill-card cat-prod" data-cat="prod">
-        <div class="skill-card-header">
-          <div class="skill-icon">🧩</div>
-          <div class="skill-name">prototype-builder</div>
-        </div>
-        <div class="skill-desc">Scaffold and build interactive HTML prototypes for product features.</div>
-        <div class="skill-example">"build prototype for the new flow"</div>
-      </div>
-      <div class="skill-card cat-prod" data-cat="prod">
-        <div class="skill-card-header">
-          <div class="skill-icon">✅</div>
-          <div class="skill-name">test-plan-creator</div>
-        </div>
-        <div class="skill-desc">Generate test plans and acceptance criteria from product specs.</div>
-        <div class="skill-example">"create test plan for the redesign"</div>
-      </div>
-      <div class="skill-card cat-prod" data-cat="prod">
-        <div class="skill-card-header">
-          <div class="skill-icon">🌍</div>
-          <div class="skill-name">web-research</div>
-        </div>
-        <div class="skill-desc">Search the web for competitors, market context, trends, and best practices.</div>
-        <div class="skill-example">"research competitor onboarding flows"</div>
-      </div>
+      <div class="skill-card cat-prod" data-cat="prod"><div class="skill-card-header"><div class="skill-icon">📝</div><div class="skill-name">writing-requirements-docs</div></div><div class="skill-desc">Write PRDs from rough notes with auto-sourced evidence.</div><div class="skill-example">"write a PRD from these notes"</div></div>
+      <div class="skill-card cat-prod" data-cat="prod"><div class="skill-card-header"><div class="skill-icon">📐</div><div class="skill-name">spec-creator</div></div><div class="skill-desc">Create product specs using structured templates, synced to Linear.</div><div class="skill-example">"create spec for new feature"</div></div>
+      <div class="skill-card cat-prod" data-cat="prod"><div class="skill-card-header"><div class="skill-icon">🔎</div><div class="skill-name">feedback-searcher</div></div><div class="skill-desc">Search and synthesize user feedback across multiple sources.</div><div class="skill-example">"what are users saying about onboarding?"</div></div>
+      <div class="skill-card cat-prod" data-cat="prod"><div class="skill-card-header"><div class="skill-icon">🧩</div><div class="skill-name">prototype-builder</div></div><div class="skill-desc">Scaffold and build interactive HTML prototypes for product features.</div><div class="skill-example">"build prototype for the new flow"</div></div>
+      <div class="skill-card cat-prod" data-cat="prod"><div class="skill-card-header"><div class="skill-icon">✅</div><div class="skill-name">test-plan-creator</div></div><div class="skill-desc">Generate test plans and acceptance criteria from product specs.</div><div class="skill-example">"create test plan for the redesign"</div></div>
+      <div class="skill-card cat-prod" data-cat="prod"><div class="skill-card-header"><div class="skill-icon">🌍</div><div class="skill-name">web-research</div></div><div class="skill-desc">Search the web for competitors, trends, and best practices.</div><div class="skill-example">"research competitor onboarding flows"</div></div>
 
       <!-- Advanced -->
-      <div class="skill-card cat-adv" data-cat="adv">
-        <div class="skill-card-header">
-          <div class="skill-icon">🤖</div>
-          <div class="skill-name">auto-pilot</div>
-        </div>
-        <div class="skill-desc">Routes any request to the right skill(s) automatically — no skill names needed.</div>
-        <div class="skill-example">(always active)</div>
-      </div>
-      <div class="skill-card cat-adv" data-cat="adv">
-        <div class="skill-card-header">
-          <div class="skill-icon">🔬</div>
-          <div class="skill-name">rpi</div>
-        </div>
-        <div class="skill-desc">Research → Plan → Implement framework for complex, multi-step tasks.</div>
-        <div class="skill-example">"rpi: refactor the auth module"</div>
-      </div>
-      <div class="skill-card cat-adv" data-cat="adv">
-        <div class="skill-card-header">
-          <div class="skill-icon">🔍</div>
-          <div class="skill-name">rpi-research</div>
-        </div>
-        <div class="skill-desc">Deep-dive research phase — understand existing code and systems.</div>
-        <div class="skill-example">"research how auth tokens work"</div>
-      </div>
-      <div class="skill-card cat-adv" data-cat="adv">
-        <div class="skill-card-header">
-          <div class="skill-icon">📋</div>
-          <div class="skill-name">rpi-plan</div>
-        </div>
-        <div class="skill-desc">Create phased implementation plans with success criteria.</div>
-        <div class="skill-example">"plan the API redesign"</div>
-      </div>
-      <div class="skill-card cat-adv" data-cat="adv">
-        <div class="skill-card-header">
-          <div class="skill-icon">⚡</div>
-          <div class="skill-name">rpi-implement</div>
-        </div>
-        <div class="skill-desc">Execute approved plans phase by phase with verification.</div>
-        <div class="skill-example">"implement phase 1"</div>
-      </div>
-      <div class="skill-card cat-adv" data-cat="adv">
-        <div class="skill-card-header">
-          <div class="skill-icon">🔄</div>
-          <div class="skill-name">rpi-iterate</div>
-        </div>
-        <div class="skill-desc">Update plans based on feedback, new requirements, or discoveries.</div>
-        <div class="skill-example">"update plan — add rate limiting"</div>
-      </div>
-      <div class="skill-card cat-adv" data-cat="adv">
-        <div class="skill-card-header">
-          <div class="skill-icon">🐝</div>
-          <div class="skill-name">swarm</div>
-        </div>
-        <div class="skill-desc">Multi-perspective investigation with adversarial challenge and consensus.</div>
-        <div class="skill-example">"investigate the latency spike"</div>
-      </div>
-      <div class="skill-card cat-adv" data-cat="adv">
-        <div class="skill-card-header">
-          <div class="skill-icon">♻️</div>
-          <div class="skill-name">ralph-loop</div>
-        </div>
-        <div class="skill-desc">Iterative work-review loop using two AI models with fresh context per iteration.</div>
-        <div class="skill-example">(complex revision tasks)</div>
-      </div>
-      <div class="skill-card cat-adv" data-cat="adv">
-        <div class="skill-card-header">
-          <div class="skill-icon">🧠</div>
-          <div class="skill-name">memory</div>
-        </div>
-        <div class="skill-desc">Persistent cross-session memory — captures observations, generates summaries.</div>
-        <div class="skill-example">"search memory for auth decisions"</div>
-      </div>
-      <div class="skill-card cat-adv" data-cat="adv">
-        <div class="skill-card-header">
-          <div class="skill-icon">🧬</div>
-          <div class="skill-name">kb-distill</div>
-        </div>
-        <div class="skill-desc">Distill raw observations into structured knowledge notes and propose rules.</div>
-        <div class="skill-example">"distill my recent work"</div>
-      </div>
+      <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">🤖</div><div class="skill-name">auto-pilot</div></div><div class="skill-desc">Routes any request to the right skill(s) automatically.</div><div class="skill-example">(always active)</div></div>
+      <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">🔬</div><div class="skill-name">rpi</div></div><div class="skill-desc">Research → Plan → Implement for complex, multi-step tasks.</div><div class="skill-example">"rpi: refactor the auth module"</div></div>
+      <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">🔍</div><div class="skill-name">rpi-research</div></div><div class="skill-desc">Deep-dive research phase — understand existing code and systems.</div><div class="skill-example">"research how auth tokens work"</div></div>
+      <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">📋</div><div class="skill-name">rpi-plan</div></div><div class="skill-desc">Create phased implementation plans with success criteria.</div><div class="skill-example">"plan the API redesign"</div></div>
+      <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">⚡</div><div class="skill-name">rpi-implement</div></div><div class="skill-desc">Execute approved plans phase by phase with verification.</div><div class="skill-example">"implement phase 1"</div></div>
+      <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">🔄</div><div class="skill-name">rpi-iterate</div></div><div class="skill-desc">Update plans based on feedback or new requirements.</div><div class="skill-example">"update plan — add rate limiting"</div></div>
+      <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">🐝</div><div class="skill-name">swarm</div></div><div class="skill-desc">Multi-perspective investigation with adversarial challenge and consensus.</div><div class="skill-example">"investigate the latency spike"</div></div>
+      <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">♻️</div><div class="skill-name">ralph-loop</div></div><div class="skill-desc">Iterative work-review loop using two AI models.</div><div class="skill-example">(complex revision tasks)</div></div>
+      <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">🧠</div><div class="skill-name">memory</div></div><div class="skill-desc">Persistent cross-session memory — captures observations, generates summaries.</div><div class="skill-example">"search memory for auth decisions"</div></div>
+      <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">🧬</div><div class="skill-name">kb-distill</div></div><div class="skill-desc">Distill raw observations into structured knowledge notes.</div><div class="skill-example">"distill my recent work"</div></div>
     </div>
   </div>
 </section>
 
 <hr class="divider">
 
-<!-- ── amp-mem ── -->
+<!-- ── Memory ── -->
 <section id="memory">
   <div class="container">
     <div class="section-header">
-      <h2>Persistent Memory with amp-mem</h2>
-      <p>SQLite + FTS5 memory that persists across sessions — no vector embeddings needed</p>
+      <h2>Persistent Memory — amp-mem</h2>
+      <p>SQLite + FTS5 memory that persists across sessions. No vector embeddings — the LLM is the semantic engine.</p>
     </div>
-
     <div class="mem-grid">
       <div class="mem-card">
         <h3>🏗️ Architecture</h3>
@@ -1125,31 +513,26 @@
 ├── amp-mem.db        # SQLite (WAL mode)
 ├── schema.sql        # Database schema
 ├── knowledge.md      # Plain-text log
-└── web/
-    ├── index.html    # Web viewer
-    └── serve.py      # Local server
+└── web/              # Web viewer
 
 ~/bin/amp-mem          # CLI (16 commands)
-
 ~/.agents/skills/
 ├── memory/SKILL.md
 └── kb-distill/SKILL.md</pre>
       </div>
-
       <div class="mem-card">
-        <h3>💡 Key Design Decisions</h3>
+        <h3>💡 Design Decisions</h3>
         <ul>
-          <li><strong>No vector embeddings</strong> — the LLM itself is the semantic engine</li>
+          <li><strong>No vector embeddings</strong> — the LLM is the semantic engine</li>
           <li><strong>SQLite + FTS5</strong> — porter stemming, single file, WAL mode</li>
           <li><strong>Progressive disclosure</strong> — search → timeline → detail</li>
-          <li><strong>On-demand web viewer</strong> — no persistent service needed</li>
-          <li><strong>Idempotent init</strong> — safe to run every session start</li>
-          <li><strong>Distillation</strong> — compresses raw observations into knowledge</li>
+          <li><strong>On-demand web viewer</strong> — no persistent service</li>
+          <li><strong>Idempotent init</strong> — safe to run every session</li>
+          <li><strong>Distillation</strong> — compresses observations into knowledge</li>
         </ul>
       </div>
-
       <div class="mem-card mem-card-full">
-        <h3>⌨️ CLI Reference</h3>
+        <h3>⌨️ CLI Commands</h3>
         <table class="cmd-table">
           <thead><tr><th>Command</th><th>Description</th></tr></thead>
           <tbody>
@@ -1157,21 +540,15 @@
             <tr><td>save</td><td>Save an observation</td></tr>
             <tr><td>search</td><td>FTS5 full-text search</td></tr>
             <tr><td>timeline</td><td>Context around an observation</td></tr>
-            <tr><td>detail</td><td>Full observation details</td></tr>
             <tr><td>context</td><td>Recent context for session priming</td></tr>
             <tr><td>compact</td><td>Compress old entries into summaries</td></tr>
-            <tr><td>session-start</td><td>Begin a session</td></tr>
-            <tr><td>session-end</td><td>End current session</td></tr>
+            <tr><td>session-start / end</td><td>Begin or end a tracked session</td></tr>
             <tr><td>stats</td><td>Database statistics</td></tr>
-            <tr><td>export</td><td>Export all memory</td></tr>
             <tr><td>serve</td><td>Web viewer at localhost:37777</td></tr>
-            <tr><td>distill-dump</td><td>Dump observations for distillation</td></tr>
-            <tr><td>distill-record</td><td>Record distillation run</td></tr>
-            <tr><td>distill-status</td><td>Check pending count</td></tr>
+            <tr><td>distill-status</td><td>Check pending observation count</td></tr>
           </tbody>
         </table>
       </div>
-
       <div class="mem-card mem-card-full">
         <h3>🏷️ Observation Types</h3>
         <div class="type-grid">
@@ -1186,31 +563,63 @@
           <div class="type-badge"><strong>session</strong><span>End-of-session summary</span></div>
         </div>
       </div>
-
       <div class="mem-card mem-card-full">
-        <h3>🔄 How Distillation Works</h3>
-        <div class="steps" style="grid-template-columns: repeat(4, 1fr);">
-          <div class="step">
-            <div class="step-num">1</div>
-            <h3>Gather</h3>
-            <p>Dump raw observations since last distillation</p>
-          </div>
-          <div class="step">
-            <div class="step-num">2</div>
-            <h3>Analyze</h3>
-            <p>Cluster by topic, identify repeated patterns</p>
-          </div>
-          <div class="step">
-            <div class="step-num">3</div>
-            <h3>Produce</h3>
-            <p>Save distilled notes, propose AGENTS.md rules</p>
-          </div>
-          <div class="step">
-            <div class="step-num">4</div>
-            <h3>Record</h3>
-            <p>Mark distillation complete — rules need your approval</p>
-          </div>
+        <h3>🔄 Distillation Pipeline</h3>
+        <div class="steps-row">
+          <div class="step"><div class="step-num">1</div><h4>Gather</h4><p>Dump raw observations since last distillation</p></div>
+          <div class="step"><div class="step-num">2</div><h4>Analyze</h4><p>Cluster by topic, identify repeated patterns</p></div>
+          <div class="step"><div class="step-num">3</div><h4>Produce</h4><p>Save distilled notes, propose AGENTS.md rules</p></div>
+          <div class="step"><div class="step-num">4</div><h4>Record</h4><p>Mark complete — rules need your approval</p></div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── Amp Setup (compact) ── -->
+<section id="setup">
+  <div class="container">
+    <div class="section-header">
+      <h2>Amp Setup</h2>
+      <p>Get <a href="https://ampcode.com" style="color:var(--accent);text-decoration:none">Amp</a> configured with skills and memory in minutes</p>
+    </div>
+    <div class="setup-grid">
+      <div class="setup-card">
+        <h3>📋 Prerequisites</h3>
+        <ul>
+          <li><strong>Amp CLI</strong> — install via <a href="https://ampcode.com" style="color:var(--accent)">ampcode.com</a></li>
+          <li><strong>GitHub CLI</strong> — <code style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;background:rgba(255,255,255,0.05);padding:0.1rem 0.3rem;border-radius:4px">brew install gh && gh auth login</code></li>
+          <li><strong>uv</strong> (for gdrive/gcal) — <code style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;background:rgba(255,255,255,0.05);padding:0.1rem 0.3rem;border-radius:4px">curl -LsSf https://astral.sh/uv/install.sh | sh</code></li>
+        </ul>
+      </div>
+      <div class="setup-card">
+        <h3>📦 Install Skills</h3>
+        <pre># Install a skill from a GitHub repo
+amp skill add your-org/skills/slack
+
+# Update existing
+amp skill add your-org/skills/slack --overwrite
+
+# Remove
+amp skill remove slack
+
+# Create your own
+amp skill create my-skill-name</pre>
+      </div>
+      <div class="setup-card setup-card-full">
+        <h3>🔐 First-Time Auth</h3>
+        <table class="cmd-table">
+          <thead><tr><th>Tool</th><th>Auth</th></tr></thead>
+          <tbody>
+            <tr><td>Google Drive / Cal</td><td><code style="font-family:'JetBrains Mono',monospace;font-size:0.78rem">cd ~/.agents/skills/gdrive && uv run gdrive-cli.py auth login</code></td></tr>
+            <tr><td>Slack</td><td>Automatic on first use (opens browser)</td></tr>
+            <tr><td>Linear</td><td>Enable the Linear MCP in Amp settings</td></tr>
+            <tr><td>GitHub</td><td><code style="font-family:'JetBrains Mono',monospace;font-size:0.78rem">gh auth login</code></td></tr>
+            <tr><td>Notion</td><td>Enable the Notion MCP in Amp settings</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -1223,13 +632,11 @@
   <div class="container">
     <div class="section-header">
       <h2>Tips</h2>
-      <p>Get the most out of your Amp setup</p>
     </div>
-
     <div class="tips-grid">
       <div class="tip">
         <h3>💬 Just Ask Naturally</h3>
-        <p>With <code>auto-pilot</code>, you don't need skill names. Just describe what you want.</p>
+        <p>With <code style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;background:rgba(255,255,255,0.05);padding:0.1rem 0.3rem;border-radius:4px">auto-pilot</code>, you don't need skill names.</p>
         <div class="example">
           <div class="bad">❌ "Use the slack skill to search for messages"</div>
           <div class="good">✅ "Search Slack for release updates this week"</div>
@@ -1237,93 +644,37 @@
       </div>
       <div class="tip">
         <h3>🔬 Use RPI for Big Tasks</h3>
-        <p>For complex work (refactors, new features, migrations), use Research → Plan → Implement. Each phase runs in its own session so context stays fresh.</p>
+        <p>For complex work, use Research → Plan → Implement. Each phase runs in its own session so context stays fresh.</p>
       </div>
       <div class="tip">
         <h3>🧠 Let Amp Remember</h3>
-        <p>With <code>amp-mem</code>, Amp remembers context across sessions — workflows, decisions, team structures. You teach it once, it remembers forever.</p>
+        <p>With <code style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;background:rgba(255,255,255,0.05);padding:0.1rem 0.3rem;border-radius:4px">amp-mem</code>, Amp remembers across sessions — workflows, decisions, team structures. Teach it once, it remembers forever.</p>
       </div>
       <div class="tip">
         <h3>⚙️ Configure AGENTS.md</h3>
-        <p>Your <code>~/AGENTS.md</code> is the master config — identity, preferences, automated behaviors. Treat it as your personal operating system for Amp.</p>
+        <p>Your <code style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;background:rgba(255,255,255,0.05);padding:0.1rem 0.3rem;border-radius:4px">~/AGENTS.md</code> is the master config — identity, preferences, automated behaviors. Your personal OS for Amp.</p>
       </div>
     </div>
   </div>
 </section>
 
-<hr class="divider">
-
-<!-- ── Setup ── -->
-<section id="setup">
-  <div class="container">
-    <div class="section-header">
-      <h2>Quick Setup</h2>
-      <p>Get up and running in minutes</p>
-    </div>
-
-    <div class="mem-grid">
-      <div class="mem-card">
-        <h3>📋 Prerequisites</h3>
-        <ul>
-          <li><strong>Amp CLI</strong> — install via <a href="https://ampcode.com" style="color:var(--accent)">ampcode.com</a></li>
-          <li><strong>GitHub CLI</strong> — <code>brew install gh && gh auth login</code></li>
-          <li><strong>uv</strong> — <code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></li>
-        </ul>
-      </div>
-
-      <div class="mem-card">
-        <h3>📦 Install Skills</h3>
-        <pre># Install a single skill
-amp skill add your-org/skills/slack
-
-# Install with overwrite (updates)
-amp skill add your-org/skills/slack --overwrite
-
-# Remove a skill
-amp skill remove slack</pre>
-      </div>
-
-      <div class="mem-card mem-card-full">
-        <h3>🔐 First-Time Auth</h3>
-        <table class="cmd-table">
-          <thead><tr><th>Tool</th><th>Auth</th></tr></thead>
-          <tbody>
-            <tr><td>Google Drive / Cal</td><td><code>cd ~/.agents/skills/gdrive && uv run gdrive-cli.py auth login</code></td></tr>
-            <tr><td>Slack</td><td>Automatic on first use (opens browser)</td></tr>
-            <tr><td>Snowflake</td><td>Uses Okta SSO</td></tr>
-            <tr><td>Linear</td><td>Enable the Linear MCP in Amp settings</td></tr>
-            <tr><td>GitHub</td><td><code>gh auth login</code></td></tr>
-            <tr><td>Notion</td><td>Enable the Notion MCP in Amp settings</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Footer ── -->
 <footer>
-  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
 </footer>
 
 <script>
-// Category filter
 const tabs = document.querySelectorAll('.tab');
 const cards = document.querySelectorAll('.skill-card');
 const searchInput = document.getElementById('skill-search');
-
 let activeCat = 'all';
-
 function filterCards() {
   const q = searchInput.value.toLowerCase().trim();
   cards.forEach(card => {
     const matchesCat = activeCat === 'all' || card.dataset.cat === activeCat;
-    const text = card.textContent.toLowerCase();
-    const matchesSearch = !q || text.includes(q);
+    const matchesSearch = !q || card.textContent.toLowerCase().includes(q);
     card.classList.toggle('hidden', !(matchesCat && matchesSearch));
   });
 }
-
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
     tabs.forEach(t => t.classList.remove('active'));
@@ -1332,29 +683,20 @@ tabs.forEach(tab => {
     filterCards();
   });
 });
-
 searchInput.addEventListener('input', filterCards);
-
-// Smooth scroll for nav
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
-
-// Active nav on scroll
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => {
-    if (window.scrollY >= s.offsetTop - 100) current = s.id;
-  });
-  navLinks.forEach(l => {
-    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
-  });
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + cur));
 });
 </script>
 
