@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flag Simulator Skill — Skills — synthetic-mind</title>
+  <meta name="description" content="Flag Simulator Skill — an Amp agent skill.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    .gh-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; padding: 0.5rem 1rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--surface); transition: all 0.15s;
+    }
+    .gh-link:hover { color: var(--text); border-color: var(--text-dim); }
+    .gh-link svg { width: 16px; height: 16px; fill: currentColor; }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="./" class="active">Skills</a>
+      <a href="../memory/">Memory</a>
+      <a href="../setup/">Setup</a>
+      <a href="../thoughts/">Thoughts</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All skills</a>
+
+  <h1>Flag Simulator Skill</h1>
+  <div class="article-meta">
+    <span class="article-tag">skill</span>
+    <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/skills/flag-simulator" class="gh-link" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+  </div>
+
+  <p>CLI replacement for <a href="https://go.internal.example.com/flag-simulator">go/flag-simulator</a> (<a href="https://console.internal.example.com/flag-simulator">console.internal.example.com/flag-simulator</a>).</p>
+
+  <p>Evaluate LaunchDarkly feature flags against specific merchant/unit/person/device contexts using the Experiment Relay API — without leaving the terminal.</p>
+
+  <h2>Prerequisites</h2>
+
+  <ul>
+    <li><strong>VPN</strong> — Must be connected to Square VPN (Cloudflare WARP)</li>
+    <li><strong>jq</strong> — For JSON formatting. Install with <code>brew install jq</code>.</li>
+  </ul>
+
+  <h2>Parameters</h2>
+
+  <p>| Parameter | Flag | Default | Description | |-----------|------|---------|-------------| | Flag key | <code>--flag-key</code> | (required) | The LaunchDarkly flag key to evaluate | | Token | <code>--token</code> | (required*) | Context token value (e.g., merchant token) | | Token type | <code>--token-type</code> | <code>MERCHANT</code> | <code>MERCHANT</code>, <code>UNIT</code>, <code>PERSON</code>, <code>SQUARE_MOBILE_DEVICE</code> | | Project | <code>--project</code> | <code>PIE</code> | <code>PIE</code>, <code>CAPITAL</code>, <code>SQUARE_CONSOLE</code>, <code>TIDAL</code>, <code>SHOP</code> | | Environment | <code>--env</code> | <code>production</code> | <code>production</code>, <code>staging</code>, <code>sandbox</code> | | Flag type | <code>--flag-type</code> | <code>BOOLEAN</code> | <code>BOOLEAN</code>, <code>STRING</code>, <code>INTEGER</code>, <code>DOUBLE</code>, <code>JSON</code> | | Platform | <code>--platform</code> | <code>Server</code> | <code>Server</code>, <code>Mobile</code>, <code>Dashboard Web</code> | | App vertical | <code>--app-vertical</code> | <code>SPOS</code> | See supported verticals below | | App version | <code>--app-version</code> | <code>6.95</code> | App version string | | Mobile OS | <code>--mobile-os</code> | <code>iOS</code> | <code>iOS</code> or <code>Android</code> | | Device | <code>--device</code> | <code>COTS</code> | Android device: <code>X2A</code>, <code>X2B</code>, <code>X2C</code>, <code>T2A</code>, <code>T2B</code>, <code>T3A</code>, <code>COTS</code> | | String attribute | <code>--attribute</code> | — | <code>key=value</code> (repeatable) | | Int attribute | <code>--attribute-int</code> | — | <code>key=value</code> (repeatable) | | Bool attribute | <code>--attribute-bool</code> | — | <code>key=value</code> (repeatable) | | Double attribute | <code>--attribute-double</code> | — | <code>key=value</code> (repeatable) | | Multi-context | <code>--context</code> | — | <code>TYPE:TOKEN</code> (repeatable, triggers multi-context mode) | | Default context | <code>--default-context-type</code> | <code>MERCHANT</code> | Default context type for multi-context mode |</p>
+
+  <p>\* <code>--token</code> is required for single-context mode. Use <code>--context</code> for multi-context mode.</p>
+
+  <h2>Examples</h2>
+
+  <h3>Simple boolean flag evaluation</h3>
+
+  <pre><code class="language-bash">scripts/evaluate.sh --flag-key waiter-orders-mode --token MLN7XZDSEWET1</code></pre>
+
+  <h3>String flag on staging</h3>
+
+  <pre><code class="language-bash">scripts/evaluate.sh --flag-key menu-layout --token UNIT456 \
+  --token-type UNIT --flag-type STRING --env staging</code></pre>
+
+  <h3>iOS Mobile evaluation</h3>
+
+  <pre><code class="language-bash">scripts/evaluate.sh --flag-key ios-feature --token M123 \
+  --platform Mobile --mobile-os iOS --app-vertical SPOS --app-version 6.95</code></pre>
+
+  <h3>Android/Squid evaluation on X2C</h3>
+
+  <pre><code class="language-bash">scripts/evaluate.sh --flag-key squid-feature --token M123 \
+  --platform Mobile --mobile-os Android --device X2C \
+  --app-vertical Restaurants --app-version 6.90</code></pre>
+
+  <h3>Dashboard Web</h3>
+
+  <pre><code class="language-bash">scripts/evaluate.sh --flag-key dashboard-feature --token M123 \
+  --platform &quot;Dashboard Web&quot;</code></pre>
+
+  <h3>Custom attributes</h3>
+
+  <pre><code class="language-bash">scripts/evaluate.sh --flag-key ab-test --token M123 \
+  --attribute country=US --attribute-int tier=3 --attribute-bool premium=true</code></pre>
+
+  <h3>Multi-context evaluation</h3>
+
+  <pre><code class="language-bash">scripts/evaluate.sh --flag-key cross-context-flag \
+  --context MERCHANT:M123 --context PERSON:P456 \
+  --default-context-type MERCHANT</code></pre>
+
+  <h2>How It Works</h2>
+
+  <ol>
+    <li>The script constructs a JSON payload with the flag key, project, context(s), flag type, and optional user attributes</li>
+    <li>It POSTs to the <strong>Experiment Relay API</strong> at <code>https://{domain}/1.0/features/flag-evaluation-details</code></li>
+    <li>An <code>Origin</code> header matching the domain is included to bypass the Trogdor CSRF check (safe because authentication is via Cloudflare Access/VPN, not browser cookies)</li>
+    <li>The response is formatted with jq, HTML tags are stripped from the evaluation reason, and the LaunchDarkly link is extracted</li>
+    <li>On <code>WRONG_TYPE</code> errors, the agent loads the <code>launchdarkly</code> skill to look up the correct flag type and retries</li>
+  </ol>
+
+  <h2>Limitations vs Console UI</h2>
+
+  <ul>
+    <li><strong>No saved contexts</strong> — Console UI lets you save and reuse evaluation contexts; the CLI requires specifying them each time</li>
+    <li><strong>No visual targeting rule breakdown</strong> — Console shows a graphical breakdown of which rule matched; the CLI shows the text reason only</li>
+    <li><strong>No bulk evaluation</strong> — Console can evaluate multiple flags at once; the CLI evaluates one at a time (but the agent can run it multiple times)</li>
+    <li><strong>No flag search/browse</strong> — Use the <a href="../launchdarkly/SKILL.md">launchdarkly skill</a> for searching and browsing flags</li>
+  </ul>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>
