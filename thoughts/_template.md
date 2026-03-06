@@ -1,10 +1,3 @@
----
-title: ""
-date: YYYY-MM-DD
-author: Abhi Basu
-tags: []
----
-
 # {title}
 
 ## TL;DR
