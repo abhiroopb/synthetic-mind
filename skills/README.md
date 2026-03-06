@@ -180,4 +180,4 @@ amp skills add <path-to-skill-folder>
 
 ---
 
-> 📁 Looking for platform-specific skills? See [synthetic-mind-internal](https://github.com/abhiroopb/synthetic-mind-internal) (private repo) for 54 additional enterprise skills.
+> 📁 Looking for enterprise-pattern skills? See [`/skills-internal`](../skills-internal/) for 54 additional skills adapted from real enterprise workflows (all internal references sanitized).
