@@ -1,0 +1,67 @@
+{
+    "consumer_segmentation": {
+        "habituation_segments": {
+            "description": "Global segmentation designating consumer's position in habituation journey based on recency and frequency",
+            "source_tables": ["YOUR_SCHEMA.CUSTOMER_SEGMENTATION"],
+            "segments": {
+                "power_users": {
+                    "definition": "Highest frequency and most recent shoppers. Top tier of engagement.",
+                    "marketing_strategy": "Retention and loyalty programs. VIP treatment. Exclusive offers."
+                },
+                "habituated": {
+                    "definition": "Regular shoppers with consistent purchase patterns. Established habit.",
+                    "marketing_strategy": "Maintain engagement. Cross-sell new products. Prevent churn."
+                },
+                "occasional": {
+                    "definition": "Infrequent shoppers. Lower engagement but not churned.",
+                    "marketing_strategy": "Increase frequency. Promote new use cases."
+                },
+                "churned": {
+                    "definition": "Consumers who have stopped using the platform for extended period.",
+                    "marketing_strategy": "Reactivation campaigns. Understand barriers."
+                },
+                "onboarder": {
+                    "definition": "New consumers in first few months. Still establishing habits.",
+                    "marketing_strategy": "Onboarding education. First purchase incentives."
+                }
+            }
+        },
+        "generation_segments": {
+            "description": "Age-based consumer segmentation. Calculated from birth_year obtained during IDV.",
+            "segments": {
+                "gen_z": {"definition": "Born 1997-2012. Digital natives. Core target demographic."},
+                "millennial": {"definition": "Born 1981-1996. Significant user base. Higher AOV."},
+                "gen_x": {"definition": "Born 1965-1980. Growing segment. Higher income."},
+                "baby_boomer": {"definition": "Born 1946-1964. Smaller segment."}
+            }
+        },
+        "geographic_segments": {
+            "description": "Location-based consumer segmentation",
+            "levels": {
+                "country": {"field": "country_code", "values": ["AU", "US", "GB", "NZ", "CA"]},
+                "state_province": {"field": "state"},
+                "metro_flag": {"field": "metro_flag", "values": ["metro", "non_metro"]}
+            }
+        }
+    },
+    "merchant_segmentation": {
+        "vertical_categories": {
+            "description": "Industry-based merchant classification",
+            "major_verticals": {
+                "fashion": {"description": "Apparel, footwear, accessories"},
+                "beauty": {"description": "Cosmetics, skincare, haircare, fragrances"},
+                "retail": {"description": "General merchandise, department stores"},
+                "home_garden": {"description": "Home goods, furniture, decor"},
+                "electronics": {"description": "Consumer electronics, gadgets"},
+                "travel": {"description": "Travel booking, accommodations, experiences"}
+            }
+        },
+        "channel_segments": {
+            "channels": {
+                "online": {"description": "E-commerce checkout integration. Largest channel."},
+                "instore": {"description": "Physical retail locations using card or barcode."},
+                "omnichannel": {"description": "Merchants accepting both online and instore."}
+            }
+        }
+    }
+}

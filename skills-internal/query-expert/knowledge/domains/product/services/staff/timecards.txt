@@ -1,0 +1,99 @@
+# Brand A Staff Timecards - Data Guide
+
+## Business Context
+
+Timecards are the core time-tracking records for Brand A Staff, capturing employee work hours, breaks, wages, and tips for each shift. Timecards integrate with Brand A Payroll for wage calculations and provide labor cost reporting for workforce management.
+
+**Key Business Facts:**
+- Timecards track a single shift for one employee on a specific day
+- Primary adoption in Food & Beverage businesses (~40-60% usage rates)
+- ~50% of hourly employees created become active on time tracking
+- Active timecards = created in last 30 days, not deleted, with clockout timestamp
+- Timecards feed directly into payroll processing and overtime calculations
+
+## Primary Tables
+
+### YOUR_TEAM_MGMT_SCHEMA.TIMECARDS (VERIFIED)
+**Purpose:** Primary analytics table for all timecard data
+**Primary Key:** TIMECARD_TOKEN
+**Table Owners:** LDAP_A, LDAP_C
+
+**Critical Columns:**
+- `TIMECARD_TOKEN` (text): Unique identifier for each timecard
+- `CUSTOMER_ID` (text): Seller identifier
+- `EMPLOYEE_TOKEN` (text): Employee identifier
+- `TS_CLOCKIN` (timestamp_ntz): Clock-in timestamp
+- `TS_CLOCKOUT` (timestamp_ntz): Clock-out timestamp
+- `M_MINUTES_CLOCKEDIN` (number): Total minutes clocked in
+- `WAGE_RATE_TYPE` (text): Values: 'Hourly', 'Annual', 'Unknown'
+- `WAGE_RATE_AMOUNT` (number): Wage rate amount
+- `IS_DELETED` (number): 1 = deleted, 0 = active
+- `DS_CREATED` (date): Date timecard was created
+- `TIMECARD_EDIT` (number): 1 = edited, 0 = not edited
+- `IS_SCHEDULED_SHIFT` (number): 1 = scheduled, 0 = unscheduled
+
+**Break Tracking Fields:**
+- `TOTAL_BREAKS` (number): Count of all breaks
+- `TOTAL_UNPAID_BREAKS` (number): Count of unpaid breaks
+- `TOTAL_PAID_BREAKS` (number): Count of paid breaks
+- `TOTAL_UNPAID_BREAKTIME_MINUTES` (number): Total unpaid break minutes
+- `TOTAL_PAID_BREAKTIME_MINUTES` (number): Total paid break minutes
+- `TOTAL_DEFAULT_BREAKS` (number): Auto-applied default breaks
+
+**Timecard Edit Fields:**
+- `TIMECARD_EDIT_REQUEST` (number): 1 = edit requested
+- `TIMECARD_REQUEST_EDIT_STATE` (number): State of edit request
+- `TIMECARD_EDIT_DS` (date): Date timecard was edited
+
+### YOUR_TEAM_MGMT_SCHEMA.BREAKS (VERIFIED)
+**Purpose:** Detailed break-level data
+**Primary Key:** BREAK_TOKEN
+**Foreign Key:** TIMECARD_TOKEN (links to timecards table)
+**Table Owners:** LDAP_A, LDAP_H
+
+**Key Columns:**
+- `BREAK_TOKEN` (text): Unique break identifier
+- `TIMECARD_TOKEN` (text): Links to parent timecard
+- `TS_BREAK_START` (timestamp_ntz): Break start time
+- `TS_BREAK_END` (timestamp_ntz): Break end time
+- `EXPECTED_BREAK_DURATION_MINUTES` (number): Scheduled duration
+- `ACTUAL_BREAK_DURATION_MINUTES` (number): Actual duration
+- `IS_PAID_BREAK` (boolean): TRUE = paid, FALSE = unpaid
+- `CONFIGURATION_TYPE` (text): Break type/configuration
+
+## Essential Query Patterns
+
+### Active Timecard Definition
+**CRITICAL:** Use these filters for active timecard analysis:
+```sql
+WHERE ds_created >= CURRENT_DATE - 30  -- Last 30 days
+  AND is_deleted = 0                    -- Not deleted
+  AND ts_clockout IS NOT NULL           -- Completed shifts only
+
+  Active Definition: Timecards are considered active if created in last 30 days, not deleted, and have a clockout timestamp
+
+Wage Rate Types:
+
+'Hourly': Hourly wage employees
+'Annual': Salaried employees
+'Unknown': No wage type set or null for the job of the employee 
+Break Compliance: Larger merchants use break tracking for labor law compliance and payroll accuracy
+
+Timecard Edits: Employees can request edits; managers approve/decline. Track with TIMECARD_EDIT and TIMECARD_EDIT_REQUEST fields
+
+Scheduled vs Unscheduled: Use IS_SCHEDULED_SHIFT to differentiate planned shifts from ad-hoc clock-ins
+
+Default Breaks: Some sellers configure auto-applied breaks (TOTAL_DEFAULT_BREAKS)
+
+Geolocation: IS_GEOLOCATION_TIMECARD indicates if location tracking was used
+
+Data Experts to Follow
+LDAP_A (Data Owner A): Primary timecard analytics owner, Staff data science lead
+LDAP_C (Matt Stringer): Timecard features and break tracking
+LDAP_B (Data Owner B): Payroll integration and timecard-to-payroll calculations
+
+Important Notes
+Production Tables: Raw timecard data exists in YOUR_TIMECARDS_RAW_SCHEMA.* sharded tables, but use the analytics table YOUR_TEAM_MGMT_SCHEMA.TIMECARDS for analysis
+Tips: Cash tips are recorded in declared_cash_tip_money field (not in standard timecards table schema shown above)
+Payroll Integration: See YOUR_PAYROLL_SCHEMA.PAYROLL_TIMECARDS_GROSS_PAY_DIFF_SUMMARY for timecard-to-payroll reconciliation
+API Context: Timecards replaced deprecated 'Shift' objects in Brand A Labor API (v2025-05-21+)
