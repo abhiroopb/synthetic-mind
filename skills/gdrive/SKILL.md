@@ -1,11 +1,7 @@
 ---
-name: gdrive
-description: Interact with Google Drive, Docs, Sheets, and Slides. Search files, read/write documents, manage sharing, work with spreadsheets, and create presentations.
+Skill name: gdrive
+Skill description: Interact with Google Drive, Docs, Sheets, and Slides. Search files, read/write documents, manage sharing, work with spreadsheets, and create presentations.
 roles: [frontend]
-metadata:
-  author: calebm
-  version: "0.3.0"
-  status: "beta"
 ---
 
 # Google Drive Skill

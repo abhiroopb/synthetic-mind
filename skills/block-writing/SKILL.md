@@ -1,10 +1,6 @@
 ---
-name: brand-voice-writing
-description: Use when writing, reviewing, drafting, editing, auditing, or revising product content across multiple brand lines. Covers UI copy, marketing, support articles, transactional communications, and legal copy. Applies brand voice principles and accessibility standards.
-metadata:
-  author: anonymous
-  version: "1.1.0"
-  status:
+Skill name: brand-voice-writing
+Skill description: Use when writing, reviewing, drafting, editing, auditing, or revising product content across multiple brand lines. Covers UI copy, marketing, support articles, transactional communications, and legal copy. Applies brand voice principles and accessibility standards.
 ---
 
 # Brand Voice Writing Standards

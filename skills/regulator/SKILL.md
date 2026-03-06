@@ -1,6 +1,6 @@
 ---
-name: regulator
-description: "Search and query an internal account/merchant lookup tool for accounts, cases, payments, and actions. Use when looking up sellers, account tokens, unit tokens, cases, or querying account data."
+Skill name: regulator
+Skill description: Search and query an internal account/merchant lookup tool for accounts, cases, payments, and actions. Use when looking up sellers, account tokens, unit tokens, cases, or querying account data.
 ---
 
 # Account Lookup Tool

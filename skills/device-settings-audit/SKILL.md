@@ -1,6 +1,6 @@
 ---
-name: device-settings-audit
-description: Query device profile change history from an audit log API. Use when investigating who created/updated/linked device profiles and when changes occurred. Includes access to device profile JSON configuration.
+Skill name: device-settings-audit
+Skill description: Query device profile change history from an audit log API. Use when investigating who created/updated/linked device profiles and when changes occurred. Includes access to device profile JSON configuration.
 roles:
   - device-platform
 ---

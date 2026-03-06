@@ -1,6 +1,6 @@
 ---
-name: creating-tasks-cli
-description: Creates tasks via a task management CLI, including labels, status, and artifacts. Use when you need to create or update tasks from the command line.
+Skill name: creating-tasks-cli
+Skill description: Creates tasks via a task management CLI, including labels, status, and artifacts. Use when you need to create or update tasks from the command line.
 ---
 
 # Creating Tasks (CLI)

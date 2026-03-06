@@ -1,6 +1,6 @@
 ---
-name: historical-info
-description: "Searches across multiple sources to find what the user is or has been working on. Use when asked about historical information, past activities, current work, or what they've been doing."
+Skill name: historical-info
+Skill description: Searches across multiple sources to find what the user is or has been working on. Use when asked about historical information, past activities, current work, or what they've been doing.
 ---
 
 # Historical Information Lookup

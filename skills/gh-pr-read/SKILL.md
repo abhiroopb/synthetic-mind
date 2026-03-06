@@ -1,6 +1,6 @@
 ---
-name: gh-pr-read
-description: "Reads and summarizes GitHub pull requests using the gh CLI. Use when asked to read, review, summarize, or inspect a PR."
+Skill name: gh-pr-read
+Skill description: Reads and summarizes GitHub pull requests using the gh CLI. Use when asked to read, review, summarize, or inspect a PR.
 ---
 
 # Reading GitHub Pull Requests

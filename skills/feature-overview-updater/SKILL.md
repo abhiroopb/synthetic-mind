@@ -1,6 +1,6 @@
 ---
-name: feature-overview-updater
-description: Scan the features/ directory and regenerate README index tables with current status, owners, and dates.
+Skill name: feature-overview-updater
+Skill description: Scan the features/ directory and regenerate README index tables with current status, owners, and dates.
 ---
 
 # Feature Overview Updater

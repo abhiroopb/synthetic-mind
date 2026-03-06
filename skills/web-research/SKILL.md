@@ -1,6 +1,6 @@
 ---
-name: web-research
-description: "Search the web and synthesize external information on a topic. Use when researching competitors, market context, industry trends, best practices, technical concepts, or any external information needed to inform PRDs, specs, strategy docs, or decision-making."
+Skill name: web-research
+Skill description: Search the web and synthesize external information on a topic. Use when researching competitors, market context, industry trends, best practices, technical concepts, or any external information needed to inform PRDs, specs, strategy docs, or decision-making.
 ---
 
 # Web Research

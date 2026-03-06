@@ -1,14 +1,12 @@
 ---
-name: kochiku
-description: "Fetch raw CI build data, logs, and artifacts via a CI system JSON API. Use when fetching, downloading, inspecting, or viewing CI build parts, build attempts, artifact logs, or stdout/stderr output. Not for failure analysis — use check-ci for that."
+Skill name: kochiku
+Skill description: Fetch raw CI build data, logs, and artifacts via a CI system JSON API. Use when fetching, downloading, inspecting, or viewing CI build parts, build attempts, artifact logs, or stdout/stderr output. Not for failure analysis — use check-ci for that.
 roles: [frontend]
 allowed-tools:
   - Bash(curl:*)
   - Bash(jq:*)
   - Bash(gunzip:*)
   - Bash(zcat:*)
-metadata:
-  status: stable
 ---
 
 # CI Build Data Fetcher

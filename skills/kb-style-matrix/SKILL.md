@@ -1,6 +1,6 @@
 ---
-name: kb-style-matrix
-description: "One-time Slack analysis to build your communication profile. Use when asked to build a style matrix, analyze communication style, create a voice profile, or match writing tone."
+Skill name: kb-style-matrix
+Skill description: One-time Slack analysis to build your communication profile. Use when asked to build a style matrix, analyze communication style, create a voice profile, or match writing tone.
 ---
 
 # kb-style-matrix — Communication Style Matrix

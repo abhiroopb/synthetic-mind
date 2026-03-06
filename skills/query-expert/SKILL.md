@@ -1,10 +1,6 @@
 ---
-name: query-expert
-description: Discover tables, search historical queries, and execute SQL on Snowflake using vector search and SSO authentication.
-metadata:
-  author: anonymous
-  version: "0.1.0"
-  status: experimental
+Skill name: query-expert
+Skill description: Discover tables, search historical queries, and execute SQL on Snowflake using vector search and SSO authentication.
 ---
 
 # Query Expert Skill

@@ -1,11 +1,9 @@
 ---
-name: registry-api
-description: Query a service registry API using a Python client library. Use when you need to look up applications, users, groups, roles, infrastructure, dependencies, or ownership information from the service registry with full API access.
+Skill name: registry-api
+Skill description: Query a service registry API using a Python client library. Use when you need to look up applications, users, groups, roles, infrastructure, dependencies, or ownership information from the service registry with full API access.
 allowed-tools:
   - Bash(uv run --with registry python:*)
   - AskUserQuestion
-metadata:
-  version: "0.1.0"
 ---
 
 # Service Registry API Skill

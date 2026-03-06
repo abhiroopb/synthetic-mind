@@ -1,6 +1,6 @@
 ---
-name: registry-info
-description: Query application metadata from a service registry. Use when you need to find service information, dependencies, deployment details, ownership, or links to documentation/monitoring.
+Skill name: registry-info
+Skill description: Query application metadata from a service registry. Use when you need to find service information, dependencies, deployment details, ownership, or links to documentation/monitoring.
 roles: [frontend]
 allowed-tools: Bash(cli app:*)
 ---

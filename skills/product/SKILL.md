@@ -1,6 +1,6 @@
 ---
-name: product
-description: Searches and reads from the product documentation repository. Use when searching existing product requirements, end-to-end feature architecture, or browsing product documentation.
+Skill name: product
+Skill description: Searches and reads from the product documentation repository. Use when searching existing product requirements, end-to-end feature architecture, or browsing product documentation.
 ---
 
 # Product Repository Search

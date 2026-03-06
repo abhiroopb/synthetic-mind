@@ -1,6 +1,6 @@
 ---
-name: writing-requirements-docs
-description: Write crisp, thorough PRDs from rough notes, customer feedback, or raw input using a canonical PRD template. Automatically searches Slack, project trackers, data warehouse, and knowledge bases for internal references to augment the PRD with traced-back evidence.
+Skill name: writing-requirements-docs
+Skill description: Write crisp, thorough PRDs from rough notes, customer feedback, or raw input using a canonical PRD template. Automatically searches Slack, project trackers, data warehouse, and knowledge bases for internal references to augment the PRD with traced-back evidence.
 ---
 
 # Writing Requirements Documents

@@ -1,11 +1,8 @@
 ---
-name: flag-simulator
-description: "Evaluate LaunchDarkly feature flags via an evaluation relay API. CLI replacement for a web-based flag simulator UI. Use when user asks to evaluate a flag, check flag value, simulate flag evaluation, test flag targeting, look up flag result, query flag state, resolve flag variation, inspect flag output, or mentions flag-simulator."
+Skill name: flag-simulator
+Skill description: Evaluate LaunchDarkly feature flags via an evaluation relay API. CLI replacement for a web-based flag simulator UI. Use when user asks to evaluate a flag, check flag value, simulate flag evaluation, test flag targeting, look up flag result, query flag state, resolve flag variation, inspect flag output, or mentions flag-simulator.
 roles: [frontend, backend, mobile]
 allowed-tools: [Bash(scripts/evaluate.sh:*), Bash(jq:*), Read]
-metadata:
-  version: "0.1.0"
-  status: experimental
 ---
 
 # Flag Simulator

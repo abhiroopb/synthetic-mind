@@ -1,8 +1,6 @@
 ---
-name: plan-to-linear
-description: "Convert structured plans into Linear issues and projects. Use when creating, filing, converting, transforming, decomposing, splitting, or breaking down a plan into Linear tickets, issues, or projects. Also use when bulk-creating Linear issues from a task list, document, or conversation."
-metadata:
-  status: experimental
+Skill name: plan-to-linear
+Skill description: Convert structured plans into Linear issues and projects. Use when creating, filing, converting, transforming, decomposing, splitting, or breaking down a plan into Linear tickets, issues, or projects. Also use when bulk-creating Linear issues from a task list, document, or conversation.
 ---
 
 # Plan to Linear

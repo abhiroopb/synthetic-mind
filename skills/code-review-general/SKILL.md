@@ -1,9 +1,6 @@
 ---
-name: code-review-general
-description: Address PR code review feedback. Fetches review comments, helps prioritize human feedback over automated ones, verifies changes, commits, and resolves threads. Use when asked to address code review, fix PR comments, or respond to reviewer feedback.
-metadata:
-  author: tirsen
-  status: experimental
+Skill name: code-review-general
+Skill description: Address PR code review feedback. Fetches review comments, helps prioritize human feedback over automated ones, verifies changes, commits, and resolves threads. Use when asked to address code review, fix PR comments, or respond to reviewer feedback.
 ---
 
 # Code Review

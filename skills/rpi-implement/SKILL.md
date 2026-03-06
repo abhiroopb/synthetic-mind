@@ -1,6 +1,6 @@
 ---
-name: rpi-implement
-description: Implement approved RPI plans phase by phase. Use after planning phase when ready to execute, apply, carry out, build, deliver, ship, or run an implementation plan. Follows plans precisely with verification at each phase.
+Skill name: rpi-implement
+Skill description: Implement approved RPI plans phase by phase. Use after planning phase when ready to execute, apply, carry out, build, deliver, ship, or run an implementation plan. Follows plans precisely with verification at each phase.
 ---
 
 # RPI Implement

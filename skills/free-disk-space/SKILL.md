@@ -1,6 +1,6 @@
 ---
-name: free-disk-space
-description: Survey and clean up disk space on macOS developer machines. Targets known locations where storage accumulates (Gradle, Xcode, npm, etc.), categorizes by safety level, and executes cleanup only with explicit approval. Use when disk is full, running low on space, or wanting to reclaim storage.
+Skill name: free-disk-space
+Skill description: Survey and clean up disk space on macOS developer machines. Targets known locations where storage accumulates (Gradle, Xcode, npm, etc.), categorizes by safety level, and executes cleanup only with explicit approval. Use when disk is full, running low on space, or wanting to reclaim storage.
 roles: []
 allowed-tools:
   - Bash(du:*)
@@ -18,10 +18,6 @@ allowed-tools:
   - Read
   - Glob
   - AskUserQuestion
-metadata:
-  author: aalaniz
-  version: "1.0.0"
-  status: experimental
 ---
 
 # Free Disk Space

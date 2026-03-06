@@ -1,6 +1,6 @@
 ---
-name: setting-up-builderbot
-description: "Guides users through a CLI tool setup for an AI task orchestration system. Use when someone needs to install/configure the CLI or prepare for CLI-based workflows."
+Skill name: setting-up-builderbot
+Skill description: Guides users through a CLI tool setup for an AI task orchestration system. Use when someone needs to install/configure the CLI or prepare for CLI-based workflows.
 ---
 
 # Setting Up the Task Orchestration CLI

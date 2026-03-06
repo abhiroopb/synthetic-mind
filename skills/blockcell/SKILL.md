@@ -1,10 +1,6 @@
 ---
-name: static-site-deployer
-description: Deploy static website prototypes and demos to an internal static site hosting service for sharing.
-metadata:
-  status: experimental
-  author: anonymous
-  version: "0.1"
+Skill name: static-site-deployer
+Skill description: Deploy static website prototypes and demos to an internal static site hosting service for sharing.
 ---
 
 # Static Site Deployment Skill

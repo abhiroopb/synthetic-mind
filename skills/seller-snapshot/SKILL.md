@@ -1,3 +1,8 @@
+---
+Skill name: seller-snapshot
+Skill description: Generate a comprehensive customer snapshot and timeline for an account, providing a 360° view of the customer's relationship with your platform.
+---
+
 # Customer Snapshot
 
 Generate a comprehensive customer snapshot and timeline for an account, providing a 360° view of the customer's relationship with your platform.

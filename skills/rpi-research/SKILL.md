@@ -1,6 +1,6 @@
 ---
-name: rpi-research
-description: Research codebase for complex tasks using RPI methodology. Use when starting a new feature, investigating unfamiliar code, or needing comprehensive understanding before planning. Creates documented research artifacts.
+Skill name: rpi-research
+Skill description: Research codebase for complex tasks using RPI methodology. Use when starting a new feature, investigating unfamiliar code, or needing comprehensive understanding before planning. Creates documented research artifacts.
 ---
 
 # RPI Research

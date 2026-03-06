@@ -1,6 +1,6 @@
 ---
-name: snagit
-description: "Capture screenshots and recordings using TechSmith Snagit on macOS. Use when asked to take a screenshot, capture a window, record the screen, open Snagit, access Snagit library, or automate screen capture workflows."
+Skill name: snagit
+Skill description: Capture screenshots and recordings using TechSmith Snagit on macOS. Use when asked to take a screenshot, capture a window, record the screen, open Snagit, access Snagit library, or automate screen capture workflows.
 ---
 
 # Snagit — Screen Capture & Recording Automation

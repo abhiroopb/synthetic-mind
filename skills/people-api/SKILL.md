@@ -1,10 +1,7 @@
 ---
-name: people-api
-description: "Query employee data from an internal People/Directory API. Search, look up, list, or browse people by name, username, LDAP, Slack ID, function, or org. Use when asked to find someone, check employee info, resolve a username, query org charts, or map teams."
+Skill name: people-api
+Skill description: Query employee data from an internal People/Directory API. Search, look up, list, or browse people by name, username, LDAP, Slack ID, function, or org. Use when asked to find someone, check employee info, resolve a username, query org charts, or map teams.
 roles: [frontend]
-metadata:
-  version: "1.0"
-  status: stable
 ---
 
 # People API Skill

@@ -1,6 +1,6 @@
 ---
-name: viewing-figma-files
-description: "View Figma files, inspect page/frame structure, export node images, and read comments via the Figma REST API. Use when asked to view, inspect, open, read, export, or describe a Figma file, frame, component, or design."
+Skill name: viewing-figma-files
+Skill description: View Figma files, inspect page/frame structure, export node images, and read comments via the Figma REST API. Use when asked to view, inspect, open, read, export, or describe a Figma file, frame, component, or design.
 ---
 
 # Viewing Figma Files

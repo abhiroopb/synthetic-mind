@@ -1,6 +1,6 @@
 ---
-name: auto-pilot
-description: "Orchestrates all installed skills automatically. Routes user requests to the correct skill(s) without asking. Use as the default skill on every prompt — matches any actionable request and loads the right skill(s) to fulfill it."
+Skill name: auto-pilot
+Skill description: Orchestrates all installed skills automatically. Routes user requests to the correct skill(s) without asking. Use as the default skill on every prompt — matches any actionable request and loads the right skill(s) to fulfill it.
 ---
 
 # Auto-Pilot — Skill Orchestrator

@@ -1,9 +1,7 @@
 ---
-name: ralph-loop
-description: Iterative work-review loop using two AI models with fresh context per iteration. Use for complex tasks requiring multiple revisions with cross-model validation. Based on Geoffrey Huntley's technique found in Goose.
+Skill name: ralph-loop
+Skill description: Iterative work-review loop using two AI models with fresh context per iteration. Use for complex tasks requiring multiple revisions with cross-model validation. Based on Geoffrey Huntley's technique found in Goose.
 roles: []
-metadata:
-  status: experimental
 ---
 
 # Ralph Loop - Multi-Model Iterative Development

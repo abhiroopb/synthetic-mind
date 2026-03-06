@@ -1,6 +1,6 @@
 ---
-name: ios-simulator
-description: Manage iOS simulators - use when user wants to start, stop, create, or manage iOS simulators for testing
+Skill name: ios-simulator
+Skill description: Manage iOS simulators - use when user wants to start, stop, create, or manage iOS simulators for testing
 roles: [mobile, cash-ios]
 allowed-tools:
   - Bash(bash ~/.agents/skills/ios-simulator/scripts/ios-simulator.sh:*)

@@ -1,6 +1,6 @@
 ---
-name: pr-manager
-description: Commit changes, create PRs, or update existing PRs. Supports Graphite stacked PRs when available. Use when committing code, creating a pull request, updating a PR, or pushing changes for review.
+Skill name: pr-manager
+Skill description: Commit changes, create PRs, or update existing PRs. Supports Graphite stacked PRs when available. Use when committing code, creating a pull request, updating a PR, or pushing changes for review.
 allowed-tools: [Bash, Read, Grep, Glob]
 argument-hint: ticket ID (JIRA or Linear), description hints, "use standard git" to skip Graphite
 ---

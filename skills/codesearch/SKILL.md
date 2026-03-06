@@ -1,6 +1,6 @@
 ---
-name: codesearch
-description: "Searches your organization's Sourcegraph code search instance across all repositories. Use when asked to search code, find implementations, locate usages, or explore codebases across the organization."
+Skill name: codesearch
+Skill description: Searches your organization's Sourcegraph code search instance across all repositories. Use when asked to search code, find implementations, locate usages, or explore codebases across the organization.
 ---
 
 # Codesearch

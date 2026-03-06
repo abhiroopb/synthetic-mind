@@ -1,6 +1,6 @@
 ---
-name: go-link
-description: Translate internal shortlinks (like go/benefits, go/oncall) to full URLs. Use when user mentions go/ links, shortlinks, or asks to navigate/fetch URLs starting with "go/".
+Skill name: go-link
+Skill description: Translate internal shortlinks (like go/benefits, go/oncall) to full URLs. Use when user mentions go/ links, shortlinks, or asks to navigate/fetch URLs starting with "go/".
 roles: [frontend]
 ---
 

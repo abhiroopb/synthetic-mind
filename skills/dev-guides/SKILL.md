@@ -1,6 +1,6 @@
 ---
-name: internal-docs
-description: Searches and retrieves developer documentation from an internal documentation site. Use to search for documentation or fetch readable markdown content from internal documentation URLs.
+Skill name: internal-docs
+Skill description: Searches and retrieves developer documentation from an internal documentation site. Use to search for documentation or fetch readable markdown content from internal documentation URLs.
 roles: [admins, infra, dx, mobile, backend, frontend]
 ---
 

@@ -1,8 +1,6 @@
 ---
-name: linear-to-execution
-description: "Picks up a Linear issue and prepares an agent for execution. Use when asked to 'work on this issue', 'pick up ISSUE-123', or 'execute this ticket'. Pairs with plan-to-linear skill. Experimental."
-metadata:
-  status: experimental
+Skill name: linear-to-execution
+Skill description: Picks up a Linear issue and prepares an agent for execution. Use when asked to 'work on this issue', 'pick up ISSUE-123', or 'execute this ticket'. Pairs with plan-to-linear skill. Experimental.
 ---
 
 # Linear to Execution

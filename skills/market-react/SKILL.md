@@ -1,8 +1,8 @@
 ---
-name: market-react
+Skill name: market-react
+Skill description: >-
 roles:
   - frontend
-description: >-
   Reference docs for a design system's React UI components.
   Use when building, implementing, debugging, styling, migrating, testing,
   or reviewing React components that use design system components

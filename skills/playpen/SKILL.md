@@ -1,9 +1,6 @@
 ---
-name: playpen
-description: "Deploy and debug applications using an ephemeral staging environment service. Use when user needs to sync code to a staging pod, view logs, debug running services, manage instances, make RPC calls, or test with feature flag overrides."
-metadata:
-  version: "0.2.0"
-  status: experimental
+Skill name: playpen
+Skill description: Deploy and debug applications using an ephemeral staging environment service. Use when user needs to sync code to a staging pod, view logs, debug running services, manage instances, make RPC calls, or test with feature flag overrides.
 ---
 
 # Staging Environment Deployer

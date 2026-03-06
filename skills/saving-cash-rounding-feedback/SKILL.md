@@ -1,6 +1,6 @@
 ---
-name: saving-cash-rounding-feedback
-description: Save customer feedback to a tracking Google Doc. Looks up account token from the account lookup tool and appends a row. Use when asked to save feedback, log feedback, or record customer feedback about a feature.
+Skill name: saving-cash-rounding-feedback
+Skill description: Save customer feedback to a tracking Google Doc. Looks up account token from the account lookup tool and appends a row. Use when asked to save feedback, log feedback, or record customer feedback about a feature.
 ---
 
 # Saving Customer Feedback

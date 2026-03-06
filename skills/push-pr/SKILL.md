@@ -1,6 +1,6 @@
 ---
-name: push-pr
-description: Pushes current branch and creates a draft PR with AI-generated description. Use when asked to "push pr", "create pr", or "push and create pr".
+Skill name: push-pr
+Skill description: Pushes current branch and creates a draft PR with AI-generated description. Use when asked to "push pr", "create pr", or "push and create pr".
 ---
 
 # Push and Create Draft PR

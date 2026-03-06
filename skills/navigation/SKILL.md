@@ -1,8 +1,6 @@
 ---
-name: navigation
-description: Add or update links in a Dashboard navigation menu. Use when the user wants to add a new nav link, rename a nav link, reorder nav items, or modify the sidebar navigation in a web dashboard. Requires changes in both the dashboard and header repositories.
-metadata:
-  status: beta
+Skill name: navigation
+Skill description: Add or update links in a Dashboard navigation menu. Use when the user wants to add a new nav link, rename a nav link, reorder nav items, or modify the sidebar navigation in a web dashboard. Requires changes in both the dashboard and header repositories.
 ---
 
 # Dashboard Navigation Skill

@@ -1,6 +1,6 @@
 ---
-name: testing-party-doc
-description: Use when creating, building, drafting, writing, preparing, generating, structuring, or organizing a testing party doc, QA plan, test plan, or test sign-off document for a feature launch. Generates a structured multi-tab Google Doc with Overview, Testing Party, Environment Setup, and Bugs tabs from feature documentation.
+Skill name: testing-party-doc
+Skill description: Use when creating, building, drafting, writing, preparing, generating, structuring, or organizing a testing party doc, QA plan, test plan, or test sign-off document for a feature launch. Generates a structured multi-tab Google Doc with Overview, Testing Party, Environment Setup, and Bugs tabs from feature documentation.
 argument-hint: [required destination-google-doc-url, optional prd-url, optional eng-doc-url, optional pr-urls, optional slack-channels]
 roles: [qa]
 allowed-tools:
@@ -12,9 +12,6 @@ allowed-tools:
   - Read
   - Glob
   - WebFetch
-metadata:
-  version: "0.2.0"
-  status: "experimental"
 ---
 
 # Testing Party Doc Generator

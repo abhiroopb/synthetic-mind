@@ -1,6 +1,6 @@
 ---
-name: creating-experiments
-description: Use when creating, launching, setting up, configuring, building, implementing, or debugging A/B experiments, dual-flag patterns, traffic allocation flags, bucketing flags, holdout prerequisites, or ramping experiment traffic. Also use when following the experiments runbook or linking experiments to GrowthBook.
+Skill name: creating-experiments
+Skill description: Use when creating, launching, setting up, configuring, building, implementing, or debugging A/B experiments, dual-flag patterns, traffic allocation flags, bucketing flags, holdout prerequisites, or ramping experiment traffic. Also use when following the experiments runbook or linking experiments to GrowthBook.
 ---
 
 # Creating Experiments

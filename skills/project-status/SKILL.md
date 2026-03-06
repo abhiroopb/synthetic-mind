@@ -1,6 +1,6 @@
 ---
-name: project-status
-description: "Gather project state from Slack history, Google Drive docs, GitHub PRs, LaunchDarkly feature flags, and project tracker (roadmap status updates). Use when asked to summarize project status, get a project overview, check what changed recently, generate a status update or progress report, recap recent activity, assess project health, or review rollout and feature flag state."
+Skill name: project-status
+Skill description: Gather project state from Slack history, Google Drive docs, GitHub PRs, LaunchDarkly feature flags, and project tracker (roadmap status updates). Use when asked to summarize project status, get a project overview, check what changed recently, generate a status update or progress report, recap recent activity, assess project health, or review rollout and feature flag state.
 argument-hint: project name or keyword, optional repo (e.g. "project-x" or "auto-mobile repo:user/repo")
 allowed-tools:
   - Bash(cd ~/.agents/skills/slack/scripts && uv run:*)

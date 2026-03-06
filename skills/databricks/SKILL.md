@@ -1,10 +1,6 @@
 ---
-name: databricks
-description: Query the Databricks Lakehouse using SQL. Use when user needs to query Databricks, search tables/catalogs, or run SQL against Databricks data.
-metadata:
-  author: anonymous
-  version: "0.1.0"
-  status: experimental
+Skill name: databricks
+Skill description: Query the Databricks Lakehouse using SQL. Use when user needs to query Databricks, search tables/catalogs, or run SQL against Databricks data.
 ---
 
 # Databricks Skill

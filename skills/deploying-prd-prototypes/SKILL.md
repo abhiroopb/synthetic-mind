@@ -1,6 +1,6 @@
 ---
-name: deploying-prd-prototypes
-description: Deploy interactive prototypes from PRDs to Blockcell for internal sharing. Use when building demos, prototypes, or static sites from product requirements documents.
+Skill name: deploying-prd-prototypes
+Skill description: Deploy interactive prototypes from PRDs to Blockcell for internal sharing. Use when building demos, prototypes, or static sites from product requirements documents.
 ---
 
 # Deploying PRD Prototypes to Blockcell

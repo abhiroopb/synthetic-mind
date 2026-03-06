@@ -1,6 +1,6 @@
 ---
-name: eng-ai-chat
-description: Searches internal company knowledge grounded in application context. Use when you need company-specific information about apps, services, infrastructure, integrations, or platform guidance. Retrieves and synthesizes information from multiple sources including AI-generated summaries, dev guides, code search results, docs, and internal knowledge bases to provide comprehensive answers.
+Skill name: eng-ai-chat
+Skill description: Searches internal company knowledge grounded in application context. Use when you need company-specific information about apps, services, infrastructure, integrations, or platform guidance. Retrieves and synthesizes information from multiple sources including AI-generated summaries, dev guides, code search results, docs, and internal knowledge bases to provide comprehensive answers.
 roles: [backend, frontend, mobile, data]
 allowed-tools: [Bash(cli:*)]
 ---

@@ -1,6 +1,6 @@
 ---
-name: rpi
-description: RPI (Research, Plan, Implement) methodology for complex multi-step tasks. Use when the user mentions "rpi", wants to decompose, phase, structure, organize, or break down a complex task, or needs a structured approach to large codebase changes, migrations, or refactors. Routes to the appropriate RPI phase skill.
+Skill name: rpi
+Skill description: RPI (Research, Plan, Implement) methodology for complex multi-step tasks. Use when the user mentions "rpi", wants to decompose, phase, structure, organize, or break down a complex task, or needs a structured approach to large codebase changes, migrations, or refactors. Routes to the appropriate RPI phase skill.
 ---
 
 # RPI — Research, Plan, Implement

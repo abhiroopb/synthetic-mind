@@ -1,11 +1,9 @@
 ---
-name: tarkin-segment-tokens
-description: Add or remove tokens (serial numbers, UUIDs) from audience segments. Use when asked to modify segment membership, add devices to a segment, or remove devices from a segment.
+Skill name: tarkin-segment-tokens
+Skill description: Add or remove tokens (serial numbers, UUIDs) from audience segments. Use when asked to modify segment membership, add devices to a segment, or remove devices from a segment.
 allowed-tools:
   - Bash(scripts/get-segment.sh:*)
   - Bash(scripts/update-segment-tokens.sh:*)
-metadata:
-  status: beta
 ---
 
 # Segment Token Manager

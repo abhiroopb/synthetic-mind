@@ -1,10 +1,6 @@
 ---
-name: linear
-description: Interact with Linear for issue tracking, project management, and team workflows. Search, create, update, and manage issues, projects, cycles, and initiatives.
-metadata:
-  author: square
-  version: "1.0"
-  status: experimental
+Skill name: linear
+Skill description: Interact with Linear for issue tracking, project management, and team workflows. Search, create, update, and manage issues, projects, cycles, and initiatives.
 ---
 
 # Linear Skill

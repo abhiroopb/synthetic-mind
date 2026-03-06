@@ -1,6 +1,6 @@
 ---
-name: git-worktree
-description: "Manages git worktrees for working on multiple branches simultaneously. Use when asked to create, list, remove, or switch between git worktrees, or when needing to work on multiple branches in parallel."
+Skill name: git-worktree
+Skill description: Manages git worktrees for working on multiple branches simultaneously. Use when asked to create, list, remove, or switch between git worktrees, or when needing to work on multiple branches in parallel.
 ---
 
 # Git Worktree Management

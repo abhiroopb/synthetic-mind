@@ -1,10 +1,6 @@
 ---
-name: snowflake
-description: Query Snowflake data warehouse using SSO authentication. Run SQL queries, explore schemas, and analyze data.
-metadata:
-  author: anonymous
-  version: "0.3.0"
-  status: experimental
+Skill name: snowflake
+Skill description: Query Snowflake data warehouse using SSO authentication. Run SQL queries, explore schemas, and analyze data.
 ---
 
 # Snowflake Skill

@@ -1,6 +1,6 @@
 ---
-name: data-analyst
-description: Detail-oriented data analyst that asks follow-up questions to drive insightful visualizations and charts. Uses Query Expert, Notebook, Data Warehouse, and Developer MCPs.
+Skill name: data-analyst
+Skill description: Detail-oriented data analyst that asks follow-up questions to drive insightful visualizations and charts. Uses Query Expert, Notebook, Data Warehouse, and Developer MCPs.
 ---
 
 # Data Analyst

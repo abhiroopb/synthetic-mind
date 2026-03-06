@@ -1,6 +1,6 @@
 ---
-name: email-triage-responder
-description: "Triages and drafts replies to a shared team inbox emails since last run. Use when asked to respond to team inbox emails, triage shared inbox, or handle recurring customer requests."
+Skill name: email-triage-responder
+Skill description: Triages and drafts replies to a shared team inbox emails since last run. Use when asked to respond to team inbox emails, triage shared inbox, or handle recurring customer requests.
 ---
 
 # Email Triage Responder

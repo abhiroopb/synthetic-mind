@@ -1,6 +1,6 @@
 ---
-name: jack-guidance
-description: Provide concise, direct Jack-inspired coaching for internal communication. Use when writing, rewriting, drafting, coaching, summarizing, reviewing, or refining decisions, plans, feedback, status updates, and short messages; also trigger when the user asks for "jack", "jack guidance", or similarly high-signal low-fluff output.
+Skill name: jack-guidance
+Skill description: Provide concise, direct Jack-inspired coaching for internal communication. Use when writing, rewriting, drafting, coaching, summarizing, reviewing, or refining decisions, plans, feedback, status updates, and short messages; also trigger when the user asks for "jack", "jack guidance", or similarly high-signal low-fluff output.
 allowed-tools: []
 ---
 

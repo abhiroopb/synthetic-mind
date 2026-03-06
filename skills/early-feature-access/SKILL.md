@@ -1,6 +1,6 @@
 ---
-name: early-feature-access
-description: "Adds new feature content to an Early Feature Access (EFA) page in a web dashboard. Creates config, translations, images, and registration. Use when adding a feature to Early Feature Access or EFA."
+Skill name: early-feature-access
+Skill description: Adds new feature content to an Early Feature Access (EFA) page in a web dashboard. Creates config, translations, images, and registration. Use when adding a feature to Early Feature Access or EFA.
 allowed-tools:
   - Bash(git:*)
   - Bash(nx:*)

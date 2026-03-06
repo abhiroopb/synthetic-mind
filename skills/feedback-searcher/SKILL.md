@@ -1,6 +1,6 @@
 ---
-name: feedback-searcher
-description: Search and synthesize customer feedback across support transcripts, sales call transcripts, Slack channels, product demand trackers, and internal knowledge bases to surface insights on any topic. Uses parallel subagents for efficient, context-cohesive searches.
+Skill name: feedback-searcher
+Skill description: Search and synthesize customer feedback across support transcripts, sales call transcripts, Slack channels, product demand trackers, and internal knowledge bases to surface insights on any topic. Uses parallel subagents for efficient, context-cohesive searches.
 ---
 
 # Feedback Searcher

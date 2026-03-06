@@ -1,6 +1,6 @@
 ---
-name: merchant-factory
-description: Creates staging test accounts using a test data factory API. Use when asked to create test accounts, generate catalogs, add subscriptions, or set up staging data.
+Skill name: merchant-factory
+Skill description: Creates staging test accounts using a test data factory API. Use when asked to create test accounts, generate catalogs, add subscriptions, or set up staging data.
 ---
 
 # Test Data Factory

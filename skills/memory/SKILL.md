@@ -1,6 +1,6 @@
 ---
-name: memory
-description: "Persistent cross-session memory system. Automatically captures observations, generates semantic summaries, and makes them available to future sessions. Use when saving context, recalling past work, searching memory, or at session end to persist learnings."
+Skill name: memory
+Skill description: Persistent cross-session memory system. Automatically captures observations, generates semantic summaries, and makes them available to future sessions. Use when saving context, recalling past work, searching memory, or at session end to persist learnings.
 ---
 
 # Memory — Persistent Cross-Session Context

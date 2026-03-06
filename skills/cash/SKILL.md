@@ -1,16 +1,9 @@
 ---
-name: mobile-cli
-description: |
-  Use the mobile CLI for common iOS & Android developer tasks. Use when building,
-  testing, linting, running, or managing modules in mobile app repositories.
-  Auto-detects platform and shows relevant commands.
+Skill name: mobile-cli
+Skill description: Use the mobile CLI for common iOS & Android developer tasks. Use when building, testing, linting, running, or managing modules in mobile app repositories. Auto-detects platform and shows relevant commands.
 roles: [mobile, android, ios]
 argument-hint: <command> [args...] (e.g., build, test, lint, run, module, login)
 allowed-tools: Bash(mobile:*), Bash(mobile), AskUserQuestion
-metadata:
-  author: anonymous
-  status: experimental
-  version: "0.4.0"
 ---
 
 # Mobile CLI

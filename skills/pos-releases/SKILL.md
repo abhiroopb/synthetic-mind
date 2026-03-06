@@ -1,6 +1,6 @@
 ---
-name: pos-releases
-description: "Query POS release train schedules, branch cuts, betas, rollout dates, and version info. Use when asked about POS releases, release trains, branch cuts, betas, app store submissions, rollout percentages, next version, upcoming release, or release dates."
+Skill name: pos-releases
+Skill description: Query POS release train schedules, branch cuts, betas, rollout dates, and version info. Use when asked about POS releases, release trains, branch cuts, betas, app store submissions, rollout percentages, next version, upcoming release, or release dates.
 ---
 
 # POS Releases

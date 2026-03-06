@@ -1,6 +1,6 @@
 ---
-name: start-of-day
-description: "Morning triage of Slack unreads, Gmail inbox, Google Calendar, and comments/notifications from Figma, Google Drive, Linear, and Notion. Presents each item with options to reply, mark as read, save for later, or accept/decline events. Use when asked to start the day, check inbox, morning triage, or catch up."
+Skill name: start-of-day
+Skill description: Morning triage of Slack unreads, Gmail inbox, Google Calendar, and comments/notifications from Figma, Google Drive, Linear, and Notion. Presents each item with options to reply, mark as read, save for later, or accept/decline events. Use when asked to start the day, check inbox, morning triage, or catch up.
 ---
 
 # Start of Day

@@ -1,3 +1,8 @@
+---
+Skill name: gmail
+Skill description: Interact with Gmail for email management. Search, read, send, draft, and manage emails, labels, and filters.
+---
+
 # Gmail Skill
 
 Interact with Gmail for email management. Search, read, send, draft, and manage emails, labels, and filters.

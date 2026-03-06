@@ -1,6 +1,6 @@
 ---
-name: ask-questions-if-underspecified
-description: Clarify requirements before implementing. Do not use automatically, only when invoked explicitly.
+Skill name: ask-questions-if-underspecified
+Skill description: Clarify requirements before implementing. Do not use automatically, only when invoked explicitly.
 ---
 
 # Ask Questions If Underspecified

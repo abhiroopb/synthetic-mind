@@ -1,6 +1,6 @@
 ---
-name: launchdarkly-cli
-description: "Manages LaunchDarkly feature flags, experiments, environments, and local dev-server using the ldcli CLI. Use when asked to create, list, toggle, or manage feature flags, run the LaunchDarkly dev-server, or interact with LaunchDarkly resources."
+Skill name: launchdarkly-cli
+Skill description: Manages LaunchDarkly feature flags, experiments, environments, and local dev-server using the ldcli CLI. Use when asked to create, list, toggle, or manage feature flags, run the LaunchDarkly dev-server, or interact with LaunchDarkly resources.
 ---
 
 # LaunchDarkly CLI

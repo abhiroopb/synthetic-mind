@@ -1,6 +1,6 @@
 ---
-name: mobile-releases
-description: Browse, download, and install mobile app builds from an internal mobile releases portal. Use when the user wants to find app versions, list available builds, download APKs or IPAs, or install builds to Android devices or iOS simulators.
+Skill name: mobile-releases
+Skill description: Browse, download, and install mobile app builds from an internal mobile releases portal. Use when the user wants to find app versions, list available builds, download APKs or IPAs, or install builds to Android devices or iOS simulators.
 roles: [android, ios]
 allowed-tools:
   - Bash(python3 scripts/mr.py:*)
@@ -8,9 +8,6 @@ allowed-tools:
   - Bash(adb devices:*)
   - Bash(xcrun simctl:*)
   - AskUserQuestion
-metadata:
-  version: "1.0"
-  status: experimental
 ---
 
 # Mobile Releases

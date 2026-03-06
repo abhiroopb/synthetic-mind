@@ -1,6 +1,6 @@
 ---
-name: mode-settings-audit
-description: Audits Mode Analytics workspace settings, permissions, data sources, and configurations. Use when asked to audit, review, inspect, or check Mode dashboard settings, access controls, or workspace configurations.
+Skill name: mode-settings-audit
+Skill description: Audits Mode Analytics workspace settings, permissions, data sources, and configurations. Use when asked to audit, review, inspect, or check Mode dashboard settings, access controls, or workspace configurations.
 ---
 
 # Mode Settings Audit

@@ -1,11 +1,7 @@
 ---
-name: slack
-description: Interact with Slack workspaces and channels. Search messages, read channels, post messages, manage status, and more across Block, Square, and Cash App workspaces.
+Skill name: slack
+Skill description: Interact with Slack workspaces and channels. Search messages, read channels, post messages, manage status, and more across Block, Square, and Cash App workspaces.
 roles: [frontend]
-metadata:
-  author: square
-  version: "1.0"
-  status: experimental
 ---
 
 # Slack Skill

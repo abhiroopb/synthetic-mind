@@ -1,8 +1,6 @@
 ---
-name: glean
-description: "Search Glean enterprise knowledge, documents, and people directory. Use when asked to search company docs, find people, chat with Glean AI, or read documents from Glean."
-metadata:
-  version: "1.0"
+Skill name: glean
+Skill description: Search Glean enterprise knowledge, documents, and people directory. Use when asked to search company docs, find people, chat with Glean AI, or read documents from Glean.
 ---
 
 # Glean Skill

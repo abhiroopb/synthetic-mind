@@ -1,6 +1,6 @@
 ---
-name: reviewing-calendar
-description: "Review Google Calendar events in a visual weekly view mirroring Google Calendar's format. Generates an HTML calendar showing events with conflict detection, color coding, and tooltips. Use when asked to review calendar, check calendar invites, view schedule, or show calendar events."
+Skill name: reviewing-calendar
+Skill description: Review Google Calendar events in a visual weekly view mirroring Google Calendar's format. Generates an HTML calendar showing events with conflict detection, color coding, and tooltips. Use when asked to review calendar, check calendar invites, view schedule, or show calendar events.
 ---
 
 # Reviewing Calendar

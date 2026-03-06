@@ -1,7 +1,6 @@
 ---
-name: requesting-pr-reviews-from-owners
-description: >
-  Use when checking, viewing, inspecting, querying, requesting, tracking, following up on, or generating reminders for PR review status. Parses code ownership bot comments to find which teams' approval is still pending and generates copyable Slack messages to request reviews.
+Skill name: requesting-pr-reviews-from-owners
+Skill description: >
 roles: [frontend]
 allowed-tools: ["Bash(gh pr view*, jq*, python3*, grep*, bash*)"]
 ---

@@ -1,6 +1,6 @@
 ---
-name: swarm
-description: Use when exploring, investigating, researching, analyzing, validating, verifying, auditing, or examining complex topics that benefit from multiple perspectives. Covers redundant parallel exploration with adversarial challenge phases to build high-confidence findings through consensus.
+Skill name: swarm
+Skill description: Use when exploring, investigating, researching, analyzing, validating, verifying, auditing, or examining complex topics that benefit from multiple perspectives. Covers redundant parallel exploration with adversarial challenge phases to build high-confidence findings through consensus.
 ---
 
 # Swarm

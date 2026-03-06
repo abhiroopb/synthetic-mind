@@ -1,10 +1,6 @@
 ---
-name: business-metrics
-description: Query business metrics, dashboards, and permissions via the Metric Store. Use when asked about business KPIs, revenue, GPV, active users, transaction volumes, or other company metrics. Also handles Looker and Mode dashboard discovery, execution, and permission checks for underlying data tables.
-metadata:
-  author: anonymous
-  version: "0.1.0"
-  status: experimental
+Skill name: business-metrics
+Skill description: Query business metrics, dashboards, and permissions via the Metric Store. Use when asked about business KPIs, revenue, GPV, active users, transaction volumes, or other company metrics. Also handles Looker and Mode dashboard discovery, execution, and permission checks for underlying data tables.
 ---
 
 # Business Metrics Skill

@@ -1,14 +1,11 @@
 ---
-name: ditto
-description: Create, configure, and manage staging test accounts using a test account provisioning tool. Use when user needs to generate, provision, set up, look up, delete, or tag test accounts, simulate transactions, or configure LaunchDarkly flags for testing.
+Skill name: ditto
+Skill description: Create, configure, and manage staging test accounts using a test account provisioning tool. Use when user needs to generate, provision, set up, look up, delete, or tag test accounts, simulate transactions, or configure LaunchDarkly flags for testing.
 allowed-tools:
   - Bash(curl:*)
   - Bash(whoami:*)
   - Bash(jq:*)
   - Bash(sleep:*)
-metadata:
-  version: "0.2.0"
-  status: experimental
 ---
 
 # Test Account Provisioning

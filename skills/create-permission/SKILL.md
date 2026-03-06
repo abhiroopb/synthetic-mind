@@ -1,6 +1,6 @@
 ---
-name: create-permission
-description: "Creates or modifies permissions end-to-end across proto files, permissions maps, and permissions config. Use when asked to create a permission, add a permission, modify a permission mapping, update authorization mappings, or set up a new permission."
+Skill name: create-permission
+Skill description: Creates or modifies permissions end-to-end across proto files, permissions maps, and permissions config. Use when asked to create a permission, add a permission, modify a permission mapping, update authorization mappings, or set up a new permission.
 allowed-tools:
   - Bash(git:*)
   - Bash(gh:*)

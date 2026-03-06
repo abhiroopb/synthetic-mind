@@ -1,12 +1,8 @@
 ---
-name: agent-browser
-description: Debug visual bugs and interact with web apps using agent-browser CLI. Use when debugging, inspecting, navigating, filling forms, clicking buttons, taking screenshots, scraping data, testing web apps, or automating browser tasks. Supports desktop browsers and iOS Simulator (Mobile Safari). 93% less context than Playwright MCP.
+Skill name: agent-browser
+Skill description: Debug visual bugs and interact with web apps using agent-browser CLI. Use when debugging, inspecting, navigating, filling forms, clicking buttons, taking screenshots, scraping data, testing web apps, or automating browser tasks. Supports desktop browsers and iOS Simulator (Mobile Safari). 93% less context than Playwright MCP.
 roles: [frontend]
 allowed-tools: Bash(npx agent-browser:*), Bash(agent-browser:*)
-metadata:
-  author: jom
-  version: "0.3.0"
-  status: experimental
 ---
 
 # Agent Browser Skill
