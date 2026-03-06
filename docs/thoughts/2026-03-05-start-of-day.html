@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Replaced My Morning Routine with a Single Command — synthetic-mind</title>
+  <meta name="description" content="A 'start of day' skill that triages Slack, Gmail, Calendar, and comments from Figma, Docs, Linear, and Notion — inbox zero in under 10 minutes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-date {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../skills/">Skills</a>
+      <a href="../memory/">Memory</a>
+      <a href="../setup/">Setup</a>
+      <a href="./">Thoughts</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All thoughts</a>
+
+  <h1>I Replaced My Morning Routine with a Single Command</h1>
+  <div class="article-meta">
+    <span class="article-date">2026-03-05</span>
+    <span class="article-tag">workflow</span>
+  </div>
+
+  <h2>TL;DR</h2>
+  <p>I built a "start of day" skill for my AI agent that triages Slack, Gmail, Google Calendar, and comments from Figma, Google Docs, Linear, and Notion — all in one terminal session. It drafts replies for me, I approve or edit, and move on. Most mornings I'm at inbox zero in under 10 minutes without opening a single app.</p>
+
+  <h2>Context</h2>
+  <p>My mornings used to look like this: open Slack, scroll through 15 channels of unreads, switch to Gmail, scan 20 emails, open Calendar, check what's coming up, then maybe remember to check Figma comments or that Linear thread someone tagged me on. By the time I'd triaged everything, 45 minutes had disappeared and I hadn't done any actual work.</p>
+  <p>I'm a PM. My job is making decisions and unblocking people. But the tools I use to do that are scattered across six different apps, each with their own notification system. So I built something to fix it.</p>
+
+  <h2>How It Works</h2>
+  <p>I type "start my day" in my terminal. That's it.</p>
+  <p>My AI agent (running <a href="https://ampcode.com">Amp</a>) loads the <code>start-of-day</code> skill and walks me through five sections in order:</p>
+  <ol>
+    <li><strong>Slack unreads</strong> — DMs, mentions, thread replies across all workspaces</li>
+    <li><strong>Gmail inbox</strong> — both unread and read-but-still-in-inbox emails</li>
+    <li><strong>Google Calendar</strong> — today's schedule with conflict detection</li>
+    <li><strong>Saved items</strong> — Slack bookmarks and reminders I'd forgotten about</li>
+    <li><strong>Comments</strong> — unresolved threads from Figma, Google Docs, Linear, and Notion</li>
+  </ol>
+  <p>For each item, the agent doesn't just show me the message — it <strong>drafts a reply</strong>. I read the draft, say "send" or tweak it, and we move to the next item. The whole thing feels like a fast inbox-zero conveyor belt.</p>
+
+  <img src="../../thoughts/images/start-of-day-slack-unreads.png" alt="Slack unreads summary in the terminal">
+
+  <p>Then for each one, it drafts a response and gives me numbered options:</p>
+
+  <img src="../../thoughts/images/start-of-day-draft-reply.png" alt="Draft reply with action options">
+
+  <h2>The Moment It Clicked</h2>
+  <p>Here's where it got interesting. Sarah asked for access to a repo. The agent drafted a polite "let me look into it" reply. But I knew I had admin access, so I just told the agent: "Actually, just give her access directly."</p>
+  <p>The agent looked up her GitHub username, ran the API call to add her as a collaborator, and then drafted a new Slack message:</p>
+  <blockquote>"Just gave you access! You should be good to go — try refreshing the repo page."</blockquote>
+  <p>I said "send." Done. What would've been a context switch — open GitHub, find the repo, go to settings, add collaborator, go back to Slack, type a reply — became a 10-second exchange in my terminal. I never left the conversation.</p>
+  <p>That's the thing people miss about AI agents. It's not about the AI writing your messages. It's about <strong>collapsing the workflow</strong>. The agent held the context of what Sarah needed, had the tools to actually fulfill the request, and then confirmed the action with a follow-up message. The whole loop — read, decide, act, confirm — happened in one place.</p>
+
+  <h2>The Skill Evolved from Use</h2>
+  <p>The first version of this skill was basic: fetch unreads, show them, ask what to do. But after using it for a few days, I realized the "what do you want to do?" prompt was slowing me down. I was making the same decisions every time — reply to humans, mark bots as read, accept calendar invites.</p>
+  <p>So I changed the skill to <strong>auto-draft replies</strong> and present numbered options. Now I'm not composing responses from scratch — I'm reviewing and approving. It's the difference between writing an email and signing off on one. Way faster.</p>
+  <p>I also added email triage in the same flow. A seller emailed about a feature not working on their current app version. The agent drafted a reply explaining which version they needed and how to update. I tweaked one line and sent it. Next.</p>
+
+  <h2>What I Learned</h2>
+  <p><strong>The best AI workflow is one you forget is AI.</strong> When I type "start my day," I'm not thinking about prompts or models. I'm just triaging my inbox. The skill handles the tool-switching, the context-gathering, the draft-writing. I handle the decisions.</p>
+  <p><strong>Auto-drafting is the unlock.</strong> Showing me a message and asking "what do you want to do?" is marginally better than opening Slack myself. Showing me a message <em>with a draft reply</em> and asking "send this?" is 10x better. The cognitive load drops dramatically when you're reviewing instead of creating.</p>
+  <p><strong>Skills compound.</strong> The start-of-day skill calls into my Slack skill, Gmail skill, Calendar skill, and Figma skill. Each one is simple on its own. Together they create a workflow that would be impossible to build as a single monolithic tool.</p>
+  <p><strong>Build for yourself first.</strong> This skill exists because I was annoyed at my own morning routine. It's not a product. It's not polished. But it saves me 30+ minutes every single day, and it gets better every time I use it because I keep tweaking the skill file based on what slows me down.</p>
+
+  <hr>
+  <p><em>This post was written with Amp.</em></p>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Persistent Memory — amp-mem — synthetic-mind</title>
+  <meta name="description" content="amp-mem gives Amp persistent memory across sessions using SQLite + FTS5. No vector embeddings — the LLM is the semantic engine.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .page-header {
+      padding: 8rem 2rem 3rem; text-align: center; max-width: 800px; margin: 0 auto;
+    }
+    .page-header h1 {
+      font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #fff 0%, #a3a3a3 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .page-header p { font-size: 1.1rem; color: var(--text-muted); }
+    .mem-section { padding: 0 0 4rem; }
+    @media (max-width: 768px) {
+      .page-header h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../skills/">Skills</a>
+      <a href="./" class="active">Memory</a>
+      <a href="../setup/">Setup</a>
+      <a href="../thoughts/">Thoughts</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Persistent Memory — amp-mem</h1>
+  <p>SQLite + FTS5 memory that persists across sessions. No vector embeddings — the LLM is the semantic engine.</p>
+</div>
+
+<section class="mem-section">
+  <div class="container">
+    <div class="mem-grid">
+      <div class="mem-card">
+        <h3>🏗️ Architecture</h3>
+        <pre>~/.amp/memory/
+├── amp-mem.db        # SQLite database (WAL mode)
+├── schema.sql        # Database schema
+├── knowledge.md      # Plain-text append-only log
+└── web/
+    ├── index.html    # Web viewer UI
+    └── serve.py      # Local dev server
+
+~/bin/amp-mem          # CLI tool (21 subcommands)
+
+~/.agents/skills/
+├── memory/SKILL.md
+└── kb-distill/SKILL.md</pre>
+      </div>
+      <div class="mem-card">
+        <h3>💡 Design Decisions</h3>
+        <ul>
+          <li><strong>No vector embeddings</strong> — the LLM is the semantic engine</li>
+          <li><strong>SQLite + FTS5</strong> — porter stemming, single file, WAL mode</li>
+          <li><strong>Progressive disclosure</strong> — search → timeline → detail</li>
+          <li><strong>On-demand web viewer</strong> — no persistent service</li>
+          <li><strong>Idempotent init</strong> — safe to run every session</li>
+          <li><strong>Distillation</strong> — compresses observations into knowledge</li>
+          <li><strong>Privacy tags</strong> — <code>&lt;private&gt;</code> markers exclude from context</li>
+          <li><strong>Confidence decay</strong> — type-specific half-lives; permanent types never decay</li>
+        </ul>
+      </div>
+      <div class="mem-card mem-card-full">
+        <h3>🔌 amp-mem Plugin</h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">The plugin (<code>~/.config/amp/plugins/amp-mem.ts</code>) wraps the CLI and provides passive memory capture:</p>
+        <ul>
+          <li><strong>Passive capture</strong> — automatically captures from Linear, Gmail, Slack, Notion, Google Drive, and Bash</li>
+          <li><strong>Noise filtering</strong> — ignores read-only tools, orchestration, and noisy ops</li>
+          <li><strong>AI gating</strong> — uses <code>ctx.ai.ask()</code> at agent.end to classify observations (p>0.65 threshold)</li>
+          <li><strong>File edit batching</strong> — accumulates edits per turn, saves as single observation</li>
+          <li><strong>Privacy tags</strong> — detects <code>&lt;private&gt;</code> and passes <code>--private</code> to all saves</li>
+          <li><strong>Context injection</strong> — injects budgeted memory context at agent.start</li>
+          <li><strong>Registered tools</strong> — <code>amp_mem_search</code>, <code>amp_mem_save</code>, <code>amp_mem_stats</code></li>
+        </ul>
+      </div>
+      <div class="mem-card mem-card-full">
+        <h3>⌨️ CLI Commands</h3>
+        <table class="cmd-table">
+          <thead><tr><th>Command</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>init</td><td>Create/migrate database</td></tr>
+            <tr><td>save</td><td>Save an observation</td></tr>
+            <tr><td>search</td><td>FTS5 full-text search</td></tr>
+            <tr><td>timeline</td><td>Context around an observation</td></tr>
+            <tr><td>detail</td><td>Full observation details</td></tr>
+            <tr><td>context</td><td>Recent context for session priming</td></tr>
+            <tr><td>compact</td><td>Compress old entries into summaries</td></tr>
+            <tr><td>session-start / end</td><td>Begin or end a tracked session</td></tr>
+            <tr><td>stats</td><td>Database statistics</td></tr>
+            <tr><td>export</td><td>Export all memory</td></tr>
+            <tr><td>serve</td><td>Web viewer at localhost:37777</td></tr>
+            <tr><td>distill-dump</td><td>Dump observations for distillation</td></tr>
+            <tr><td>distill-record</td><td>Record distillation run</td></tr>
+            <tr><td>distill-status</td><td>Check pending observation count</td></tr>
+            <tr><td>decay</td><td>Apply confidence decay to aging observations</td></tr>
+            <tr><td>ingest-thread</td><td>Ingest an Amp thread (de-duplicated)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mem-card mem-card-full">
+        <h3>🏷️ Observation Types</h3>
+        <div class="type-grid">
+          <div class="type-badge"><strong>observation</strong><span>General codebase/tool knowledge</span></div>
+          <div class="type-badge"><strong>decision</strong><span>Design decisions, trade-offs</span></div>
+          <div class="type-badge"><strong>discovery</strong><span>Bugs found, root causes</span></div>
+          <div class="type-badge"><strong>preference</strong><span>How you want things done</span></div>
+          <div class="type-badge"><strong>bugfix</strong><span>Bug fixes with context</span></div>
+          <div class="type-badge"><strong>config</strong><span>URLs, credentials, env details</span></div>
+          <div class="type-badge"><strong>workflow</strong><span>Command sequences, processes</span></div>
+          <div class="type-badge"><strong>people</strong><span>Team structure, ownership</span></div>
+          <div class="type-badge"><strong>session</strong><span>End-of-session summary</span></div>
+        </div>
+      </div>
+      <div class="mem-card mem-card-full">
+        <h3>🔄 Distillation Pipeline</h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Every session, Amp checks <code>amp-mem distill-status</code>. If >50 pending observations or >7 days since last run, it auto-distills:</p>
+        <div class="steps-row">
+          <div class="step"><div class="step-num">1</div><h4>Gather</h4><p>Dump raw observations since last distillation</p></div>
+          <div class="step"><div class="step-num">2</div><h4>Analyze</h4><p>Cluster by topic, identify repeated patterns</p></div>
+          <div class="step"><div class="step-num">3</div><h4>Produce</h4><p>Save distilled notes, propose AGENTS.md rules</p></div>
+          <div class="step"><div class="step-num">4</div><h4>Record</h4><p>Mark complete — rules need your approval</p></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" style="margin: 3rem 0;">
+
+    <div class="section-header">
+      <h2>Setup</h2>
+      <p>Get amp-mem running in 6 steps</p>
+    </div>
+
+    <div class="page-content" style="padding: 0; max-width: 100%;">
+      <h3>Step 1: Create directories</h3>
+      <pre><code>mkdir -p ~/.amp/memory/web</code></pre>
+
+      <h3>Step 2: Create the database schema</h3>
+      <p>Save to <code>~/.amp/memory/schema.sql</code>:</p>
+<pre><code>PRAGMA journal_mode=WAL;
+PRAGMA foreign_keys=ON;
+
+CREATE TABLE IF NOT EXISTS sessions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    thread_url TEXT,
+    started_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now')),
+    ended_at TEXT, summary TEXT
+);
+
+CREATE TABLE IF NOT EXISTS observations (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    session_id INTEGER REFERENCES sessions(id),
+    ts TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now')),
+    type TEXT NOT NULL DEFAULT 'observation',
+    topic TEXT NOT NULL, summary TEXT NOT NULL,
+    project TEXT, file_path TEXT, tags TEXT, metadata TEXT,
+    confidence REAL NOT NULL DEFAULT 1.0,
+    access_count INTEGER NOT NULL DEFAULT 0,
+    last_accessed TEXT,
+    private INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE VIRTUAL TABLE IF NOT EXISTS observations_fts USING fts5(
+    topic, summary, project, tags,
+    content='observations', content_rowid='id',
+    tokenize='porter unicode61'
+);</code></pre>
+
+      <h3>Step 3: Install the CLI</h3>
+<pre><code># Ensure ~/bin is in PATH
+echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc
+
+# Place the amp-mem script at ~/bin/amp-mem
+chmod +x ~/bin/amp-mem</code></pre>
+
+      <h3>Step 4: Initialize</h3>
+      <pre><code>amp-mem init</code></pre>
+
+      <h3>Step 5: Configure AGENTS.md</h3>
+      <p>Add to your <code>~/AGENTS.md</code> Session Start section a reference to the amp-mem plugin handling init, backup, context injection, and distill-status checks automatically.</p>
+
+      <h3>Step 6: Verify</h3>
+<pre><code>amp-mem init          # "Database initialized"
+amp-mem stats         # 0 observations
+amp-mem save observation "Test" "Testing memory"
+amp-mem search "test" # Finds test observation
+amp-mem serve         # Web viewer at localhost:37777</code></pre>
+    </div>
+
+    <hr class="divider" style="margin: 3rem 0;">
+
+    <div class="section-header">
+      <h2>Backup &amp; Restore</h2>
+    </div>
+
+    <div class="page-content" style="padding: 0; max-width: 100%;">
+<pre><code># Database backup
+cp ~/.amp/memory/amp-mem.db ~/.amp/memory/amp-mem.db.bak
+
+# Full backup
+tar czf ~/amp-mem-backup.tar.gz ~/.amp/memory/ ~/bin/amp-mem
+
+# Restore
+tar xzf ~/amp-mem-backup.tar.gz -C /
+amp-mem init</code></pre>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+      <a href="https://github.com/abhiroopb/synthetic-mind/blob/main/amp-setup-guide.md#persistent-memory-with-amp-mem" class="btn btn-ghost" target="_blank">Full guide on GitHub ↗</a>
+      <a href="../thoughts/2026-03-05-building-amp-mem" class="btn btn-ghost" style="margin-left:0.5rem;">Read the blog post ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>
