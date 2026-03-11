@@ -71,6 +71,7 @@ Or clone the repo and point Amp at the `skills/` directory. The `auto-pilot` ski
 
 | Date | Update |
 |------|--------|
+| 2026-03-11 | 🐛 New thought: [When Your Plugin Works but Nothing Happens](./thoughts/2026-03-11-debugging-the-dollar-api.md) — debugging silent failures in Amp's `$` API |
 | 2026-03-05 | 🚀 Initial release — 98 skills uploaded, categorized, and indexed |
 | 2026-03-05 | 🔒 Secrets scrubbed (OAuth credentials, API tokens) |
 | 2026-03-05 | 🧹 54 enterprise skills sanitized — all internal URLs, brand names, Slack channels, Snowflake tables, and proprietary tool references replaced with generic placeholders |
