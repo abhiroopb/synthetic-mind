@@ -289,10 +289,7 @@ Your `~/AGENTS.md` file is the master configuration. It tells Amp your identity,
 ~/.amp/memory/
 ├── amp-mem.db        # SQLite database (WAL mode)
 ├── schema.sql        # Database schema
-├── knowledge.md      # Plain-text append-only log
-└── web/
-    ├── index.html    # Web viewer UI
-    └── serve.py      # Local dev server
+└── knowledge.md      # Plain-text append-only log
 
 ~/bin/amp-mem          # CLI tool (21 subcommands)
 
@@ -312,6 +309,8 @@ The **amp-mem plugin** (`~/.config/amp/plugins/amp-mem.ts`) wraps the CLI and pr
 - **Privacy tags**: Detects `<private>` in user messages and passes `--private` to all saves from that turn
 - **Context injection**: Injects budgeted memory context at agent.start (private observations excluded)
 - **Registered tools**: `amp_mem_search`, `amp_mem_save` (with `private` option), `amp_mem_stats`
+
+> **⚠️ Known issue (fixed March 2026):** The original plugin used Amp's experimental `$` tagged template to shell out to the CLI. This silently fails — registered tools return empty results while the CLI works fine. The fix: replace `$` with Node.js `child_process.execFile` (`import { execFile } from 'node:child_process'`) and replace `ctx.$` backup commands with `node:fs` operations. See the [complete setup guide](https://docs.google.com/document/d/1K1kASZubj8MiFL3B7qq3FxnUmS0oBCMrR8ioQQiJb38) for details.
 
 ### Setup
 

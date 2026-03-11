@@ -55,10 +55,7 @@
         <pre>~/.amp/memory/
 ├── amp-mem.db        # SQLite database (WAL mode)
 ├── schema.sql        # Database schema
-├── knowledge.md      # Plain-text append-only log
-└── web/
-    ├── index.html    # Web viewer UI
-    └── serve.py      # Local dev server
+└── knowledge.md      # Plain-text append-only log
 
 ~/bin/amp-mem          # CLI tool (21 subcommands)
 
@@ -90,6 +87,7 @@
           <li><strong>Privacy tags</strong> — detects <code>&lt;private&gt;</code> and passes <code>--private</code> to all saves</li>
           <li><strong>Context injection</strong> — injects budgeted memory context at agent.start</li>
           <li><strong>Registered tools</strong> — <code>amp_mem_search</code>, <code>amp_mem_save</code>, <code>amp_mem_stats</code></li>
+          <li><strong>Shell execution fix</strong> — uses Node.js <code>child_process.execFile</code> instead of Amp's experimental <code>$</code> tagged template (which silently fails)</li>
         </ul>
       </div>
       <div class="mem-card mem-card-full">
@@ -174,7 +172,7 @@ source ~/.zshrc</code></pre>
 <pre><code># Download the Amp plugin
 curl -fsSL https://raw.githubusercontent.com/abhiroopb/synthetic-mind/main/bin/amp-mem-plugin.ts \
   -o ~/.config/amp/plugins/amp-mem.ts</code></pre>
-      <p style="font-size: 0.85rem; color: var(--text-muted);">The plugin passively captures observations from tool usage (Linear, Gmail, Slack, etc.) and injects memory context at session start. It's optional — the CLI works standalone.</p>
+      <p style="font-size: 0.85rem; color: var(--text-muted);">The plugin passively captures observations from tool usage (Linear, Gmail, Slack, etc.) and injects memory context at session start. Uses Node.js <code>child_process.execFile</code> for reliable CLI execution. It's optional — the CLI works standalone.</p>
 
       <h3>Step 3: Initialize the database</h3>
 <pre><code>amp-mem init</code></pre>
