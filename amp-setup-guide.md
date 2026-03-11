@@ -307,17 +307,20 @@ The **amp-mem plugin** (`~/.config/amp/plugins/amp-mem.ts`) wraps the CLI and pr
 - **AI gating**: Uses `ctx.ai.ask()` at agent.end to classify turn observations (p>0.65 threshold)
 - **File edit batching**: Accumulates file edits per turn and saves as a single observation
 - **Privacy tags**: Detects `<private>` in user messages and passes `--private` to all saves from that turn
-- **Context injection**: Injects budgeted memory context at agent.start (private observations excluded)
+- **Context injection**: Injects budgeted memory context at agent.start (60-line budget, private observations excluded, silent — hidden from user chat via `display: false`)
+- **Duplicate prevention**: Injects context only once per session via a `contextInjected` flag reset on session start
+- **Meta-noise filtering**: Excludes self-referential observations (amp-mem architecture, build decisions) from context injection to avoid crowding out real work
+- **Smart truncation**: Summaries in context are truncated at sentence boundaries (up to 400 chars) instead of hard cuts
 - **Registered tools**: `amp_mem_search`, `amp_mem_save` (with `private` option), `amp_mem_stats`
 
-> **⚠️ Known issue (fixed March 2026):** The original plugin used Amp's experimental `$` tagged template to shell out to the CLI. This silently fails — registered tools return empty results while the CLI works fine. The fix: replace `$` with Node.js `child_process.execFile` (`import { execFile } from 'node:child_process'`) and replace `ctx.$` backup commands with `node:fs` operations. See the [complete setup guide](https://docs.google.com/document/d/1K1kASZubj8MiFL3B7qq3FxnUmS0oBCMrR8ioQQiJb38) for details.
+> **⚠️ Known issue (fixed March 2026):** The original plugin used Amp's experimental `$` tagged template to shell out to the CLI. This silently fails — registered tools return empty results while the CLI works fine. The fix: replace `$` with Node.js `child_process.execFile` (`import { execFile } from 'node:child_process'`) and replace `ctx.$` backup commands with `node:fs` operations. The web viewer is now fully self-contained in the CLI (no `web/` subdirectory needed). See the [complete setup guide](https://docs.google.com/document/d/1K1kASZubj8MiFL3B7qq3FxnUmS0oBCMrR8ioQQiJb38) for details.
 
 ### Setup
 
 #### Step 1: Create directories
 
 ```bash
-mkdir -p ~/.amp/memory/web
+mkdir -p ~/.amp/memory
 ```
 
 #### Step 2: Create the database schema

@@ -85,7 +85,9 @@
           <li><strong>AI gating</strong> — uses <code>ctx.ai.ask()</code> at agent.end to classify observations (p>0.65 threshold)</li>
           <li><strong>File edit batching</strong> — accumulates edits per turn, saves as single observation</li>
           <li><strong>Privacy tags</strong> — detects <code>&lt;private&gt;</code> and passes <code>--private</code> to all saves</li>
-          <li><strong>Context injection</strong> — injects budgeted memory context at agent.start</li>
+          <li><strong>Context injection</strong> — injects 60-line budgeted memory at agent.start, silent (<code>display: false</code>), one-shot per session</li>
+          <li><strong>Meta-noise filtering</strong> — excludes self-referential amp-mem observations from context to avoid crowding out real work</li>
+          <li><strong>Smart truncation</strong> — summaries truncated at sentence boundaries (up to 400 chars) instead of hard cuts</li>
           <li><strong>Registered tools</strong> — <code>amp_mem_search</code>, <code>amp_mem_save</code>, <code>amp_mem_stats</code></li>
           <li><strong>Shell execution fix</strong> — uses Node.js <code>child_process.execFile</code> instead of Amp's experimental <code>$</code> tagged template (which silently fails)</li>
         </ul>
@@ -172,7 +174,7 @@ source ~/.zshrc</code></pre>
 <pre><code># Download the Amp plugin
 curl -fsSL https://raw.githubusercontent.com/abhiroopb/synthetic-mind/main/bin/amp-mem-plugin.ts \
   -o ~/.config/amp/plugins/amp-mem.ts</code></pre>
-      <p style="font-size: 0.85rem; color: var(--text-muted);">The plugin passively captures observations from tool usage (Linear, Gmail, Slack, etc.) and injects memory context at session start. Uses Node.js <code>child_process.execFile</code> for reliable CLI execution. It's optional — the CLI works standalone.</p>
+      <p style="font-size: 0.85rem; color: var(--text-muted);">The plugin passively captures observations from tool usage (Linear, Gmail, Slack, etc.) and silently injects memory context once at session start (60-line budget, sentence-boundary truncation, meta-noise filtering). Uses Node.js <code>child_process.execFile</code> for reliable CLI execution. It's optional — the CLI works standalone.</p>
 
       <h3>Step 3: Initialize the database</h3>
 <pre><code>amp-mem init</code></pre>

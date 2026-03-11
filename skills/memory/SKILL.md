@@ -11,8 +11,7 @@ A claude-mem-inspired persistent memory system for Amp. Uses SQLite + FTS5 for s
 
 - **Database**: `~/.amp/memory/amp-mem.db` (SQLite + FTS5 full-text search)
 - **CLI**: `~/bin/amp-mem` (all operations)
-- **Legacy wrapper**: `~/bin/amp-memory-save.sh` (backward-compatible save)
-- **Web viewer**: `amp-mem serve` → http://localhost:37777
+- **Web viewer**: `amp-mem serve` → http://localhost:37777 (self-contained in CLI, no external files needed)
 - **Knowledge file**: `~/.amp/memory/knowledge.md` (also maintained for plain-text access)
 
 ## Observation Types
@@ -89,7 +88,7 @@ amp-mem decay                    # Apply confidence decay to aging observations
 
 Save a memory entry whenever ANY of these occur:
 
-> **Note:** When the amp-mem plugin (`~/.config/amp/plugins/amp-mem.ts`) is installed, most of this capture happens automatically. The plugin passively captures tool results (Linear, Gmail, Slack, Notion, Google Drive, Bash), batches file edits, and AI-gates observations at agent.end with p>0.65 threshold. The protocol below describes what gets captured — you don't need to do it manually.
+> **Note:** When the amp-mem plugin (`~/.config/amp/plugins/amp-mem.ts`) is installed, most of this capture happens automatically. The plugin passively captures tool results (Linear, Gmail, Slack, Notion, Google Drive, Bash), batches file edits, and AI-gates observations at agent.end with p>0.65 threshold. Context injection is silent (`display: false`), one-shot per session (duplicate prevention), uses a 60-line budget with smart sentence-boundary truncation, and filters out self-referential amp-mem observations. The protocol below describes what gets captured — you don't need to do it manually.
 
 1. **Every file edit** — "Edited X to do Y" (with file path)
 2. **Every significant bash command** — commands that reveal system state or produce important output
