@@ -71,7 +71,6 @@ Or clone the repo and point Amp at the `skills/` directory. The `auto-pilot` ski
 
 | Date | Update |
 |------|--------|
-| 2026-03-11 | 📱 New thought: [Piping Slack DMs to Amp](./thoughts/2026-03-11-slack-to-amp.md) — a Slack bot that lets you use Amp from your phone |
 | 2026-03-11 | 🐛 New thought: [When Your Plugin Works but Nothing Happens](./thoughts/2026-03-11-debugging-the-dollar-api.md) — debugging silent failures in Amp's `$` API |
 | 2026-03-11 | 📝 New thought: [The Signal-to-Noise Problem in AI Memory](./thoughts/2026-03-11-tuning-memory-noise.md) — tuning amp-mem's context injection |
 | 2026-03-05 | 🚀 Initial release — 98 skills uploaded, categorized, and indexed |
