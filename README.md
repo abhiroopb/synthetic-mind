@@ -77,6 +77,7 @@ Or clone the repo and point Amp at the `skills/` directory. The `auto-pilot` ski
 | 2026-03-05 | 🔒 Secrets scrubbed (OAuth credentials, API tokens) |
 | 2026-03-05 | 🧹 54 enterprise skills sanitized — all internal URLs, brand names, Slack channels, Snowflake tables, and proprietary tool references replaced with generic placeholders |
 | 2026-03-05 | 📚 Unified all skills into single `/skills` directory with full categorized README |
+| 2026-03-11 | 📝 New thought: [The Signal-to-Noise Problem in AI Memory](./thoughts/2026-03-11-tuning-memory-noise.md) — tuning amp-mem's context injection |
 
 ## License
 
