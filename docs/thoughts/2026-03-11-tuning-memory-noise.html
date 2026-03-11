@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Signal-to-Noise Problem in AI Memory — synthetic-mind</title>
+  <meta name="description" content="After a week of running amp-mem, context injection got noisy. Five targeted fixes brought the signal-to-noise ratio back.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-date {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../skills/">Skills</a>
+      <a href="../memory/">Memory</a>
+      <a href="../setup/">Setup</a>
+      <a href="./">Thoughts</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All thoughts</a>
+
+  <h1>The Signal-to-Noise Problem in AI Memory</h1>
+  <div class="article-meta">
+    <span class="article-date">2026-03-11</span>
+    <span class="article-tag">memory-system</span>
+  </div>
+
+  <h2>TL;DR</h2>
+  <p>After a week of running amp-mem, context injection got noisy. Routine bash commands, self-referential entries about the memory system itself, duplicate injections on every agent turn, and summaries cut mid-sentence. Five targeted fixes brought the signal-to-noise ratio back: sentence-boundary truncation, duplicate injection prevention, meta-noise filtering, silent context injection, and a budget increase from 40 to 60 lines.</p>
+
+  <h2>Context</h2>
+  <p>I <a href="./2026-03-05-building-amp-mem">built amp-mem</a> to give Amp persistent memory across sessions. It worked. Maybe too well. After a week of daily use — 142 observations, 74 ingested threads, 256K database — the context block injected at session start was getting cluttered.</p>
+  <p>The symptoms:</p>
+  <ul>
+    <li><strong>Hard-cut summaries</strong> — "Configured the LaunchDarkly flag for cash rounding with targeting rules for mercha" — mid-word. Useless.</li>
+    <li><strong>Self-referential noise</strong> — Half the injected context was about the memory system itself. "Saved observation about amp-mem configuration." Thanks, I know.</li>
+    <li><strong>Duplicate injection</strong> — The <code>agent.start</code> hook fires on every turn, so the same context block was being injected 15+ times per session.</li>
+    <li><strong>Bash noise</strong> — <code>git status</code>, <code>ls</code>, <code>warp-cli connect</code> — routine commands getting captured as if they were meaningful.</li>
+    <li><strong>Visual clutter</strong> — The context block was rendered in the chat UI with <code>display: true</code>, pushing the actual conversation down.</li>
+  </ul>
+  <p>The system was remembering everything. It just wasn't remembering the right things at the right time.</p>
+
+  <h2>The Fixes</h2>
+
+  <h3>Fix 1: Sentence-boundary truncation</h3>
+  <p>The <code>context</code> command's Python script was doing a hard cut at 150 characters for summaries. Mid-word. Mid-thought. The fix: cut at sentence boundaries instead, with a higher budget.</p>
+<pre><code>def truncate_summary(text, max_len=400):
+    """Truncate at sentence boundary instead of hard-cutting mid-word."""
+    if len(text) &lt;= max_len:
+        return text
+    # Find the last sentence boundary before max_len
+    for sep in ['. ', '! ', '? ', '; ']:
+        idx = text.rfind(sep, 0, max_len)
+        if idx &gt; max_len * 0.4:  # Don't cut too short
+            return text[:idx + 1].strip()
+    # Fallback: cut at last space
+    idx = text.rfind(' ', 0, max_len)
+    return (text[:idx] + '…') if idx &gt; 0 else text[:max_len] + '…'</code></pre>
+  <p>Going from 150 to ~400 chars with sentence boundaries means each observation actually carries enough context to be useful. Complete thought, complete value.</p>
+
+  <h3>Fix 2: Duplicate injection prevention</h3>
+  <p>The <code>agent.start</code> hook fires on every turn. That's by design — Amp runs it before each message. But injecting the same 40-line context block on turn 1, turn 2, turn 3, and turn 15 is pure waste.</p>
+  <p>The fix is a single boolean:</p>
+<pre><code>let contextInjected = false
+
+amp.on('session.start', async (_event, ctx) =&gt; {
+  contextInjected = false  // Reset per session
+  // ... rest of session start
+})
+
+amp.on('agent.start', async (event, ctx) =&gt; {
+  if (contextInjected) return  // Already injected this session
+
+  const context = await ampMem(ctx.$, ['context', '--lines', '60'])
+  if (context &amp;&amp; context.length &gt; 50) {
+    contextInjected = true
+    return {
+      message: {
+        content: `&lt;amp-mem-context&gt;\n${context}\n&lt;/amp-mem-context&gt;`,
+        display: false,
+      },
+    }
+  }
+})</code></pre>
+  <p>Context injects once at session start. Done. The agent has the memory it needs without seeing it repeated 15 times.</p>
+
+  <h3>Fix 3: Meta-noise filtering</h3>
+  <p>The memory system was remembering itself. Every time I worked on amp-mem — which was often that first week — it would capture observations about its own configuration. Then those observations would get injected as context. Then <em>that</em> would sometimes trigger new observations about the context injection. Recursive noise.</p>
+  <p>The fix: skip entries where the topic is about the memory system itself.</p>
+<pre><code>META_NOISE_KEYWORDS = [
+    'amp-mem', 'amp_mem', 'memory system', 'memory plugin',
+    'context injection', 'observation capture', 'kb-distill',
+    'knowledge distillation', 'memory budget'
+]
+
+def is_meta_noise(topic, summary):
+    """Skip entries about the memory system itself."""
+    combined = (topic + ' ' + summary).lower()
+    return any(kw in combined for kw in META_NOISE_KEYWORDS)</code></pre>
+  <p>This single filter cut about 15-20% of the injected context. All of it was noise.</p>
+
+  <h3>Fix 4: Silent context injection</h3>
+  <p>Changed <code>display: true</code> to <code>display: false</code> in the <code>agent.start</code> return value. The agent still sees the context — it's injected into the message stream — but it doesn't render in the chat UI anymore.</p>
+  <p>Before: every session started with a 40-line block of memory context visible in the chat. After: clean chat, memory working invisibly in the background. One line change. Biggest UX improvement of the batch.</p>
+
+  <h3>Fix 5: Context budget increase</h3>
+  <p>With the noise filtered out, I could afford more signal. Bumped the context budget from 40 to 60 lines. More decisions, more preferences, more actually-useful observations — without the noise floor rising.</p>
+  <p>The combination matters: filtering noise <em>then</em> increasing budget means 60 lines of high-signal context instead of 40 lines of mixed signal.</p>
+
+  <h2>The Numbers</h2>
+  <table>
+    <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Total observations</td><td>142</td></tr>
+      <tr><td>Database size</td><td>256K</td></tr>
+      <tr><td>Threads ingested</td><td>74</td></tr>
+      <tr><td>Context lines (before)</td><td>40, noisy</td></tr>
+      <tr><td>Context lines (after)</td><td>60, filtered</td></tr>
+      <tr><td>Summary truncation</td><td>150 chars hard-cut → ~400 chars sentence-boundary</td></tr>
+      <tr><td>Meta-noise filtered</td><td>~15-20% of entries</td></tr>
+      <tr><td>Duplicate injections eliminated</td><td>~14 per session</td></tr>
+    </tbody>
+  </table>
+
+  <h2>What I Learned</h2>
+  <ol>
+    <li><strong>Build the system first, then tune it.</strong> I deliberately shipped amp-mem without these filters. You can't optimize signal-to-noise until you have enough data to see what the noise looks like. A week of real usage was the right amount of time.</li>
+    <li><strong>Self-referential noise is the sneakiest problem.</strong> A system that observes itself creates a feedback loop. You have to explicitly break that loop. This applies to any observability system, not just AI memory.</li>
+    <li><strong>One-line UX fixes matter.</strong> <code>display: true</code> → <code>display: false</code> took 2 seconds to change and made the biggest experiential difference. The best context injection is invisible.</li>
+    <li><strong>Sentence boundaries are worth the complexity.</strong> Hard-cutting text at character limits is a lazy default that makes every summary worse. The 15-line Python function to find sentence boundaries was the highest-ROI code I wrote that week.</li>
+    <li><strong>Filter noise, then increase budget.</strong> The instinct is to reduce budget when things get noisy. The better move is to filter the noise source and <em>increase</em> budget so more signal fits.</li>
+  </ol>
+
+  <hr>
+  <p><em>This is a sequel to <a href="./2026-03-05-building-amp-mem">Building a Persistent Memory System for Amp</a>. amp-mem is still evolving — I expect to write more of these tuning posts as patterns emerge.</em></p>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>
