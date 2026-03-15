@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo — Skills — synthetic-mind</title>
+  <meta name="description" content="Persistent to-do list with proactive reminders and auto-capture from Slack, Gmail, Calendar, Linear.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    .gh-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; padding: 0.5rem 1rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--surface); transition: all 0.15s;
+    }
+    .gh-link:hover { color: var(--text); border-color: var(--text-dim); }
+    .gh-link svg { width: 16px; height: 16px; fill: currentColor; }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="./" class="active">Skills</a>
+      <a href="../memory/">Memory</a>
+      <a href="../setup/">Setup</a>
+      <a href="../thoughts/">Thoughts</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All skills</a>
+
+  <h1>Todo</h1>
+  <div class="article-meta">
+    <span class="article-tag">skill</span>
+    <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/skills/todo" class="gh-link" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+  </div>
+
+  <blockquote>Persistent to-do list with proactive reminders and auto-capture from Slack, Gmail, Calendar, Linear.</blockquote>
+
+  <h2>What it does</h2>
+
+  <p>Todo provides a persistent task tracker stored as a JSON file that the agent manages proactively. It auto-captures action items from other skills (start-of-day triage, emails, Slack messages, Linear issues), surfaces open items at session start, and reminds you of untouched high-priority items before a session ends. Items support priorities (P1–P4), snoozing, due dates, and source references for one-click context.</p>
+
+  <h2>Usage</h2>
+
+  <p>The skill runs proactively — surfacing items at session start and auto-capturing new ones. You can also interact with it directly.</p>
+
+  <p><strong>Key commands:</strong></p>
+
+  <ul>
+    <li><code>"add a to-do to review the spec"</code> — manually add an item</li>
+    <li><code>"show my to-do list"</code> — display all open items</li>
+    <li><code>"done 1"</code> — mark item #1 as complete</li>
+    <li><code>"snooze 2 until tomorrow"</code> — snooze an item</li>
+    <li><code>"prioritize 3 as P1"</code> — change priority</li>
+    <li><code>"delete 4"</code> — remove an item</li>
+  </ul>
+
+  <h2>Proactive behaviors</h2>
+
+  <ul>
+    <li><strong>Session start:</strong> Surfaces top 5 open items sorted by priority and due date</li>
+    <li><strong>Auto-capture:</strong> Silently creates to-do items from skipped/saved triage items, emails needing replies, Slack questions, assigned issues</li>
+    <li><strong>Auto-complete:</strong> When you complete an action matching a to-do, it marks the item done automatically</li>
+    <li><strong>End-of-session:</strong> Reminds you of untouched P1/P2 items before wrapping up</li>
+    <li><strong>Staleness alerts:</strong> Items open for 5+ days get flagged and bumped up one priority level</li>
+    <li><strong>Auto-archive:</strong> Completed items are removed after 7 days</li>
+  </ul>
+
+  <h2>Data schema</h2>
+
+  <p>Each item tracks: id, title, source (Gmail/Slack/Linear/etc.), source_ref (link or ID), priority (1–4), status (open/in-progress/done/snoozed), due date, snooze_until, timestamps, and context notes.</p>
+
+  <h2>Why it was created</h2>
+
+  <p>Action items surface across many tools — Slack, Gmail, Linear, Google Docs, Figma — but none of them talk to each other. Items get lost between sessions. This skill creates a single unified task list that captures items from all sources and proactively reminds you, so nothing falls through the cracks.</p>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>
