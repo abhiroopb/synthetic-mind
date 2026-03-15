@@ -16,13 +16,13 @@ Built primarily with [Amp](https://ampcode.com), these skills power a PM's daily
 
 | Directory | Contents |
 |-----------|----------|
-| **[`/skills`](./skills)** | 98 AI agent skills — [browse the full catalog →](./skills/README.md) |
+| **[`/skills`](./skills)** | 99 AI agent skills — [browse the full catalog →](./skills/README.md) |
 | **[`/thoughts`](./thoughts)** | Write-ups on AI workflows, observations, and takeaways |
 | **[`/processes`](./processes)** | Documented processes for AI-augmented work |
 
 ## Skills at a Glance
 
-**98 skills** across 20+ categories:
+**99 skills** across 20+ categories:
 
 | Category | Skills | Examples |
 |----------|--------|----------|
@@ -71,6 +71,7 @@ Or clone the repo and point Amp at the `skills/` directory. The `auto-pilot` ski
 
 | Date | Update |
 |------|--------|
+| 2026-03-14 | 🆕 New skill: [todo](./skills/todo/) — persistent to-do list with proactive reminders and auto-capture |
 | 2026-03-11 | 🐛 New thought: [When Your Plugin Works but Nothing Happens](./thoughts/2026-03-11-debugging-the-dollar-api.md) — debugging silent failures in Amp's `$` API |
 | 2026-03-11 | 📝 New thought: [The Signal-to-Noise Problem in AI Memory](./thoughts/2026-03-11-tuning-memory-noise.md) — tuning amp-mem's context injection |
 | 2026-03-05 | 🚀 Initial release — 98 skills uploaded, categorized, and indexed |

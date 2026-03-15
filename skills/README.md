@@ -1,6 +1,6 @@
 # 🛠️ Skills Library
 
-**98 AI agent skills built for Amp — covering productivity, development, data, communication, and more.**
+**99 AI agent skills built for Amp — covering productivity, development, data, communication, and more.**
 
 Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. Skills are loaded via the `skill` tool or auto-routed by the `auto-pilot` skill.
 
@@ -108,6 +108,7 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 | 96 | [web-research](./web-research/) | 🔎 Research & Insights | Search & synthesize external information |
 | 97 | [writing-feedback](./writing-feedback/) | ✍️ Writing & Content | Write performance feedback (IBB model) |
 | 98 | [writing-requirements-docs](./writing-requirements-docs/) | 📝 Product | Write PRDs from rough notes & evidence |
+| 99 | [todo](./todo/) | ⏰ Productivity | Persistent to-do list with proactive reminders and auto-capture |
 
 ---
 
@@ -256,6 +257,7 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 
 ### ⏰ Productivity
 - [start-of-day](./start-of-day/) — Morning triage of Slack, Gmail, and Calendar
+- [todo](./todo/) — Persistent to-do list with proactive reminders and auto-capture
 
 ### 🔗 Navigation
 - [go-link](./go-link/) — Resolve internal go/ shortlinks to full URLs
