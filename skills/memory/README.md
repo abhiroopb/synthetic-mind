@@ -20,7 +20,7 @@ Memory runs passively in the background, but you can interact with it directly f
 ## Examples
 
 - `amp-mem search "checkout flow bug"` — Finds all observations related to checkout flow bugs, ranked by relevance.
-- `amp-mem save decision "Use Regulator for lookups" "Decided to always use Regulator omniSearch first for merchant token lookups"` — Saves a decision for future reference.
+- `amp-mem save decision "Use admin dashboard for lookups" "Decided to always use admin dashboard search first for user account lookups"` — Saves a decision for future reference.
 - `amp-mem timeline 42 --window 5` — Shows chronological context around observation #42.
 
 ## Why it was created

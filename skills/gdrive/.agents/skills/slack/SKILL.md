@@ -1,12 +1,11 @@
 ---
 name: slack
-description: Interact with Slack workspaces and channels. Search messages, read channels, post messages, manage status, and more across Block, Square, and Cash App workspaces.
+description: Interact with Slack workspaces and channels. Search messages, read channels, post messages, manage status, and more across multiple workspaces.
 roles: [frontend]
 allowed-tools:
   - Bash(scripts/slack-cli:*)
   - Read(reference/**)
 metadata:
-  author: square
   version: "1.0"
   status: experimental
 ---
@@ -20,11 +19,11 @@ Interact with Slack workspaces using a local Python CLI that wraps the internal 
 When any command returns `"error_type": "auth_required"`, run this single command:
 
 ```bash
-scripts/slack-cli auth callback --workspace block
+scripts/slack-cli auth callback --workspace default
 ```
 
 This opens a browser with a simple web page where the user can:
-1. Click a link to open Slack authorization (requires WARP VPN)
+1. Click a link to open Slack authorization
 2. Paste their token into the form
 3. Click "Save Token"
 
@@ -34,8 +33,6 @@ Tell the user:
 > "I've opened a browser page for Slack authentication. Please follow the steps there - click the authorization link, copy your token, and paste it into the form."
 
 After auth succeeds, retry whatever command originally failed.
-
-**Important**: The user must be connected to WARP VPN for the OAuth flow to work.
 
 For first-time setup (uv installation, PyPI config, manual auth), see [SETUP.md](SETUP.md).
 
@@ -72,17 +69,12 @@ All commands output JSON.
 
 Every command accepts `--workspace` (or `-w`) to select which workspace to use:
 
-| Alias | Workspace ID | Description |
-|-------|-------------|-------------|
-| `block` | T05HJ0CKWG5 | Block (default) |
-| `square` | T024FALR8 | Square |
-| `cashapp` | T01H5TZGHUJ | Cash App |
-| `tidal` | T0414TYF4 | Tidal |
+Configure workspace aliases in your credentials file. Use `--workspace <alias>` to switch between them.
 
 Examples:
 ```bash
-scripts/slack-cli list-channels --workspace square
-scripts/slack-cli search-messages -w cashapp --query "incident"
+scripts/slack-cli list-channels --workspace my-workspace
+scripts/slack-cli search-messages -w another-workspace --query "incident"
 ```
 
 ---
@@ -115,7 +107,7 @@ scripts/slack-cli auth logout
 scripts/slack-cli workspace list
 
 # Set default workspace
-scripts/slack-cli workspace set-default cashapp
+scripts/slack-cli workspace set-default myworkspace
 
 # Add custom workspace alias
 scripts/slack-cli workspace add myteam T0XXXXXXXX
@@ -175,7 +167,7 @@ scripts/slack-cli get-channel-info --channel-id C08G2DR1B40
 ```bash
 scripts/slack-cli get-user-info
 scripts/slack-cli get-user-info --user-id U03PNTMGFQX
-scripts/slack-cli get-user-info --email johndoe@squareup.com
+scripts/slack-cli get-user-info --email johndoe@example.com
 scripts/slack-cli get-user-info --username johndoe
 ```
 
@@ -250,4 +242,4 @@ scripts/slack-cli auth status
 
 ### Support
 
-Questions? Reach out in [#goose-slack-mcp](https://square.enterprise.slack.com/archives/C08G2DR1B40).
+Questions? Check the project repository for support channels.

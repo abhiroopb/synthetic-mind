@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- **Chrome open** with a profile logged into Okta (for video.square.com SSO)
+- **Chrome open** with a profile logged into your SSO provider (for video platform access)
 
 ---
 
@@ -21,22 +21,7 @@ Add to the `"mcpServers"` section of `~/.claude.json`:
 
 ---
 
-## 2. Install Blockcell MCP
-
-Add to the `"mcpServers"` section of `~/.claude.json`:
-
-```json
-"blockcell": {
-  "type": "stdio",
-  "command": "uvx",
-  "args": ["mcp_blockcell@latest"],
-  "env": {}
-}
-```
-
----
-
-## 3. Install Python dependency
+## 2. Install Python dependency
 
 ```bash
 pip3 install markdown==3.7 --break-system-packages -q
@@ -52,7 +37,7 @@ After installing, restart Claude Code (Cmd+Q, relaunch), then check MCP servers 
 /mcp
 ```
 
-You should see both `chrome-devtools` and `blockcell` listed with a green status.
+You should see `chrome-devtools` listed with a green status.
 
 ---
 
@@ -60,7 +45,6 @@ You should see both `chrome-devtools` and `blockcell` listed with a green status
 
 | Issue | Solution |
 |-------|----------|
-| Video page requires login | Complete Okta SSO in Chrome before running the skill — the MCP will wait for the page to load |
+| Video page requires login | Complete SSO login in Chrome before running the skill — the MCP will wait for the page to load |
 | `markdown` module not found | `pip3 install markdown==3.7 --break-system-packages` |
-| Blockcell upload fails | Check that the Blockcell MCP is connected via `/mcp` |
 | MCP servers not showing | Restart Claude Code after adding to `~/.claude.json` |

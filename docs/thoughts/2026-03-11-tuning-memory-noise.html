@@ -59,7 +59,7 @@
   <p>I <a href="./2026-03-05-building-amp-mem">built amp-mem</a> to give Amp persistent memory across sessions. It worked. Maybe too well. After a week of daily use — 142 observations, 74 ingested threads, 256K database — the context block injected at session start was getting cluttered.</p>
   <p>The symptoms:</p>
   <ul>
-    <li><strong>Hard-cut summaries</strong> — "Configured the LaunchDarkly flag for cash rounding with targeting rules for mercha" — mid-word. Useless.</li>
+    <li><strong>Hard-cut summaries</strong> — "Configured the LaunchDarkly flag for the new feature with targeting rules for mercha" — mid-word. Useless.</li>
     <li><strong>Self-referential noise</strong> — Half the injected context was about the memory system itself. "Saved observation about amp-mem configuration." Thanks, I know.</li>
     <li><strong>Duplicate injection</strong> — The <code>agent.start</code> hook fires on every turn, so the same context block was being injected 15+ times per session.</li>
     <li><strong>Bash noise</strong> — <code>git status</code>, <code>ls</code>, <code>warp-cli connect</code> — routine commands getting captured as if they were meaningful.</li>

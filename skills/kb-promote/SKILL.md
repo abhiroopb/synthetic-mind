@@ -49,7 +49,7 @@ For each candidate, determine where it should live:
 For behavioral preferences and recurring workflows. These are short, imperative instructions.
 
 **Examples:**
-- "When looking up a merchant, always try Regulator omniSearch first"
+- "When looking up a user account, always try the admin dashboard search first"
 - "Always create Google Docs for reports, never raw text in chat"
 - "When drafting emails, check the Communication Style Matrix first"
 
@@ -57,7 +57,7 @@ For behavioral preferences and recurring workflows. These are short, imperative 
 For knowledge that improves an existing skill's instructions. Append to the relevant SKILL.md.
 
 **Examples:**
-- A better workflow step discovered for `cash-rounding-responder`
+- A better workflow step discovered for an existing responder skill
 - A new channel to search in `feedback-searcher`
 
 #### C. New Skill
@@ -75,20 +75,20 @@ Show all candidates to the user with clear proposals:
 🎓 Promotion Candidates
 ━━━━━━━━━━━━━━━━━━━━━━━━
 
-1. ⭐ "Merchant Token Lookup Workflow" (stability: 8/10)
+1. ⭐ "User Account Lookup Workflow" (stability: 8/10)
    📍 Destination: AGENTS.md rule
-   📝 Proposed rule: "When looking up a merchant token, always try Regulator
-      omniSearch first, then fall back to the advanced search UI."
+   📝 Proposed rule: "When looking up a user account, always try the admin
+      dashboard search first, then fall back to the advanced search UI."
    📊 Evidence: 7 observations across 4 sessions
    → promote / skip / edit
 
-2. ⭐ "Cash Rounding Feedback — Post-Launch Tab" (stability: 7/10)
-   📍 Destination: Enhance `saving-cash-rounding-feedback` skill
-   📝 Proposed addition: Add step to always save to the Post-Launch sub-tab
+2. ⭐ "Feature Feedback — Tracking Tab" (stability: 7/10)
+   📍 Destination: Enhance feedback tracking skill
+   📝 Proposed addition: Add step to always save to the tracking sub-tab
    📊 Evidence: 5 observations across 3 sessions
    → promote / skip / edit
 
-3. ⚠️ "POS Release Check Workflow" (stability: 4/10)
+3. ⚠️ "Release Check Workflow" (stability: 4/10)
    📍 Destination: Not ready — needs more evidence
    📝 Note: Only seen twice, wait for more repetitions
    → defer / force-promote
@@ -148,7 +148,7 @@ amp-mem save decision "Created skill: <skill-name>" \
 
   Changes made:
   • ~/AGENTS.md — added 2 rules (lines XX-YY)
-  • ~/.agents/skills/cash-rounding-responder/SKILL.md — added Post-Launch tab step
+  • ~/.agents/skills/feedback-responder/SKILL.md — added tracking tab step
 ```
 
 ## Guardrails
@@ -164,7 +164,7 @@ amp-mem save decision "Created skill: <skill-name>" \
 **User says:** "promote"
 → Run full Phase 1–5 workflow, present all candidates.
 
-**User says:** "promote the merchant lookup workflow"
+**User says:** "promote the account lookup workflow"
 → Search for that specific note, skip to Phase 3 with just that candidate.
 
 **User says:** "what's ready to promote?"

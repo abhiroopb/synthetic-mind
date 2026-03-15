@@ -208,7 +208,7 @@ amp skill remove slack
 | `launchdarkly-cli` | Create, toggle, list feature flags | "list flags with 'checkout' in the name" |
 | `flag-simulator` | Evaluate flag values for a context | "evaluate flag new-feature-v2" |
 | `creating-experiments` | Set up A/B experiments | "create experiment for new onboarding" |
-| `blockcell` | Deploy static sites | "deploy prototype to Blockcell" |
+| `static-deploy` | Deploy static sites | "deploy prototype to hosting" |
 | `free-disk-space` | Clean up disk space on Mac | "free up disk space" |
 
 ### 🧪 Testing & Devices

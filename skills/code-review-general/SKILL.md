@@ -24,7 +24,7 @@ gh pr view --json comments --jq '.comments[] | "Author: \(.author.login)\nCreate
 gh pr view --comments
 ```
 
-Replace `{owner}/{repo}` with the actual repository (e.g., `squareup/cash-server`).
+Replace `{owner}/{repo}` with the actual repository (e.g., `myorg/my-service`).
 
 ## 2. Address all human comments
 

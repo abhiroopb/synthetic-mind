@@ -16,7 +16,7 @@ Describe what you want to research and why. The skill handles query generation, 
 
 ## Examples
 
-- `"Research how competitors handle cash rounding at checkout"`
+- `"Research how competitors handle price rounding at checkout"`
 - `"What's the state of the art for offline payment processing in 2026?"`
 - `"Find best practices for split payment UX — I'm writing a PRD"`
 

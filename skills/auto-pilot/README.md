@@ -16,9 +16,9 @@ Trigger phrases:
 
 ## Examples
 
-- "Find the Linear ticket for cash rounding and post a summary to Slack"
+- "Find the Linear ticket for the settings redesign and post a summary to Slack"
 - "Check my calendar for tomorrow and draft a decline for the 2pm meeting"
-- "Search code for the payment processor interface across all repos"
+- "Search code for the payment processor interface"
 
 ## Why it was created
 

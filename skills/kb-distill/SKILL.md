@@ -34,8 +34,8 @@ amp-mem distill-dump --since 2026-02-01
 
 Read all dumped observations and identify:
 
-1. **Repeated patterns** — Actions performed 3+ times (e.g., "looked up merchant token via Regulator" appearing across sessions). These are rule candidates.
-2. **Topic clusters** — Groups of related observations that form a coherent knowledge area (e.g., "checkout flow debugging", "cash rounding seller feedback workflow").
+1. **Repeated patterns** — Actions performed 3+ times (e.g., "looked up user account via admin dashboard" appearing across sessions). These are rule candidates.
+2. **Topic clusters** — Groups of related observations that form a coherent knowledge area (e.g., "checkout flow debugging", "feature rollout feedback workflow").
 3. **Decision chains** — Sequences where a decision was made, tested, and confirmed or revised.
 4. **One-off facts** — Individual observations worth preserving but not patterns.
 
@@ -57,9 +57,9 @@ The summary should be:
 
 Example:
 ```bash
-amp-mem save distilled "Merchant Token Lookup Workflow" \
-  "To look up a merchant token: (1) Use Regulator omniSearch GraphQL with email/name, (2) If omniSearch fails, provide the advanced search UI link: https://regulator.sqprod.co/o/advanced-search. (3) Can also search by MT directly in Iterable (Audience → Contact Lookup). Derived from observations #12, #34, #67." \
-  --tags "distilled,regulator,merchant-lookup"
+amp-mem save distilled "User Account Lookup Workflow" \
+  "To look up a user account: (1) Use admin dashboard search with email/name, (2) If search fails, use the advanced search UI. (3) Can also search by account ID directly. Derived from observations #12, #34, #67." \
+  --tags "distilled,admin,account-lookup"
 ```
 
 #### B. Proposed Rules (for AGENTS.md)
@@ -69,7 +69,7 @@ For repeated patterns (3+ occurrences), propose a rule to add to AGENTS.md. **Pr
 Format the proposal like:
 ```
 📋 PROPOSED RULE (based on pattern seen N times):
-  "When looking up a merchant token, always try Regulator omniSearch first, then fall back to the advanced search UI link."
+  "When looking up a user account, always try the admin dashboard search first, then fall back to the advanced search UI."
 
   Evidence: observations #12, #34, #67
   Add to AGENTS.md? [Present to user]
@@ -113,13 +113,13 @@ Then present a summary to the user:
   Inferred preferences:   2
 
   📝 Notes:
-  1. "Merchant Token Lookup Workflow" — consolidated 4 observations
-  2. "Cash Rounding Feedback Process" — consolidated 6 observations
+  1. "User Account Lookup Workflow" — consolidated 4 observations
+  2. "Feature Rollout Feedback Process" — consolidated 6 observations
   ...
 
   📋 Proposed Rules:
-  1. Always use Regulator omniSearch for merchant lookups
-  2. Save cash rounding feedback to Post-Launch sub-tab
+  1. Always use admin dashboard search for account lookups
+  2. Save feature feedback to the tracking document
   3. ...
 
   🔍 Inferred Preferences:
@@ -141,7 +141,7 @@ If pending observations > 50 or last distillation > 7 days ago, **auto-run silen
    ```
    ---
    🧠 While warming up, I distilled N observations and noticed:
-   📋 Rule: "Always use Regulator omniSearch for merchant lookups" → approve / skip
+   📋 Rule: "Always use admin dashboard search for account lookups" → approve / skip
    🔍 Inferred: "You prefer Google Docs over chat for reports" → approve / skip
    ```
 4. If the user ignores them, that's fine — they're non-blocking.

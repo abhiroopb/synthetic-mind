@@ -1,6 +1,6 @@
 ---
 Skill name: summarize-video
-Skill description: Summarize a go/media (video.square.com) video — extract transcript via Kaltura API, generate AI summary with key takeaways and timestamped quotes, build styled HTML page, and publish to Blockcell. Requires Chrome DevTools MCP and Blockcell MCP.
+Skill description: Summarize a video — extract transcript via Kaltura API, generate AI summary with key takeaways and timestamped quotes, and build styled HTML page. Requires Chrome DevTools MCP.
 argument-hint: <video_url>
 allowed-tools:
   - mcp__chrome-devtools__new_page
@@ -11,7 +11,6 @@ allowed-tools:
   - mcp__chrome-devtools__click
   - mcp__chrome-devtools__list_pages
   - mcp__chrome-devtools__select_page
-  - mcp__blockcell__manage_site
   - Bash(python3 {{SKILL_DIR}}/scripts/format_transcript.py:*)
   - Bash(python3 {{SKILL_DIR}}/scripts/build.py:*)
   - Bash(python3 -c:*)
@@ -27,17 +26,15 @@ allowed-tools:
   - AskUserQuestion
 ---
 
-# Summarize a go/media Video
+# Summarize a Video
 
 ## Prerequisites
 
-This skill requires Chrome DevTools MCP, Blockcell MCP, and the `markdown` Python package. See [SETUP.md](./SETUP.md) for installation instructions.
+This skill requires Chrome DevTools MCP and the `markdown` Python package. See [SETUP.md](./SETUP.md) for installation instructions.
 
 ## Workflow
 
-Given a video URL like `https://video.square.com/media/Some+Title/1_abc123`, perform the following steps.
-
-**URL Validation:** Before proceeding, verify that the URL matches the pattern `https://video.square.com/media/...`. If it does not, inform the user and stop.
+Given a video URL from a Kaltura-based video platform, perform the following steps.
 
 ## Step 1: Set up output directory
 
@@ -49,7 +46,7 @@ mkdir -p <output_dir>
 
 ## Step 2: Extract the SRT caption file
 
-1. Open the video URL in Chrome using chrome-devtools MCP (`new_page` with a 30s timeout — it may need SSO auth via Okta FastPass).
+1. Open the video URL in Chrome using chrome-devtools MCP (`new_page` with a 30s timeout — it may need SSO auth).
 2. Once the page loads, extract the Kaltura session token and caption download URL by running this script in the browser via `evaluate_script`. **Important:** The `ks` token is a session credential — do not log it, persist it, or include it in any output.
 
 ```javascript
@@ -164,15 +161,4 @@ pip3 install markdown==3.7 --break-system-packages -q
 python3 {{SKILL_DIR}}/scripts/build.py <output_dir>/
 ```
 
-Then **ask the user for confirmation** before publishing. Show them:
-- The site name that will be used
-- The output directory path
-- A note that the page will be publicly accessible
-
-Once the user confirms, publish to Blockcell. Use `whoami` to get the current username and prefix the site name:
-
-```
-manage_site(site_name="<username>-<slug>", action="upload", directory_path="<output_dir>")
-```
-
-Report the final Blockcell URL to the user.
+The built HTML page will be in `<output_dir>/index.html`. Tell the user the output path so they can open it in a browser or publish it to their preferred hosting.

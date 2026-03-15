@@ -1,6 +1,6 @@
 ---
 Skill name: slack
-Skill description: Interact with Slack workspaces and channels. Search messages, read channels, post messages, manage status, and more across Block, Square, and Cash App workspaces.
+Skill description: Interact with Slack workspaces and channels. Search messages, read channels, post messages, manage status, and more across multiple workspaces.
 roles: [frontend]
 ---
 
@@ -13,11 +13,11 @@ Interact with Slack workspaces using a local Python CLI that wraps the internal 
 When any command returns `"error_type": "auth_required"`, run this single command:
 
 ```bash
-{{SKILL_DIR}}/scripts/slack-cli auth callback --workspace block
+{{SKILL_DIR}}/scripts/slack-cli auth callback --workspace default
 ```
 
 This opens a browser with a simple web page where the user can:
-1. Click a link to open Slack authorization (requires WARP VPN)
+1. Click a link to open Slack authorization
 2. Paste their token into the form
 3. Click "Save Token"
 
@@ -27,8 +27,6 @@ Tell the user:
 > "I've opened a browser page for Slack authentication. Please follow the steps there - click the authorization link, copy your token, and paste it into the form."
 
 After auth succeeds, retry whatever command originally failed.
-
-**Important**: The user must be connected to WARP VPN for the OAuth flow to work.
 
 ---
 
@@ -40,19 +38,7 @@ After auth succeeds, retry whatever command originally failed.
 which uv || curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-### Configure uv for Block PyPI (if needed)
-
-```bash
-mkdir -p ~/.config/uv
-cat > ~/.config/uv/uv.toml << 'EOL'
-native-tls = true
-index-url = "https://artifactory.global.square/artifactory/api/pypi/block-pypi/simple"
-EOL
-```
-
 ### Authenticate
-
-**IMPORTANT: You must be connected to WARP VPN throughout this process.**
 
 ```bash
 {{SKILL_DIR}}/scripts/slack-cli auth login
@@ -82,17 +68,12 @@ All commands output JSON. Run from `{{SKILL_DIR}}/scripts`:
 
 Every command accepts `--workspace` (or `-w`) to select which workspace to use:
 
-| Alias | Workspace ID | Description |
-|-------|-------------|-------------|
-| `block` | T05HJ0CKWG5 | Block (default) |
-| `square` | T024FALR8 | Square |
-| `cashapp` | T01H5TZGHUJ | Cash App |
-| `tidal` | T0414TYF4 | Tidal |
+Configure workspace aliases in your credentials file. Use `--workspace <alias>` to switch between them.
 
 Examples:
 ```bash
-{{SKILL_DIR}}/scripts/slack-cli list-channels --workspace square
-{{SKILL_DIR}}/scripts/slack-cli search-messages -w cashapp --query "incident"
+{{SKILL_DIR}}/scripts/slack-cli list-channels --workspace my-workspace
+{{SKILL_DIR}}/scripts/slack-cli search-messages -w another-workspace --query "incident"
 ```
 
 ---
@@ -125,7 +106,7 @@ Examples:
 {{SKILL_DIR}}/scripts/slack-cli workspace list
 
 # Set default workspace
-{{SKILL_DIR}}/scripts/slack-cli workspace set-default cashapp
+{{SKILL_DIR}}/scripts/slack-cli workspace set-default myworkspace
 
 # Add custom workspace alias
 {{SKILL_DIR}}/scripts/slack-cli workspace add myteam T0XXXXXXXX
@@ -210,7 +191,7 @@ Messages with attached files include a `files` array with `id` and `name`. To do
 {{SKILL_DIR}}/scripts/slack-cli get-user-info --user-id U03PNTMGFQX
 
 # By email
-{{SKILL_DIR}}/scripts/slack-cli get-user-info --email johndoe@squareup.com
+{{SKILL_DIR}}/scripts/slack-cli get-user-info --email johndoe@example.com
 
 # By username
 {{SKILL_DIR}}/scripts/slack-cli get-user-info --username johndoe
@@ -341,7 +322,7 @@ Messages with attached files include a `files` array with `id` and `name`. To do
 | Error | Solution |
 |-------|----------|
 | "SLACK_TOKEN environment variable not set" | Run `{{SKILL_DIR}}/scripts/slack-cli auth login` |
-| "Forbidden" during OAuth | Ensure WARP VPN is connected and authenticated |
+| "Forbidden" during OAuth | Ensure VPN is connected and authenticated |
 | "missing_scope" errors | Re-run the OAuth flow to get updated scopes |
 | "channel_not_found" | Try specifying `--workspace` to switch workspaces |
 | Package resolution errors | Run the uv config setup from Prerequisites |
@@ -364,4 +345,4 @@ The same token will be generated, but with any newly added scopes.
 
 ### Support
 
-Questions? Reach out in [#goose-slack-mcp](https://square.enterprise.slack.com/archives/C08G2DR1B40).
+Questions? Check the project repository for support channels.

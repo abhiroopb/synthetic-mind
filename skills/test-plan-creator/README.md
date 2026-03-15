@@ -16,7 +16,7 @@ Point it at a feature spec and it generates either a full test plan or lightweig
 
 ## Examples
 
-- `"Create a test plan for the cash rounding feature"`
+- `"Create a test plan for the settings configuration feature"`
 - `"Generate acceptance criteria for offline payments — focus on compliance and payment flows"`
 - `"Write test scenarios for the new tipping flow on iOS and Android"`
 

@@ -31,7 +31,7 @@ If the purpose is unclear, ask one focused question. Default to a structured res
 ### 2. Generate Search Queries
 
 From the topic, generate 3–7 diverse search queries that cover:
-- **Direct queries**: The topic itself (e.g., "Square competitors checkout flow")
+- **Direct queries**: The topic itself (e.g., "competitor checkout flow comparison")
 - **Comparative queries**: "best [category] solutions 2025", "[competitor] vs [competitor]"
 - **Technical queries**: Implementation details, API docs, platform specifics
 - **Trend queries**: "state of [industry] 2025", "[topic] market trends"

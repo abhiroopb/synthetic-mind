@@ -10,7 +10,7 @@ I [built amp-mem](./2026-03-05-building-amp-mem.md) to give Amp persistent memor
 
 The symptoms:
 
-- **Hard-cut summaries** — "Configured the LaunchDarkly flag for cash rounding with targeting rules for mercha" — mid-word. Useless.
+- **Hard-cut summaries** — "Configured the LaunchDarkly flag for the new feature with targeting rules for mercha" — mid-word. Useless.
 - **Self-referential noise** — Half the injected context was about the memory system itself. "Saved observation about amp-mem configuration." Thanks, I know.
 - **Duplicate injection** — The `agent.start` hook fires on every turn, so the same context block was being injected 15+ times per session. Same memories, every single turn.
 - **Bash noise** — `git status`, `ls`, `warp-cli connect` — routine commands getting captured and injected as if they were meaningful.
@@ -39,7 +39,7 @@ def truncate_summary(text, max_len=400):
     return (text[:idx] + '…') if idx > 0 else text[:max_len] + '…'
 ```
 
-Going from 150 to ~400 chars with sentence boundaries means each observation actually carries enough context to be useful. "Configured the LaunchDarkly flag for cash rounding with targeting rules for merchant segments in staging." — complete thought, complete value.
+Going from 150 to ~400 chars with sentence boundaries means each observation actually carries enough context to be useful. "Configured the LaunchDarkly flag for the new feature with targeting rules for user segments in staging." — complete thought, complete value.
 
 ### Fix 2: Duplicate injection prevention
 

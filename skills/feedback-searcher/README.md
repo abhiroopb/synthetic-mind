@@ -14,7 +14,7 @@ Use when researching seller feedback on any topic. The skill asks clarifying que
 
 - "What are sellers saying about invoicing in the last 90 days?"
 - "Search for churn signals related to the checkout experience"
-- "Find product requests related to cash rounding from upmarket sellers"
+- "Find product requests related to checkout improvements from enterprise users"
 
 ## Why it was created
 

@@ -34,7 +34,7 @@ Before drafting, confirm:
 1) What environments need testing?
    a) Web only
    b) Mobile only (iOS/Android)
-   c) POS (Point of Sale)
+   c) Desktop application
    d) Multiple platforms
 
 2) What's the test scope?

@@ -256,7 +256,7 @@ else: print(f'{len(a &amp; b) / len(a | b):.3f}')
     return await ampMem(amp.$, ['search', input.query])
   },
 })</code></pre>
-  <p>This means the agent can <em>proactively</em> search its own memory. When I ask "what was that flag we set up for cash rounding?", the agent calls <code>amp_mem_search</code> and finds it — even if it was 3 weeks ago in a completely different session.</p>
+  <p>This means the agent can <em>proactively</em> search its own memory. When I ask "what was that flag we set up for the feature launch?", the agent calls <code>amp_mem_search</code> and finds it — even if it was 3 weeks ago in a completely different session.</p>
 
   <h2>The Knowledge Distillation Layer</h2>
   <p>Raw observations accumulate fast. After ~50, signal-to-noise drops. That's where <strong>kb-distill</strong> comes in — a separate Amp skill that compresses raw observations into structured knowledge notes and proposes behavioral rules for <code>AGENTS.md</code>.</p>

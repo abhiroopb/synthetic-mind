@@ -17,7 +17,7 @@ Invoke when you need to create an interactive prototype for a product feature. T
 
 ## Examples
 
-- `"Build a mid-fi prototype of the cash rounding settings screen"`
+- `"Build a mid-fi prototype of the settings configuration screen"`
 - `"Create an end-to-end prototype of the checkout workflow"`
 - `"Prototype two variants of the payment confirmation modal for comparison"`
 

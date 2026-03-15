@@ -17,7 +17,7 @@ Tell the skill who the feedback is for, their role and level, and provide specif
 ## Examples
 
 - `"Write a peer review for a L5 engineer — they led the offline payments project and mentored two junior engineers"`
-- `"Help me draft my self-reflection — I shipped cash rounding, ran 3 experiments, and presented at the all-hands"`
+- `"Help me draft my self-reflection — I shipped the settings redesign, ran 3 experiments, and presented at the all-hands"`
 - `"Write a manager evaluation for a L4 designer who consistently exceeds expectations"`
 
 ## Why it was created

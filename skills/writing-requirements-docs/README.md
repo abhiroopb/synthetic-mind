@@ -16,7 +16,7 @@ Provide any form of raw input about a feature and the skill handles research, cl
 
 ## Examples
 
-- `"Write a PRD for cash rounding at checkout — here are my rough notes: [paste notes]"`
+- `"Write a PRD for price rounding at checkout — here are my rough notes: [paste notes]"`
 - `"Turn this Slack thread into a PRD: [slack link]"`
 - `"Draft requirements for offline payment support — search internal sources for customer feedback first"`
 

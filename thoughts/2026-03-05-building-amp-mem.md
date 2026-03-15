@@ -249,7 +249,7 @@ amp.registerTool({
 })
 ```
 
-This means the agent can *proactively* search its own memory. When I ask "what was that flag we set up for cash rounding?", the agent calls `amp_mem_search` and finds it — even if it was 3 weeks ago in a completely different session.
+This means the agent can *proactively* search its own memory. When I ask "what was that flag we set up for the feature launch?", the agent calls `amp_mem_search` and finds it — even if it was 3 weeks ago in a completely different session.
 
 ## The Knowledge Distillation Layer
 

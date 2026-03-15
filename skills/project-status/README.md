@@ -17,7 +17,7 @@ Invoke when you need to summarize project status, generate a progress report, re
 
 ## Examples
 
-- `"Get me a status report on cash-rounding"`
+- `"Get me a status report on the checkout redesign"`
 - `"Summarize what's happened on offline-payments in the last 7 days"`
 - `"Check the rollout state for project-x repo:org/repo"`
 
