@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Stopped Maintaining My To-Do List and Let the Agent Do It — synthetic-mind</title>
+  <meta name="description" content="A proactive to-do system that auto-captures from Slack, Gmail, Calendar, and Linear — prioritizes, syncs to calendar, and surfaces at every session.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-date {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../skills/">Skills</a>
+      <a href="../memory/">Memory</a>
+      <a href="../setup/">Setup</a>
+      <a href="./">Thoughts</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All thoughts</a>
+
+  <h1>I Stopped Maintaining My To-Do List and Let the Agent Do It</h1>
+  <div class="article-meta">
+    <span class="article-date">2026-03-14</span>
+    <span class="article-tag">workflow</span>
+    <span class="article-tag">productivity</span>
+  </div>
+
+  <h2>TL;DR</h2>
+  <p>I'm bad at to-do lists. I forget to check them, forget to update them, and forget they exist. So I built one that doesn't need me. It watches every incoming signal — Slack, Gmail, Calendar, Linear, Notion — auto-captures action items, prioritizes them, adds them to my calendar, and surfaces them at the start of every session. I don't manage the list. The list manages me.</p>
+
+  <h2>Context</h2>
+  <p>I've tried every to-do system. Todoist, Things, Apple Reminders, Notion databases, plain text files. They all have the same problem: they require me to use them. I have to remember to open the app, remember to add items, remember to check items off. And I just... don't. Not consistently.</p>
+  <p>The pattern is always the same. Someone asks me something in Slack. I think "I'll do that later." I don't write it down. Three days pass. They follow up. I feel bad. Repeat.</p>
+  <p>It's not a discipline problem. It's a workflow problem. The places where action items appear (Slack DMs, email threads, PR reviews, meeting follow-ups) are completely disconnected from the place where I'm supposed to track them. The gap between "I should do this" and "I wrote this down" is where everything falls through.</p>
+
+  <h2>The Idea</h2>
+  <p>What if the to-do list didn't need me at all?</p>
+  <p>Not "what if it had a nice UI" or "what if it synced across devices." What if it literally watched everything coming in, decided what needed action, created the task, set the priority, and then told me about it at exactly the right time?</p>
+  <p>That's what the <code>todo</code> skill does. It's a JSON file at <code>~/.config/amp/todo.json</code> — dead simple storage — paired with a set of behaviors that make it proactive instead of passive.</p>
+
+  <h3>Auto-capture: I never add items manually</h3>
+  <p>When my <code>start-of-day</code> skill runs through Slack unreads, Gmail, Calendar, and comments — every actionable item I skip or save for later automatically becomes a to-do. I don't say "add this to my list." The agent recognizes it's an action item and captures it silently:</p>
+<pre><code>📌 Added 3 items to your to-do list</code></pre>
+  <p>That line shows up at the end of triage. I didn't do anything. Three tasks are now tracked.</p>
+  <p>The same thing happens during any session. Someone DMs me in Slack asking for a review? To-do. Email from a seller needing follow-up? To-do. Linear issue assigned to me? To-do. I don't context-switch to a task manager. The agent handles it in the background.</p>
+
+  <h3>Auto-prioritize: I never decide what's urgent</h3>
+  <p>Every captured item gets a priority based on signals:</p>
+  <ul>
+    <li><strong>P1 (urgent)</strong> — sender is a VP or the message literally says "urgent" or "ASAP"</li>
+    <li><strong>P2 (high)</strong> — direct ask from a person, needs my input</li>
+    <li><strong>P3 (normal)</strong> — review requests, FYI items, docs to read</li>
+    <li><strong>P4 (low)</strong> — bot notifications, automated alerts</li>
+  </ul>
+  <p>I used to spend mental energy triaging. Now the agent does it based on who's asking and how they're asking. It's not perfect, but it's right 90% of the time, and I can bump priorities with a quick "prioritize 3 as P1."</p>
+
+  <h3>Calendar sync: I never forget deadlines</h3>
+  <p>Here's the part that changed everything. When a to-do item has a future due date, the agent creates a 15-minute calendar event at 3pm ET. Color-coded by priority: red for urgent, yellow for high, blue for normal. If multiple items are due the same day, they stagger by 15 minutes.</p>
+  <p>I live in my calendar. I don't live in a to-do app. So instead of hoping I remember to check a list, I get a calendar notification at 3pm that says "Review PR #4521 for tip buttons." The task comes to me in the tool I actually look at.</p>
+
+  <h3>Session start: the list finds me</h3>
+  <p>Every time I start a session with my agent, the to-do list surfaces automatically. Top 5 items, sorted by priority and due date:</p>
+<pre><code>## ✅ To-Do List (8 open items)
+
+1. 🔴 [P1] Reply to Sarah's escalation email — Gmail, 3h ago
+2. 🟠 [P2] Review PR #4521 for tip buttons — GitHub, 1d ago
+3. 🟡 [P3] Update Q1 OKRs in Google Doc — Google Docs, 2d ago
+4. 🟡 [P3] Follow up with Andrea on pre-auth tipping — Slack, 1d ago
+5. 🔵 [P4] Read the new POS release notes — Notion, 3d ago
+
+> 📋 +3 more items (1 normal, 2 low priority)</code></pre>
+  <p>I don't open a list. The list opens itself. Every session starts with "here's what you owe people." It's impossible to forget.</p>
+
+  <h3>Auto-complete: I never check things off</h3>
+  <p>When I reply to Sarah's email during a session, the agent recognizes that maps to to-do item #1 and marks it done automatically:</p>
+<pre><code>✅ Marked done: "Reply to Sarah's escalation email"</code></pre>
+  <p>I didn't tell it to. It connected the action to the task and closed the loop. This is the part that makes it feel less like a system I'm fighting and more like a system that's working with me.</p>
+
+  <h3>Auto-reconcile: it cleans up after me</h3>
+  <p>At the start of each session, the agent scans all connected sources — Slack sent messages, Gmail sent mail, Calendar events I attended — for evidence that open items were completed. If I replied to that email from my phone yesterday, the agent sees the sent message and marks the to-do done. Silently. No double-tracking.</p>
+
+  <h2>What I Learned</h2>
+  <ol>
+    <li><strong>The best to-do system is one you never touch.</strong> Every to-do app assumes you'll maintain it. That assumption is wrong for people like me. The breakthrough was removing myself from the maintenance loop entirely. I'm the decision-maker, not the bookkeeper.</li>
+    <li><strong>Put tasks where you already look.</strong> Calendar sync is the single highest-impact feature. I check my calendar 20 times a day. I check a to-do app maybe once. Meeting the user where they are — even when the user is yourself — is Product Management 101.</li>
+    <li><strong>Auto-capture beats manual capture every time.</strong> The gap between "I should do this" and "I wrote this down" is where tasks die. Eliminating that gap by capturing at the source — in the same session where the request arrives — means nothing falls through.</li>
+    <li><strong>Proactive > reactive.</strong> The old model: I go to my to-do list. The new model: my to-do list comes to me. Every session, every morning, every time something is due. The system is proactive, and I just respond.</li>
+    <li><strong>Simple storage, smart behaviors.</strong> The whole thing is a JSON file. No database, no API, no sync service. All the intelligence is in the skill's behaviors — when to capture, how to prioritize, when to surface, when to close. The storage is dumb. The orchestration is smart.</li>
+  </ol>
+
+  <hr>
+  <p><em>This pairs with <a href="./2026-03-05-start-of-day">I Replaced My Morning Routine with a Single Command</a> — the to-do system plugs into the start-of-day skill as Section 0, surfacing open items before anything else.</em></p>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>
