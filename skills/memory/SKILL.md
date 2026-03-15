@@ -84,14 +84,14 @@ amp-mem decay                    # Apply confidence decay to aging observations
 
 ## Auto-Capture Protocol
 
-### What to capture (be aggressive)
+### What to capture (be selective)
 
-Save a memory entry whenever ANY of these occur:
+Save a memory entry when something **worth recalling in a future session** occurs:
 
 > **Note:** When the amp-mem plugin (`~/.config/amp/plugins/amp-mem.ts`) is installed, most of this capture happens automatically. The plugin passively captures tool results (Linear, Gmail, Slack, Notion, Google Drive, Bash), batches file edits, and AI-gates observations at agent.end with p>0.65 threshold. Context injection is silent (`display: false`), one-shot per session (duplicate prevention), uses a 60-line budget with smart sentence-boundary truncation, and filters out self-referential amp-mem observations. The protocol below describes what gets captured — you don't need to do it manually.
 
-1. **Every file edit** — "Edited X to do Y" (with file path)
-2. **Every significant bash command** — commands that reveal system state or produce important output
+1. **Significant file edits** — non-trivial changes where the "why" matters (skip typo fixes, formatting)
+2. **Revealing bash commands** — commands that expose system state, configuration, or non-obvious behavior (skip routine ls/cat/grep)
 3. **Project discovery** — architecture, conventions, setup learned
 4. **Decision made** — design decisions, approach chosen, trade-offs
 5. **Problem solved** — bug fixed, workaround found, root cause identified

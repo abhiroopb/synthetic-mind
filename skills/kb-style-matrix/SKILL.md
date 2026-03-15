@@ -16,7 +16,7 @@ Analyzes your Slack messages to build a reusable voice/tone profile so future dr
 ## Prerequisites
 
 - `slack` skill must be available
-- User's Slack identity must be resolvable (uses `abhiroop` / Abhi Basu)
+- User's Slack identity must be resolvable (look up via `slack` skill or ask the user)
 
 ## Workflow
 
