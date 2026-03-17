@@ -30,12 +30,11 @@ This skill uses the `gmail` MCP server (`uvx mcp_gmail@latest`) configured in `~
 
 On first use, the server opens a browser for Google OAuth authentication. After authorizing, the token is stored in the system keyring for future use.
 
-## Available Tools
+## Key Patterns
 
-- **search_emails** — Search Gmail using Gmail search syntax (from:, to:, subject:, is:unread, has:attachment, etc.)
-- **read_message** — Read full email content by message ID
-- **send_email** — Send a new email
-- **draft_email** — Create a draft email
-- **modify_labels** — Add/remove labels on messages
-- **list_labels** — List all Gmail labels
-- **create_filter** / **list_filters** / **delete_filter** — Manage Gmail filters
+- **Always preview drafts** in chat before sending. Never send without user confirmation.
+- **Search defaults to Inbox.** Set `label: "all"` to search across all labels.
+- **Pass `timezone`** on search and read calls when available (IANA format).
+- **Reply drafts:** Use `draft_type: "reply"` with `reference_message_id`.
+- **Batch reads:** `read_message` accepts multiple `message_ids` in one call.
+- **Mark as read:** Use `modify_labels` with `labels_to_remove: ["UNREAD"]`.

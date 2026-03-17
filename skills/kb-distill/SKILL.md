@@ -50,32 +50,13 @@ For topic clusters, save a synthesized note:
 amp-mem save distilled "<topic>" "<synthesized summary>" --tags "distilled,<cluster-tags>"
 ```
 
-The summary should be:
-- **Actionable** — tells future-you what to do, not just what happened
-- **Concise** — shorter than the sum of source observations
-- **Cross-referenced** — mentions source observation IDs for traceability
-
-Example:
-```bash
-amp-mem save distilled "User Account Lookup Workflow" \
-  "To look up a user account: (1) Use admin dashboard search with email/name, (2) If search fails, use the advanced search UI. (3) Can also search by account ID directly. Derived from observations #12, #34, #67." \
-  --tags "distilled,admin,account-lookup"
-```
+The summary should be **actionable** (tells future-you what to do), **concise** (shorter than source observations), and **cross-referenced** (mentions source observation IDs).
 
 #### B. Proposed Rules (for AGENTS.md)
 
 For repeated patterns (3+ occurrences), propose a rule to add to AGENTS.md. **Present each rule to the user for approval** — do NOT auto-add.
 
-Format the proposal like:
-```
-📋 PROPOSED RULE (based on pattern seen N times):
-  "When looking up a user account, always try the admin dashboard search first, then fall back to the advanced search UI."
-
-  Evidence: observations #12, #34, #67
-  Add to AGENTS.md? [Present to user]
-```
-
-If the user approves, append the rule to `~/AGENTS.md` in the appropriate section.
+Present each proposal with the pattern, evidence (observation IDs), and an approve/skip prompt. If approved, append to `~/AGENTS.md`.
 
 #### C. Implicit Behavior Inference
 
@@ -85,14 +66,7 @@ This is the key differentiator. Look for patterns the user **never explicitly st
 - Recurring questions to specific people/channels
 - Default approaches to certain problem types
 
-For these, frame the proposal as:
-```
-🔍 INFERRED PREFERENCE (observed but never stated):
-  You always create a Google Doc when producing reports, never output to chat.
-  Seen in: observations #5, #19, #28, #41
-
-  Codify this? [Present to user]
-```
+For these, present the inferred preference with evidence and ask to codify.
 
 ### Phase 4: Record & Report
 

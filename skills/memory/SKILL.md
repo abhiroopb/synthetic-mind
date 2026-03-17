@@ -86,20 +86,9 @@ amp-mem decay                    # Apply confidence decay to aging observations
 
 ### What to capture (be selective)
 
-Save a memory entry when something **worth recalling in a future session** occurs:
+Save when something is **worth recalling in a future session** — significant edits, decisions, discoveries, bugs, configs, workflows, preferences, and session summaries.
 
-> **Note:** When the amp-mem plugin (`~/.config/amp/plugins/amp-mem.ts`) is installed, most of this capture happens automatically. The plugin passively captures tool results (Linear, Gmail, Slack, Notion, Google Drive, Bash), batches file edits, and AI-gates observations at agent.end with p>0.65 threshold. Context injection is silent (`display: false`), one-shot per session (duplicate prevention), uses a 60-line budget with smart sentence-boundary truncation, and filters out self-referential amp-mem observations. The protocol below describes what gets captured — you don't need to do it manually.
-
-1. **Significant file edits** — non-trivial changes where the "why" matters (skip typo fixes, formatting)
-2. **Revealing bash commands** — commands that expose system state, configuration, or non-obvious behavior (skip routine ls/cat/grep)
-3. **Project discovery** — architecture, conventions, setup learned
-4. **Decision made** — design decisions, approach chosen, trade-offs
-5. **Problem solved** — bug fixed, workaround found, root cause identified
-6. **Configuration found** — service URLs, API patterns, file locations
-7. **Tool/workflow learned** — new workflow, command sequence, integration pattern
-8. **Preference expressed** — how the user wants things done
-9. **Context about people/teams** — ownership, contacts, team structures
-10. **Session end** — always save a comprehensive session summary
+> **Note:** When the amp-mem plugin (`~/.config/amp/plugins/amp-mem.ts`) is installed, most of this capture happens automatically. The plugin passively captures tool results (Linear, Gmail, Slack, Notion, Google Drive, Bash), batches file edits, and AI-gates observations at agent.end with p>0.65 threshold. Context injection is silent (`display: false`), one-shot per session (duplicate prevention), uses a 60-line budget with smart sentence-boundary truncation, and filters out self-referential amp-mem observations.
 
 ### How to capture efficiently
 
