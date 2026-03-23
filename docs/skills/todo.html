@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Todo — Skills — synthetic-mind</title>
-  <meta name="description" content="Persistent to-do list with proactive reminders and auto-capture from Slack, Gmail, Calendar, Linear.">
+  <title>todo — Skills — synthetic-mind</title>
+  <meta name="description" content="Persistent to-do list with proactive reminders and auto-capture from Slack, Gmail, Calendar, Linear, and manual input.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
@@ -51,7 +51,7 @@
 <div class="page-content">
   <a href="./" class="back-link">All skills</a>
 
-  <h1>Todo</h1>
+  <h1>todo</h1>
   <div class="article-meta">
     <span class="article-tag">skill</span>
     <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/skills/todo" class="gh-link" target="_blank">
@@ -60,45 +60,9 @@
     </a>
   </div>
 
-  <blockquote>Persistent to-do list with proactive reminders and auto-capture from Slack, Gmail, Calendar, Linear.</blockquote>
+  <blockquote>Persistent to-do list with proactive reminders and auto-capture from Slack, Gmail, Calendar, Linear, and manual input.</blockquote>
 
-  <h2>What it does</h2>
-
-  <p>Todo provides a persistent task tracker stored as a JSON file that the agent manages proactively. It auto-captures action items from other skills (start-of-day triage, emails, Slack messages, Linear issues), surfaces open items at session start, and reminds you of untouched high-priority items before a session ends. Items support priorities (P1–P4), snoozing, due dates, and source references for one-click context.</p>
-
-  <h2>Usage</h2>
-
-  <p>The skill runs proactively — surfacing items at session start and auto-capturing new ones. You can also interact with it directly.</p>
-
-  <p><strong>Key commands:</strong></p>
-
-  <ul>
-    <li><code>"add a to-do to review the spec"</code> — manually add an item</li>
-    <li><code>"show my to-do list"</code> — display all open items</li>
-    <li><code>"done 1"</code> — mark item #1 as complete</li>
-    <li><code>"snooze 2 until tomorrow"</code> — snooze an item</li>
-    <li><code>"prioritize 3 as P1"</code> — change priority</li>
-    <li><code>"delete 4"</code> — remove an item</li>
-  </ul>
-
-  <h2>Proactive behaviors</h2>
-
-  <ul>
-    <li><strong>Session start:</strong> Surfaces top 5 open items sorted by priority and due date</li>
-    <li><strong>Auto-capture:</strong> Silently creates to-do items from skipped/saved triage items, emails needing replies, Slack questions, assigned issues</li>
-    <li><strong>Auto-complete:</strong> When you complete an action matching a to-do, it marks the item done automatically</li>
-    <li><strong>End-of-session:</strong> Reminds you of untouched P1/P2 items before wrapping up</li>
-    <li><strong>Staleness alerts:</strong> Items open for 5+ days get flagged and bumped up one priority level</li>
-    <li><strong>Auto-archive:</strong> Completed items are removed after 7 days</li>
-  </ul>
-
-  <h2>Data schema</h2>
-
-  <p>Each item tracks: id, title, source (Gmail/Slack/Linear/etc.), source_ref (link or ID), priority (1–4), status (open/in-progress/done/snoozed), due date, snooze_until, timestamps, and context notes.</p>
-
-  <h2>Why it was created</h2>
-
-  <p>Action items surface across many tools — Slack, Gmail, Linear, Google Docs, Figma — but none of them talk to each other. Items get lost between sessions. This skill creates a single unified task list that captures items from all sources and proactively reminds you, so nothing falls through the cracks.</p>
+  <p>See <a href="./SKILL.md"><code>SKILL.md</code></a> for full instructions.</p>
 </div>
 
 <footer>

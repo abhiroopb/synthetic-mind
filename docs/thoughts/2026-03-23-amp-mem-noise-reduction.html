@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cutting 80% of the Noise from My AI Memory System — synthetic-mind</title>
+  <meta name="description" content="After distilling 2,718 observations, I found ~90% were noise. Seven targeted changes to the amp-mem plugin cut observation volume by ~80% while preserving signal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-date {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../skills/">Skills</a>
+      <a href="../memory/">Memory</a>
+      <a href="../setup/">Setup</a>
+      <a href="./">Thoughts</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All thoughts</a>
+
+  <h1>Cutting 80% of the Noise from My AI Memory System</h1>
+  <div class="article-meta">
+    <span class="article-date">2026-03-23</span>
+    <span class="article-tag">memory-system</span>
+    <span class="article-tag">noise-reduction</span>
+  </div>
+
+  <h2>TL;DR</h2>
+  <p>After distilling 2,718 observations, I found ~90% were noise. Made 7 changes to the amp-mem plugin that should cut observation volume by ~80% while preserving all meaningful signal. The key insight: tool-level captures are mostly redundant when you have an AI-gated turn evaluator. The real signal comes from what you <em>do</em> with search results, not the searches themselves.</p>
+
+  <h2>Context</h2>
+  <p>I ran <code>kb-distill</code> for the first time in a while and found 2,718 pending observations. That's… a lot. So I actually looked at them.</p>
+  <p>Only ~42 were high-signal — real preferences, decisions, discoveries, workflow patterns. The rest? Raw command traces, search queries, email draft records, and meta-noise about the memory system itself. 42 out of 2,718. That's a 1.5% signal rate.</p>
+  <p>The passive capture system I <a href="./2026-03-11-tuning-memory-noise">built and tuned</a> was doing its job — it just wasn't filtering hard enough. Every Gmail search, every Slack read, every <code>amp-mem search</code> call was generating an observation. The structured extractors were firing on read-only operations that produced zero actionable insight.</p>
+  <p>The distillation process (kb-distill) still surfaced the real patterns — that's the compression step that matters — but wading through 2,700 garbage entries to find 42 gems is not a system that scales.</p>
+
+  <h2>The Changes</h2>
+  <p>Seven targeted changes to <code>~/.config/amp/plugins/amp-mem.ts</code>:</p>
+
+  <h3>1. Added amp_mem tools to IGNORED_TOOLS</h3>
+<pre><code>const IGNORED_TOOLS = [
+  // ... existing entries
+  'amp_mem_search',
+  'amp_mem_save',
+  'amp_mem_stats',
+]</code></pre>
+  <p>The memory system was observing itself. Again. I <a href="./2026-03-11-tuning-memory-noise">fixed this at the context injection layer</a> before, but the capture layer was still recording every <code>amp_mem_search</code> call as a structured observation. Pure meta-noise.</p>
+
+  <h3>2. Skipped Gmail drafts from structured capture</h3>
+<pre><code>// Skip Gmail draft operations — "Drafted email to X" floods decisions
+if (toolName === 'mcp__gmail__draft_tool') return</code></pre>
+  <p>Every email draft was being captured as a "decision" observation. Drafting an email is not a decision — it's an action. The actual decision (what to say, who to reply to) is captured by the AI-gated turn evaluator at the end of the turn. The per-tool capture was just adding noise.</p>
+
+  <h3>3. Skipped all search/read tools</h3>
+<pre><code>const READ_ONLY_TOOLS = [
+  'mcp__gmail__search_tool',
+  'mcp__gmail__read_message_tool',
+  'mcp__slack__search_messages',
+  'mcp__slack__read_channel',
+  'mcp__linear__linear_searchIssues',
+  'mcp__linear__linear_getIssueById',
+  'mcp__notion__notion_search',
+  'mcp__notion__notion_fetch',
+  'mcp__gdrive__search',
+  'mcp__gdrive__read',
+]</code></pre>
+  <p>This was the biggest single win. Every search across every tool was generating observations like "Searched Gmail for cash rounding emails" or "Read Slack message in #checkout-flow." None of that is signal. What matters is what the agent <em>does</em> after reading — reply, create a ticket, draft a doc. That's captured by the turn evaluator.</p>
+
+  <h3>4. Bash: skip slack-cli, amp-mem, block-glean-cli</h3>
+<pre><code>const SKIP_BASH_PREFIXES = [
+  'slack-cli',
+  'amp-mem',
+  'block-glean-cli',
+  'warp-cli',
+  'git status',
+  'git fetch',
+]</code></pre>
+  <p>Bash commands were already partially filtered, but CLI wrappers for MCP tools were slipping through. A <code>slack-cli search</code> command is the same noise as a <code>mcp__slack__search_messages</code> call — just via a different path.</p>
+
+  <h3>5. Generic extractor: only capture write/mutate operations</h3>
+<pre><code>const WRITE_OPS_PATTERN = /create|update|post|send|draft|edit|delete|transition|assign|move|add|remove/i
+
+// In the generic MCP extractor:
+if (!WRITE_OPS_PATTERN.test(toolName)) return</code></pre>
+  <p>This is the philosophical shift. Instead of capturing everything and filtering later, only capture operations that <em>change state</em>. Reads are context-gathering. Writes are decisions. The memory system should remember decisions.</p>
+
+  <h3>6. AI gating threshold: 0.65 → 0.75</h3>
+<pre><code>const AI_GATE_THRESHOLD = 0.75  // was 0.65</code></pre>
+  <p>The <code>agent.end</code> handler runs an AI evaluation on the full turn to decide if anything worth remembering happened. Bumping the threshold from 0.65 to 0.75 makes it pickier. Combined with the other filters, this means fewer but higher-quality observations from the safety-net layer.</p>
+
+  <h3>7. Deduplication via recentTopics</h3>
+<pre><code>const recentTopics = new Set&lt;string&gt;()
+
+function isDuplicate(topic: string): boolean {
+  const normalized = topic.toLowerCase().trim()
+  if (recentTopics.has(normalized)) return true
+  recentTopics.add(normalized)
+  // Clean up after 50 entries
+  if (recentTopics.size &gt; 50) {
+    const first = recentTopics.values().next().value
+    recentTopics.delete(first)
+  }
+  return false
+}</code></pre>
+  <p>Same insight was getting saved 2-3x per session because multiple tools in the same turn would each trigger a capture. The dedup set catches these within-session repeats.</p>
+
+  <h3>Bonus: Short user prompts</h3>
+<pre><code>// Skip user messages under 30 chars — "ok", "yes", "do it" aren't worth saving
+if (event.content.length &lt; 30) return</code></pre>
+  <p>"yes", "ok", "do that", "looks good" — none of these are observations worth persisting.</p>
+
+  <h2>The Key Insight</h2>
+  <p>The safety net is the AI-gated <code>agent.end</code> handler. It evaluates the <em>entire turn</em> — all tool calls, all results, the user's message, the agent's response — and decides if anything meaningful happened. That's where the real signal extraction lives.</p>
+  <p>Tool-level structured captures were mostly <em>redundant</em> with that. They were pre-extracting observations that the turn evaluator would catch anyway, but at lower quality because they lacked the full-turn context.</p>
+  <p>The right architecture: aggressive filtering at the tool level (only capture writes/mutations), with the AI-gated turn evaluator as the quality layer that catches everything else worth remembering.</p>
+
+  <h2>What I Learned</h2>
+  <ol>
+    <li><strong>Passive capture without curation creates garbage.</strong> The instinct to "capture everything, filter later" doesn't work for memory systems. The volume grows faster than your ability to filter. Better to be aggressive at capture time and trust your safety-net evaluator.</li>
+    <li><strong>The distillation step is what matters.</strong> kb-distill takes raw observations and compresses them into structured knowledge notes. That's the actual intelligence — the pattern recognition, the synthesis, the "what does this mean?" step. Raw observations are just the input.</li>
+    <li><strong>Read operations are almost never signal.</strong> What you searched for doesn't matter. What you did with what you found — that's the signal. This applies broadly: logs of "user viewed page" are noise; "user purchased item" is signal.</li>
+    <li><strong>Keep the AI gate as your quality layer.</strong> Don't try to make every extractor smart. Make them fast and selective, then let one high-quality AI evaluation at the end decide what's worth keeping.</li>
+    <li><strong>1.5% signal rate means your filter is broken.</strong> If you're keeping 98.5% garbage, you don't have a memory system — you have a logging system. Memory requires curation.</li>
+  </ol>
+
+  <hr>
+  <p><em>This is the third post in the amp-mem series, after <a href="./2026-03-05-building-amp-mem">Building a Persistent Memory System</a> and <a href="./2026-03-11-tuning-memory-noise">The Signal-to-Noise Problem</a>. The pattern: build → tune injection → tune capture. Next will probably be tuning retrieval.</em></p>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>

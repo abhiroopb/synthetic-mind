@@ -16,13 +16,13 @@ Built primarily with [Amp](https://ampcode.com), these skills power a PM's daily
 
 | Directory | Contents |
 |-----------|----------|
-| **[`/skills`](./skills)** | 99 AI agent skills — [browse the full catalog →](./skills/README.md) |
+| **[`/skills`](./skills)** | 105 AI agent skills — [browse the full catalog →](./skills/README.md) |
 | **[`/thoughts`](./thoughts)** | Write-ups on AI workflows, observations, and takeaways |
 | **[`/processes`](./processes)** | Documented processes for AI-augmented work |
 
 ## Skills at a Glance
 
-**99 skills** across 20+ categories:
+**105 skills** across 20+ categories:
 
 | Category | Skills | Examples |
 |----------|--------|----------|
@@ -71,6 +71,8 @@ Or clone the repo and point Amp at the `skills/` directory. The `auto-pilot` ski
 
 | Date | Update |
 |------|--------|
+| 2026-03-23 | 📝 New thought: [Cutting 80% of the Noise from My AI Memory System](./thoughts/2026-03-23-amp-mem-noise-reduction.md) — 7 plugin changes that cut observation volume by ~80% while preserving signal |
+| 2026-03-23 | 🆕 6 new skills: enterprise-search, feature-request-scanner, roadmap-intake, graphql-schema-discovery, communication-coach, merchant-lookup |
 | 2026-03-14 | 📝 New thought: [I Stopped Maintaining My To-Do List and Let the Agent Do It](./thoughts/2026-03-14-todo-system.md) — a proactive to-do system that auto-captures, prioritizes, and syncs to calendar |
 | 2026-03-14 | 🆕 New skill: [todo](./skills/todo/) — persistent to-do list with proactive reminders and auto-capture |
 | 2026-03-11 | 🐛 New thought: [When Your Plugin Works but Nothing Happens](./thoughts/2026-03-11-debugging-the-dollar-api.md) — debugging silent failures in Amp's `$` API |

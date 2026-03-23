@@ -1,6 +1,6 @@
 # 🛠️ Skills Library
 
-**59 AI agent skills built for Amp — covering productivity, development, data, communication, and more.**
+**65 AI agent skills built for Amp — covering productivity, development, data, communication, and more.**
 
 Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. Skills are loaded via the `skill` tool or auto-routed by the `auto-pilot` skill.
 
@@ -69,6 +69,12 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 | 57 | [web-research](./web-research/) | 🔎 Research & Insights | Search & synthesize external information |
 | 58 | [writing-feedback](./writing-feedback/) | ✍️ Writing & Content | Write performance feedback (IBB model) |
 | 59 | [writing-requirements-docs](./writing-requirements-docs/) | 📝 Product | Write PRDs from rough notes with evidence |
+| 60 | [enterprise-search](./enterprise-search/) | 🔎 Research & Insights | Search internal knowledge base, chat with AI, read docs |
+| 61 | [feature-request-scanner](./feature-request-scanner/) | 📝 Product | Daily scan of feedback channels for feature requests |
+| 62 | [roadmap-intake](./roadmap-intake/) | 📝 Product | Create roadmap projects from Slack threads or links |
+| 63 | [graphql-schema-discovery](./graphql-schema-discovery/) | 📊 Data & Analytics | Discover and navigate GraphQL schemas via MCP or introspection |
+| 64 | [communication-coach](./communication-coach/) | ✍️ Writing & Content | Concise, high-signal coaching for internal comms |
+| 65 | [merchant-lookup](./merchant-lookup/) | 🔎 Research & Insights | Query merchant/customer data via admin tools |
 
 ---
 
@@ -109,6 +115,7 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 - [databricks](./databricks/) — Query Databricks Lakehouse via SQL
 - [datadog](./datadog/) — Query logs, metrics, traces, monitors, and RUM
 - [looker](./looker/) — Interact with Looker dashboards, queries, and explores
+- [graphql-schema-discovery](./graphql-schema-discovery/) — Discover and navigate GraphQL schemas via MCP or introspection
 - [snowflake](./snowflake/) — Query Snowflake data warehouse via SQL
 
 ### 🧪 Experimentation
@@ -122,8 +129,10 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 - [prototype-builder](./prototype-builder/) — Scaffold interactive HTML prototypes
 
 ### 📝 Product
+- [feature-request-scanner](./feature-request-scanner/) — Daily scan of feedback channels for feature requests
 - [logging-feature-requests](./logging-feature-requests/) — Log feature requests from Slack to sheet
 - [product](./product/) — Search product docs and requirements
+- [roadmap-intake](./roadmap-intake/) — Create roadmap projects from Slack threads or links
 - [spec-creator](./spec-creator/) — Create and iterate on product specs
 - [writing-requirements-docs](./writing-requirements-docs/) — Write PRDs from rough notes with evidence
 
@@ -134,6 +143,7 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 - [project-status](./project-status/) — Gather project state across multiple sources
 
 ### ✍️ Writing & Content
+- [communication-coach](./communication-coach/) — Concise, high-signal coaching for internal comms
 - [reflect](./reflect/) — Guided reflection coach for performance reviews
 - [writing-feedback](./writing-feedback/) — Write performance feedback using IBB model
 
@@ -170,7 +180,9 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 - [todo](./todo/) — Persistent to-do list with proactive reminders and auto-capture
 
 ### 🔎 Research & Insights
+- [enterprise-search](./enterprise-search/) — Search internal knowledge base, chat with AI, read docs
 - [feedback-searcher](./feedback-searcher/) — Synthesize customer feedback across sources
+- [merchant-lookup](./merchant-lookup/) — Query merchant/customer data via admin tools
 - [web-research](./web-research/) — Search and synthesize external information
 
 ---

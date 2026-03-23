@@ -8,6 +8,7 @@ Write-ups on AI workflows, observations, experiments, and takeaways from buildin
 
 | # | Title | Date | Tags |
 |---|-------|------|------|
+| 5 | [Cutting 80% of the Noise from My AI Memory System](./2026-03-23-amp-mem-noise-reduction.md) | 2026-03-23 | amp-mem, memory-system, signal-to-noise, plugin, noise-reduction |
 | 4 | [I Stopped Maintaining My To-Do List and Let the Agent Do It](./2026-03-14-todo-system.md) | 2026-03-14 | workflow, productivity, to-do, proactive-agent |
 | 3 | [The Signal-to-Noise Problem in AI Memory](./2026-03-11-tuning-memory-noise.md) | 2026-03-11 | memory-system, signal-to-noise, amp-mem, tuning |
 | 2 | [Building a Persistent Memory System for Amp — From Zero to Cross-Session Intelligence](./2026-03-05-building-amp-mem.md) | 2026-03-05 | amp-plugin, memory-system, sqlite, ai-agents, amp-mem, cross-session |
