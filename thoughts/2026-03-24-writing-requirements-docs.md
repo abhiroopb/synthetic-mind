@@ -12,7 +12,7 @@ In early February 2026, a few of us decided to try something different. What if 
 
 The idea started simple: stand up a repo with a clear folder structure — `requirements/`, `architecture/`, `releases/`, `prototypes/` — and write specs in markdown. Version-controlled. Reviewable via PR. Searchable. No more Google Docs graveyards.
 
-But the real unlock came when a teammate built an agent skill to automate the writing process itself.
+But the real unlock came when I built an agent skill to automate the writing process itself.
 
 ## The Idea
 
@@ -32,7 +32,7 @@ Clean, predictable, boring in the best way. Any PM could find any spec by naviga
 
 ### Week 2: The skill
 
-A teammate built the `writing-requirements-docs` skill — an agent module that guides a PM through creating a structured PRD. It came with a `GUIDE.md` that defined the exact sections every requirements doc should have:
+I built the `writing-requirements-docs` skill — an agent module that guides a PM through creating a structured PRD. It came with a `GUIDE.md` that defined the exact sections every requirements doc should have:
 
 - Problem statement
 - User stories

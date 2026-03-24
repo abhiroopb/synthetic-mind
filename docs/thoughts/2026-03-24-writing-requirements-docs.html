@@ -61,7 +61,7 @@
   <p>Every PM I know has the same complaint about product specs: they take forever to write, they're always slightly different formats, they live in Google Docs where they rot, and nobody reads them until something goes wrong.</p>
   <p>In early February 2026, a few of us decided to try something different. What if product specs were markdown files in a Git repo? What if they lived alongside prototypes? And what if an AI agent could do 80% of the scaffolding work?</p>
   <p>The idea started simple: stand up a repo with a clear folder structure — <code>requirements/</code>, <code>architecture/</code>, <code>releases/</code>, <code>prototypes/</code> — and write specs in markdown. Version-controlled. Reviewable via PR. Searchable. No more Google Docs graveyards.</p>
-  <p>But the real unlock came when a teammate built an agent skill to automate the writing process itself.</p>
+  <p>But the real unlock came when I built an agent skill to automate the writing process itself.</p>
 
   <h2>The Idea</h2>
 
@@ -75,7 +75,7 @@
   <p>Clean, predictable, boring in the best way. Any PM could find any spec by navigating the folder tree. No search required.</p>
 
   <h3>Week 2: The skill</h3>
-  <p>A teammate built the <code>writing-requirements-docs</code> skill — an agent module that guides a PM through creating a structured PRD. It came with a <code>GUIDE.md</code> that defined the exact sections every requirements doc should have:</p>
+  <p>I built the <code>writing-requirements-docs</code> skill — an agent module that guides a PM through creating a structured PRD. It came with a <code>GUIDE.md</code> that defined the exact sections every requirements doc should have:</p>
   <ul>
     <li>Problem statement</li>
     <li>User stories</li>
