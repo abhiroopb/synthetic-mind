@@ -2,7 +2,7 @@
 
 ## TL;DR
 
-Over five weeks, a small team went from "we should put our specs in markdown" to a fully working AI skill that guides PMs through writing structured product requirements — complete with auto-referenced internal data sources, co-located prototypes, and a sub-one-hour first draft. The key insight: PRDs aren't special documents. They're structured markdown that an agent can scaffold, research, and assemble faster than any PM can from scratch.
+Over two weeks, a small team went from "we should put our specs in markdown" to a fully working AI skill that guides PMs through writing structured product requirements — complete with auto-referenced internal data sources, co-located prototypes, and a sub-one-hour first draft. The key insight: PRDs aren't special documents. They're structured markdown that an agent can scaffold, research, and assemble faster than any PM can from scratch.
 
 ## Context
 
