@@ -66,6 +66,10 @@ That's the model: agent does the grunt work, PM does the thinking.
 
 Leadership saw the results and pushed to make this the standard approach — a "golden path" for writing product specs. The channel that started as a temporary experiment became permanent infrastructure.
 
+## Challenges
+
+**Markdown doesn't have a good commenting story.** This is the one area where Google Docs still wins decisively. In Docs, you highlight a sentence, leave a comment, someone replies, you resolve it. It's frictionless. In a markdown repo, your options are PR review comments (which only work on diffs, not the full document) or opening issues (which lose the inline context entirely). We haven't solved this yet. HackMD gets partway there with collaborative editing, but it's not the same as native inline commenting on a living doc. This is probably the biggest adoption blocker we'll need to address.
+
 ## What I Learned
 
 **Markdown beats Google Docs for specs.** Version control, PR reviews, co-located prototypes, searchability — it's better in every way that matters for technical documents. The only thing Google Docs has is real-time collaboration, and for specs, async review via PR is actually preferable.
