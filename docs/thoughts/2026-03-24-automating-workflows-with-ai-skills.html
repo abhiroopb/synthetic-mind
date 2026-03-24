@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How I Automated Every Workflow with AI Skills — synthetic-mind</title>
+  <meta name="description" content="A practical guide to building 35+ AI agent skills that automate morning triage, email, project management, and more — no engineering degree required.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-date {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../skills/">Skills</a>
+      <a href="../memory/">Memory</a>
+      <a href="../setup/">Setup</a>
+      <a href="./">Thoughts</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All thoughts</a>
+
+  <h1>How I Automated Every Workflow with AI Skills</h1>
+  <div class="article-meta">
+    <span class="article-date">2026-03-24</span>
+    <span class="article-tag">workflow</span>
+    <span class="article-tag">skills</span>
+    <span class="article-tag">guide</span>
+  </div>
+
+  <h2>TL;DR</h2>
+  <p>I built 35+ custom skills for <a href="https://ampcode.com">Amp</a> that automate everything from morning triage to email replies to project status reports. I'm a PM, not an engineer. Here's how the system works and how you can build your own.</p>
+
+  <h2>Context</h2>
+  <p>Most of my day used to be operational overhead — checking Slack, triaging email, updating Linear tickets, writing status reports, scanning channels for feature requests. Important work, but repetitive. I wanted to spend more time <em>thinking about product</em> and less time context-switching between 12 tabs.</p>
+  <p>AI coding agents like Amp can do way more than write code. They can read your Slack, draft your emails, update your project tracker, and aggregate a status report across five different tools — all in one conversation. The trick is teaching them <em>how you work</em>.</p>
+
+  <h2>The System</h2>
+  <p>Four layers make this work:</p>
+
+  <h3>1. AGENTS.md — the brain</h3>
+  <p>This is a markdown file that lives at <code>~/AGENTS.md</code>. It tells the agent who you are, what tools you prefer, what to do at session start, and what boundaries to respect. Think of it as an instruction manual for your AI.</p>
+<pre><code># Identity
+Name: Your Name | Email: you@company.com
+Team: Your Team
+
+# Session Start
+1. Check VPN status
+2. Load todo skill → surface open items
+3. Run start-of-day triage
+
+# Boundaries
+✅ Always: Use skills before raw tool calls
+⚠️ Ask first: Posting to Slack, sending emails
+🚫 Never: Commit secrets, send without preview</code></pre>
+  <p>This is where you encode your preferences. The agent reads it at the start of every session and follows it like a playbook.</p>
+
+  <h3>2. Skills — modular automation</h3>
+  <p>Each skill is a <code>SKILL.md</code> file with instructions for one specific workflow. Here are the ones I use most:</p>
+  <ul>
+    <li><strong>start-of-day</strong> — triages Slack unreads, Gmail inbox, Calendar, GitHub PRs, and notifications from Figma, Drive, Linear, and Notion. Inbox zero in under 10 minutes.</li>
+    <li><strong>slack / gcal / gmail</strong> — read and write across communication tools. Draft replies, schedule events, search threads.</li>
+    <li><strong>linear / project-status / todo</strong> — create issues, aggregate status from multiple sources, auto-capture to-dos from conversations.</li>
+    <li><strong>memory / kb-distill</strong> — persistent cross-session memory backed by SQLite. Captures decisions and preferences, primes future sessions with context.</li>
+    <li><strong>auto-pilot</strong> — the router. One meta-skill that routes any request to the right sub-skill. You never need to remember which skill does what.</li>
+    <li><strong>feature-request-scanner / blueprint-intake</strong> — scans Slack channels for feature requests, auto-classifies them, and files to the roadmap tracker.</li>
+  </ul>
+  <p>Skills are just markdown. No code required. You're writing instructions the same way you'd write them for a human teammate.</p>
+
+  <h3>3. Memory — context that persists</h3>
+  <p>Without memory, every session starts from zero. I built <a href="../memory/">amp-mem</a> — a SQLite + FTS5 memory system that passively captures what matters as you work. When you start a new session, it automatically injects relevant past context. No vector database, no embeddings — just full-text search and an LLM that knows what to look for.</p>
+  <p>Over time, the agent learns your preferences, your team's names, your project acronyms, your communication style. That compounds fast.</p>
+
+  <h3>4. To-do system — auto-capture everything</h3>
+  <p>Action items from Slack conversations, email follow-ups, Linear tickets — they all get auto-captured into a persistent <code>todo.json</code>. The system syncs high-priority items to Google Calendar, surfaces the top 5 at every session start, and auto-completes items when it detects you've done them.</p>
+
+  <h2>How to Build Your Own</h2>
+  <ol>
+    <li><strong>Start with AGENTS.md.</strong> Define who you are, what you want automated at session start, and what boundaries matter. This takes 15 minutes and immediately changes the agent's behavior.</li>
+    <li><strong>Build your first skill.</strong> Pick the workflow you hate most. For most people, that's morning triage. Write a <code>SKILL.md</code> that describes the steps — "check Slack unreads, summarize unread DMs, check Gmail for anything urgent." That's it. That's a skill.</li>
+    <li><strong>Add auto-pilot.</strong> Create a routing skill that maps natural language requests to your other skills. Now you just talk and the right thing happens.</li>
+    <li><strong>Add memory.</strong> Install <a href="../memory/">amp-mem</a> so context persists. This is where the compound effect kicks in — the agent remembers what you told it last week.</li>
+    <li><strong>Let skills compose.</strong> Skills calling other skills is where it gets powerful. My <code>project-status</code> skill calls <code>slack</code>, <code>gdrive</code>, <code>linear</code>, and <code>launchdarkly</code> to build a unified status report. Each skill is simple. The composition is what makes it feel like magic.</li>
+  </ol>
+
+  <h2>What I Learned</h2>
+  <ol>
+    <li><strong>The compound effect is real.</strong> Each skill makes every other skill more useful. Memory makes all skills smarter. Auto-pilot makes all skills accessible. The value isn't linear — it's exponential.</li>
+    <li><strong>Start with the workflow you hate most.</strong> That's where you'll get the most immediate relief and motivation to keep going.</li>
+    <li><strong>Skills don't need to be perfect.</strong> They need to save you 5 minutes a day. A skill that works 80% of the time is still 80% less work for you.</li>
+    <li><strong>The agent learns your preferences over time</strong> — but only if you give it memory. Without persistence, every session is a cold start.</li>
+    <li><strong>Non-engineers can build this.</strong> SKILL.md files are just markdown instructions. If you can write a checklist, you can build a skill.</li>
+  </ol>
+
+  <hr>
+  <p><em>All 35+ skills I've built are open source in this repo. <a href="../skills/">Browse the full catalog</a> or <a href="../setup/">follow the setup guide</a> to get started.</em></p>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>

@@ -71,6 +71,7 @@ Or clone the repo and point Amp at the `skills/` directory. The `auto-pilot` ski
 
 | Date | Update |
 |------|--------|
+| 2026-03-24 | 📝 New thought: [How I Automated Every Workflow with AI Skills](./thoughts/2026-03-24-automating-workflows-with-ai-skills.md) — a practical guide to building 35+ AI agent skills for morning triage, email, project management, and more |
 | 2026-03-23 | 📝 New thought: [Cutting 80% of the Noise from My AI Memory System](./thoughts/2026-03-23-amp-mem-noise-reduction.md) — 7 plugin changes that cut observation volume by ~80% while preserving signal |
 | 2026-03-23 | 🆕 6 new skills: enterprise-search, feature-request-scanner, roadmap-intake, graphql-schema-discovery, communication-coach, merchant-lookup |
 | 2026-03-14 | 📝 New thought: [I Stopped Maintaining My To-Do List and Let the Agent Do It](./thoughts/2026-03-14-todo-system.md) — a proactive to-do system that auto-captures, prioritizes, and syncs to calendar |
