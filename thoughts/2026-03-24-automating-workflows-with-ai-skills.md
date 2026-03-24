@@ -43,12 +43,12 @@ Each skill is a `SKILL.md` file with instructions for a specific workflow. I org
 
 | Category | Skills | What They Do |
 |----------|--------|-------------|
-| **Morning triage** | `start-of-day` | Triages Slack unreads, Gmail inbox, Calendar, GitHub PRs, Figma/Drive/Linear/Notion notifications. One command, full inbox zero. |
-| **Communication** | `slack`, `gcal`, `gmail` | Read/write Slack, manage calendar events, draft email replies |
-| **Project management** | `linear`, `plan-to-linear`, `project-status`, `todo` | Create/manage issues, aggregate status from Slack + GitHub + Drive + feature flags, auto-capture action items |
-| **Knowledge** | `memory`, `kb-distill`, `kb-promote` | Persistent cross-session memory, compress observations into structured notes, promote patterns into permanent rules |
-| **Product** | `feature-request-scanner`, `launch-a-product` | Daily scans of feedback channels for feature requests, GTM readiness checks |
-| **Meta** | `auto-pilot`, `skill-management`, `building-skills` | Auto-routing, self-management, creating new skills |
+| **Morning triage** | [`start-of-day`](https://abhiroopb.github.io/synthetic-mind/skills/start-of-day) | Triages Slack unreads, Gmail inbox, Calendar, GitHub PRs, Figma/Drive/Linear/Notion notifications. One command, full inbox zero. |
+| **Communication** | [`slack`](https://abhiroopb.github.io/synthetic-mind/skills/slack), [`gcal`](https://abhiroopb.github.io/synthetic-mind/skills/gcal), [`gmail`](https://abhiroopb.github.io/synthetic-mind/skills/gmail) | Read/write Slack, manage calendar events, draft email replies |
+| **Project management** | [`linear`](https://abhiroopb.github.io/synthetic-mind/skills/linear), [`plan-to-linear`](https://abhiroopb.github.io/synthetic-mind/skills/plan-to-linear), [`project-status`](https://abhiroopb.github.io/synthetic-mind/skills/project-status), [`todo`](https://abhiroopb.github.io/synthetic-mind/skills/todo) | Create/manage issues, aggregate status from Slack + GitHub + Drive + feature flags, auto-capture action items |
+| **Knowledge** | [`memory`](https://abhiroopb.github.io/synthetic-mind/skills/memory), [`kb-distill`](https://abhiroopb.github.io/synthetic-mind/skills/kb-distill), [`kb-promote`](https://abhiroopb.github.io/synthetic-mind/skills/kb-promote) | Persistent cross-session memory, compress observations into structured notes, promote patterns into permanent rules |
+| **Product** | [`feature-request-scanner`](https://abhiroopb.github.io/synthetic-mind/skills/logging-feature-requests), [`launch-a-product`](https://abhiroopb.github.io/synthetic-mind/skills/product) | Daily scans of feedback channels for feature requests, GTM readiness checks |
+| **Meta** | [`auto-pilot`](https://abhiroopb.github.io/synthetic-mind/skills/auto-pilot), [`skill-management`](https://abhiroopb.github.io/synthetic-mind/skills/skill-management) | Auto-routing, self-management, creating new skills |
 
 Each skill is self-contained. You can use one skill or thirty — they compose but don't depend on each other.
 
