@@ -56,7 +56,7 @@ So when you're writing a requirements doc for a new checkout feature, the agent 
 
 ### Week 4: First real test
 
-A PM used the skill to write a "Spread of Hours" spec — a compliance feature for labor law calculations. Complete with a working prototype.
+A PM used the skill to write a spec for a new compliance feature — something with complex regulatory requirements and edge cases. Complete with a working prototype.
 
 **It took less than an hour.** The PM said the experience was smooth. The agent handled the research, the PM provided the product judgment, and the output was a clean markdown spec with a functional prototype sitting right next to it in the same folder.
 
