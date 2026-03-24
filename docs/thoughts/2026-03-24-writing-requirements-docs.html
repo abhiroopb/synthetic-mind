@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>We Built an AI Skill That Writes Product Requirements Docs — synthetic-mind</title>
+  <meta name="description" content="How a team went from markdown-first specs to an agent skill that writes PRDs with auto-referenced internal sources — in five weeks.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-date {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../skills/">Skills</a>
+      <a href="../memory/">Memory</a>
+      <a href="../setup/">Setup</a>
+      <a href="./">Thoughts</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All thoughts</a>
+
+  <h1>We Built an AI Skill That Writes Product Requirements Docs</h1>
+  <div class="article-meta">
+    <span class="article-date">2026-03-24</span>
+    <span class="article-tag">product-management</span>
+    <span class="article-tag">agent-skill</span>
+    <span class="article-tag">prd</span>
+  </div>
+
+  <h2>TL;DR</h2>
+  <p>Over five weeks, a small team went from "we should put our specs in markdown" to a fully working AI skill that guides PMs through writing structured product requirements — complete with auto-referenced internal data sources, co-located prototypes, and a sub-one-hour first draft. The key insight: PRDs aren't special documents. They're structured markdown that an agent can scaffold, research, and assemble faster than any PM can from scratch.</p>
+
+  <h2>Context</h2>
+  <p>Every PM I know has the same complaint about product specs: they take forever to write, they're always slightly different formats, they live in Google Docs where they rot, and nobody reads them until something goes wrong.</p>
+  <p>In early February 2026, a few of us decided to try something different. What if product specs were markdown files in a Git repo? What if they lived alongside prototypes? And what if an AI agent could do 80% of the scaffolding work?</p>
+  <p>The idea started simple: stand up a repo with a clear folder structure — <code>requirements/</code>, <code>architecture/</code>, <code>releases/</code>, <code>prototypes/</code> — and write specs in markdown. Version-controlled. Reviewable via PR. Searchable. No more Google Docs graveyards.</p>
+  <p>But the real unlock came when a teammate built an agent skill to automate the writing process itself.</p>
+
+  <h2>The Idea</h2>
+
+  <h3>Week 1: Structure first</h3>
+  <p>The repo went up with a markdown-first philosophy. Product areas got their own scopes — payments, point-of-sale, retail, and so on. Each area had the same folder structure:</p>
+<pre><code>payments-checkout/
+  requirements/
+  architecture/
+  releases/
+  prototypes/</code></pre>
+  <p>Clean, predictable, boring in the best way. Any PM could find any spec by navigating the folder tree. No search required.</p>
+
+  <h3>Week 2: The skill</h3>
+  <p>A teammate built the <code>writing-requirements-docs</code> skill — an agent module that guides a PM through creating a structured PRD. It came with a <code>GUIDE.md</code> that defined the exact sections every requirements doc should have:</p>
+  <ul>
+    <li>Problem statement</li>
+    <li>User stories</li>
+    <li>Success metrics</li>
+    <li>Requirements (functional and non-functional)</li>
+    <li>Open questions</li>
+    <li>Dependencies</li>
+  </ul>
+  <p>The skill doesn't just create a template and leave you alone. It walks you through each section, asks clarifying questions, and drafts content based on your answers. Think of it as pair-writing with an agent that knows what a good PRD looks like.</p>
+
+  <h3>Week 3: Internal source integration</h3>
+  <p>This was the game-changer. The skill got updated to automatically search internal sources when building out a PRD:</p>
+  <ul>
+    <li><strong>Slack</strong> — finds relevant conversations and decisions</li>
+    <li><strong>Data warehouse</strong> — pulls metrics and usage data</li>
+    <li><strong>Project management tools</strong> — references related tickets and roadmap items</li>
+    <li><strong>Enterprise search</strong> — surfaces existing docs and prior art</li>
+  </ul>
+  <p>So when you're writing a requirements doc for a new checkout feature, the agent finds the Slack thread where the team discussed it, pulls the current conversion metrics, links the related engineering tickets, and cites the previous spec that touched the same area. All automatically.</p>
+
+  <h3>Week 4: First real test</h3>
+  <p>A PM used the skill to write a "Spread of Hours" spec — a compliance feature for labor law calculations. Complete with a working prototype.</p>
+  <p><strong>It took less than an hour.</strong> The PM said the experience was smooth. The agent handled the research, the PM provided the product judgment, and the output was a clean markdown spec with a functional prototype sitting right next to it in the same folder.</p>
+  <p>That's the model: agent does the grunt work, PM does the thinking.</p>
+
+  <h3>Week 5: Golden path</h3>
+  <p>Leadership saw the results and pushed to make this the standard approach — a "golden path" for writing product specs. The channel that started as a temporary experiment became permanent infrastructure.</p>
+
+  <h2>What I Learned</h2>
+  <p><strong>Markdown beats Google Docs for specs.</strong> Version control, PR reviews, co-located prototypes, searchability — it's better in every way that matters for technical documents. The only thing Google Docs has is real-time collaboration, and for specs, async review via PR is actually preferable.</p>
+  <p><strong>Agent skills work best as guides, not generators.</strong> The skill doesn't generate a PRD from a one-line prompt. It walks you through the process section by section. The PM stays in the loop, making decisions and providing context. The agent handles structure, research, and drafting. That division of labor is what makes the output actually good.</p>
+  <p><strong>Auto-referencing internal sources is the real unlock.</strong> Any PM can write a problem statement. The hard part is finding the supporting data — the Slack thread from three months ago, the usage metrics, the related spec from another team. The agent does that research in seconds instead of hours.</p>
+  <p><strong>Prototypes should live with requirements, not separately.</strong> When the prototype is in the same folder as the spec, it gets reviewed together. The spec describes what should happen; the prototype shows what it looks like. Engineers can see both in context.</p>
+  <p><strong>The first real test matters more than months of iteration.</strong> We spent two weeks on structure and tooling. Then one PM used it for a real spec and validated the whole approach in under an hour. Ship the minimum, test it on a real problem, iterate from there.</p>
+
+  <hr>
+  <p><em>Related: <a href="./2026-03-05-start-of-day">I Replaced My Morning Routine with a Single Command</a> — another skill that turned a manual process into an agent-guided workflow.</em></p>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>

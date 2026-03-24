@@ -8,6 +8,7 @@ Write-ups on AI workflows, observations, experiments, and takeaways from buildin
 
 | # | Title | Date | Tags |
 |---|-------|------|------|
+| 7 | [We Built an AI Skill That Writes Product Requirements Docs](./2026-03-24-writing-requirements-docs.md) | 2026-03-24 | prd, agent-skill, markdown, product-management, requirements |
 | 6 | [How I Automated Every Workflow with AI Skills](./2026-03-24-automating-workflows-with-ai-skills.md) | 2026-03-24 | workflow, skills, guide, automation, ai-agents |
 | 5 | [Cutting 80% of the Noise from My AI Memory System](./2026-03-23-amp-mem-noise-reduction.md) | 2026-03-23 | amp-mem, memory-system, signal-to-noise, plugin, noise-reduction |
 | 4 | [I Stopped Maintaining My To-Do List and Let the Agent Do It](./2026-03-14-todo-system.md) | 2026-03-14 | workflow, productivity, to-do, proactive-agent |
