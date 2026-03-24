@@ -89,7 +89,7 @@ Team: Your Team
     <li><strong>linear / project-status / todo</strong> — create issues, aggregate status from multiple sources, auto-capture to-dos from conversations.</li>
     <li><strong>memory / kb-distill</strong> — persistent cross-session memory backed by SQLite. Captures decisions and preferences, primes future sessions with context.</li>
     <li><strong>auto-pilot</strong> — the router. One meta-skill that routes any request to the right sub-skill. You never need to remember which skill does what.</li>
-    <li><strong>feature-request-scanner / blueprint-intake</strong> — scans Slack channels for feature requests, auto-classifies them, and files to the roadmap tracker.</li>
+    <li><strong>feature-request-scanner</strong> — scans Slack channels for feature requests, auto-classifies them, and logs to a tracking sheet.</li>
   </ul>
   <p>Skills are just markdown. No code required. You're writing instructions the same way you'd write them for a human teammate.</p>
 
@@ -106,7 +106,7 @@ Team: Your Team
     <li><strong>Build your first skill.</strong> Pick the workflow you hate most. For most people, that's morning triage. Write a <code>SKILL.md</code> that describes the steps — "check Slack unreads, summarize unread DMs, check Gmail for anything urgent." That's it. That's a skill.</li>
     <li><strong>Add auto-pilot.</strong> Create a routing skill that maps natural language requests to your other skills. Now you just talk and the right thing happens.</li>
     <li><strong>Add memory.</strong> Install <a href="../memory/">amp-mem</a> so context persists. This is where the compound effect kicks in — the agent remembers what you told it last week.</li>
-    <li><strong>Let skills compose.</strong> Skills calling other skills is where it gets powerful. My <code>project-status</code> skill calls <code>slack</code>, <code>gdrive</code>, <code>linear</code>, and <code>launchdarkly</code> to build a unified status report. Each skill is simple. The composition is what makes it feel like magic.</li>
+    <li><strong>Let skills compose.</strong> Skills calling other skills is where it gets powerful. My <code>project-status</code> skill calls <code>slack</code>, <code>gdrive</code>, <code>linear</code>, and <code>github</code> to build a unified status report. Each skill is simple. The composition is what makes it feel like magic.</li>
   </ol>
 
   <h2>What I Learned</h2>

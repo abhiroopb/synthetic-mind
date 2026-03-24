@@ -6,7 +6,7 @@ I built 35+ custom skills for [Amp](https://ampcode.com) that automate everythin
 
 ## Context
 
-I spend my days as a PM at Square doing a lot of operational work — checking email, triaging Slack, updating Linear tickets, writing status reports, scanning channels for feature requests. Important work, but repetitive. I wanted to spend more time *thinking about product* and less time doing the busywork around it.
+I spend my days as a PM doing a lot of operational work — checking email, triaging Slack, updating Linear tickets, writing status reports, scanning channels for feature requests. Important work, but repetitive. I wanted to spend more time *thinking about product* and less time doing the busywork around it.
 
 The insight: AI coding agents like Amp can do way more than write code. They can read your Slack, draft your emails, manage your calendar, triage your inbox, and update your project tracker — if you teach them how. That's what skills are. Markdown files that teach an agent a workflow.
 
@@ -22,7 +22,7 @@ A simplified version looks like this:
 
 ```markdown
 # Identity
-You are an AI assistant for a PM at Block/Square.
+You are an AI assistant for a product manager.
 
 # Preferences
 - Be concise. No fluff.
@@ -47,14 +47,14 @@ Each skill is a `SKILL.md` file with instructions for a specific workflow. I org
 | **Communication** | `slack`, `gcal`, `gmail` | Read/write Slack, manage calendar events, draft email replies |
 | **Project management** | `linear`, `plan-to-linear`, `project-status`, `todo` | Create/manage issues, aggregate status from Slack + GitHub + Drive + feature flags, auto-capture action items |
 | **Knowledge** | `memory`, `kb-distill`, `kb-promote` | Persistent cross-session memory, compress observations into structured notes, promote patterns into permanent rules |
-| **Product** | `blueprint-intake`, `feature-request-scanner`, `launch-a-product` | Intake feature requests from Slack threads, daily scans of feedback channels, GTM readiness checks |
+| **Product** | `feature-request-scanner`, `launch-a-product` | Daily scans of feedback channels for feature requests, GTM readiness checks |
 | **Meta** | `auto-pilot`, `skill-management`, `building-skills` | Auto-routing, self-management, creating new skills |
 
 Each skill is self-contained. You can use one skill or thirty — they compose but don't depend on each other.
 
 ### 3. Auto-Pilot — The Router
 
-This is the skill that changed everything. Instead of remembering which skill does what, I just say what I need and `auto-pilot` routes it to the right skill automatically. "Scan my inbox" → `start-of-day`. "File this as a Blueprint project" → `blueprint-intake`. "What's the status of Project X?" → `project-status`.
+This is the skill that changed everything. Instead of remembering which skill does what, I just say what I need and `auto-pilot` routes it to the right skill automatically. "Scan my inbox" → `start-of-day`. "Log this feature request" → `feature-request-scanner`. "What's the status of Project X?" → `project-status`.
 
 One entry point for everything.
 
@@ -74,7 +74,7 @@ Action items get auto-captured from Slack messages, Gmail, Calendar events, and 
 2. **Build your first skill.** Pick the workflow you repeat most. I'd suggest `start-of-day` — morning triage is universal and the ROI is immediate.
 3. **Add auto-pilot routing.** Write one routing skill so you stop needing to invoke skills by name.
 4. **Add memory.** Even a simple SQLite store that captures key decisions changes everything about session continuity.
-5. **Let skills compose.** `start-of-day` calls `slack`, `gmail`, `gcal`, and `todo`. `project-status` pulls from Slack, GitHub, Drive, and Linear. Skills calling skills is where it gets powerful.
+5. **Let skills compose.** `start-of-day` calls `slack`, `gmail`, `gcal`, and `todo`. `project-status` pulls from Slack, GitHub, Drive, Linear, and feature flags. Skills calling skills is where it gets powerful.
 
 ## What I Learned
 
