@@ -1,6 +1,6 @@
 # 🛠️ Skills Library
 
-**65 AI agent skills built for Amp — covering productivity, development, data, communication, and more.**
+**76 AI agent skills built for Amp — covering productivity, development, data, communication, and more.**
 
 Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. Skills are loaded via the `skill` tool or auto-routed by the `auto-pilot` skill.
 
@@ -15,7 +15,10 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 | 3 | [airtable](./airtable/) | 📊 Data & Analytics | Manage Airtable bases, tables, and records |
 | 4 | [android-emulator](./android-emulator/) | 📱 Mobile & Devices | Manage Android emulators (AVDs) |
 | 5 | [auto-pilot](./auto-pilot/) | 🤖 Agent Behavior | Route requests to the correct skill(s) |
-| 6 | [code-review-general](./code-review-general/) | 🔀 Git & PRs | Address PR code review feedback |
+| 6 | [blueprint-intake](./blueprint-intake/) | 📝 Product | Create roadmap projects from Slack threads |
+| 7 | [cash-rounding-responder](./cash-rounding-responder/) | 💬 Communication | Triage and draft replies to feature feedback emails |
+| 8 | [code-review-general](./code-review-general/) | 🔀 Git & PRs | Address PR code review feedback |
+| 9 | [codesearch](./codesearch/) | 🔎 Research & Insights | Search code patterns across company repositories |
 | 7 | [controlling-computer](./controlling-computer/) | 🖥️ System & macOS | Control Mac via AppleScript & shell |
 | 8 | [converting-gdocs-to-markdown](./converting-gdocs-to-markdown/) | 📄 Documents | Convert Google Docs to markdown |
 | 9 | [data-analyst](./data-analyst/) | 📊 Data & Analytics | Drive insightful visualizations and charts |
@@ -27,14 +30,17 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 | 15 | [gdrive](./gdrive/) | 📄 Documents | Google Drive, Docs, Sheets, and Slides |
 | 16 | [gh-pr-read](./gh-pr-read/) | 🔀 Git & PRs | Read & summarize GitHub pull requests |
 | 17 | [git-worktree](./git-worktree/) | 🔀 Git & PRs | Manage git worktrees for parallel branches |
-| 18 | [gmail](./gmail/) | 💬 Communication | Search, read, send & manage emails |
-| 19 | [historical-info](./historical-info/) | 🧠 Memory & Context | Find what you've been working on across sources |
+| 18 | [glean](./glean/) | 🔎 Research & Insights | Search internal knowledge base via enterprise search |
+| 19 | [gmail](./gmail/) | 💬 Communication | Search, read, send & manage emails |
+| 20 | [historical-info](./historical-info/) | 🧠 Memory & Context | Find what you've been working on across sources |
 | 20 | [ios-simulator](./ios-simulator/) | 📱 Mobile & Devices | Manage iOS simulators for testing |
 | 21 | [kb-distill](./kb-distill/) | 🧠 Memory & Context | Distill raw observations into knowledge notes |
 | 22 | [kb-promote](./kb-promote/) | 🧠 Memory & Context | Promote high-value notes into AGENTS.md rules |
 | 23 | [kb-style-matrix](./kb-style-matrix/) | 🧠 Memory & Context | Build communication voice profile from Slack |
-| 24 | [launchdarkly-cli](./launchdarkly-cli/) | 🧪 Experimentation | Manage feature flags via ldcli |
-| 25 | [linear](./linear/) | 📋 Task & Project Management | Issue tracking & project management |
+| 24 | [jack-guidance](./jack-guidance/) | ✍️ Writing & Content | Concise, direct coaching for internal communication |
+| 25 | [launch-a-product](./launch-a-product/) | 📝 Product | Guide PMs through GTM launch readiness |
+| 26 | [launchdarkly-cli](./launchdarkly-cli/) | 🧪 Experimentation | Manage feature flags via ldcli |
+| 27 | [linear](./linear/) | 📋 Task & Project Management | Issue tracking & project management |
 | 26 | [linear-to-execution](./linear-to-execution/) | 📋 Task & Project Management | Pick up a Linear issue for execution |
 | 27 | [logging-feature-requests](./logging-feature-requests/) | 📝 Product | Log feature requests from Slack to sheet |
 | 28 | [looker](./looker/) | 📊 Data & Analytics | Interact with Looker dashboards & queries |
@@ -75,6 +81,17 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 | 63 | [graphql-schema-discovery](./graphql-schema-discovery/) | 📊 Data & Analytics | Discover and navigate GraphQL schemas via MCP or introspection |
 | 64 | [communication-coach](./communication-coach/) | ✍️ Writing & Content | Concise, high-signal coaching for internal comms |
 | 65 | [merchant-lookup](./merchant-lookup/) | 🔎 Research & Insights | Query merchant/customer data via admin tools |
+| 66 | [pos-releases](./pos-releases/) | 📱 Mobile & Devices | Query release train schedules, branch cuts & rollout dates |
+| 67 | [regulator](./regulator/) | 🔎 Research & Insights | Query merchant data via admin tools |
+| 68 | [saving-cash-rounding-feedback](./saving-cash-rounding-feedback/) | 📝 Product | Save feature feedback to tracking doc |
+| 69 | [shipped-announcements](./shipped-announcements/) | 💬 Communication | Craft and post launch announcements to Slack |
+| 70 | [jack-guidance](./jack-guidance/) | ✍️ Writing & Content | Concise, direct coaching for internal communication |
+| 71 | [launch-a-product](./launch-a-product/) | 📝 Product | Guide PMs through GTM launch readiness |
+| 72 | [blueprint-intake](./blueprint-intake/) | 📝 Product | Create roadmap projects from Slack threads |
+| 73 | [cash-rounding-responder](./cash-rounding-responder/) | 💬 Communication | Triage and draft replies to feature feedback emails |
+| 74 | [codesearch](./codesearch/) | 🔎 Research & Insights | Search code patterns across company repositories |
+| 75 | [glean](./glean/) | 🔎 Research & Insights | Search internal knowledge base via enterprise search |
+| 76 | [synthetic-mind](./synthetic-mind/) | 🤖 Agent Behavior | Post thoughts, processes, and updates to this repo |
 
 ---
 
@@ -83,6 +100,7 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 ### 🤖 Agent Behavior
 - [auto-pilot](./auto-pilot/) — Route requests to the correct skill(s) automatically
 - [skill-management](./skill-management/) — List, add, remove, inspect, and edit skills
+- [synthetic-mind](./synthetic-mind/) — Post thoughts, processes, and updates to this repo
 
 ### 🧠 Memory & Context
 - [historical-info](./historical-info/) — Find what you've been working on across sources
@@ -124,15 +142,19 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 ### 📱 Mobile & Devices
 - [android-emulator](./android-emulator/) — Manage Android emulators (AVDs)
 - [ios-simulator](./ios-simulator/) — Manage iOS simulators for testing
+- [pos-releases](./pos-releases/) — Query release train schedules, branch cuts, and rollout dates
 
 ### 🚀 Deployment
 - [prototype-builder](./prototype-builder/) — Scaffold interactive HTML prototypes
 
 ### 📝 Product
+- [blueprint-intake](./blueprint-intake/) — Create roadmap projects from Slack threads
 - [feature-request-scanner](./feature-request-scanner/) — Daily scan of feedback channels for feature requests
+- [launch-a-product](./launch-a-product/) — Guide PMs through GTM launch readiness
 - [logging-feature-requests](./logging-feature-requests/) — Log feature requests from Slack to sheet
 - [product](./product/) — Search product docs and requirements
 - [roadmap-intake](./roadmap-intake/) — Create roadmap projects from Slack threads or links
+- [saving-cash-rounding-feedback](./saving-cash-rounding-feedback/) — Save feature feedback to tracking doc
 - [spec-creator](./spec-creator/) — Create and iterate on product specs
 - [writing-requirements-docs](./writing-requirements-docs/) — Write PRDs from rough notes with evidence
 
@@ -144,6 +166,7 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 
 ### ✍️ Writing & Content
 - [communication-coach](./communication-coach/) — Concise, high-signal coaching for internal comms
+- [jack-guidance](./jack-guidance/) — Concise, direct coaching for internal communication
 - [reflect](./reflect/) — Guided reflection coach for performance reviews
 - [writing-feedback](./writing-feedback/) — Write performance feedback using IBB model
 
@@ -163,7 +186,9 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 - [test-plan-creator](./test-plan-creator/) — Create test plans and acceptance criteria
 
 ### 💬 Communication
+- [cash-rounding-responder](./cash-rounding-responder/) — Triage and draft replies to feature feedback emails
 - [gmail](./gmail/) — Search, read, send, and manage emails
+- [shipped-announcements](./shipped-announcements/) — Craft and post launch announcements to Slack
 - [slack](./slack/) — Search, read, and post Slack messages
 
 ### 📆 Calendar & Scheduling
@@ -180,9 +205,12 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 - [todo](./todo/) — Persistent to-do list with proactive reminders and auto-capture
 
 ### 🔎 Research & Insights
+- [codesearch](./codesearch/) — Search code patterns across company repositories
 - [enterprise-search](./enterprise-search/) — Search internal knowledge base, chat with AI, read docs
 - [feedback-searcher](./feedback-searcher/) — Synthesize customer feedback across sources
+- [glean](./glean/) — Search internal knowledge base via enterprise search
 - [merchant-lookup](./merchant-lookup/) — Query merchant/customer data via admin tools
+- [regulator](./regulator/) — Query merchant data via admin tools
 - [web-research](./web-research/) — Search and synthesize external information
 
 ---
