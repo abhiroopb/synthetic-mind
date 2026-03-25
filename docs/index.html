@@ -712,7 +712,7 @@
   <div class="container">
     <div class="section-header">
       <h2>What I've Built</h2>
-      <p>105+ AI agent skills powering a PM's daily workflow — from morning triage to PRD writing to data analysis</p>
+      <p>Original skills I created for my daily PM workflow — <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/skills" style="color:var(--accent);text-decoration:none">76 total on GitHub</a></p>
     </div>
 
     <div class="search-wrap">
@@ -722,90 +722,52 @@
 
     <div class="tabs" id="category-tabs">
       <button class="tab active" data-cat="all">All</button>
-      <button class="tab" data-cat="comm">🗣️ Communication</button>
+      <button class="tab" data-cat="comm">⚡ Productivity</button>
       <button class="tab" data-cat="proj">📋 Projects</button>
       <button class="tab" data-cat="code">💻 Code</button>
-      <button class="tab" data-cat="data">📊 Data</button>
-      <button class="tab" data-cat="infra">🔧 Infra</button>
-      <button class="tab" data-cat="test">🧪 Testing</button>
       <button class="tab" data-cat="prod">📝 Product</button>
       <button class="tab" data-cat="adv">🧠 Advanced</button>
     </div>
 
     <div class="skills-grid" id="skills-grid">
-      <!-- Communication -->
-      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">💬</div><div class="skill-name">start-of-day</div></div><div class="skill-desc">Morning triage: Slack → Gmail → Calendar. Surfaces unreads, drafts replies, shows schedule.</div><div class="skill-example">"start my day"</div></div>
-      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">💬</div><div class="skill-name">slack</div></div><div class="skill-desc">Search, read, and post messages across Slack workspaces.</div><div class="skill-example">"search Slack for project updates"</div></div>
-      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">📅</div><div class="skill-name">gcal</div></div><div class="skill-desc">Create, update, RSVP, and check availability on Google Calendar.</div><div class="skill-example">"what meetings do I have tomorrow?"</div></div>
+      <!-- Productivity -->
+      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">☀️</div><div class="skill-name">start-of-day</div></div><div class="skill-desc">Morning triage: Slack → Gmail → Calendar. Surfaces unreads, drafts replies, shows schedule.</div><div class="skill-example">"start my day"</div></div>
       <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">📅</div><div class="skill-name">reviewing-calendar</div></div><div class="skill-desc">Visual weekly calendar with conflict detection and color coding.</div><div class="skill-example">"review my calendar this week"</div></div>
-      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">📄</div><div class="skill-name">gdrive</div></div><div class="skill-desc">Read/write Google Docs, Sheets, Slides. Search and manage Drive files.</div><div class="skill-example">"create a Google Doc titled Q1 Plan"</div></div>
-      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">📝</div><div class="skill-name">gmail</div></div><div class="skill-desc">Search, read, send, draft, and manage emails, labels, and filters.</div><div class="skill-example">"draft a reply to the latest email from Sarah"</div></div>
-      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">📓</div><div class="skill-name">notion</div></div><div class="skill-desc">Read, search, create, and update pages in your Notion workspace.</div><div class="skill-example">"search Notion for the roadmap"</div></div>
-      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">🪞</div><div class="skill-name">reflect</div></div><div class="skill-desc">Guided reflection for performance reviews. Asks questions, synthesizes responses.</div><div class="skill-example">"start a reflection"</div></div>
-      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">✍️</div><div class="skill-name">writing-feedback</div></div><div class="skill-desc">Draft performance feedback — self-reflections, peer reviews, manager evaluations.</div><div class="skill-example">"draft my self-reflection"</div></div>
-      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">🖥️</div><div class="skill-name">controlling-computer</div></div><div class="skill-desc">Control macOS via AppleScript — apps, windows, volume, dark mode.</div><div class="skill-example">"turn on dark mode"</div></div>
-      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">🎨</div><div class="skill-name">viewing-figma-files</div></div><div class="skill-desc">Inspect Figma files, view structure, export images, read comments.</div><div class="skill-example">"inspect the checkout frame in this Figma"</div></div>
+      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">✅</div><div class="skill-name">todo</div></div><div class="skill-desc">Persistent to-do list with proactive reminders. Auto-captures from Slack, Gmail, Calendar, Linear.</div><div class="skill-example">"add a to-do to review the spec"</div></div>
+      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">📢</div><div class="skill-name">shipped-announcements</div></div><div class="skill-desc">Craft and post launch announcements to Slack using Block Kit.</div><div class="skill-example">"write a shipped post for the new feature"</div></div>
+      <div class="skill-card cat-comm" data-cat="comm"><div class="skill-card-header"><div class="skill-icon">📬</div><div class="skill-name">cash-rounding-responder</div></div><div class="skill-desc">Triage and draft replies to feature feedback emails. Classifies, prioritizes, drafts responses.</div><div class="skill-example">"respond to feature feedback emails"</div></div>
 
       <!-- Projects -->
-      <div class="skill-card cat-proj" data-cat="proj"><div class="skill-card-header"><div class="skill-icon">📌</div><div class="skill-name">linear</div></div><div class="skill-desc">Create, search, update issues and projects in Linear.</div><div class="skill-example">"create a Linear issue for the login bug"</div></div>
       <div class="skill-card cat-proj" data-cat="proj"><div class="skill-card-header"><div class="skill-icon">📋</div><div class="skill-name">plan-to-linear</div></div><div class="skill-desc">Convert a structured plan into Linear issues and projects in bulk.</div><div class="skill-example">"convert this plan into Linear tickets"</div></div>
       <div class="skill-card cat-proj" data-cat="proj"><div class="skill-card-header"><div class="skill-icon">▶️</div><div class="skill-name">linear-to-execution</div></div><div class="skill-desc">Pick up a Linear issue and prepare for implementation.</div><div class="skill-example">"work on PROJ-42"</div></div>
       <div class="skill-card cat-proj" data-cat="proj"><div class="skill-card-header"><div class="skill-icon">📊</div><div class="skill-name">project-status</div></div><div class="skill-desc">Aggregate project status from Slack, Drive, GitHub, and feature flags.</div><div class="skill-example">"what's the project status?"</div></div>
       <div class="skill-card cat-proj" data-cat="proj"><div class="skill-card-header"><div class="skill-icon">🕰️</div><div class="skill-name">historical-info</div></div><div class="skill-desc">Search across sources to find what you've been working on.</div><div class="skill-example">"what have I worked on this week?"</div></div>
-      <div class="skill-card cat-proj" data-cat="proj"><div class="skill-card-header"><div class="skill-icon">📥</div><div class="skill-name">logging-feature-requests</div></div><div class="skill-desc">Digest feature requests from Slack and log them to a tracking sheet.</div><div class="skill-example">"log this as a feature request"</div></div>
-      <div class="skill-card cat-proj" data-cat="proj"><div class="skill-card-header"><div class="skill-icon">✅</div><div class="skill-name">todo</div></div><div class="skill-desc">Persistent to-do list with proactive reminders. Auto-captures from Slack, Gmail, Calendar, Linear.</div><div class="skill-example">"add a to-do to review the spec"</div></div>
+      <div class="skill-card cat-proj" data-cat="proj"><div class="skill-card-header"><div class="skill-icon">📥</div><div class="skill-name">feature-request-scanner</div></div><div class="skill-desc">Daily scan of Slack channels for feature requests. Auto-classifies, scores, deduplicates.</div><div class="skill-example">"scan for new feature requests"</div></div>
+      <div class="skill-card cat-proj" data-cat="proj"><div class="skill-card-header"><div class="skill-icon">🗺️</div><div class="skill-name">blueprint-intake</div></div><div class="skill-desc">Create roadmap projects from Slack threads. Digests discussion, populates all fields.</div><div class="skill-example">"add this to the roadmap"</div></div>
 
       <!-- Code -->
-      <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🔍</div><div class="skill-name">gh-pr-read</div></div><div class="skill-desc">Read and summarize GitHub pull requests using the gh CLI.</div><div class="skill-example">"summarize PR #4521"</div></div>
       <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🚀</div><div class="skill-name">pr-manager</div></div><div class="skill-desc">Commit changes, create/update PRs. Supports Graphite stacked PRs.</div><div class="skill-example">"commit and create a PR"</div></div>
-      <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">⬆️</div><div class="skill-name">push-pr</div></div><div class="skill-desc">Quick push branch and create a draft PR with AI-generated description.</div><div class="skill-example">"push pr"</div></div>
       <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">💬</div><div class="skill-name">address-pr-comments</div></div><div class="skill-desc">Fix unresolved PR comments, commit per-comment, resolve threads.</div><div class="skill-example">"address PR comments"</div></div>
       <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">✅</div><div class="skill-name">code-review-general</div></div><div class="skill-desc">Address code review feedback — prioritize human comments, verify changes.</div><div class="skill-example">"fix the review feedback"</div></div>
-      <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🔀</div><div class="skill-name">rebasing-git-branches</div></div><div class="skill-desc">Rebase branches onto upstream targets, resolve conflicts.</div><div class="skill-example">"rebase my branch onto main"</div></div>
-      <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🌳</div><div class="skill-name">git-worktree</div></div><div class="skill-desc">Manage git worktrees for working on multiple branches simultaneously.</div><div class="skill-example">"create a worktree for the hotfix"</div></div>
       <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🗺️</div><div class="skill-name">walkthrough</div></div><div class="skill-desc">Explore and visualize codebase architecture with diagrams.</div><div class="skill-example">"walk me through the payment flow"</div></div>
-
-      <!-- Data -->
-      <div class="skill-card cat-data" data-cat="data"><div class="skill-card-header"><div class="skill-icon">❄️</div><div class="skill-name">snowflake</div></div><div class="skill-desc">Run SQL queries on Snowflake with SSO authentication.</div><div class="skill-example">"query conversion rates"</div></div>
-      <div class="skill-card cat-data" data-cat="data"><div class="skill-card-header"><div class="skill-icon">🧱</div><div class="skill-name">databricks</div></div><div class="skill-desc">Run SQL on Databricks Lakehouse. Search tables and catalogs.</div><div class="skill-example">"search for the payments table"</div></div>
-
-      <div class="skill-card cat-data" data-cat="data"><div class="skill-card-header"><div class="skill-icon">📊</div><div class="skill-name">looker</div></div><div class="skill-desc">Interact with Looker dashboards, tiles, queries, explores, and models.</div><div class="skill-example">"run Looker dashboard 1234"</div></div>
-      <div class="skill-card cat-data" data-cat="data"><div class="skill-card-header"><div class="skill-icon">📈</div><div class="skill-name">data-analyst</div></div><div class="skill-desc">Full analysis pipeline with follow-up questions, charts, and visualizations.</div><div class="skill-example">"analyze abandonment trends"</div></div>
-      <div class="skill-card cat-data" data-cat="data"><div class="skill-card-header"><div class="skill-icon">📑</div><div class="skill-name">airtable</div></div><div class="skill-desc">Manage Airtable bases, tables, records with filtering and sorting.</div><div class="skill-example">"search Airtable for Q1 features"</div></div>
-
-      <!-- Infra -->
-      <div class="skill-card cat-infra" data-cat="infra"><div class="skill-card-header"><div class="skill-icon">🐕</div><div class="skill-name">datadog</div></div><div class="skill-desc">Query logs, metrics, traces, monitors, RUM, and CI visibility.</div><div class="skill-example">"check Datadog for service errors"</div></div>
-      <div class="skill-card cat-infra" data-cat="infra"><div class="skill-card-header"><div class="skill-icon">🚩</div><div class="skill-name">launchdarkly-cli</div></div><div class="skill-desc">Create, toggle, list, and manage LaunchDarkly feature flags.</div><div class="skill-example">"list flags with 'checkout' in the name"</div></div>
-
-
-      <div class="skill-card cat-infra" data-cat="infra"><div class="skill-card-header"><div class="skill-icon">🧹</div><div class="skill-name">free-disk-space</div></div><div class="skill-desc">Survey and clean up disk space on macOS.</div><div class="skill-example">"free up disk space"</div></div>
-
-      <!-- Testing -->
-      <div class="skill-card cat-test" data-cat="test"><div class="skill-card-header"><div class="skill-icon">📱</div><div class="skill-name">ios-simulator</div></div><div class="skill-desc">Manage iOS simulators — start, stop, create devices for testing.</div><div class="skill-example">"start an iPhone 15 simulator"</div></div>
-      <div class="skill-card cat-test" data-cat="test"><div class="skill-card-header"><div class="skill-icon">🤖</div><div class="skill-name">android-emulator</div></div><div class="skill-desc">Manage Android emulators (AVDs) for testing.</div><div class="skill-example">"list available Android AVDs"</div></div>
-      <div class="skill-card cat-test" data-cat="test"><div class="skill-card-header"><div class="skill-icon">🌐</div><div class="skill-name">agent-browser</div></div><div class="skill-desc">Browser automation — navigate, click, fill forms, take screenshots.</div><div class="skill-example">"open the page and take a screenshot"</div></div>
-
-
 
       <!-- Product -->
       <div class="skill-card cat-prod" data-cat="prod"><div class="skill-card-header"><div class="skill-icon">📝</div><div class="skill-name">writing-requirements-docs</div></div><div class="skill-desc">Write PRDs from rough notes with auto-sourced evidence.</div><div class="skill-example">"write a PRD from these notes"</div></div>
       <div class="skill-card cat-prod" data-cat="prod"><div class="skill-card-header"><div class="skill-icon">📐</div><div class="skill-name">spec-creator</div></div><div class="skill-desc">Create product specs using structured templates, synced to Linear.</div><div class="skill-example">"create spec for new feature"</div></div>
       <div class="skill-card cat-prod" data-cat="prod"><div class="skill-card-header"><div class="skill-icon">🔎</div><div class="skill-name">feedback-searcher</div></div><div class="skill-desc">Search and synthesize user feedback across multiple sources.</div><div class="skill-example">"what are users saying about onboarding?"</div></div>
       <div class="skill-card cat-prod" data-cat="prod"><div class="skill-card-header"><div class="skill-icon">🧩</div><div class="skill-name">prototype-builder</div></div><div class="skill-desc">Scaffold and build interactive HTML prototypes for product features.</div><div class="skill-example">"build prototype for the new flow"</div></div>
+      <div class="skill-card cat-prod" data-cat="prod"><div class="skill-card-header"><div class="skill-icon">🚀</div><div class="skill-name">launch-a-product</div></div><div class="skill-desc">Guide PMs through GTM launch readiness. Validates fields, crafts positioning, drafts comms.</div><div class="skill-example">"check launch readiness for the new feature"</div></div>
       <div class="skill-card cat-prod" data-cat="prod"><div class="skill-card-header"><div class="skill-icon">✅</div><div class="skill-name">test-plan-creator</div></div><div class="skill-desc">Generate test plans and acceptance criteria from product specs.</div><div class="skill-example">"create test plan for the redesign"</div></div>
-      <div class="skill-card cat-prod" data-cat="prod"><div class="skill-card-header"><div class="skill-icon">🌍</div><div class="skill-name">web-research</div></div><div class="skill-desc">Search the web for competitors, trends, and best practices.</div><div class="skill-example">"research competitor onboarding flows"</div></div>
+      <div class="skill-card cat-prod" data-cat="prod"><div class="skill-card-header"><div class="skill-icon">📈</div><div class="skill-name">data-analyst</div></div><div class="skill-desc">Full analysis pipeline with follow-up questions, charts, and visualizations.</div><div class="skill-example">"analyze abandonment trends"</div></div>
 
       <!-- Advanced -->
       <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">🤖</div><div class="skill-name">auto-pilot</div></div><div class="skill-desc">Routes any request to the right skill(s) automatically.</div><div class="skill-example">(always active)</div></div>
       <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">🔬</div><div class="skill-name">rpi</div></div><div class="skill-desc">Research → Plan → Implement for complex, multi-step tasks.</div><div class="skill-example">"rpi: refactor the auth module"</div></div>
-      <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">🔍</div><div class="skill-name">rpi-research</div></div><div class="skill-desc">Deep-dive research phase — understand existing code and systems.</div><div class="skill-example">"research how auth tokens work"</div></div>
-      <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">📋</div><div class="skill-name">rpi-plan</div></div><div class="skill-desc">Create phased implementation plans with success criteria.</div><div class="skill-example">"plan the API redesign"</div></div>
-      <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">⚡</div><div class="skill-name">rpi-implement</div></div><div class="skill-desc">Execute approved plans phase by phase with verification.</div><div class="skill-example">"implement phase 1"</div></div>
-      <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">🔄</div><div class="skill-name">rpi-iterate</div></div><div class="skill-desc">Update plans based on feedback or new requirements.</div><div class="skill-example">"update plan — add rate limiting"</div></div>
       <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">🐝</div><div class="skill-name">swarm</div></div><div class="skill-desc">Multi-perspective investigation with adversarial challenge and consensus.</div><div class="skill-example">"investigate the latency spike"</div></div>
       <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">♻️</div><div class="skill-name">ralph-loop</div></div><div class="skill-desc">Iterative work-review loop using two AI models.</div><div class="skill-example">(complex revision tasks)</div></div>
       <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">🧠</div><div class="skill-name">memory</div></div><div class="skill-desc">Persistent cross-session memory — captures observations, generates summaries.</div><div class="skill-example">"search memory for auth decisions"</div></div>
       <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">🧬</div><div class="skill-name">kb-distill</div></div><div class="skill-desc">Distill raw observations into structured knowledge notes.</div><div class="skill-example">"distill my recent work"</div></div>
+      <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">💬</div><div class="skill-name">jack-guidance</div></div><div class="skill-desc">Concise, direct coaching for internal communication. High-signal, low-fluff.</div><div class="skill-example">"jack guidance on this status update"</div></div>
     </div>
   </div>
 </section>
