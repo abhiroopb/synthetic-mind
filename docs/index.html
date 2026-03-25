@@ -160,6 +160,83 @@
     }
     .pillar-link:hover { text-decoration: underline; }
 
+    /* ── About ── */
+    .about-layout {
+      display: grid; grid-template-columns: 280px 1fr; gap: 3.5rem; align-items: start;
+    }
+    .about-sidebar { position: sticky; top: 80px; }
+    .about-avatar {
+      width: 120px; height: 120px; border-radius: 50%; background: var(--accent-dim);
+      display: flex; align-items: center; justify-content: center; font-size: 3rem;
+      margin-bottom: 1.25rem; border: 2px solid var(--border);
+    }
+    .about-sidebar h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .about-sidebar .about-role { font-size: 0.9rem; color: var(--accent); font-weight: 500; margin-bottom: 0.75rem; }
+    .about-sidebar .about-location { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 1.25rem; }
+    .about-links { display: flex; flex-direction: column; gap: 0.4rem; }
+    .about-links a {
+      font-size: 0.82rem; color: var(--text-muted); text-decoration: none;
+      display: flex; align-items: center; gap: 0.4rem; transition: color 0.15s;
+    }
+    .about-links a:hover { color: var(--accent); }
+    .about-main p { color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem; font-size: 0.95rem; }
+    .about-main p strong { color: var(--text); }
+    .journey-timeline { margin-top: 2rem; position: relative; padding-left: 1.5rem; }
+    .journey-timeline::before {
+      content: ''; position: absolute; left: 0; top: 0.5rem; bottom: 0.5rem;
+      width: 2px; background: var(--border);
+    }
+    .journey-item {
+      position: relative; margin-bottom: 1.75rem;
+    }
+    .journey-item:last-child { margin-bottom: 0; }
+    .journey-item::before {
+      content: ''; position: absolute; left: -1.5rem; top: 0.45rem;
+      width: 10px; height: 10px; border-radius: 50%; background: var(--accent);
+      border: 2px solid var(--bg);
+    }
+    .journey-item.current::before { background: var(--green); box-shadow: 0 0 8px rgba(34,197,94,0.4); }
+    .journey-header {
+      display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.25rem; flex-wrap: wrap;
+    }
+    .journey-company { font-weight: 700; font-size: 0.95rem; color: var(--text); }
+    .journey-role { font-size: 0.85rem; color: var(--text-muted); }
+    .journey-date { font-size: 0.72rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; }
+    .journey-highlights { margin-top: 0.4rem; }
+    .journey-highlights li {
+      font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;
+      margin-bottom: 0.25rem; list-style: none; padding-left: 1rem; position: relative;
+    }
+    .journey-highlights li::before {
+      content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.75rem;
+    }
+    .impact-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;
+      margin: 2rem 0 0;
+    }
+    .impact-card {
+      background: var(--surface); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm); padding: 1rem; text-align: center;
+    }
+    .impact-num {
+      font-size: 1.5rem; font-weight: 800; font-family: 'JetBrains Mono', monospace;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .impact-label { font-size: 0.7rem; color: var(--text-dim); margin-top: 0.15rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .about-origin {
+      background: var(--surface); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm); padding: 1.25rem; margin-top: 2rem;
+      font-size: 0.85rem; color: var(--text-muted); line-height: 1.7;
+    }
+    .about-origin strong { color: var(--text); }
+    @media (max-width: 768px) {
+      .about-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .about-sidebar { position: static; display: flex; flex-direction: column; align-items: center; text-align: center; }
+      .about-links { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+      .impact-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
     /* ── amp-mem Showcase ── */
     .ampmem-hero {
       display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
@@ -432,6 +509,7 @@
   <div class="nav-inner">
     <a href="./" class="nav-brand">🧠 synthetic-mind</a>
     <div class="nav-links">
+      <a href="#about">About</a>
       <a href="#thoughts">Thoughts</a>
       <a href="#skills">Projects</a>
       <a href="#under-the-hood">Setup</a>
@@ -452,6 +530,111 @@
     <a href="#thoughts" class="hero-link">✍️ Thoughts</a>
     <a href="#skills" class="hero-link">🛠 Projects</a>
     <a href="https://github.com/abhiroopb/synthetic-mind" class="hero-link" target="_blank">↗ GitHub</a>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── About ── -->
+<section id="about">
+  <div class="container">
+    <div class="about-layout">
+      <div class="about-sidebar">
+        <div class="about-avatar">👨‍💻</div>
+        <h3>Abhi Basu</h3>
+        <div class="about-role">Staff Product Manager @ Square</div>
+        <div class="about-location">📍 San Francisco Bay Area</div>
+        <div class="about-links">
+          <a href="https://www.linkedin.com/in/abhiroopbasu" target="_blank">🔗 LinkedIn</a>
+          <a href="https://github.com/abhiroopb" target="_blank">🔗 GitHub</a>
+          <a href="mailto:contact@abhiroopbasu.com">✉️ contact@abhiroopbasu.com</a>
+        </div>
+      </div>
+
+      <div class="about-main">
+        <p>I'm a product leader with <strong>12+ years</strong> building software across B2B SaaS, fintech, and payments. I started my career as a <strong>lawyer in Singapore</strong>, pivoted into marketing at a 30-person startup, and worked my way up through product marketing and product management at companies from early-stage to enterprise.</p>
+
+        <p>Today I lead <strong>checkout and payments</strong> at Square — the flows that run every time a seller takes a payment on a Square terminal. I also build AI tools that make me better at my job. I've created <strong>105+ AI agent skills</strong> that automate everything from morning triage to writing PRDs to analyzing data, and I built <strong>amp-mem</strong>, a persistent memory system for AI agents.</p>
+
+        <div class="impact-grid">
+          <div class="impact-card">
+            <div class="impact-num">12+</div>
+            <div class="impact-label">Years in Product</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-num">XXM</div>
+            <div class="impact-label">Monthly Volume ↑</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-num">105+</div>
+            <div class="impact-label">AI Skills Built</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-num">4K</div>
+            <div class="impact-label">LinkedIn Followers</div>
+          </div>
+        </div>
+
+        <div class="journey-timeline">
+          <div class="journey-item current">
+            <div class="journey-header">
+              <span class="journey-company">Square</span>
+              <span class="journey-role">Staff Product Manager</span>
+              <span class="journey-date">2022 → present</span>
+            </div>
+            <ul class="journey-highlights">
+              <li>Own checkout and payments across Android &amp; iOS — increased merchant checkout success rate by 1%, driving multi-million monthly volume increase</li>
+              <li>Shipped generative AI onboarding (GPT-4) that increased conversion by 6% — replaced 20+ static questions with a single free-form text box</li>
+              <li>Led cross-platform Neighborhoods initiative spanning Square and Cash App</li>
+              <li>Grew Dashboard app downloads 50% via growth campaigns; built mobile sales and employee reporting</li>
+            </ul>
+          </div>
+
+          <div class="journey-item">
+            <div class="journey-header">
+              <span class="journey-company">Zendesk</span>
+              <span class="journey-role">Group PM → Director of PMM</span>
+              <span class="journey-date">2014 → 2022</span>
+            </div>
+            <ul class="journey-highlights">
+              <li>Managed 5 PMs and 7 PMMs across growth and omnichannel products</li>
+              <li>Increased retention by 1% and revenue by &gt;$2M/year; launched first self-service onboarding for 100K+ customers</li>
+              <li>Grew net revenue of Suite product 15% through PSM-driven pricing strategy; drove &gt;$2.5M pipeline from targeted campaigns</li>
+              <li>Led enterprise go-to-market post-acquisition; increased live chat ASP by 30%</li>
+            </ul>
+          </div>
+
+          <div class="journey-item">
+            <div class="journey-header">
+              <span class="journey-company">Zopim</span>
+              <span class="journey-role">Product Marketing Lead</span>
+              <span class="journey-date">2013 → 2014</span>
+            </div>
+            <ul class="journey-highlights">
+              <li>First marketing hire at a 30-person startup (acquired by Zendesk in 2014)</li>
+              <li>Grew organic traffic 135% through content and SEM strategy</li>
+            </ul>
+          </div>
+
+          <div class="journey-item">
+            <div class="journey-header">
+              <span class="journey-company">Amica Law</span>
+              <span class="journey-role">Lawyer</span>
+              <span class="journey-date">2010 → 2011</span>
+            </div>
+            <ul class="journey-highlights">
+              <li>Admitted as Advocate of the Supreme Court of Singapore</li>
+              <li>Intellectual property law — patents, trademarks, copyright; advised startups on licensing</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="about-origin">
+          <strong>🎓 Education:</strong> LLB (Upper Second Class Hons) from the University of Warwick, UK. International Baccalaureate from Mahindra United World College of India.<br><br>
+          <strong>🌍 Background:</strong> Born in India, practiced law in Singapore, built products across Asia and the US. Fluent in English, conversational in Bengali and Hindi. PADI rescue diver, chess society president, and former TEDx organizer.
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
