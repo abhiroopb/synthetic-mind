@@ -19,8 +19,31 @@
     }
     .page-header p { font-size: 1.1rem; color: var(--text-muted); }
     .mem-section { padding: 0 0 4rem; }
+    .intro-section { max-width: 800px; margin: 0 auto; padding: 0 2rem 3rem; }
+    .intro-section p { color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem; font-size: 0.95rem; }
+    .intro-section p strong { color: var(--text); }
+    .intro-callout {
+      background: var(--surface); border: 1px solid var(--border-subtle); border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 1.25rem 1.5rem; margin: 1.5rem 0;
+      font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;
+    }
+    .intro-callout strong { color: var(--text); }
+    .challenge-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1.5rem 0;
+    }
+    .challenge-card {
+      background: var(--surface); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm); padding: 1rem 1.15rem;
+    }
+    .challenge-card h4 {
+      font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .challenge-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+    .intro-divider { border: none; border-top: 1px solid var(--border-subtle); margin: 2.5rem auto; max-width: 800px; }
     @media (max-width: 768px) {
       .page-header h1 { font-size: 1.8rem; }
+      .challenge-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -46,6 +69,45 @@
   <h1>Persistent Memory — amp-mem</h1>
   <p>SQLite + FTS5 memory that persists across sessions. No vector embeddings — the LLM is the semantic engine.</p>
 </div>
+
+<div class="intro-section">
+  <p>AI agents have a fundamental problem: <strong>amnesia</strong>. Every new session starts from scratch. The decisions you made yesterday, the bugs you fixed last week, the preferences you expressed a month ago — all gone. I got tired of re-explaining things to my own tools.</p>
+
+  <p>So I built <strong>amp-mem</strong> — a persistent memory system that gives AI agents the ability to remember across sessions. It's a ~500-line bash CLI backed by SQLite with FTS5 full-text search, paired with a ~490-line TypeScript plugin that hooks into <a href="https://ampcode.com" style="color:var(--accent);text-decoration:none">Amp's</a> event system. No vector database. No cloud service. No embeddings. Just a single SQLite file and the LLM itself as the semantic engine.</p>
+
+  <div class="intro-callout">
+    <strong>The core idea:</strong> Every session I start now has context from what I did yesterday, last week, or last month. The agent knows what decisions I've made, what tools I prefer, what workflows I've established. It captures this passively — I don't have to tell it to remember. And when the volume gets too high, it distills thousands of raw observations into a handful of structured knowledge notes.
+  </div>
+
+  <p><strong>Why build it?</strong> I was running 10+ Amp sessions a day across product management, data analysis, and engineering workflows. Each session was a blank slate. I'd have to re-explain my team structure, re-state my tool preferences, re-describe ongoing projects. With 105+ skills automating my daily work, the memory problem became the biggest bottleneck — not what the agent could do, but what it could <em>remember</em>.</p>
+
+  <p><strong>The hardest challenges weren't technical — they were about signal:</strong></p>
+
+  <div class="challenge-grid">
+    <div class="challenge-card">
+      <h4>🔊 Noise at scale</h4>
+      <p>The first version captured everything. After 2,718 observations, only 42 were useful — a 1.5% signal rate. Seven rounds of plugin tuning cut volume by 80% while keeping the signal.</p>
+    </div>
+    <div class="challenge-card">
+      <h4>🪞 Self-referential loops</h4>
+      <p>The memory system kept observing itself — every <code>amp-mem search</code> call generated a new observation about searching memory. Meta-noise crowded out real work.</p>
+    </div>
+    <div class="challenge-card">
+      <h4>🔇 Silent failures</h4>
+      <p>Amp's experimental <code>$</code> API for shell execution silently returned empty results. Took days to debug because the plugin appeared to work perfectly.</p>
+    </div>
+    <div class="challenge-card">
+      <h4>📏 Context budget</h4>
+      <p>Injecting too much memory wastes the agent's context window. Too little and it forgets. Landed on a 60-line budget with sentence-boundary truncation.</p>
+    </div>
+  </div>
+
+  <p><strong>How it was built:</strong> The CLI came first — a bash script wrapping SQLite because I wanted zero external dependencies. Then the Amp plugin, which uses the <code>session.start</code>, <code>agent.start</code>, <code>agent.end</code>, and <code>tool.result</code> hooks to passively capture observations and inject context. AI gating (p>0.65 confidence threshold) filters low-value captures. The distillation pipeline compresses raw observations into knowledge notes, and a decay system ages out stale information over time.</p>
+
+  <p>I've written extensively about the journey — from the <a href="../thoughts/2026-03-05-building-amp-mem" style="color:var(--accent);text-decoration:none">initial build</a> to <a href="../thoughts/2026-03-11-tuning-memory-noise" style="color:var(--accent);text-decoration:none">tuning signal-to-noise</a> to <a href="../thoughts/2026-03-23-amp-mem-noise-reduction" style="color:var(--accent);text-decoration:none">cutting 80% of the noise</a>. What follows below is the technical reference.</p>
+</div>
+
+<hr class="intro-divider">
 
 <section class="mem-section">
   <div class="container">
