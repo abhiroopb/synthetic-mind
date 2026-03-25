@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>synthetic-mind — AI-augmented work by Abhi Basu</title>
+  <title>Abhi Basu — AI-augmented work</title>
   <meta name="description" content="AI thoughts, processes, skills, and experiments. A showcase of AI-augmented work.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -79,17 +79,15 @@
     .hero {
       padding: 9rem 2rem 5rem; text-align: center; max-width: 800px; margin: 0 auto;
     }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: var(--surface); color: var(--text-muted); font-size: 0.8rem;
-      font-weight: 600; padding: 0.35rem 1rem; border-radius: 100px;
-      border: 1px solid var(--border); margin-bottom: 1.5rem; letter-spacing: 0.02em;
-    }
     .hero h1 {
       font-size: 3.5rem; font-weight: 800; line-height: 1.1; letter-spacing: -0.04em;
       margin-bottom: 1rem;
       background: linear-gradient(135deg, #fff 0%, #a3a3a3 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle {
+      font-size: 1.1rem; color: var(--accent); font-weight: 600;
+      margin-bottom: 1rem; letter-spacing: 0.02em;
     }
     .hero p {
       font-size: 1.2rem; color: var(--text-muted); max-width: 580px;
@@ -124,7 +122,26 @@
     .btn-ghost { color: var(--text-muted); border-color: var(--border); background: transparent; }
     .btn-ghost:hover { color: var(--text); border-color: var(--text-dim); }
 
-    /* ── What's Inside ── */
+    /* ── Featured ── */
+    .featured-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+    }
+    .featured-card {
+      background: var(--surface); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius); padding: 1.75rem; text-decoration: none;
+      color: var(--text); transition: all 0.2s; display: flex; flex-direction: column;
+    }
+    .featured-card:hover { border-color: var(--border); background: var(--surface-hover); transform: translateY(-2px); }
+    .featured-card .thought-date { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 0.75rem; font-family: 'JetBrains Mono', monospace; }
+    .featured-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; line-height: 1.4; }
+    .featured-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; flex: 1; }
+    .featured-card .thought-tag {
+      display: inline-block; margin-top: 1rem; font-size: 0.7rem; font-weight: 500;
+      color: var(--accent); background: var(--accent-dim); padding: 0.2rem 0.6rem;
+      border-radius: 100px; font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── Pillars (Under the Hood) ── */
     .pillars {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
     }
@@ -335,6 +352,7 @@
     /* ── Responsive ── */
     @media (max-width: 768px) {
       .hero h1 { font-size: 2.2rem; }
+      .featured-grid { grid-template-columns: 1fr; }
       .pillars { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr; }
       .mem-grid, .setup-grid { grid-template-columns: 1fr; }
@@ -352,10 +370,9 @@
   <div class="nav-inner">
     <a href="./" class="nav-brand">🧠 synthetic-mind</a>
     <div class="nav-links">
-      <a href="skills/">Skills</a>
-      <a href="memory/">Memory</a>
-      <a href="setup/">Setup</a>
-      <a href="thoughts/">Thoughts</a>
+      <a href="#writing">Writing</a>
+      <a href="#skills">Projects</a>
+      <a href="#under-the-hood">Setup</a>
     </div>
     <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
       <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
@@ -366,58 +383,122 @@
 
 <!-- ── Hero ── -->
 <section class="hero">
-  <div class="hero-badge">by Abhi Basu</div>
-  <h1>synthetic-mind</h1>
-  <p>AI thoughts, processes, skills, and experiments — a living collection from working deeply with AI agents, LLMs, and automation.</p>
+  <h1>Abhi Basu</h1>
+  <p class="hero-subtitle">Product Manager · AI Builder</p>
+  <p>I use AI to do my job better. This site documents how — from building 105+ agent skills that automate my daily workflow, to writing about what actually works when you pair a product manager with an AI copilot.</p>
   <div class="hero-links">
-    <a href="skills/" class="hero-link">🛠 53 Skills</a>
-    <a href="memory/" class="hero-link">🧠 Persistent Memory</a>
-    <a href="setup/" class="hero-link">⚡ Amp Setup</a>
-    <a href="thoughts/" class="hero-link">✍️ Thoughts</a>
+    <a href="#writing" class="hero-link">✍️ Writing</a>
+    <a href="#skills" class="hero-link">🛠 Projects</a>
     <a href="https://github.com/abhiroopb/synthetic-mind" class="hero-link" target="_blank">↗ GitHub</a>
   </div>
 </section>
 
 <hr class="divider">
 
-<!-- ── What's Inside ── -->
-<section id="explore">
+<!-- ── Featured ── -->
+<section id="featured">
   <div class="container">
     <div class="section-header">
-      <h2>What's Inside</h2>
-      <p>Each entry captures something useful — a workflow that clicked, a skill that shipped, or a process worth sharing</p>
+      <h2>Featured</h2>
+      <p>The posts people read most</p>
     </div>
-    <div class="pillars">
-      <div class="pillar pillar-skills">
-        <div class="pillar-icon">🛠</div>
-        <h3>Skills</h3>
-        <p>53 reusable AI agent skills for Slack, Gmail, Calendar, Linear, Snowflake, Figma, and more. Install in one command.</p>
-        <a href="skills/" class="pillar-link">Browse catalog →</a>
-      </div>
-      <div class="pillar pillar-memory">
-        <div class="pillar-icon">🧠</div>
-        <h3>Memory</h3>
-        <p>amp-mem — a persistent memory system using SQLite + FTS5. No vector embeddings. The LLM is the semantic engine.</p>
-        <a href="memory/" class="pillar-link">How it works →</a>
-      </div>
-      <div class="pillar pillar-thoughts">
-        <div class="pillar-icon">✍️</div>
-        <h3>Thoughts</h3>
-        <p>Blog posts on building with AI agents — what worked, what didn't, and things worth sharing along the way.</p>
-        <a href="thoughts/" class="pillar-link">Read posts →</a>
-      </div>
+    <div class="featured-grid">
+      <a href="thoughts/2026-03-24-automating-workflows-with-ai-skills" class="featured-card">
+        <div class="thought-date">2026-03-24</div>
+        <h3>How I Automated Every Workflow with AI Skills</h3>
+        <p>A practical guide to building 35+ AI agent skills that automate morning triage, email, project management, and more.</p>
+        <span class="thought-tag">workflow</span>
+      </a>
+      <a href="thoughts/2026-03-24-writing-requirements-docs" class="featured-card">
+        <div class="thought-date">2026-03-24</div>
+        <h3>We Built an AI Skill That Writes Product Requirements Docs</h3>
+        <p>How a team went from markdown-first specs to an agent skill that writes PRDs with auto-referenced internal sources.</p>
+        <span class="thought-tag">product-management</span>
+      </a>
+      <a href="thoughts/2026-03-14-todo-system" class="featured-card">
+        <div class="thought-date">2026-03-14</div>
+        <h3>I Stopped Maintaining My To-Do List and Let the Agent Do It</h3>
+        <p>A proactive to-do system that auto-captures from Slack, Gmail, Calendar, and Linear.</p>
+        <span class="thought-tag">workflow</span>
+      </a>
     </div>
   </div>
 </section>
 
 <hr class="divider">
 
-<!-- ── Skills Catalog ── -->
+<!-- ── Writing ── -->
+<section id="writing">
+  <div class="container">
+    <div class="section-header">
+      <h2>Writing</h2>
+      <p>Notes on building with AI — what works, what doesn't, and what I've learned</p>
+    </div>
+    <div class="thoughts-grid">
+
+      <a href="thoughts/2026-03-24-writing-requirements-docs" class="thought-card">
+        <div class="thought-date">2026-03-24</div>
+        <h3>We Built an AI Skill That Writes Product Requirements Docs</h3>
+        <p>How a team went from markdown-first specs to an agent skill that writes PRDs with auto-referenced internal sources — in two weeks.</p>
+        <span class="thought-tag">product-management</span>
+      </a>
+      <a href="thoughts/2026-03-24-automating-workflows-with-ai-skills" class="thought-card">
+        <div class="thought-date">2026-03-24</div>
+        <h3>How I Automated Every Workflow with AI Skills</h3>
+        <p>A practical guide to building 35+ AI agent skills that automate morning triage, email, project management, and more — no engineering degree required.</p>
+        <span class="thought-tag">workflow</span>
+      </a>
+      <a href="thoughts/2026-03-23-amp-mem-noise-reduction" class="thought-card">
+        <div class="thought-date">2026-03-23</div>
+        <h3>Cutting 80% of the Noise from My AI Memory System</h3>
+        <p>After distilling 2,718 observations, found ~90% were noise. Seven plugin changes cut volume by ~80% while preserving signal.</p>
+        <span class="thought-tag">memory-system</span>
+      </a>
+      <a href="thoughts/2026-03-14-todo-system" class="thought-card">
+        <div class="thought-date">2026-03-14</div>
+        <h3>I Stopped Maintaining My To-Do List and Let the Agent Do It</h3>
+        <p>A proactive to-do system that auto-captures from Slack, Gmail, Calendar, and Linear — prioritizes, syncs to calendar, and surfaces at every session.</p>
+        <span class="thought-tag">workflow</span>
+      </a>
+      <a href="thoughts/2026-03-11-debugging-the-dollar-api" class="thought-card">
+        <div class="thought-date">2026-03-11</div>
+        <h3>When Your Plugin Works but Nothing Happens</h3>
+        <p>Debugging why amp-mem plugin tools returned empty results — the silent failure mode of Amp's experimental $ API.</p>
+        <span class="thought-tag">debugging</span>
+      </a>
+      <a href="thoughts/2026-03-11-tuning-memory-noise" class="thought-card">
+        <div class="thought-date">2026-03-11</div>
+        <h3>The Signal-to-Noise Problem in AI Memory</h3>
+        <p>Five targeted fixes to bring amp-mem's context injection signal-to-noise ratio back after a week of use.</p>
+        <span class="thought-tag">memory-system</span>
+      </a>
+      <a href="thoughts/2026-03-05-building-amp-mem" class="thought-card">
+        <div class="thought-date">2026-03-05</div>
+        <h3>Building a Persistent Memory System for Amp</h3>
+        <p>From zero to cross-session intelligence — a ~500-line bash CLI backed by SQLite + FTS5, paired with a TypeScript plugin.</p>
+        <span class="thought-tag">memory-system</span>
+      </a>
+      <a href="thoughts/2026-03-05-start-of-day" class="thought-card">
+        <div class="thought-date">2026-03-05</div>
+        <h3>I Replaced My Morning Routine with a Single Command</h3>
+        <p>A "start of day" skill that triages Slack, Gmail, Calendar, and comments from Figma, Docs, Linear, and Notion.</p>
+        <span class="thought-tag">workflow</span>
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:2rem;">
+      <a href="thoughts/" class="btn btn-ghost">View all posts →</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── Skills ── -->
 <section id="skills">
   <div class="container">
     <div class="section-header">
-      <h2>Skills Catalog</h2>
-      <p>Plug-in instruction sets that teach AI agents to use your everyday tools</p>
+      <h2>What I've Built</h2>
+      <p>105+ AI agent skills powering a PM's daily workflow — from morning triage to PRD writing to data analysis</p>
     </div>
 
     <div class="search-wrap">
@@ -517,138 +598,32 @@
 
 <hr class="divider">
 
-<!-- ── Memory ── -->
-<section id="memory">
+<!-- ── Under the Hood ── -->
+<section id="under-the-hood">
   <div class="container">
     <div class="section-header">
-      <h2>Persistent Memory — amp-mem</h2>
-      <p>SQLite + FTS5 memory that persists across sessions. No vector embeddings — the LLM is the semantic engine.</p>
+      <h2>Under the Hood</h2>
+      <p>The systems that make it all work</p>
     </div>
-    <div class="mem-grid">
-      <div class="mem-card">
-        <h3>🧠 What it does</h3>
-        <ul>
-          <li>Passively captures decisions, discoveries, workflows, and preferences as you work</li>
-          <li>Full-text search across all past sessions via SQLite + FTS5</li>
-          <li>Automatically primes new sessions with relevant context</li>
-          <li>Distills raw observations into structured knowledge over time</li>
-        </ul>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon">🧠</div>
+        <h3>Persistent Memory</h3>
+        <p>SQLite + FTS5 memory system that persists across sessions. Auto-captures decisions, discoveries, and workflows. No vector DB — the LLM is the semantic engine.</p>
+        <a href="memory/" class="pillar-link">Learn more →</a>
       </div>
-      <div class="mem-card">
-        <h3>⚡ How it works</h3>
-        <ul>
-          <li><strong>CLI</strong> — <code>amp-mem</code> with 16 commands (search, save, compact, serve, etc.)</li>
-          <li><strong>Plugin</strong> — passive capture from tools like Slack, Gmail, Linear</li>
-          <li><strong>Storage</strong> — single SQLite file, no external services</li>
-          <li><strong>Web viewer</strong> — on-demand at <code>localhost:37777</code></li>
-        </ul>
+      <div class="pillar">
+        <div class="pillar-icon">⚡</div>
+        <h3>Amp Setup</h3>
+        <p>The full guide to getting started — installing Amp, adding skills, configuring AGENTS.md, and setting up cross-session memory.</p>
+        <a href="setup/" class="pillar-link">Setup guide →</a>
       </div>
-    </div>
-    <div style="text-align:center;margin-top:2rem;">
-      <a href="memory/" class="btn btn-ghost">Learn more & install →</a>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- ── Amp Setup ── -->
-<section id="setup">
-  <div class="container">
-    <div class="section-header">
-      <h2>Amp Setup</h2>
-      <p>Get up and running in four steps</p>
-    </div>
-    <div class="steps-row">
-      <div class="step">
-        <div class="step-num">1</div>
-        <h4>Install Amp</h4>
-        <p>Download from <a href="https://ampcode.com" style="color:var(--accent);text-decoration:none">ampcode.com</a> — CLI or VS Code extension</p>
+      <div class="pillar">
+        <div class="pillar-icon">🤖</div>
+        <h3>AGENTS.md</h3>
+        <p>The configuration file that defines identity, session startup, tool preferences, output style, and automated behaviors. The brain of the system.</p>
+        <a href="https://github.com/abhiroopb/synthetic-mind/blob/main/AGENTS.md" class="pillar-link">View on GitHub →</a>
       </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <h4>Add Skills</h4>
-        <p><code style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;background:rgba(255,255,255,0.05);padding:0.1rem 0.3rem;border-radius:4px">amp skill add your-org/skills/slack</code></p>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <h4>Configure AGENTS.md</h4>
-        <p>Set your identity, preferences, and automated behaviors in <code style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;background:rgba(255,255,255,0.05);padding:0.1rem 0.3rem;border-radius:4px">~/AGENTS.md</code></p>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <h4>Set Up Memory</h4>
-        <p>Install <a href="memory/#install" style="color:var(--accent);text-decoration:none">amp-mem</a> for persistent, cross-session context</p>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:2rem;">
-      <a href="setup/" class="btn btn-ghost">Full setup guide →</a>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- ── Thoughts ── -->
-<section id="thoughts">
-  <div class="container">
-    <div class="section-header">
-      <h2>Thoughts</h2>
-      <p>Blog posts on building with AI agents — processes, experiments, and things I've learned along the way</p>
-    </div>
-    <div class="thoughts-grid">
-
-      <a href="thoughts/2026-03-24-writing-requirements-docs" class="thought-card">
-        <div class="thought-date">2026-03-24</div>
-        <h3>We Built an AI Skill That Writes Product Requirements Docs</h3>
-        <p>How a team went from markdown-first specs to an agent skill that writes PRDs with auto-referenced internal sources — in two weeks.</p>
-        <span class="thought-tag">product-management</span>
-      </a>
-      <a href="thoughts/2026-03-24-automating-workflows-with-ai-skills" class="thought-card">
-        <div class="thought-date">2026-03-24</div>
-        <h3>How I Automated Every Workflow with AI Skills</h3>
-        <p>A practical guide to building 35+ AI agent skills that automate morning triage, email, project management, and more — no engineering degree required.</p>
-        <span class="thought-tag">workflow</span>
-      </a>
-      <a href="thoughts/2026-03-23-amp-mem-noise-reduction" class="thought-card">
-        <div class="thought-date">2026-03-23</div>
-        <h3>Cutting 80% of the Noise from My AI Memory System</h3>
-        <p>After distilling 2,718 observations, found ~90% were noise. Seven plugin changes cut volume by ~80% while preserving signal.</p>
-        <span class="thought-tag">memory-system</span>
-      </a>
-      <a href="thoughts/2026-03-14-todo-system" class="thought-card">
-        <div class="thought-date">2026-03-14</div>
-        <h3>I Stopped Maintaining My To-Do List and Let the Agent Do It</h3>
-        <p>A proactive to-do system that auto-captures from Slack, Gmail, Calendar, and Linear — prioritizes, syncs to calendar, and surfaces at every session.</p>
-        <span class="thought-tag">workflow</span>
-      </a>
-      <a href="thoughts/2026-03-11-debugging-the-dollar-api" class="thought-card">
-        <div class="thought-date">2026-03-11</div>
-        <h3>When Your Plugin Works but Nothing Happens</h3>
-        <p>Debugging why amp-mem plugin tools returned empty results — the silent failure mode of Amp's experimental $ API.</p>
-        <span class="thought-tag">debugging</span>
-      </a>
-      <a href="thoughts/2026-03-11-tuning-memory-noise" class="thought-card">
-        <div class="thought-date">2026-03-11</div>
-        <h3>The Signal-to-Noise Problem in AI Memory</h3>
-        <p>Five targeted fixes to bring amp-mem's context injection signal-to-noise ratio back after a week of use.</p>
-        <span class="thought-tag">memory-system</span>
-      </a>
-      <a href="thoughts/2026-03-05-building-amp-mem" class="thought-card">
-        <div class="thought-date">2026-03-05</div>
-        <h3>Building a Persistent Memory System for Amp</h3>
-        <p>From zero to cross-session intelligence — a ~500-line bash CLI backed by SQLite + FTS5, paired with a TypeScript plugin.</p>
-        <span class="thought-tag">memory-system</span>
-      </a>
-      <a href="thoughts/2026-03-05-start-of-day" class="thought-card">
-        <div class="thought-date">2026-03-05</div>
-        <h3>I Replaced My Morning Routine with a Single Command</h3>
-        <p>A "start of day" skill that triages Slack, Gmail, Calendar, and comments from Figma, Docs, Linear, and Notion.</p>
-        <span class="thought-tag">workflow</span>
-      </a>
-    </div>
-    <div style="text-align:center;margin-top:2rem;">
-      <a href="thoughts/" class="btn btn-ghost">View all posts →</a>
     </div>
   </div>
 </section>
