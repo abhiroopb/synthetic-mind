@@ -160,6 +160,68 @@
     }
     .pillar-link:hover { text-decoration: underline; }
 
+    /* ── amp-mem Showcase ── */
+    .ampmem-hero {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+    }
+    .ampmem-text h2 {
+      font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem;
+    }
+    .ampmem-text h2 span { color: var(--accent); }
+    .ampmem-text .ampmem-tagline {
+      font-size: 1.05rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7;
+    }
+    .ampmem-stats {
+      display: flex; gap: 2rem; margin-bottom: 1.5rem;
+    }
+    .ampmem-stat {
+      text-align: center;
+    }
+    .ampmem-stat-num {
+      font-size: 1.8rem; font-weight: 800; color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .ampmem-stat-label {
+      font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;
+      letter-spacing: 0.06em; font-weight: 500;
+    }
+    .ampmem-features {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
+    }
+    .ampmem-feature {
+      background: var(--surface); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm); padding: 1rem;
+    }
+    .ampmem-feature h4 {
+      font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .ampmem-feature p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+    .ampmem-terminal {
+      background: var(--surface); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .ampmem-terminal-bar {
+      background: var(--bg); padding: 0.5rem 0.75rem; display: flex; align-items: center; gap: 0.4rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .ampmem-terminal-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .ampmem-terminal pre {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; line-height: 1.7;
+      color: var(--text-muted); padding: 1.25rem; margin: 0; overflow-x: auto;
+    }
+    .ampmem-terminal pre .cmd { color: var(--green); }
+    .ampmem-terminal pre .flag { color: var(--accent); }
+    .ampmem-terminal pre .dim { color: var(--text-dim); }
+    .ampmem-terminal pre .result { color: var(--text); }
+    @media (max-width: 768px) {
+      .ampmem-hero { grid-template-columns: 1fr; }
+      .ampmem-features { grid-template-columns: 1fr; }
+      .ampmem-stats { gap: 1.5rem; }
+    }
+
     /* ── Skills ── */
     .tabs {
       display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem;
@@ -592,6 +654,89 @@
       <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">♻️</div><div class="skill-name">ralph-loop</div></div><div class="skill-desc">Iterative work-review loop using two AI models.</div><div class="skill-example">(complex revision tasks)</div></div>
       <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">🧠</div><div class="skill-name">memory</div></div><div class="skill-desc">Persistent cross-session memory — captures observations, generates summaries.</div><div class="skill-example">"search memory for auth decisions"</div></div>
       <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">🧬</div><div class="skill-name">kb-distill</div></div><div class="skill-desc">Distill raw observations into structured knowledge notes.</div><div class="skill-example">"distill my recent work"</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── amp-mem ── -->
+<section id="amp-mem">
+  <div class="container">
+    <div class="ampmem-hero">
+      <div class="ampmem-text">
+        <h2><span>amp-mem</span> — Persistent Memory for AI Agents</h2>
+        <p class="ampmem-tagline">Most AI agents forget everything between sessions. I built a memory system that doesn't. amp-mem is a ~500-line bash CLI backed by SQLite + FTS5 that gives AI agents persistent, searchable memory — no vector database, no cloud service, no embeddings. The LLM itself is the semantic engine.</p>
+        <div class="ampmem-stats">
+          <div class="ampmem-stat">
+            <div class="ampmem-stat-num">16</div>
+            <div class="ampmem-stat-label">CLI Commands</div>
+          </div>
+          <div class="ampmem-stat">
+            <div class="ampmem-stat-num">FTS5</div>
+            <div class="ampmem-stat-label">Search Engine</div>
+          </div>
+          <div class="ampmem-stat">
+            <div class="ampmem-stat-num">0</div>
+            <div class="ampmem-stat-label">External Deps</div>
+          </div>
+        </div>
+        <div class="ampmem-features">
+          <div class="ampmem-feature">
+            <h4>🔍 Passive Capture</h4>
+            <p>Auto-records decisions, discoveries, and workflows from tools like Slack, Gmail, and Linear as you work</p>
+          </div>
+          <div class="ampmem-feature">
+            <h4>🧬 Knowledge Distillation</h4>
+            <p>Compacts raw observations into structured notes — surfaces patterns across hundreds of sessions</p>
+          </div>
+          <div class="ampmem-feature">
+            <h4>⚡ Context Injection</h4>
+            <p>Automatically primes new sessions with relevant past context — the agent remembers what matters</p>
+          </div>
+          <div class="ampmem-feature">
+            <h4>📦 Zero Infrastructure</h4>
+            <p>Single SQLite file. No vector DB, no API keys, no cloud. Works offline, backs up with git</p>
+          </div>
+        </div>
+        <div style="margin-top:1.5rem;">
+          <a href="memory/" class="btn btn-primary">Deep dive →</a>
+          <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/bin" class="btn btn-ghost" style="margin-left:0.5rem;">View source →</a>
+        </div>
+      </div>
+      <div class="ampmem-terminal">
+        <div class="ampmem-terminal-bar">
+          <div class="ampmem-terminal-dot" style="background:#ff5f57"></div>
+          <div class="ampmem-terminal-dot" style="background:#febc2e"></div>
+          <div class="ampmem-terminal-dot" style="background:#28c840"></div>
+        </div>
+        <pre><span class="dim">$</span> <span class="cmd">amp-mem search</span> <span class="flag">"checkout flow"</span>
+
+<span class="dim">── Results (3 of 47 observations) ──</span>
+
+<span class="result">📌 decision</span> <span class="dim">2026-03-22</span>
+  Checkout skip-screen removed after
+  A/B test showed 12% lift in completion
+
+<span class="result">📌 discovery</span> <span class="dim">2026-03-18</span>
+  Cash rounding applies AFTER tax calc,
+  not before — confirmed in register-svc
+
+<span class="result">📌 workflow</span> <span class="dim">2026-03-14</span>
+  New flow: PR → playpen deploy → smoke
+  test via agent-browser → merge
+
+<span class="dim">$</span> <span class="cmd">amp-mem stats</span>
+
+  <span class="result">Observations:</span>  <span class="flag">2,718</span>
+  <span class="result">Sessions:</span>      <span class="flag">342</span>
+  <span class="result">Compacted:</span>     <span class="flag">89 notes</span>
+  <span class="result">DB size:</span>       <span class="flag">4.2 MB</span>
+
+<span class="dim">$</span> <span class="cmd">amp-mem compact</span>
+  <span class="dim">Distilling 51 new observations...</span>
+  <span class="result">✓ 7 knowledge notes created</span></pre>
+      </div>
     </div>
   </div>
 </section>
