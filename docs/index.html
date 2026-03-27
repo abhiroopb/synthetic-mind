@@ -167,9 +167,11 @@
     }
     .about-sidebar { position: sticky; top: 80px; }
     .about-avatar {
-      width: 120px; height: 120px; border-radius: 50%; background: var(--accent-dim);
-      display: flex; align-items: center; justify-content: center; font-size: 3rem;
+      width: 120px; height: 120px; border-radius: 50%; overflow: hidden;
       margin-bottom: 1.25rem; border: 2px solid var(--border);
+    }
+    .about-avatar img {
+      width: 100%; height: 100%; object-fit: cover;
     }
     .about-sidebar h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.25rem; }
     .about-sidebar .about-role { font-size: 0.9rem; color: var(--accent); font-weight: 500; margin-bottom: 0.75rem; }
@@ -541,7 +543,7 @@
   <div class="container">
     <div class="about-layout">
       <div class="about-sidebar">
-        <div class="about-avatar">👨‍💻</div>
+        <div class="about-avatar"><img src="images/headshot.jpg" alt="Abhi Basu"></div>
         <h3>Abhi Basu</h3>
         <div class="about-role">Staff Product Manager @ Square</div>
         <div class="about-location">📍 San Francisco Bay Area</div>
