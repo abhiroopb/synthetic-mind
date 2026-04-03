@@ -1,6 +1,6 @@
 # 🛠️ Skills Library
 
-**76 AI agent skills built for Amp — covering productivity, development, data, communication, and more.**
+**97 AI agent skills built for Amp — covering productivity, development, data, communication, and more.**
 
 Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. Skills are loaded via the `skill` tool or auto-routed by the `auto-pilot` skill.
 
@@ -92,6 +92,27 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 | 74 | [codesearch](./codesearch/) | 🔎 Research & Insights | Search code patterns across company repositories |
 | 75 | [glean](./glean/) | 🔎 Research & Insights | Search internal knowledge base via enterprise search |
 | 76 | [synthetic-mind](./synthetic-mind/) | 🤖 Agent Behavior | Post thoughts, processes, and updates to this repo |
+| 77 | [blox](./blox/) | ☁️ Cloud & Infrastructure | Delegate work to cloud workstations |
+| 78 | [blueprint-project-status](./blueprint-project-status/) | 📋 Task & Project Management | Audit and update roadmap project statuses in bulk |
+| 79 | [blueprint-project-update](./blueprint-project-update/) | 📋 Task & Project Management | Draft weekly roadmap project updates |
+| 80 | [blueprint-status-update](./blueprint-status-update/) | 📋 Task & Project Management | Batch audit and update project statuses from connected resources |
+| 81 | [check-ci](./check-ci/) | 🔀 Git & PRs | Analyze CI failures, fix code, and loop until green |
+| 82 | [cloning-squareup-repos](./cloning-squareup-repos/) | 🔀 Git & PRs | Clone org repos using correct SSH remote |
+| 83 | [dev-guides](./dev-guides/) | 📄 Documents | Search and read internal developer documentation |
+| 84 | [drafting-docs](./drafting-docs/) | 📄 Documents | Draft and format Google Docs with consistent styling |
+| 85 | [ecom-great-stores](./ecom-great-stores/) | 🔎 Research & Insights | Surface example ecommerce seller sites by industry or feature |
+| 86 | [ecom-research](./ecom-research/) | 🔎 Research & Insights | Surface ecommerce research insights, CSAT data, and UXR findings |
+| 87 | [eng-ai-chat](./eng-ai-chat/) | 🔎 Research & Insights | Search internal company knowledge grounded in app context |
+| 88 | [go-link](./go-link/) | 🔧 Infrastructure | Translate and navigate internal go/ links |
+| 89 | [hermit](./hermit/) | 🔧 Infrastructure | Hermetic binary package management per-repository |
+| 90 | [jira](./jira/) | 📋 Task & Project Management | Interact with Jira via Atlassian CLI |
+| 91 | [manager-slack-summary](./manager-slack-summary/) | 💬 Communication | Weekly digest of Slack conversations with your manager |
+| 92 | [monitoring-prs](./monitoring-prs/) | 🔀 Git & PRs | Monitor open PRs for new comments and CI failures |
+| 93 | [protos](./protos/) | 🔎 Research & Insights | Search protocol buffer definitions and services |
+| 94 | [slack-saved-triage](./slack-saved-triage/) | 💬 Communication | Prioritize and group Slack saved messages |
+| 95 | [staging-account-builder](./staging-account-builder/) | 🧪 Testing | Provision complete F&B staging accounts with data |
+| 96 | [trust-feature-validation](./trust-feature-validation/) | 🧪 Testing | Validate feature behavior during rollout |
+| 97 | [weekly-status-summary](./weekly-status-summary/) | 📋 Task & Project Management | Generate and post consolidated weekly status to Slack |
 
 ---
 
@@ -120,9 +141,12 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 
 ### 🔀 Git & PRs
 - [address-pr-comments](./address-pr-comments/) — Resolve GitHub PR review comments
+- [check-ci](./check-ci/) — Analyze CI failures, fix code, and loop until green
+- [cloning-squareup-repos](./cloning-squareup-repos/) — Clone org repos using correct SSH remote
 - [code-review-general](./code-review-general/) — Address PR code review feedback
 - [gh-pr-read](./gh-pr-read/) — Read and summarize GitHub pull requests
 - [git-worktree](./git-worktree/) — Manage git worktrees for parallel branches
+- [monitoring-prs](./monitoring-prs/) — Monitor open PRs for new comments and CI failures
 - [pr-manager](./pr-manager/) — Commit, create, and update PRs (supports Graphite)
 - [push-pr](./push-pr/) — Push branch and create draft PR
 - [rebasing-git-branches](./rebasing-git-branches/) — Rebase branches onto upstream target
@@ -144,6 +168,11 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 - [ios-simulator](./ios-simulator/) — Manage iOS simulators for testing
 - [pos-releases](./pos-releases/) — Query release train schedules, branch cuts, and rollout dates
 
+### ☁️ Cloud & Infrastructure
+- [blox](./blox/) — Delegate work to cloud workstations
+- [go-link](./go-link/) — Translate and navigate internal go/ links
+- [hermit](./hermit/) — Hermetic binary package management per-repository
+
 ### 🚀 Deployment
 - [prototype-builder](./prototype-builder/) — Scaffold interactive HTML prototypes
 
@@ -159,10 +188,15 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 - [writing-requirements-docs](./writing-requirements-docs/) — Write PRDs from rough notes with evidence
 
 ### 📋 Task & Project Management
+- [blueprint-project-status](./blueprint-project-status/) — Audit and update roadmap project statuses in bulk
+- [blueprint-project-update](./blueprint-project-update/) — Draft weekly roadmap project updates
+- [blueprint-status-update](./blueprint-status-update/) — Batch audit and update project statuses from connected resources
+- [jira](./jira/) — Interact with Jira via Atlassian CLI
 - [linear](./linear/) — Issue tracking and project management
 - [linear-to-execution](./linear-to-execution/) — Pick up a Linear issue for agent execution
 - [plan-to-linear](./plan-to-linear/) — Convert structured plans into Linear issues
 - [project-status](./project-status/) — Gather project state across multiple sources
+- [weekly-status-summary](./weekly-status-summary/) — Generate and post consolidated weekly status to Slack
 
 ### ✍️ Writing & Content
 - [communication-coach](./communication-coach/) — Concise, high-signal coaching for internal comms
@@ -172,6 +206,8 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 
 ### 📄 Documents
 - [converting-gdocs-to-markdown](./converting-gdocs-to-markdown/) — Convert Google Docs to markdown
+- [dev-guides](./dev-guides/) — Search and read internal developer documentation
+- [drafting-docs](./drafting-docs/) — Draft and format Google Docs with consistent styling
 - [gdrive](./gdrive/) — Google Drive, Docs, Sheets, and Slides
 - [notion](./notion/) — Read, search, create, and update Notion pages
 - [summarize-video](./summarize-video/) — Summarize videos with transcript and quotes
@@ -183,13 +219,17 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 - [viewing-figma-files](./viewing-figma-files/) — View, inspect, and export Figma files
 
 ### 🧪 Testing
+- [staging-account-builder](./staging-account-builder/) — Provision complete F&B staging accounts with data
 - [test-plan-creator](./test-plan-creator/) — Create test plans and acceptance criteria
+- [trust-feature-validation](./trust-feature-validation/) — Validate feature behavior during rollout
 
 ### 💬 Communication
 - [cash-rounding-responder](./cash-rounding-responder/) — Triage and draft replies to feature feedback emails
 - [gmail](./gmail/) — Search, read, send, and manage emails
+- [manager-slack-summary](./manager-slack-summary/) — Weekly digest of Slack conversations with your manager
 - [shipped-announcements](./shipped-announcements/) — Craft and post launch announcements to Slack
 - [slack](./slack/) — Search, read, and post Slack messages
+- [slack-saved-triage](./slack-saved-triage/) — Prioritize and group Slack saved messages
 
 ### 📆 Calendar & Scheduling
 - [gcal](./gcal/) — Schedule, manage, and query calendar events
@@ -206,10 +246,14 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 
 ### 🔎 Research & Insights
 - [codesearch](./codesearch/) — Search code patterns across company repositories
+- [ecom-great-stores](./ecom-great-stores/) — Surface example ecommerce seller sites by industry or feature
+- [ecom-research](./ecom-research/) — Surface ecommerce research insights, CSAT data, and UXR findings
+- [eng-ai-chat](./eng-ai-chat/) — Search internal company knowledge grounded in app context
 - [enterprise-search](./enterprise-search/) — Search internal knowledge base, chat with AI, read docs
 - [feedback-searcher](./feedback-searcher/) — Synthesize customer feedback across sources
 - [glean](./glean/) — Search internal knowledge base via enterprise search
 - [merchant-lookup](./merchant-lookup/) — Query merchant/customer data via admin tools
+- [protos](./protos/) — Search protocol buffer definitions and services
 - [regulator](./regulator/) — Query merchant data via admin tools
 - [web-research](./web-research/) — Search and synthesize external information
 
@@ -250,4 +294,4 @@ The `SKILL.md` file uses YAML frontmatter with `name` and `description` fields, 
 
 ---
 
-*Last updated: March 2026*
+*Last updated: April 2026*

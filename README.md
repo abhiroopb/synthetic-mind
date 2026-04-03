@@ -16,35 +16,35 @@ Built primarily with [Amp](https://ampcode.com), these skills power a PM's daily
 
 | Directory | Contents |
 |-----------|----------|
-| **[`/skills`](./skills)** | 105 AI agent skills — [browse the full catalog →](./skills/README.md) |
+| **[`/skills`](./skills)** | 97 AI agent skills — [browse the full catalog →](./skills/README.md) |
 | **[`/thoughts`](./thoughts)** | Write-ups on AI workflows, observations, and takeaways |
 | **[`/processes`](./processes)** | Documented processes for AI-augmented work |
 
 ## Skills at a Glance
 
-**105 skills** across 20+ categories:
+**97 skills** across 20+ categories:
 
 | Category | Skills | Examples |
 |----------|--------|----------|
 | 🤖 **Agent Behavior** | 3 | Auto-pilot routing, swarm exploration, requirement clarification |
 | 🧠 **Memory & Context** | 5 | Cross-session memory, knowledge distillation, voice profiling |
 | 🔬 **Methodology** | 7 | RPI (Research → Plan → Implement), multi-model review loops |
-| 📊 **Data & Analytics** | 8 | Snowflake, Databricks, Looker, Datadog, Airtable |
-| 🔀 **Git & PRs** | 8 | PR creation, code review, rebasing, stacked PRs, worktrees |
-| 📝 **Product** | 7 | PRDs, specs, feature requests, feedback tracking |
-| 💬 **Communication** | 3 | Slack, Gmail, email triage |
+| 📊 **Data & Analytics** | 7 | Snowflake, Databricks, Looker, Datadog, Airtable |
+| 🔀 **Git & PRs** | 10 | PR creation, code review, CI analysis, PR monitoring, stacked PRs |
+| 📝 **Product** | 9 | PRDs, specs, feature requests, feedback tracking |
+| 💬 **Communication** | 6 | Slack, Gmail, manager summaries, saved message triage |
 | ✍️ **Writing** | 4 | Brand voice, communication coaching, performance feedback |
-| 📄 **Documents** | 4 | Google Drive, Notion, video summaries, doc conversion |
-| 🧪 **Experimentation** | 3 | A/B testing, LaunchDarkly flags, flag evaluation |
-| 📱 **Mobile** | 5 | iOS/Android simulators, app builds, release trains |
-| 🚀 **Deployment** | 4 | Static sites, staging environments, prototypes |
-| 🔍 **Search** | 7 | Code search, enterprise knowledge, employee directory |
-| 📋 **Project Mgmt** | 5 | Linear, task creation, project status aggregation |
-| 🧪 **Testing** | 4 | Test accounts, test plans, QA docs |
-| 🔧 **Infrastructure** | 4 | Permissions, service registry, audience segments |
+| 📄 **Documents** | 6 | Google Drive, Notion, dev guides, doc drafting, video summaries |
+| 🧪 **Experimentation** | 1 | LaunchDarkly flags |
+| 📱 **Mobile** | 3 | iOS/Android simulators, release trains |
+| ☁️ **Cloud & Infra** | 3 | Cloud workstations, go/ links, Hermit package manager |
+| 🚀 **Deployment** | 1 | Static sites, prototypes |
+| 🔍 **Search** | 10 | Code search, enterprise knowledge, protos, ecom research |
+| 📋 **Project Mgmt** | 9 | Linear, Jira, project status, weekly summaries, roadmap audits |
+| 🧪 **Testing** | 3 | Staging accounts, feature validation, test plans |
 | 🖥️ **System** | 3 | macOS control, disk cleanup, screenshots |
 | 🎨 **Design** | 1 | Figma file inspection |
-| + more | 13 | Calendar, CI/CD, browser automation, web research, etc. |
+| + more | 6 | Calendar, browser automation, web research, etc. |
 
 **[Browse the full catalog →](./skills/README.md)**
 
@@ -71,6 +71,7 @@ Or clone the repo and point Amp at the `skills/` directory. The `auto-pilot` ski
 
 | Date | Update |
 |------|--------|
+| 2026-04-03 | 🆕 21 new skills: blox, blueprint-project-status, blueprint-project-update, blueprint-status-update, check-ci, cloning-squareup-repos, dev-guides, drafting-docs, ecom-great-stores, ecom-research, eng-ai-chat, go-link, hermit, jira, manager-slack-summary, monitoring-prs, protos, slack-saved-triage, staging-account-builder, trust-feature-validation, weekly-status-summary |
 | 2026-03-24 | 📝 New thought: [How I Automated Every Workflow with AI Skills](./thoughts/2026-03-24-automating-workflows-with-ai-skills.md) — a practical guide to building 35+ AI agent skills for morning triage, email, project management, and more |
 | 2026-03-24 | 📝 New thought: [We Built an AI Skill That Writes Product Requirements Docs](./thoughts/2026-03-24-writing-requirements-docs.md) — how a team went from markdown-first specs to an agent skill that writes PRDs with auto-referenced internal sources |
 | 2026-03-23 | 📝 New thought: [Cutting 80% of the Noise from My AI Memory System](./thoughts/2026-03-23-amp-mem-noise-reduction.md) — 7 plugin changes that cut observation volume by ~80% while preserving signal |
