@@ -1,13 +1,13 @@
 # Agents
 
-A real-world AGENTS.md powering 105+ AI skills across product management, data analysis, and engineering workflows. Sanitized for public sharing — all internal URLs, proprietary tool names, and company-specific references have been replaced with generic placeholders.
+A real-world AGENTS.md powering 76+ AI skills across product management, data analysis, and engineering workflows. Sanitized for public sharing — all internal URLs, proprietary tool names, and company-specific references have been replaced with generic placeholders.
 
 ---
 
 ## Identity
 
 - **Name:** Abhi Basu | **Email:** you@company.com | **Title:** Product Manager
-- **Team:** Checkout Flow (in-person POS checkout)
+- **Team:** Profiles (Online Ordering)
 - **Working folder:** `/Development`
 
 ## Session Start
@@ -20,7 +20,7 @@ Run silently on every session start (do NOT ask):
 4. If `amp-mem search "Communication Style Matrix"` is >30 days old, run `kb-style-matrix`
 5. If `~/.config/start-of-day/last-run` is missing or >12h old, run `start-of-day` skill and write ISO timestamp
 6. Load relevant skills and warm up MCP servers
-7. After the first user message, set the iTerm tab title to a short (2-4 word) summary of the task: `osascript -e 'tell application "iTerm2" to tell current session of current tab of current window to set name to "TITLE"'`
+7. After the first user message, set the iTerm tab title to a short (2-3 word) summary of the task: `osascript -e 'tell application "iTerm2" to tell current session of current tab of current window to set name to "TITLE"'`
 
 > **Note:** amp-mem plugin (`~/.config/amp/plugins/amp-mem.ts`) handles init, backup, session tracking, context injection, and distill-status automatically.
 
@@ -90,7 +90,6 @@ _Update monthly._
 ## Output Preferences
 
 - **Reports/docs:** Google Doc via gdrive skill. Never local files. Links must be clickable.
-- **Google Doc context box:** 1×1 table after title — #F3F3F3 background, 18pt padding, invisible borders, 10pt text, 138% line spacing. Fields: Document Status, Author, Last Updated, Audience/Related Docs. Insert via `insertTable` + `updateTableCellStyle`. Never skip.
 - **Email drafts:** Paste original message + draft in chat for review before Gmail. Drafting is almost always replies, rarely fresh compositions.
 - **Calendar review:** Inline in chat via `reviewing-calendar` skill. Never open HTML in browser.
 - **Response style:** Concise (2-4 lines) unless asked for detail. Tables for comparisons, bullets for lists. Options in numbered blockquote format (max 3 with recommendation). Status emoji: ✅ done, 🔄 in progress, ❌ blocked.
@@ -103,7 +102,9 @@ _Update monthly._
 - **Docs/reports:** Google Docs via gdrive, never local files
 - **Code context:** Librarian (cross-repo), finder (local)
 - **Backlog:** "Add to backlog" always means the roadmap tool — never the sprint tracker.
-- **Git:** Always `git fetch origin` first.
+- **Git:** Always `git fetch origin` first. Always push immediately after committing PR changes — never wait to be asked.
+- **PR comments:** "Respond to comments" means both fix the code AND post replies. Never just one without the other.
+- **Google Docs:** After writing/updating a doc, read it back and verify all links are clickable.
 
 ## synthetic-mind
 
