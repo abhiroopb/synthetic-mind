@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The File That Runs My Entire AI Setup — synthetic-mind</title>
+  <meta name="description" content="I published my AGENTS.md — the single file that configures how my AI agent behaves across 76+ skills. Identity, memory, to-dos, boundaries, and tool routing in one markdown document.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-date {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../skills/">Skills</a>
+      <a href="../memory/">Memory</a>
+      <a href="../setup/">Setup</a>
+      <a href="./">Thoughts</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All thoughts</a>
+
+  <h1>The File That Runs My Entire AI Setup</h1>
+  <div class="article-meta">
+    <span class="article-date">2026-04-06</span>
+    <span class="article-tag">agents-md</span>
+    <span class="article-tag">configuration</span>
+    <span class="article-tag">setup</span>
+  </div>
+
+  <blockquote style="border-left:3px solid var(--accent);padding:0.75rem 1rem;margin-bottom:2rem;background:var(--accent-dim);border-radius:0 8px 8px 0;">
+    📄 <strong>Get the file:</strong> <a href="https://github.com/abhiroopb/synthetic-mind/blob/main/agents-md-reference.md" style="color:var(--accent);">agents-md-reference.md</a>
+  </blockquote>
+
+  <h2>TL;DR</h2>
+  <p>I published a sanitized version of my <code>AGENTS.md</code> — the single file that configures how my AI agent behaves across 76+ skills. It defines my identity, session startup routine, memory system, to-do automation, output preferences, and tool routing. If you want to build your own AI-powered workflow, this is the blueprint.</p>
+
+  <h2>Context</h2>
+  <p>Every time I talk about my AI setup — the <a href="./2026-03-05-start-of-day">start-of-day skill</a>, the <a href="./2026-03-05-building-amp-mem">memory system</a>, the <a href="./2026-03-24-automating-workflows-with-ai-skills">76 skills</a> — people ask the same question: "Where does all the configuration live?"</p>
+  <p>One file. <code>AGENTS.md</code> in my project root.</p>
+  <p>It's not a config file in the traditional sense. It's a markdown document that the agent reads at the start of every session. Think of it as a combination of a <code>.bashrc</code>, a runbook, and a personality profile — except it's written in plain English.</p>
+
+  <h2>What's In It</h2>
+
+  <h3>Identity</h3>
+<pre><code>- Name: Abhi Basu
+- Team: Profiles (Online Ordering)
+- Working folder: /Development</code></pre>
+  <p>This is how the agent knows who it's working for. It affects tone, Slack attribution, email signatures, and which projects to prioritize.</p>
+
+  <h3>Session Start</h3>
+  <p>Seven steps that run silently every time a session begins:</p>
+  <ol>
+    <li>Check VPN connection</li>
+    <li>Load the to-do list and surface open items</li>
+    <li>Check if memory needs distillation</li>
+    <li>Check if communication style profile is stale</li>
+    <li>Run start-of-day if it hasn't run in 12 hours</li>
+    <li>Load skills and warm up MCP servers</li>
+    <li>Set the terminal tab title to the current task</li>
+  </ol>
+  <p>The agent doesn't ask permission for any of these. They just happen. The session is ready to work by the time I type my first message.</p>
+
+  <h3>Memory System</h3>
+  <p>The <a href="./2026-03-05-building-amp-mem">amp-mem plugin</a> runs passively in the background:</p>
+  <ul>
+    <li><strong>Passive capture</strong> — watches tool results from Slack, Gmail, Linear, etc. Uses AI gating (probability > 0.65) to decide what's worth saving.</li>
+    <li><strong>Noise filtering</strong> — ignores read-only tools, short commands, and noisy operations.</li>
+    <li><strong>Pattern learning</strong> — after 3+ repeated actions across sessions, proposes codifying it as a rule in AGENTS.md itself.</li>
+  </ul>
+  <p>The memory system is self-improving. The more I use it, the smarter the file gets.</p>
+
+  <h3>To-Do System</h3>
+  <p>The <a href="./2026-03-14-todo-system">to-do system</a> is fully automated:</p>
+  <ul>
+    <li><strong>Auto-capture</strong> from conversations, Slack, email, Linear</li>
+    <li><strong>Auto-reconcile</strong> at session start — checks if items were already completed</li>
+    <li><strong>Auto-complete</strong> when I finish something during a session</li>
+    <li><strong>Calendar sync</strong> — future items get 15-minute calendar blocks, color-coded by priority</li>
+  </ul>
+  <p>I haven't manually added a to-do item in weeks. The agent captures them as they come up.</p>
+
+  <h3>Boundaries</h3>
+  <p>This is the part most people skip, and it's the most important:</p>
+<pre><code>✅ Always: Use skills before raw tool calls
+⚠️ Ask first: Modifying AGENTS.md, posting to Slack, sending emails
+🚫 Never: Commit secrets, send emails without preview</code></pre>
+  <p>Without boundaries, the agent will do too much. The <code>Ask first</code> tier is critical — it means I stay in the loop on anything that goes out to other people.</p>
+
+  <h3>Tool Preferences</h3>
+  <p>This section is where I encode my workflow opinions:</p>
+  <ul>
+    <li>Enterprise search first, Slack/web search as fallback</li>
+    <li>Snowflake over Databricks for data queries</li>
+    <li>Google Docs via gdrive, never local files</li>
+    <li>"Add to backlog" means the roadmap tool, not the sprint tracker</li>
+  </ul>
+  <p>These sound trivial, but they eliminate a whole category of "did you mean..." back-and-forth. The agent just knows.</p>
+
+  <h2>Why This Works</h2>
+  <p>Three reasons:</p>
+  <p><strong>1. It's plain English.</strong> No YAML schema to learn. No special syntax. The agent reads markdown and follows instructions. If I want to change a behavior, I edit a sentence.</p>
+  <p><strong>2. It's self-reinforcing.</strong> The memory system watches my corrections and proposes new rules. When I say "don't use emdashes" three times, it suggests adding that to Output Preferences. The file evolves with my habits.</p>
+  <p><strong>3. It's the single source of truth.</strong> Every skill, every session, every workstream reads this file. There's no drift between "how the agent should behave" and "how the agent actually behaves" because there's only one place to look.</p>
+
+  <h2>Get the File</h2>
+  <p>The full sanitized reference is here: <strong><a href="https://github.com/abhiroopb/synthetic-mind/blob/main/agents-md-reference.md">agents-md-reference.md</a></strong></p>
+  <p>All internal URLs, proprietary tool names, and company-specific references have been replaced with generic placeholders. The structure and logic are exactly what I use every day.</p>
+  <p>To use it:</p>
+  <ol>
+    <li>Copy it to your project root as <code>AGENTS.md</code></li>
+    <li>Replace the identity section with your info</li>
+    <li>Remove sections you don't need yet (start with Identity, Boundaries, and Output Preferences)</li>
+    <li>Add sections as your workflow evolves</li>
+  </ol>
+  <p>You don't need all 76 skills to get value from this. Even with just the identity and boundaries sections, your agent sessions will feel noticeably more consistent.</p>
+
+  <h2>What I Learned</h2>
+  <p><strong>Start small.</strong> My first AGENTS.md was 10 lines: name, team, and "be concise." Everything else grew organically from corrections and preferences I noticed repeating.</p>
+  <p><strong>Boundaries matter more than capabilities.</strong> The <code>Never</code> and <code>Ask first</code> sections prevent more problems than all the other sections combined. An agent that does too much is worse than one that does too little.</p>
+  <p><strong>The file is never done.</strong> I edit it 2-3 times a week. It's a living document that reflects how I actually work, not how I think I should work. That's the whole point.</p>
+
+  <hr>
+  <p><em>Related: <a href="./2026-03-24-automating-workflows-with-ai-skills">How I Automated Every Workflow with AI Skills</a> — the 76+ skills this file configures.</em></p>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>
