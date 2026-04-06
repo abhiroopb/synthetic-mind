@@ -14,7 +14,7 @@ A real-world AGENTS.md powering 76+ AI skills across product management, data an
 
 Run silently on every session start (do NOT ask):
 
-1. `warp-cli status` → if disconnected, run `warp-cli connect`
+1. Check VPN status → if disconnected, connect before proceeding
 2. Load todo skill → surface open items (top 5 + summary) → auto-reconcile (see To-Do System)
 3. If `amp-mem distill-status` shows pending > 50 or last run > 7d, auto-run `kb-distill`; append proposed rules as "approve/skip"
 4. If `amp-mem search "Communication Style Matrix"` is >30 days old, run `kb-style-matrix`
@@ -105,16 +105,6 @@ _Update monthly._
 - **Git:** Always `git fetch origin` first. Always push immediately after committing PR changes — never wait to be asked.
 - **PR comments:** "Respond to comments" means both fix the code AND post replies. Never just one without the other.
 - **Google Docs:** After writing/updating a doc, read it back and verify all links are clickable.
-
-## synthetic-mind
-
-- **Auto-commit:** Commit and push automatically with descriptive message — never ask.
-- **Auto-update README:** Update "Latest Updates" section whenever content changes.
-- **Auto-publish skills:** New skills installed → upload to synthetic-mind + create blog post (what, how, examples, why). Sanitize internals.
-- **Proactive nudge:** After novel/creative work, suggest a post once per session. If declined, move on.
-- **Trigger signals:** New skill, new automation, interesting debug, novel tool use, cross-tool orchestration, architectural insight, or anything called "cool"/"interesting".
-- **Writing voice:** First-person as Abhi. Casual, direct, short sentences. Point first, then context. "Smart friend over coffee" not "Medium article." Sentence case, light emoji, heavy code blocks.
-
 ## Meta-Rules
 
 - New skill installed → add to install script + routing in auto-pilot skill
