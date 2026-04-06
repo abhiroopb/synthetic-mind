@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Stopped Telling My Agent Which Tool to Use — synthetic-mind</title>
+  <meta name="description" content="The auto-pilot skill routes requests to the right skill automatically. Routing tables, intent parsing, multi-skill chaining — how one meta-skill replaced a 97-option menu.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-date {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../skills/">Skills</a>
+      <a href="../memory/">Memory</a>
+      <a href="../setup/">Setup</a>
+      <a href="./">Thoughts</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All thoughts</a>
+
+  <h1>I Stopped Telling My Agent Which Tool to Use</h1>
+  <div class="article-meta">
+    <span class="article-date">2026-04-06</span>
+    <span class="article-tag">auto-pilot</span>
+    <span class="article-tag">orchestration</span>
+    <span class="article-tag">workflow</span>
+  </div>
+
+  <h2>TL;DR</h2>
+  <p>The auto-pilot skill is a routing layer that sits between me and 97 AI skills. I describe what I want done, and it picks the right skill — or chains multiple skills together — without asking. It turned my agent from a toolbox into an assistant.</p>
+
+  <h2>Context</h2>
+  <p>By late February, I had 30+ skills installed. Start-of-day, Slack, Gmail, Linear, Snowflake, PRD writing, code review. Each one worked great in isolation. The problem was me.</p>
+  <p>Every time I wanted something done, I had to remember which skill to use. "Search Slack" → load <code>slack</code>. "Check my calendar" → load <code>gcal</code>. "Draft a PRD" → load <code>prd-draft</code>. It felt like having a car where you manually engage each gear, every time, from a 97-option menu.</p>
+  <p>So I built a skill whose only job is picking the right skill.</p>
+
+  <h2>How It Works</h2>
+  <p>Auto-pilot has three pieces:</p>
+
+  <h3>1. Intent parsing</h3>
+  <p>When I say something like "find the Linear ticket for cash rounding and post it to Slack," auto-pilot breaks that into two intents: search Linear, then post to Slack. No fancy NLP — the agent's language model handles the parsing natively.</p>
+
+  <h3>2. Routing tables</h3>
+  <p>A <code>routing-tables.md</code> file maps intents to skills across every domain:</p>
+
+  <table>
+    <thead><tr><th>Intent</th><th>Skill</th></tr></thead>
+    <tbody>
+      <tr><td>Search/read/draft email</td><td><code>gmail</code></td></tr>
+      <tr><td>Calendar: schedule, check, RSVP</td><td><code>gcal</code></td></tr>
+      <tr><td>Linear issues: create, update, search</td><td><code>linear</code></td></tr>
+      <tr><td>Snowflake SQL queries</td><td><code>snowflake</code></td></tr>
+      <tr><td>Draft PRD / feature spec</td><td><code>prd-draft</code></td></tr>
+      <tr><td>Project status / recap</td><td><code>project-status</code></td></tr>
+      <tr><td>Deploy static site</td><td><code>blockcell</code></td></tr>
+    </tbody>
+  </table>
+
+  <p>There are 100+ entries across communication, project management, code, data, infrastructure, testing, product, strategy, and prototyping. The table is the skill's brain — everything else is just execution logic.</p>
+
+  <h3>3. Execution protocol</h3>
+  <p>Five steps, every time:</p>
+  <ol>
+    <li><strong>Parse intent</strong> — what does the user want done?</li>
+    <li><strong>Select skill(s)</strong> — match against routing tables</li>
+    <li><strong>Load skill</strong> — pull the right SKILL.md into context</li>
+    <li><strong>Execute</strong> — follow the skill's instructions</li>
+    <li><strong>Chain if needed</strong> — load additional skills for multi-domain tasks</li>
+  </ol>
+  <p>The key principle: <strong>don't ask which skill to use.</strong> The agent decides. Only ask for genuinely missing data — a merchant ID the user hasn't mentioned, a date range that's ambiguous.</p>
+
+  <h2>The Chaining Part</h2>
+  <p>This is where it gets interesting. Most of my real work spans multiple tools:</p>
+  <ul>
+    <li>"Check if the feature flag is ramped, and if so, update the project status" → <code>launchdarkly</code> → <code>project-update</code></li>
+    <li>"Find yesterday's Slack thread about X and create a Linear ticket" → <code>slack</code> → <code>linear</code></li>
+    <li>"Pull the checkout completion rate from Snowflake and draft a status update" → <code>snowflake</code> → <code>status-update</code></li>
+  </ul>
+  <p>Auto-pilot handles these by loading skills sequentially, passing context from one to the next. The output of the Snowflake query becomes the input for the status update. No manual copy-pasting between tools.</p>
+
+  <h2>Active vs. Archived Skills</h2>
+  <p>With 97 skills, loading all of them into context would be wasteful. So there are two tiers:</p>
+  <ul>
+    <li><strong>Active</strong> (<code>~/.agents/skills/</code>) — always available, loaded via the <code>skill</code> tool</li>
+    <li><strong>Archived</strong> (<code>~/.agents/skills-archive/</code>) — loaded on demand by reading the SKILL.md directly</li>
+  </ul>
+  <p>Frequently used skills stay active. Rarely used ones get archived. Auto-pilot knows where each one lives and loads from the right place.</p>
+
+  <h2>The Safety Valve</h2>
+  <p>There's one important guardrail: if the request is ambiguous enough that routing to the wrong skill would cause <strong>unrecoverable side effects</strong> — posting to a public Slack channel vs. sending a private email, for example — auto-pilot stops and asks to clarify. It prefers action over clarification, but not at the cost of sending the wrong message to the wrong place.</p>
+
+  <h2>What I Learned</h2>
+  <p><strong>Routing tables beat AI reasoning for skill selection.</strong> I tried letting the agent "figure out" which skill to use based on descriptions alone. It worked 80% of the time. The routing table brought it to 99%. Explicit mappings beat fuzzy matching for production workflows.</p>
+  <p><strong>The real value is chaining, not routing.</strong> Single-skill tasks are easy — I could just load the skill myself. The magic is when auto-pilot chains three skills together for a task I would have done in three separate sessions before.</p>
+  <p><strong>Maintenance is the cost.</strong> Every new skill needs a routing table entry. Every renamed skill needs an update. It's a small tax, but it's non-zero. I've automated most of it — new skill installs auto-add to the routing table — but it's worth knowing the trade-off.</p>
+  <p><strong>You need boundaries elsewhere.</strong> Auto-pilot decides <em>what</em> to do, but <code>AGENTS.md</code> decides <em>how</em> to do it. The boundaries section ("ask before posting to Slack," "preview emails before sending") acts as the safety net. Without it, auto-pilot would be dangerously efficient.</p>
+
+  <hr>
+  <p><em>Related: <a href="./2026-04-06-agents-md-reference">The File That Runs My Entire AI Setup</a> — the AGENTS.md that provides auto-pilot's boundaries and preferences.</em></p>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>

@@ -8,6 +8,7 @@ Write-ups on AI workflows, observations, experiments, and takeaways from buildin
 
 | # | Title | Date | Tags |
 |---|-------|------|------|
+| 9 | [I Stopped Telling My Agent Which Tool to Use](./2026-04-06-auto-pilot-skill.md) | 2026-04-06 | auto-pilot, orchestration, workflow, routing |
 | 8 | [The File That Runs My Entire AI Setup](./2026-04-06-agents-md-reference.md) | 2026-04-06 | agents-md, configuration, setup, reference |
 | 7 | [We Built an AI Skill That Writes Product Requirements Docs](./2026-03-24-writing-requirements-docs.md) | 2026-03-24 | prd, agent-skill, markdown, product-management, requirements |
 | 6 | [How I Automated Every Workflow with AI Skills](./2026-03-24-automating-workflows-with-ai-skills.md) | 2026-03-24 | workflow, skills, guide, automation, ai-agents |
