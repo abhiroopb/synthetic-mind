@@ -102,52 +102,317 @@
       font-size: 0.92rem;
       line-height: 1.7;
     }
-    .flow {
+    .visual-stage {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 0.75rem;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
+      gap: 1.25rem;
       margin-top: 1.5rem;
+      align-items: start;
     }
-    .flow-step {
-      background: var(--surface);
+    .visual-card {
+      background: linear-gradient(180deg, rgba(20,20,20,0.96), rgba(12,13,17,0.96));
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-sm);
-      padding: 1rem;
-      position: relative;
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.28);
     }
-    .flow-step::after {
-      content: '→';
-      position: absolute;
-      right: -0.6rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-dim);
-      font-size: 1rem;
-    }
-    .flow-step:last-child::after {
-      display: none;
-    }
-    .flow-num {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--accent-dim);
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .visual-kicker {
       font-size: 0.72rem;
-      font-weight: 700;
-      margin-bottom: 0.65rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.55rem;
     }
-    .flow-step h3 {
-      font-size: 0.92rem;
+    .visual-card h3 {
+      font-size: 1.05rem;
       margin-bottom: 0.35rem;
     }
-    .flow-step p {
-      font-size: 0.8rem;
+    .visual-card > p {
       color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+    .workflow-ladder {
+      position: relative;
+      margin-top: 1.2rem;
+      padding-left: 1.35rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+    .workflow-ladder::before {
+      content: '';
+      position: absolute;
+      left: 0.38rem;
+      top: 0.3rem;
+      bottom: 0.3rem;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(59,130,246,0.75), rgba(34,197,94,0.18));
+    }
+    .workflow-node {
+      position: relative;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 0.95rem 1rem 0.95rem 1.05rem;
+    }
+    .workflow-node::before {
+      content: '';
+      position: absolute;
+      left: -1.14rem;
+      top: 1.05rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: #60a5fa;
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.15);
+    }
+    .workflow-node:nth-child(3)::before {
+      background: #34d399;
+      box-shadow: 0 0 0 4px rgba(52,211,153,0.15);
+    }
+    .workflow-node:nth-child(4)::before {
+      background: #f59e0b;
+      box-shadow: 0 0 0 4px rgba(245,158,11,0.14);
+    }
+    .workflow-node:nth-child(5)::before {
+      background: #f87171;
+      box-shadow: 0 0 0 4px rgba(248,113,113,0.12);
+    }
+    .workflow-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: baseline;
+      margin-bottom: 0.35rem;
+    }
+    .workflow-step-label {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .workflow-node h4 {
+      font-size: 0.95rem;
+      margin: 0;
+    }
+    .workflow-node p {
+      color: var(--text-muted);
+      font-size: 0.82rem;
       line-height: 1.55;
+      margin: 0;
+    }
+    .workflow-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-top: 0.7rem;
+    }
+    .workflow-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      padding: 0.22rem 0.48rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+    }
+    .cmux-shell {
+      margin-top: 1.15rem;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #090b0f;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .cmux-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 0.9rem;
+      background: linear-gradient(180deg, #121721, #0d1118);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.76rem;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .cmux-dots {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+    .cmux-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+    }
+    .cmux-layout {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      min-height: 420px;
+    }
+    .cmux-sidebar {
+      background: linear-gradient(180deg, #10141b, #0b0e13);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      padding: 0.8rem;
+    }
+    .cmux-sidebar-label {
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.65rem;
+    }
+    .cmux-tab {
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 0.7rem;
+      margin-bottom: 0.55rem;
+      background: rgba(255,255,255,0.025);
+    }
+    .cmux-tab.active {
+      border-color: rgba(59,130,246,0.45);
+      background: linear-gradient(180deg, rgba(59,130,246,0.16), rgba(59,130,246,0.06));
+    }
+    .cmux-tab-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.3rem;
+    }
+    .cmux-tab-name {
+      font-size: 0.78rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+    .cmux-badge {
+      font-size: 0.63rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #bfdbfe;
+      background: rgba(59,130,246,0.16);
+      padding: 0.14rem 0.34rem;
+      border-radius: 999px;
+    }
+    .cmux-badge.waiting {
+      color: #fde68a;
+      background: rgba(245,158,11,0.16);
+    }
+    .cmux-badge.review {
+      color: #86efac;
+      background: rgba(34,197,94,0.14);
+    }
+    .cmux-tab p {
+      margin: 0;
+      font-size: 0.72rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+    .cmux-main {
+      padding: 0.8rem;
+      background: radial-gradient(circle at top right, rgba(59,130,246,0.12), transparent 28%), #090b0f;
+    }
+    .cmux-main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      padding: 0.5rem 0.65rem;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.025);
+      font-size: 0.74rem;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .cmux-main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+      gap: 0.75rem;
+    }
+    .terminal-pane,
+    .state-pane {
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      overflow: hidden;
+    }
+    .terminal-head,
+    .state-head {
+      padding: 0.65rem 0.8rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .terminal-body {
+      padding: 0.9rem 0.9rem 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.73rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      min-height: 275px;
+    }
+    .terminal-body .prompt {
+      color: #34d399;
+    }
+    .terminal-body .cmd {
+      color: #e5e7eb;
+    }
+    .terminal-body .accent {
+      color: #93c5fd;
+    }
+    .terminal-body .good {
+      color: #86efac;
+    }
+    .terminal-body .dim {
+      color: #6b7280;
+    }
+    .state-body {
+      padding: 0.8rem;
+      display: grid;
+      gap: 0.65rem;
+    }
+    .state-card {
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 0.75rem;
+      background: rgba(255,255,255,0.025);
+    }
+    .state-card-label {
+      font-size: 0.67rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.35rem;
+    }
+    .state-card-title {
+      font-size: 0.84rem;
+      color: var(--text);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .state-card p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      line-height: 1.55;
+    }
+    .state-chip-row {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .state-chip {
+      font-size: 0.64rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-dim);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 999px;
+      padding: 0.16rem 0.36rem;
+      background: rgba(255,255,255,0.025);
     }
     .code-block {
       background: var(--surface);
@@ -201,12 +466,13 @@
     }
     @media (max-width: 960px) {
       .snapshot,
-      .flow,
+      .visual-stage,
       .links-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
       }
-      .flow-step::after {
-        display: none;
+      .cmux-layout,
+      .cmux-main-grid {
+        grid-template-columns: 1fr;
       }
     }
     @media (max-width: 768px) {
@@ -215,9 +481,14 @@
       }
       .feature-grid,
       .snapshot,
-      .flow,
       .links-grid {
         grid-template-columns: 1fr;
+      }
+      .cmux-sidebar {
+        padding-bottom: 0.2rem;
+      }
+      .workflow-ladder {
+        padding-left: 1.15rem;
       }
     }
   </style>
@@ -304,33 +575,171 @@
   <div class="container">
     <div class="section-header">
       <h2>How a day runs</h2>
-      <p>The whole system starts from one command and a few small files.</p>
+      <p>The whole system starts from one command, then fans out into a planner, a ranked queue, and live workspaces.</p>
     </div>
-    <div class="flow">
-      <div class="flow-step">
-        <div class="flow-num">1</div>
-        <h3>Launch</h3>
-        <p><code>start-day.sh</code> validates prerequisites and boots or reuses <code>cmux</code>.</p>
+    <div class="visual-stage">
+      <div class="visual-card">
+        <div class="visual-kicker">Workflow view</div>
+        <h3>From one command to a full operating surface</h3>
+        <p>The launcher is just the beginning. The important part is how planning, ranking, and execution stay separated while sharing the same file-backed context.</p>
+        <div class="workflow-ladder">
+          <div class="workflow-node">
+            <div class="workflow-top">
+              <h4>Start the day</h4>
+              <span class="workflow-step-label">step 01</span>
+            </div>
+            <p><code>bash system/start-day.sh</code> validates the environment and boots or reuses the CMUX workspace.</p>
+            <div class="workflow-tags">
+              <span class="workflow-tag">cmux</span>
+              <span class="workflow-tag">Amp CLI</span>
+            </div>
+          </div>
+          <div class="workflow-node">
+            <div class="workflow-top">
+              <h4>Plan in command-center</h4>
+              <span class="workflow-step-label">step 02</span>
+            </div>
+            <p>The Chief of Staff workspace reads notes, routines, and workstreams, then decides what deserves focus now.</p>
+            <div class="workflow-tags">
+              <span class="workflow-tag">chief-of-staff</span>
+              <span class="workflow-tag">notes/</span>
+            </div>
+          </div>
+          <div class="workflow-node">
+            <div class="workflow-top">
+              <h4>Write the plan</h4>
+              <span class="workflow-step-label">step 03</span>
+            </div>
+            <p>The planner emits <code>today-plan.json</code>, then the public repo derives <code>queue.json</code> and <code>now.json</code> for a quick current-state view.</p>
+            <div class="workflow-tags">
+              <span class="workflow-tag">today-plan.json</span>
+              <span class="workflow-tag">system/state/</span>
+            </div>
+          </div>
+          <div class="workflow-node">
+            <div class="workflow-top">
+              <h4>Open focused sessions</h4>
+              <span class="workflow-step-label">step 04</span>
+            </div>
+            <p>Workstreams like meeting prep, comms triage, or a product thread open in parallel instead of piling into one chat.</p>
+            <div class="workflow-tags">
+              <span class="workflow-tag">parallel tabs</span>
+              <span class="workflow-tag">routines</span>
+            </div>
+          </div>
+          <div class="workflow-node">
+            <div class="workflow-top">
+              <h4>Resume from files</h4>
+              <span class="workflow-step-label">step 05</span>
+            </div>
+            <p>Each session reads and refreshes its own <code>CONTEXT.md</code>, so the thread survives crashes, interruptions, and long gaps.</p>
+            <div class="workflow-tags">
+              <span class="workflow-tag">CONTEXT.md</span>
+              <span class="workflow-tag">durable state</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="flow-step">
-        <div class="flow-num">2</div>
-        <h3>Plan</h3>
-        <p>The Chief of Staff workspace reviews notes, routines, and workstreams.</p>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">3</div>
-        <h3>Write plan</h3>
-        <p>The planner emits <code>system/today-plan.json</code> with selected workstreams and prompts.</p>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">4</div>
-        <h3>Derive state</h3>
-        <p>The public repo mirrors the plan into <code>queue.json</code> and <code>now.json</code>.</p>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">5</div>
-        <h3>Resume</h3>
-        <p>Selected workstreams open in parallel and each session picks up from <code>CONTEXT.md</code>.</p>
+
+      <div class="visual-card">
+        <div class="visual-kicker">CMUX mockup</div>
+        <h3>What it looks like when it is running</h3>
+        <p>An illustrative layout of the AI PM OS in CMUX: a left rail of active workstreams, a command-center surface, and a ranked queue of what should happen next.</p>
+        <div class="cmux-shell">
+          <div class="cmux-topbar">
+            <div class="cmux-dots">
+              <span class="cmux-dot" style="background:#fb7185"></span>
+              <span class="cmux-dot" style="background:#fbbf24"></span>
+              <span class="cmux-dot" style="background:#34d399"></span>
+            </div>
+            <span>cmux • ai-pm-os</span>
+            <span>Sun 09:14</span>
+          </div>
+          <div class="cmux-layout">
+            <aside class="cmux-sidebar">
+              <div class="cmux-sidebar-label">Active workspaces</div>
+              <div class="cmux-tab active">
+                <div class="cmux-tab-top">
+                  <span class="cmux-tab-name">command-center</span>
+                  <span class="cmux-badge">active</span>
+                </div>
+                <p>Review the queue, refresh today-plan, and decide what opens next.</p>
+              </div>
+              <div class="cmux-tab">
+                <div class="cmux-tab-top">
+                  <span class="cmux-tab-name">meetings</span>
+                  <span class="cmux-badge waiting">waiting</span>
+                </div>
+                <p>Prep for the next 1:1 and collect follow-ups from earlier notes.</p>
+              </div>
+              <div class="cmux-tab">
+                <div class="cmux-tab-top">
+                  <span class="cmux-tab-name">checkout-ux</span>
+                  <span class="cmux-badge review">review</span>
+                </div>
+                <p>Draft flows, capture open questions, and prep the next decision doc.</p>
+              </div>
+              <div class="cmux-tab">
+                <div class="cmux-tab-top">
+                  <span class="cmux-tab-name">comms-triage</span>
+                  <span class="cmux-badge">active</span>
+                </div>
+                <p>Triage inbox, chat, and tracker updates without leaving the terminal.</p>
+              </div>
+            </aside>
+            <div class="cmux-main">
+              <div class="cmux-main-header">
+                <span>workspace: command-center</span>
+                <span>source: today-plan.json → state</span>
+              </div>
+              <div class="cmux-main-grid">
+                <div class="terminal-pane">
+                  <div class="terminal-head">Live terminal</div>
+                  <div class="terminal-body">
+                    <div><span class="prompt">$</span> <span class="cmd">bash system/start-day.sh</span></div>
+                    <div class="dim">validating prerequisites...</div>
+                    <div class="good">cmux ready • amp ready • chief-of-staff prompt sent</div>
+                    <br>
+                    <div><span class="accent">Chief of Staff:</span> Reviewing 5 workstreams and 3 routines</div>
+                    <div><span class="accent">Chief of Staff:</span> Writing <span class="cmd">system/today-plan.json</span></div>
+                    <div><span class="accent">State:</span> Derived <span class="cmd">queue.json</span> and <span class="cmd">now.json</span></div>
+                    <br>
+                    <div><span class="accent">Launching:</span> checkout-ux</div>
+                    <div><span class="accent">Launching:</span> comms-triage</div>
+                    <div><span class="accent">Launching:</span> meetings</div>
+                    <br>
+                    <div><span class="accent">Resume:</span> Read <span class="cmd">workstreams/checkout-ux/CONTEXT.md</span></div>
+                    <div class="good">Ready for focused work</div>
+                  </div>
+                </div>
+                <div class="state-pane">
+                  <div class="state-head">Current state</div>
+                  <div class="state-body">
+                    <div class="state-card">
+                      <div class="state-card-label">Now</div>
+                      <div class="state-card-title">checkout-ux</div>
+                      <p>Refine the next UX decision and prep the prompt for the design review thread.</p>
+                      <div class="state-chip-row">
+                        <span class="state-chip">priority: high</span>
+                        <span class="state-chip">driver: agent</span>
+                      </div>
+                    </div>
+                    <div class="state-card">
+                      <div class="state-card-label">Queue</div>
+                      <div class="state-card-title">meetings → comms-triage → product-strategy</div>
+                      <p>Three follow-on threads are queued, each with its own startup prompt and durable context file.</p>
+                    </div>
+                    <div class="state-card">
+                      <div class="state-card-label">Continuity</div>
+                      <div class="state-card-title">File-backed resume</div>
+                      <p>Every workspace can crash and reopen without losing the narrative state because the thread lives in files, not terminal history.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="code-block">
