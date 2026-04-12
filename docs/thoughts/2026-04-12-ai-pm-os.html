@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>I Built an AI PM OS — synthetic-mind</title>
-  <meta name="description" content="Why I turned a collection of AI skills into AI PM OS: a Chief of Staff agent, durable workstreams, and a start-of-day command center for product work.">
+  <meta name="description" content="Why I turned a collection of AI skills into the AI PM OS: a Chief of Staff agent, durable workstreams, and a start-of-day command center for product work.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
@@ -55,7 +55,7 @@
   </div>
 
   <h2>TL;DR</h2>
-  <p>I stopped thinking about AI as a set of isolated tricks and started treating it like an operating system for my work. AI PM OS is the result: a Chief of Staff agent that plans the day, durable workstreams that survive restarts, and a <code>cmux</code>-based workspace that opens the right threads in parallel.</p>
+  <p>I stopped thinking about AI as a set of isolated tricks and started treating it like an operating system for my work. The AI PM OS is the result: a Chief of Staff agent that plans the day, durable workstreams that survive restarts, and a <code>cmux</code>-based workspace that opens the right threads in parallel.</p>
 
   <h2>Context</h2>
   <p>For months, I had great AI skills for individual tasks: morning triage, to-dos, PRD writing, research, data pulls, code review. Each one worked. The problem was the seams between them.</p>
@@ -83,7 +83,7 @@
   <p>Some work never ends. To-do review, comms triage, meeting prep, recurring maintenance. Those are not projects, so the system treats them as <code>routines/</code> rather than <code>workstreams/</code>. That lets the operating system handle finite deliverables and ongoing loops without forcing them into the same shape.</p>
 
   <h2>Why the file boundary matters</h2>
-  <p>The most important design choice in AI PM OS is not the model, or <code>cmux</code>, or even the Chief of Staff prompt. It is the decision to put continuity in files.</p>
+  <p>The most important design choice in the AI PM OS is not the model, or <code>cmux</code>, or even the Chief of Staff prompt. It is the decision to put continuity in files.</p>
   <p>Chat history is fragile. Sessions end. Context windows fill up. Threads drift. But a short <code>CONTEXT.md</code> that gets refreshed as work moves forward is stable, inspectable, and easy to edit.</p>
 
   <h2>The public version</h2>
@@ -97,7 +97,7 @@
   <p><strong>The system became useful when it survived interruption.</strong> That's the real bar. Not "did the demo work," but "does this still make sense after a bad week?"</p>
 
   <hr>
-  <p><em>Related: <a href="./2026-04-12-how-ai-pm-os-works">How AI PM OS Spins Up My Entire Workday</a> and <a href="./2026-04-12-why-ai-pm-os-is-powerful">Why AI PM OS Feels More Powerful Than a Chatbot</a>.</em></p>
+  <p><em>Related: <a href="./2026-04-12-how-ai-pm-os-works">How the AI PM OS Spins Up My Entire Workday</a> and <a href="./2026-04-12-why-ai-pm-os-is-powerful">Why the AI PM OS Feels More Powerful Than a Chatbot</a>.</em></p>
 </div>
 
 <footer>

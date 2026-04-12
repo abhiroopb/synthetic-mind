@@ -1,8 +1,8 @@
-# Why AI PM OS Feels More Powerful Than a Chatbot
+# Why the AI PM OS Feels More Powerful Than a Chatbot
 
 ## TL;DR
 
-AI PM OS feels more powerful than a chatbot because it is not just a conversation. It is an environment: durable workstreams, a startup routine, explicit next actions, and multiple focused sessions that can resume from files instead of memory. The power comes from orchestration and continuity, not just model quality.
+The AI PM OS feels more powerful than a chatbot because it is not just a conversation. It is an environment: durable workstreams, a startup routine, explicit next actions, and multiple focused sessions that can resume from files instead of memory. The power comes from orchestration and continuity, not just model quality.
 
 ## Context
 
@@ -33,7 +33,7 @@ If all context lives inside the conversation, then every interruption is expensi
 
 ### 1. Durable context
 
-Each workstream in AI PM OS has its own `CONTEXT.md`. That means the important state is written down in a place the next session can read.
+Each workstream in the AI PM OS has its own `CONTEXT.md`. That means the important state is written down in a place the next session can read.
 
 This changes the user's relationship with the system. You stop feeling like you have to keep everything alive in one thread.
 
@@ -94,6 +94,6 @@ In other words: after a point, the product matters more than the raw intelligenc
 
 ---
 
-*Related: [I Built an AI PM OS](./2026-04-12-ai-pm-os.md) and [How AI PM OS Spins Up My Entire Workday](./2026-04-12-how-ai-pm-os-works.md).*
+*Related: [I Built an AI PM OS](./2026-04-12-ai-pm-os.md) and [How the AI PM OS Spins Up My Entire Workday](./2026-04-12-how-ai-pm-os-works.md).*
 
 *[← Back to all thoughts](../thoughts/README.md) · [🧠 synthetic-mind](../README.md)*

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How AI PM OS Spins Up My Entire Workday — synthetic-mind</title>
-  <meta name="description" content="A technical walkthrough of AI PM OS: start-day.sh, the Chief of Staff planner, today-plan.json, derived queue/now state, and resumable cmux workstreams.">
+  <title>How the AI PM OS Spins Up My Entire Workday — synthetic-mind</title>
+  <meta name="description" content="A technical walkthrough of the AI PM OS: start-day.sh, the Chief of Staff planner, today-plan.json, derived queue/now state, and resumable cmux workstreams.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
@@ -46,7 +46,7 @@
 <div class="page-content">
   <a href="./" class="back-link">All thoughts</a>
 
-  <h1>How AI PM OS Spins Up My Entire Workday</h1>
+  <h1>How the AI PM OS Spins Up My Entire Workday</h1>
   <div class="article-meta">
     <span class="article-date">2026-04-12</span>
     <span class="article-tag">ai-pm-os</span>
@@ -55,7 +55,7 @@
   </div>
 
   <h2>TL;DR</h2>
-  <p>AI PM OS starts with one shell command, opens a planning workspace, writes a launch plan, derives a lightweight state view, and then spins up the right workstreams in parallel. The trick is that every workspace resumes from its own <code>CONTEXT.md</code>, so the system can survive crashes, restarts, and long gaps without losing the thread.</p>
+  <p>The AI PM OS starts with one shell command, opens a planning workspace, writes a launch plan, derives a lightweight state view, and then spins up the right workstreams in parallel. The trick is that every workspace resumes from its own <code>CONTEXT.md</code>, so the system can survive crashes, restarts, and long gaps without losing the thread.</p>
 
   <h2>Context</h2>
   <p>Most AI workflows still assume a single chat window. That breaks down fast when your day includes planning, meetings, follow-ups, writing, research, and a few half-finished threads that all matter for different reasons.</p>
@@ -91,7 +91,7 @@
 
   <h2>Why this feels better than tab chaos</h2>
   <p>A normal workday usually becomes accidental multitasking. Too many tabs, too many half-started notes, too many threads mixed into one place.</p>
-  <p>AI PM OS works better because it makes the structure explicit: one planner, multiple focused executors, durable state per thread, and a ranking of what matters now.</p>
+  <p>The AI PM OS works better because it makes the structure explicit: one planner, multiple focused executors, durable state per thread, and a ranking of what matters now.</p>
 
   <h2>What I learned</h2>
   <p><strong>A launcher script can carry a lot of product value.</strong> The shell glue is not glamorous, but it is what turns a pile of prompts into a reusable experience.</p>
@@ -100,7 +100,7 @@
   <p><strong>The public version got better when I simplified it.</strong> The exported repo became more useful once I resisted the urge to ship every internal layer.</p>
 
   <hr>
-  <p><em>Related: <a href="./2026-04-12-ai-pm-os">I Built an AI PM OS</a> and <a href="./2026-04-12-why-ai-pm-os-is-powerful">Why AI PM OS Feels More Powerful Than a Chatbot</a>.</em></p>
+  <p><em>Related: <a href="./2026-04-12-ai-pm-os">I Built an AI PM OS</a> and <a href="./2026-04-12-why-ai-pm-os-is-powerful">Why the AI PM OS Feels More Powerful Than a Chatbot</a>.</em></p>
 </div>
 
 <footer>

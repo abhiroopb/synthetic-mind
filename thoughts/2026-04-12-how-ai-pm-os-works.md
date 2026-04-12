@@ -1,8 +1,8 @@
-# How AI PM OS Spins Up My Entire Workday
+# How the AI PM OS Spins Up My Entire Workday
 
 ## TL;DR
 
-AI PM OS starts with one shell command, opens a planning workspace, writes a launch plan, derives a lightweight state view, and then spins up the right workstreams in parallel. The trick is that every workspace resumes from its own `CONTEXT.md`, so the system can survive crashes, restarts, and long gaps without losing the thread.
+The AI PM OS starts with one shell command, opens a planning workspace, writes a launch plan, derives a lightweight state view, and then spins up the right workstreams in parallel. The trick is that every workspace resumes from its own `CONTEXT.md`, so the system can survive crashes, restarts, and long gaps without losing the thread.
 
 ## Context
 
@@ -111,7 +111,7 @@ Those live as `routines/`, not `workstreams/`. They use the same continuity mode
 
 A normal workday usually becomes accidental multitasking. Too many tabs, too many half-started notes, too many threads mixed into one place.
 
-AI PM OS works better because it makes the structure explicit:
+The AI PM OS works better because it makes the structure explicit:
 
 - one planner
 - multiple focused executors
@@ -132,6 +132,6 @@ That is enough orchestration to feel intentional without becoming heavy.
 
 ---
 
-*Related: [I Built an AI PM OS](./2026-04-12-ai-pm-os.md) and [Why AI PM OS Feels More Powerful Than a Chatbot](./2026-04-12-why-ai-pm-os-is-powerful.md).*
+*Related: [I Built an AI PM OS](./2026-04-12-ai-pm-os.md) and [Why the AI PM OS Feels More Powerful Than a Chatbot](./2026-04-12-why-ai-pm-os-is-powerful.md).*
 
 *[← Back to all thoughts](../thoughts/README.md) · [🧠 synthetic-mind](../README.md)*
