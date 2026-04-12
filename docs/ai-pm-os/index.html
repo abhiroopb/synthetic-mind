@@ -164,22 +164,6 @@
       color: var(--text-muted);
       line-height: 1.8;
     }
-    .callout {
-      background: linear-gradient(180deg, rgba(59,130,246,0.1), rgba(59,130,246,0.03));
-      border: 1px solid rgba(59,130,246,0.28);
-      border-radius: var(--radius);
-      padding: 1.4rem;
-      margin-top: 1.5rem;
-    }
-    .callout h3 {
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-    }
-    .callout p {
-      color: var(--text-muted);
-      margin-bottom: 0;
-      line-height: 1.75;
-    }
     .links-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -357,39 +341,6 @@
   -> build-state-from-plan.py derives queue.json + now.json
   -> launcher opens recommended workstreams
   -> each workstream resumes from its own CONTEXT.md</pre>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<section>
-  <div class="container">
-    <div class="section-header">
-      <h2>What changed in the public export</h2>
-      <p>The open-source repo is real, but simplified on purpose.</p>
-    </div>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <h3>Lighter state model</h3>
-        <p>The public version uses a simple launch-plan model centered on <code>today-plan.json</code>, then derives the current queue and top recommendation into <code>system/state/</code>.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Generalized automation language</h3>
-        <p>Daemon scripts talk about chat, inbox, docs, and trackers rather than private internal tools, so the patterns are reusable outside my own stack.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Starter workstreams</h3>
-        <p>The repo ships with a small sample set like <code>example-project</code>, <code>checkout-ux</code>, and <code>product-strategy</code> so you can see the shape without inheriting my real work.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Repo-local skills</h3>
-        <p>It includes repo-scoped Amp skills such as <code>running-chief-of-staff</code> and <code>reviewing-product-plans</code>, so the workflow is easier to adapt instead of rebuild from scratch.</p>
-      </div>
-    </div>
-    <div class="callout">
-      <h3>The point was portability</h3>
-      <p>I wanted the public repo to show the real operating model without dragging along private names, proprietary integrations, or a bunch of internal infrastructure. The result is a smaller system that still demonstrates the important ideas: planning, continuity, ranking, and resumable parallel work.</p>
     </div>
   </div>
 </section>
