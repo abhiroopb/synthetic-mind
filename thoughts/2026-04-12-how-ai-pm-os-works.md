@@ -16,11 +16,11 @@ What should be open right now, and how does each thread pick up from where it le
 
 Everything begins here:
 
-```bash
-bash system/start-day.sh
+```
+start-day
 ```
 
-In the public `ai-pm-os` repo, that launcher does a small number of deliberate things:
+In the public `ai-pm-os` repo, the `start-day` launcher does a small number of deliberate things:
 
 1. validates prerequisites
 2. boots or reuses `cmux`

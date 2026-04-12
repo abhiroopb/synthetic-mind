@@ -70,8 +70,8 @@
 
   <h3>1. A Chief of Staff agent</h3>
   <p>The day starts with a single command:</p>
-  <pre><code>bash system/start-day.sh</code></pre>
-  <p>That script opens a dedicated workspace where a Chief of Staff agent reviews notes, routines, and workstreams, then writes a plan for what deserves focus today. Its job is not to do everything. Its job is to decide what should be opened.</p>
+  <pre><code>start-day</code></pre>
+  <p>That launcher opens a dedicated workspace where a Chief of Staff agent reviews notes, routines, and workstreams, then writes a plan for what deserves focus today. Its job is not to do everything. Its job is to decide what should be opened.</p>
 
   <h3>2. Durable workstreams</h3>
   <p>Each workstream has <code>CONTEXT.md</code> for narrative state and <code>config.yaml</code> for priority and startup guidance. If <code>cmux</code> crashes or I ignore a thread for three days, the next session can resume from the file instead of depending on memory or scrollback.</p>
