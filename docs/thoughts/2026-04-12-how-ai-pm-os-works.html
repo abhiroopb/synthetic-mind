@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How AI PM OS Spins Up My Entire Workday — synthetic-mind</title>
+  <meta name="description" content="A technical walkthrough of AI PM OS: start-day.sh, the Chief of Staff planner, today-plan.json, derived queue/now state, and resumable cmux workstreams.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem; flex-wrap: wrap;
+    }
+    .article-date {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../skills/">Skills</a>
+      <a href="../memory/">Memory</a>
+      <a href="../setup/">Setup</a>
+      <a href="./" class="active">Thoughts</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All thoughts</a>
+
+  <h1>How AI PM OS Spins Up My Entire Workday</h1>
+  <div class="article-meta">
+    <span class="article-date">2026-04-12</span>
+    <span class="article-tag">ai-pm-os</span>
+    <span class="article-tag">workflow</span>
+    <span class="article-tag">cmux</span>
+  </div>
+
+  <h2>TL;DR</h2>
+  <p>AI PM OS starts with one shell command, opens a planning workspace, writes a launch plan, derives a lightweight state view, and then spins up the right workstreams in parallel. The trick is that every workspace resumes from its own <code>CONTEXT.md</code>, so the system can survive crashes, restarts, and long gaps without losing the thread.</p>
+
+  <h2>Context</h2>
+  <p>Most AI workflows still assume a single chat window. That breaks down fast when your day includes planning, meetings, follow-ups, writing, research, and a few half-finished threads that all matter for different reasons.</p>
+  <p>I wanted a system that could answer a more practical question: what should be open right now, and how does each thread pick up from where it left off?</p>
+
+  <h2>The startup command</h2>
+  <p>Everything begins here:</p>
+  <pre><code>bash system/start-day.sh</code></pre>
+  <p>In the public <code>ai-pm-os</code> repo, that launcher validates prerequisites, boots or reuses <code>cmux</code>, opens the Chief of Staff workspace, waits for <code>system/today-plan.json</code>, derives <code>system/state/queue.json</code> and <code>system/state/now.json</code>, then opens the selected workstreams.</p>
+
+  <h2>Step 1: the Chief of Staff plans the day</h2>
+  <p>The first workspace is the planner, not the executor.</p>
+  <p>The Chief of Staff agent reads recent notes, routine context files, workstream context files, and per-workstream metadata. Then it writes <code>system/today-plan.json</code> with the workstreams to open, the ones to skip, and a startup prompt for each selected thread.</p>
+
+  <h2>Step 2: derive a quick state view</h2>
+  <p>The public repo adds a small state-derivation step after the plan is written. <code>system/scripts/build-state-from-plan.py</code> reads <code>today-plan.json</code> and produces two files:</p>
+  <ul>
+    <li><code>queue.json</code>: the ranked list of recommended workstreams</li>
+    <li><code>now.json</code>: the top recommendation plus a few fallbacks</li>
+  </ul>
+  <p>That layer is intentionally lightweight. Internally I use a richer command-center model, but for the public repo I wanted something people could inspect instantly without inheriting extra machinery.</p>
+
+  <h2>Step 3: open workstreams in parallel</h2>
+  <p>Once the plan exists, <code>start-day.sh</code> opens one <code>cmux</code> workspace per selected workstream. Each workspace gets a startup prompt that points it back to its own folder and current objective, so it is not starting from a blank slate.</p>
+  <p>In practice, that state usually lives in two files: <code>workstreams/&lt;slug&gt;/CONTEXT.md</code> and <code>workstreams/&lt;slug&gt;/config.yaml</code>. The config file gives the launcher metadata. The context file gives the agent continuity.</p>
+
+  <h2>Step 4: let the files hold memory</h2>
+  <p>This is the part that makes the whole system feel reliable. If the terminal dies, nothing important is lost.</p>
+  <p>When the workspace opens again later, the agent reads <code>CONTEXT.md</code> and can answer what changed, what is blocked, what decision is pending, and what should happen next. That turns the terminal into a temporary surface rather than the only place where state exists.</p>
+
+  <h2>Workstreams versus routines</h2>
+  <p>Not everything in the system is a project. Some folders are durable loops like to-do review, comms triage, meeting prep, and scheduled maintenance. Those live as <code>routines/</code>, not <code>workstreams/</code>. They use the same continuity model, but represent a different kind of job.</p>
+
+  <h2>Why this feels better than tab chaos</h2>
+  <p>A normal workday usually becomes accidental multitasking. Too many tabs, too many half-started notes, too many threads mixed into one place.</p>
+  <p>AI PM OS works better because it makes the structure explicit: one planner, multiple focused executors, durable state per thread, and a ranking of what matters now.</p>
+
+  <h2>What I learned</h2>
+  <p><strong>A launcher script can carry a lot of product value.</strong> The shell glue is not glamorous, but it is what turns a pile of prompts into a reusable experience.</p>
+  <p><strong>Derived state is worth it when it improves inspectability.</strong> <code>queue.json</code> and <code>now.json</code> are simple, but they make the system easier to reason about.</p>
+  <p><strong>Resume quality matters more than startup polish.</strong> A beautiful launch flow is not enough if the second session is confusing.</p>
+  <p><strong>The public version got better when I simplified it.</strong> The exported repo became more useful once I resisted the urge to ship every internal layer.</p>
+
+  <hr>
+  <p><em>Related: <a href="./2026-04-12-ai-pm-os">I Built an AI PM OS</a> and <a href="./2026-04-12-why-ai-pm-os-is-powerful">Why AI PM OS Feels More Powerful Than a Chatbot</a>.</em></p>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>

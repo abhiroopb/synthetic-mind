@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Built an AI PM OS — synthetic-mind</title>
+  <meta name="description" content="Why I turned a collection of AI skills into AI PM OS: a Chief of Staff agent, durable workstreams, and a start-of-day command center for product work.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem; flex-wrap: wrap;
+    }
+    .article-date {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../skills/">Skills</a>
+      <a href="../memory/">Memory</a>
+      <a href="../setup/">Setup</a>
+      <a href="./" class="active">Thoughts</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All thoughts</a>
+
+  <h1>I Built an AI PM OS</h1>
+  <div class="article-meta">
+    <span class="article-date">2026-04-12</span>
+    <span class="article-tag">ai-pm-os</span>
+    <span class="article-tag">operating-system</span>
+    <span class="article-tag">ai-agents</span>
+  </div>
+
+  <h2>TL;DR</h2>
+  <p>I stopped thinking about AI as a set of isolated tricks and started treating it like an operating system for my work. AI PM OS is the result: a Chief of Staff agent that plans the day, durable workstreams that survive restarts, and a <code>cmux</code>-based workspace that opens the right threads in parallel.</p>
+
+  <h2>Context</h2>
+  <p>For months, I had great AI skills for individual tasks: morning triage, to-dos, PRD writing, research, data pulls, code review. Each one worked. The problem was the seams between them.</p>
+  <p>Every new session started with re-explaining context. Every interrupted thread risked getting lost. Every complicated day required me to decide, from scratch, what to open, what to ignore, and what needed follow-up.</p>
+  <p>That made the agent helpful, but not truly ambient. It still behaved like a smart tool I had to manage. So I started building something bigger.</p>
+
+  <h2>From skills to an operating system</h2>
+  <p>The key shift was simple: stop treating each conversation like the unit of work. Instead, make the unit of work a folder.</p>
+  <p>Each meaningful thread gets its own <code>workstreams/&lt;slug&gt;/</code> directory with a living <code>CONTEXT.md</code> file. That file captures the objective, what is already done, what is blocked, and the next concrete step. Now the context lives on disk, not in chat history.</p>
+
+  <h2>The core pieces</h2>
+
+  <h3>1. A Chief of Staff agent</h3>
+  <p>The day starts with a single command:</p>
+  <pre><code>bash system/start-day.sh</code></pre>
+  <p>That script opens a dedicated workspace where a Chief of Staff agent reviews notes, routines, and workstreams, then writes a plan for what deserves focus today. Its job is not to do everything. Its job is to decide what should be opened.</p>
+
+  <h3>2. Durable workstreams</h3>
+  <p>Each workstream has <code>CONTEXT.md</code> for narrative state and <code>config.yaml</code> for priority and startup guidance. If <code>cmux</code> crashes or I ignore a thread for three days, the next session can resume from the file instead of depending on memory or scrollback.</p>
+
+  <h3>3. Parallel workspaces</h3>
+  <p>Once the plan exists, the launcher opens the right sessions in parallel with <code>cmux</code>. One workspace might be a focused project. Another might be meeting prep. Another might be comms triage. Each has a different prompt, context, and role, but they all share the same file-based continuity model.</p>
+
+  <h3>4. Routines, not just projects</h3>
+  <p>Some work never ends. To-do review, comms triage, meeting prep, recurring maintenance. Those are not projects, so the system treats them as <code>routines/</code> rather than <code>workstreams/</code>. That lets the operating system handle finite deliverables and ongoing loops without forcing them into the same shape.</p>
+
+  <h2>Why the file boundary matters</h2>
+  <p>The most important design choice in AI PM OS is not the model, or <code>cmux</code>, or even the Chief of Staff prompt. It is the decision to put continuity in files.</p>
+  <p>Chat history is fragile. Sessions end. Context windows fill up. Threads drift. But a short <code>CONTEXT.md</code> that gets refreshed as work moves forward is stable, inspectable, and easy to edit.</p>
+
+  <h2>The public version</h2>
+  <p>I recently sanitized and open-sourced a starter version of this system as <a href="https://github.com/abhiroopb/ai-pm-os">ai-pm-os</a>.</p>
+  <p>The public repo keeps the same core ideas, but simplifies the machinery. Instead of the full internal command-center event pipeline, it uses a lighter launch-plan model built around <code>system/today-plan.json</code>, with a derived state layer that mirrors the recommended queue into <code>system/state/queue.json</code> and <code>system/state/now.json</code>.</p>
+
+  <h2>What I learned</h2>
+  <p><strong>The operating model matters more than the prompt.</strong> Better prompts help, but most of the leverage came from structuring the environment so the agent had a place to return to.</p>
+  <p><strong>Separation of roles makes the system calmer.</strong> A planning workspace should plan. A workstream workspace should execute. A routine workspace should loop. Mixing them makes everything noisier.</p>
+  <p><strong>Small files beat clever memory tricks.</strong> A concise <code>CONTEXT.md</code> is one of the highest-leverage AI UX improvements I've found.</p>
+  <p><strong>The system became useful when it survived interruption.</strong> That's the real bar. Not "did the demo work," but "does this still make sense after a bad week?"</p>
+
+  <hr>
+  <p><em>Related: <a href="./2026-04-12-how-ai-pm-os-works">How AI PM OS Spins Up My Entire Workday</a> and <a href="./2026-04-12-why-ai-pm-os-is-powerful">Why AI PM OS Feels More Powerful Than a Chatbot</a>.</em></p>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>

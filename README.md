@@ -12,6 +12,23 @@ A living collection of learnings from working deeply with AI agents, LLMs, and a
 
 Built primarily with [Amp](https://ampcode.com), these skills power a PM's daily workflow — from morning triage to PRD writing to data analysis to deploying prototypes. Everything here is real, battle-tested, and actively used.
 
+## Featured Project: AI PM OS
+
+One of the bigger things I've built recently is **AI PM OS**: an operating system for product management built around AI agents, durable workstream context, and a start-of-day command center.
+
+It's the system behind things like:
+
+- a Chief of Staff agent that decides what deserves focus today
+- workstream folders with persistent `CONTEXT.md` files
+- `cmux` workspaces that spin up in parallel and resume from file-based state
+- routines for meetings, comms triage, and recurring PM operations
+
+If you want the overview first:
+
+- **Landing page:** [AI PM OS overview](https://abhiroopb.github.io/synthetic-mind/ai-pm-os/)
+- **Repo:** [abhiroopb/ai-pm-os](https://github.com/abhiroopb/ai-pm-os)
+- **Thoughts:** [what it is](./thoughts/2026-04-12-ai-pm-os.md), [how it works](./thoughts/2026-04-12-how-ai-pm-os-works.md), [why it matters](./thoughts/2026-04-12-why-ai-pm-os-is-powerful.md)
+
 ## Structure
 
 | Directory | Contents |
@@ -71,6 +88,10 @@ Or clone the repo and point Amp at the `skills/` directory. The `auto-pilot` ski
 
 | Date | Update |
 |------|--------|
+| 2026-04-12 | 🆕 AI PM OS landing page: [overview](https://abhiroopb.github.io/synthetic-mind/ai-pm-os/) — how the system works, what it automates, and how to install it |
+| 2026-04-12 | 📝 New thought: [I Built an AI PM OS](./thoughts/2026-04-12-ai-pm-os.md) — what the system is and why I built it |
+| 2026-04-12 | 📝 New thought: [How AI PM OS Spins Up My Entire Workday](./thoughts/2026-04-12-how-ai-pm-os-works.md) — the mechanics behind the command center, workstreams, and routines |
+| 2026-04-12 | 📝 New thought: [Why AI PM OS Feels More Powerful Than a Chatbot](./thoughts/2026-04-12-why-ai-pm-os-is-powerful.md) — why durable context plus orchestration changes the experience |
 | 2026-04-03 | 🆕 21 new skills: blox, blueprint-project-status, blueprint-project-update, blueprint-status-update, check-ci, cloning-squareup-repos, dev-guides, drafting-docs, ecom-great-stores, ecom-research, eng-ai-chat, go-link, hermit, jira, manager-slack-summary, monitoring-prs, protos, slack-saved-triage, staging-account-builder, trust-feature-validation, weekly-status-summary |
 | 2026-03-24 | 📝 New thought: [How I Automated Every Workflow with AI Skills](./thoughts/2026-03-24-automating-workflows-with-ai-skills.md) — a practical guide to building 35+ AI agent skills for morning triage, email, project management, and more |
 | 2026-03-24 | 📝 New thought: [We Built an AI Skill That Writes Product Requirements Docs](./thoughts/2026-03-24-writing-requirements-docs.md) — how a team went from markdown-first specs to an agent skill that writes PRDs with auto-referenced internal sources |

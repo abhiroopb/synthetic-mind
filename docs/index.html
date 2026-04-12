@@ -530,6 +530,7 @@
   <p class="hero-subtitle">Product Leader · AI Builder</p>
   <p>I use AI to do my job better. This site documents how — from personally building 76 agent skills that automate my daily workflow, to writing about what actually works when you pair a product manager with an AI copilot.</p>
   <div class="hero-links">
+    <a href="ai-pm-os/" class="hero-link">🧭 AI PM OS</a>
     <a href="#thoughts" class="hero-link">✍️ Thoughts</a>
     <a href="#skills" class="hero-link">🛠 Projects</a>
     <a href="https://github.com/abhiroopb/synthetic-mind" class="hero-link" target="_blank">↗ GitHub</a>
@@ -655,6 +656,42 @@
 
 <hr class="divider">
 
+<!-- ── Featured Project: AI PM OS ── -->
+<section id="ai-pm-os">
+  <div class="container">
+    <div class="section-header">
+      <h2>Featured Project: AI PM OS</h2>
+      <p>An operating system for product work, built around a Chief of Staff agent, durable workstreams, and resumable parallel sessions.</p>
+    </div>
+    <div class="featured-grid">
+      <a href="ai-pm-os/" class="featured-card">
+        <div class="thought-date">Landing page</div>
+        <h3>See the full system</h3>
+        <p>A walkthrough of the operating model: start-of-day planning, <code>CONTEXT.md</code> continuity, lightweight derived state, and the public starter repo.</p>
+        <span class="thought-tag">overview</span>
+      </a>
+      <a href="https://github.com/abhiroopb/ai-pm-os" class="featured-card" target="_blank">
+        <div class="thought-date">GitHub repo</div>
+        <h3>Clone the public export</h3>
+        <p>A sanitized, tool-agnostic version of the system with starter workstreams, repo-local skills, and a simpler <code>today-plan.json</code>-driven state model.</p>
+        <span class="thought-tag">open source</span>
+      </a>
+      <a href="thoughts/2026-04-12-how-ai-pm-os-works" class="featured-card">
+        <div class="thought-date">Three-part series</div>
+        <h3>Read the story behind it</h3>
+        <p>Why I built it, how the launcher works, and why durable context plus orchestration feels different from a normal chatbot workflow.</p>
+        <span class="thought-tag">thoughts</span>
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:2rem;">
+      <a href="ai-pm-os/" class="btn btn-primary">Explore AI PM OS →</a>
+      <a href="https://github.com/abhiroopb/ai-pm-os" class="btn btn-ghost" target="_blank" style="margin-left:0.5rem;">View repo ↗</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
 <!-- ── Thoughts ── -->
 <section id="thoughts">
   <div class="container">
@@ -663,6 +700,27 @@
       <p>Notes on building with AI — what works, what doesn't, and what I've learned</p>
     </div>
     <div class="thoughts-grid">
+
+      <a href="thoughts/2026-04-12-why-ai-pm-os-is-powerful" class="thought-card">
+        <div class="thought-date">2026-04-12</div>
+        <h3>Why AI PM OS Feels More Powerful Than a Chatbot</h3>
+        <p>The leap comes from orchestration, durable context, and startup routines around the model, not just the model itself.</p>
+        <span class="thought-tag">ai-pm-os</span>
+      </a>
+
+      <a href="thoughts/2026-04-12-how-ai-pm-os-works" class="thought-card">
+        <div class="thought-date">2026-04-12</div>
+        <h3>How AI PM OS Spins Up My Entire Workday</h3>
+        <p>A technical walkthrough of the launcher, the Chief of Staff planner, the public state layer, and resumable <code>cmux</code> workstreams.</p>
+        <span class="thought-tag">ai-pm-os</span>
+      </a>
+
+      <a href="thoughts/2026-04-12-ai-pm-os" class="thought-card">
+        <div class="thought-date">2026-04-12</div>
+        <h3>I Built an AI PM OS</h3>
+        <p>Why I turned a collection of AI skills into a product-management operating system with durable workstream context.</p>
+        <span class="thought-tag">ai-pm-os</span>
+      </a>
 
       <a href="thoughts/2026-03-24-writing-requirements-docs" class="thought-card">
         <div class="thought-date">2026-03-24</div>
@@ -682,35 +740,17 @@
         <p>After distilling 2,718 observations, found ~90% were noise. Seven plugin changes cut volume by ~80% while preserving signal.</p>
         <span class="thought-tag">memory-system</span>
       </a>
-      <a href="thoughts/2026-03-14-todo-system" class="thought-card">
-        <div class="thought-date">2026-03-14</div>
-        <h3>I Stopped Maintaining My To-Do List and Let the Agent Do It</h3>
-        <p>A proactive to-do system that auto-captures from Slack, Gmail, Calendar, and Linear — prioritizes, syncs to calendar, and surfaces at every session.</p>
-        <span class="thought-tag">workflow</span>
+      <a href="thoughts/2026-04-06-auto-pilot-skill" class="thought-card">
+        <div class="thought-date">2026-04-06</div>
+        <h3>I Stopped Telling My Agent Which Tool to Use</h3>
+        <p>How the auto-pilot routing layer turned a long menu of skills into one assistant that can pick and chain the right tools automatically.</p>
+        <span class="thought-tag">orchestration</span>
       </a>
-      <a href="thoughts/2026-03-11-debugging-the-dollar-api" class="thought-card">
-        <div class="thought-date">2026-03-11</div>
-        <h3>When Your Plugin Works but Nothing Happens</h3>
-        <p>Debugging why amp-mem plugin tools returned empty results — the silent failure mode of Amp's experimental $ API.</p>
-        <span class="thought-tag">debugging</span>
-      </a>
-      <a href="thoughts/2026-03-11-tuning-memory-noise" class="thought-card">
-        <div class="thought-date">2026-03-11</div>
-        <h3>The Signal-to-Noise Problem in AI Memory</h3>
-        <p>Five targeted fixes to bring amp-mem's context injection signal-to-noise ratio back after a week of use.</p>
-        <span class="thought-tag">memory-system</span>
-      </a>
-      <a href="thoughts/2026-03-05-building-amp-mem" class="thought-card">
-        <div class="thought-date">2026-03-05</div>
-        <h3>Building a Persistent Memory System for Amp</h3>
-        <p>From zero to cross-session intelligence — a ~500-line bash CLI backed by SQLite + FTS5, paired with a TypeScript plugin.</p>
-        <span class="thought-tag">memory-system</span>
-      </a>
-      <a href="thoughts/2026-03-05-start-of-day" class="thought-card">
-        <div class="thought-date">2026-03-05</div>
-        <h3>I Replaced My Morning Routine with a Single Command</h3>
-        <p>A "start of day" skill that triages Slack, Gmail, Calendar, and comments from Figma, Docs, Linear, and Notion.</p>
-        <span class="thought-tag">workflow</span>
+      <a href="thoughts/2026-04-06-agents-md-reference" class="thought-card">
+        <div class="thought-date">2026-04-06</div>
+        <h3>The File That Runs My Entire AI Setup</h3>
+        <p>The single <code>AGENTS.md</code> file that defines identity, boundaries, startup behavior, routing defaults, and how the whole AI environment behaves.</p>
+        <span class="thought-tag">agents-md</span>
       </a>
     </div>
     <div style="text-align:center;margin-top:2rem;">

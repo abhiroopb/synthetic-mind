@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI PM OS — synthetic-mind</title>
+  <meta name="description" content="AI PM OS is an operating system for product work: a Chief of Staff agent, durable workstreams, resumable cmux sessions, and a public starter repo you can adapt.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .hero {
+      padding: 8.5rem 2rem 4rem;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 0%, #a3a3a3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      max-width: 720px;
+      margin: 0 auto 2rem;
+      color: var(--text-muted);
+      font-size: 1.08rem;
+      line-height: 1.75;
+    }
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .hero-actions .btn {
+      min-width: 170px;
+      justify-content: center;
+    }
+    .snapshot {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+      margin-top: 2.5rem;
+    }
+    .snapshot-card {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      text-align: left;
+    }
+    .snapshot-label {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+    }
+    .snapshot-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+    }
+    .feature-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .flow-step {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      position: relative;
+    }
+    .flow-step::after {
+      content: '→';
+      position: absolute;
+      right: -0.6rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      font-size: 1rem;
+    }
+    .flow-step:last-child::after {
+      display: none;
+    }
+    .flow-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+    }
+    .flow-step h3 {
+      font-size: 0.92rem;
+      margin-bottom: 0.35rem;
+    }
+    .flow-step p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .code-block {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-top: 1.5rem;
+      overflow-x: auto;
+    }
+    .code-block pre {
+      margin: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+    .callout {
+      background: linear-gradient(180deg, rgba(59,130,246,0.1), rgba(59,130,246,0.03));
+      border: 1px solid rgba(59,130,246,0.28);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      margin-top: 1.5rem;
+    }
+    .callout h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .callout p {
+      color: var(--text-muted);
+      margin-bottom: 0;
+      line-height: 1.75;
+    }
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .link-card {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.15s;
+    }
+    .link-card:hover {
+      border-color: var(--border);
+      background: var(--surface-hover);
+      transform: translateY(-2px);
+    }
+    .link-card .kicker {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .link-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.45rem;
+    }
+    .link-card p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+    @media (max-width: 960px) {
+      .snapshot,
+      .flow,
+      .links-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .flow-step::after {
+        display: none;
+      }
+    }
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .feature-grid,
+      .snapshot,
+      .flow,
+      .links-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../skills/">Skills</a>
+      <a href="../memory/">Memory</a>
+      <a href="../setup/">Setup</a>
+      <a href="../thoughts/">Thoughts</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">Featured project</div>
+  <h1>AI PM OS</h1>
+  <p>An operating system for product work, built around a Chief of Staff agent, durable workstream context, resumable <code>cmux</code> sessions, and a start-of-day flow that decides what deserves attention before the day gets noisy.</p>
+  <div class="hero-actions">
+    <a href="https://github.com/abhiroopb/ai-pm-os" class="btn btn-primary" target="_blank">View repo ↗</a>
+    <a href="../thoughts/2026-04-12-ai-pm-os" class="btn btn-ghost">Read the origin story</a>
+    <a href="../thoughts/2026-04-12-how-ai-pm-os-works" class="btn btn-ghost">See how it works</a>
+  </div>
+  <div class="snapshot">
+    <div class="snapshot-card">
+      <div class="snapshot-label">Planner</div>
+      <div class="snapshot-value">Chief of Staff agent</div>
+    </div>
+    <div class="snapshot-card">
+      <div class="snapshot-label">Continuity</div>
+      <div class="snapshot-value">File-based <code>CONTEXT.md</code></div>
+    </div>
+    <div class="snapshot-card">
+      <div class="snapshot-label">Surface</div>
+      <div class="snapshot-value">Parallel <code>cmux</code> workspaces</div>
+    </div>
+    <div class="snapshot-card">
+      <div class="snapshot-label">Public model</div>
+      <div class="snapshot-value"><code>today-plan.json</code> → state</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>What it is</h2>
+      <p>Not a chatbot, not a pile of prompts. More like a lightweight operating model for AI-assisted PM work.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>A morning planner, not just a responder</h3>
+        <p>The first workspace is a Chief of Staff agent that reviews notes, routines, and open workstreams, then writes a launch plan for the day. It decides what should be open before execution begins.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Durable context per thread</h3>
+        <p>Each workstream lives in its own folder with a living <code>CONTEXT.md</code>. The important state is stored on disk, so an interrupted session can resume cleanly without depending on chat history.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Parallel sessions with clear roles</h3>
+        <p>Once the plan exists, the launcher opens the right <code>cmux</code> workspaces in parallel. Planning, project execution, meeting prep, and routine loops can stay separate instead of collapsing into one thread.</p>
+      </div>
+      <div class="feature-card">
+        <h3>A public starter repo, not a black box</h3>
+        <p>The open-source version is sanitized, tool-agnostic, and intentionally lighter than the internal system. It keeps the useful shape while stripping away private integrations and extra machinery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>How a day runs</h2>
+      <p>The whole system starts from one command and a few small files.</p>
+    </div>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <h3>Launch</h3>
+        <p><code>start-day.sh</code> validates prerequisites and boots or reuses <code>cmux</code>.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <h3>Plan</h3>
+        <p>The Chief of Staff workspace reviews notes, routines, and workstreams.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <h3>Write plan</h3>
+        <p>The planner emits <code>system/today-plan.json</code> with selected workstreams and prompts.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <h3>Derive state</h3>
+        <p>The public repo mirrors the plan into <code>queue.json</code> and <code>now.json</code>.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">5</div>
+        <h3>Resume</h3>
+        <p>Selected workstreams open in parallel and each session picks up from <code>CONTEXT.md</code>.</p>
+      </div>
+    </div>
+    <div class="code-block">
+      <pre>bash system/start-day.sh
+  -> boots or reuses cmux
+  -> opens Chief of Staff workspace
+  -> Chief of Staff writes system/today-plan.json
+  -> build-state-from-plan.py derives queue.json + now.json
+  -> launcher opens recommended workstreams
+  -> each workstream resumes from its own CONTEXT.md</pre>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>What changed in the public export</h2>
+      <p>The open-source repo is real, but simplified on purpose.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>Lighter state model</h3>
+        <p>The public version uses a simple launch-plan model centered on <code>today-plan.json</code>, then derives the current queue and top recommendation into <code>system/state/</code>.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Generalized automation language</h3>
+        <p>Daemon scripts talk about chat, inbox, docs, and trackers rather than private internal tools, so the patterns are reusable outside my own stack.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Starter workstreams</h3>
+        <p>The repo ships with a small sample set like <code>example-project</code>, <code>checkout-ux</code>, and <code>product-strategy</code> so you can see the shape without inheriting my real work.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Repo-local skills</h3>
+        <p>It includes repo-scoped Amp skills such as <code>running-chief-of-staff</code> and <code>reviewing-product-plans</code>, so the workflow is easier to adapt instead of rebuild from scratch.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <h3>The point was portability</h3>
+      <p>I wanted the public repo to show the real operating model without dragging along private names, proprietary integrations, or a bunch of internal infrastructure. The result is a smaller system that still demonstrates the important ideas: planning, continuity, ranking, and resumable parallel work.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>Read the full series</h2>
+      <p>If you want the philosophy, mechanics, and product framing, start here.</p>
+    </div>
+    <div class="links-grid">
+      <a href="../thoughts/2026-04-12-ai-pm-os" class="link-card">
+        <div class="kicker">Thought 1</div>
+        <h3>I Built an AI PM OS</h3>
+        <p>Why I moved from a collection of useful AI skills to a full operating system for product work.</p>
+      </a>
+      <a href="../thoughts/2026-04-12-how-ai-pm-os-works" class="link-card">
+        <div class="kicker">Thought 2</div>
+        <h3>How AI PM OS Spins Up My Entire Workday</h3>
+        <p>The technical walkthrough of the launcher, planner, state layer, and resumable workstreams.</p>
+      </a>
+      <a href="../thoughts/2026-04-12-why-ai-pm-os-is-powerful" class="link-card">
+        <div class="kicker">Thought 3</div>
+        <h3>Why AI PM OS Feels More Powerful Than a Chatbot</h3>
+        <p>Why the real leverage comes from orchestration, durable context, and system design around the model.</p>
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:2rem;">
+      <a href="https://github.com/abhiroopb/ai-pm-os" class="btn btn-primary" target="_blank">Open the repo ↗</a>
+      <a href="../thoughts/" class="btn btn-ghost" style="margin-left:0.5rem;">Browse all thoughts →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>

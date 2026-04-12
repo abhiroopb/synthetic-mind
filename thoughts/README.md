@@ -8,6 +8,9 @@ Write-ups on AI workflows, observations, experiments, and takeaways from buildin
 
 | # | Title | Date | Tags |
 |---|-------|------|------|
+| 12 | [Why AI PM OS Feels More Powerful Than a Chatbot](./2026-04-12-why-ai-pm-os-is-powerful.md) | 2026-04-12 | ai-pm-os, workflow, orchestration, product-management |
+| 11 | [How AI PM OS Spins Up My Entire Workday](./2026-04-12-how-ai-pm-os-works.md) | 2026-04-12 | ai-pm-os, workflow, cmux, chief-of-staff |
+| 10 | [I Built an AI PM OS](./2026-04-12-ai-pm-os.md) | 2026-04-12 | ai-pm-os, product-management, operating-system, ai-agents |
 | 9 | [I Stopped Telling My Agent Which Tool to Use](./2026-04-06-auto-pilot-skill.md) | 2026-04-06 | auto-pilot, orchestration, workflow, routing |
 | 8 | [The File That Runs My Entire AI Setup](./2026-04-06-agents-md-reference.md) | 2026-04-06 | agents-md, configuration, setup, reference |
 | 7 | [We Built an AI Skill That Writes Product Requirements Docs](./2026-03-24-writing-requirements-docs.md) | 2026-03-24 | prd, agent-skill, markdown, product-management, requirements |
