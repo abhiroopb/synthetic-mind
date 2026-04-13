@@ -15,11 +15,11 @@
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.35"/>
     </filter>
-    <marker id="inputArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
-      <path d="M0 0L10 5L0 10V0Z" fill="#34D399"/>
+    <marker id="inputArrow" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto">
+      <path d="M0 0L8 4L0 8V0Z" fill="#34D399"/>
     </marker>
-    <marker id="outputArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
-      <path d="M0 0L10 5L0 10V0Z" fill="#60A5FA"/>
+    <marker id="outputArrow" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto">
+      <path d="M0 0L8 4L0 8V0Z" fill="#60A5FA"/>
     </marker>
     <style>
       .title{font:700 38px Inter,Arial,sans-serif;fill:#F8FAFC}
@@ -28,12 +28,12 @@
       .kicker-input{font:600 13px Inter,Arial,sans-serif;fill:#6EE7B7;letter-spacing:1.8px;text-transform:uppercase}
       .kicker-output{font:600 13px Inter,Arial,sans-serif;fill:#93C5FD;letter-spacing:1.8px;text-transform:uppercase}
       .card-title{font:700 24px Inter,Arial,sans-serif;fill:#F8FAFC}
-      .card-copy{font:500 17px Inter,Arial,sans-serif;fill:#CBD5E1}
+      .card-copy{font:500 16px Inter,Arial,sans-serif;fill:#CBD5E1}
       .small-title{font:700 19px Inter,Arial,sans-serif;fill:#F8FAFC}
       .small-copy{font:500 15px Inter,Arial,sans-serif;fill:#94A3B8}
-      .mono{font:600 14px 'JetBrains Mono',monospace;fill:#BFDBFE}
-      .mono-input{font:600 14px 'JetBrains Mono',monospace;fill:#A7F3D0}
-      .mono-output{font:600 14px 'JetBrains Mono',monospace;fill:#BFDBFE}
+      .mono{font:600 13px 'JetBrains Mono',monospace;fill:#BFDBFE}
+      .mono-input{font:600 13px 'JetBrains Mono',monospace;fill:#A7F3D0}
+      .mono-output{font:600 13px 'JetBrains Mono',monospace;fill:#BFDBFE}
     </style>
   </defs>
 
@@ -66,13 +66,14 @@
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="414" y="254" width="360" height="216" rx="28" fill="url(#core)"/>
+    <rect x="404" y="244" width="388" height="236" rx="28" fill="url(#core)"/>
     <text x="450" y="304" class="kicker" fill="#DBEAFE">Planning layer</text>
     <text x="450" y="348" class="card-title">Chief of Staff</text>
-    <text x="450" y="384" class="card-copy">Reads notes, routines, and open workstreams.</text>
-    <text x="450" y="414" class="card-copy">Decides what deserves attention now.</text>
-    <text x="450" y="446" class="mono-input">User command: start-day</text>
-    <text x="450" y="468" class="mono-output">Planner output: today-plan.json</text>
+    <text x="450" y="382" class="card-copy">Reads notes, routines, and</text>
+    <text x="450" y="406" class="card-copy">open workstreams.</text>
+    <text x="450" y="436" class="card-copy">Decides what deserves attention now.</text>
+    <text x="450" y="466" class="mono-input">User command: start-day</text>
+    <text x="450" y="488" class="mono-output">Planner output: today-plan.json</text>
   </g>
 
   <g filter="url(#shadow)">
@@ -111,9 +112,9 @@
   <path d="M324 484C364 484 386 454 404 390" stroke="#34D399" stroke-width="3" marker-end="url(#inputArrow)"/>
   <path d="M324 596C370 596 386 530 404 426" stroke="#34D399" stroke-width="3" marker-end="url(#inputArrow)"/>
 
-  <path d="M774 348C804 348 820 300 840 274" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
-  <path d="M774 348C804 348 820 394 840 410" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
-  <path d="M774 348C810 348 820 534 840 566" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
-  <path d="M594 470C594 492 494 500 494 514" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
-  <path d="M594 470C594 492 674 500 674 514" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
+  <path d="M792 364C818 364 826 308 840 278" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
+  <path d="M792 364C818 364 828 396 840 414" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
+  <path d="M792 364C824 364 828 532 840 566" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
+  <path d="M598 480C598 498 494 500 494 514" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
+  <path d="M598 480C598 498 674 500 674 514" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
 </svg>
