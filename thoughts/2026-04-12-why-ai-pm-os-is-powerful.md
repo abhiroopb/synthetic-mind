@@ -29,6 +29,10 @@ That is not a knock on chat. It is just the wrong container for durable operatio
 
 If all context lives inside the conversation, then every interruption is expensive.
 
+![Comparison diagram contrasting a single chat thread with the AI PM OS, highlighting planning, separate workspaces, and file-backed continuity.](./images/ai-pm-os-chat-vs-os.svg)
+
+*The difference is not just a better model. It is a better container for ongoing work.*
+
 ## The feeling of power comes from four things
 
 ### 1. Durable context

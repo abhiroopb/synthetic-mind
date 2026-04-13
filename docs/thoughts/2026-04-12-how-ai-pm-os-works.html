@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>How the AI PM OS Spins Up My Entire Workday — synthetic-mind</title>
-  <meta name="description" content="A technical walkthrough of the AI PM OS: start-day.sh, the Chief of Staff planner, today-plan.json, derived queue/now state, and resumable cmux workstreams.">
+  <meta name="description" content="A technical walkthrough of the AI PM OS: start-day, the Chief of Staff planner, today-plan.json, derived queue/now state, and resumable cmux workstreams.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
@@ -62,9 +62,19 @@
   <p>I wanted a system that could answer a more practical question: what should be open right now, and how does each thread pick up from where it left off?</p>
 
   <h2>The startup command</h2>
-  <p>Everything begins here:</p>
-  <pre><code>start-day</code></pre>
+  <p>Everything begins with one command typed into Amp:</p>
+  <div class="terminal-callout">
+    <div class="terminal-callout-header">
+      <span class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="terminal-callout-label">Typed into Amp</span>
+    </div>
+    <pre><code><span class="prompt-sign">$</span> start-day</code></pre>
+  </div>
   <p>In the public <code>ai-pm-os</code> repo, the <code>start-day</code> launcher validates prerequisites, boots or reuses <code>cmux</code>, opens the Chief of Staff workspace, waits for <code>system/today-plan.json</code>, derives <code>system/state/queue.json</code> and <code>system/state/now.json</code>, then opens the selected workstreams.</p>
+  <figure>
+    <img src="images/ai-pm-os-start-day-flow.svg" alt="Workflow diagram showing how start-day moves from the Chief of Staff planner to today-plan.json, derives queue.json and now.json, and then opens focused workspaces in cmux.">
+    <figcaption>The public flow stays intentionally simple: plan first, derive a lightweight state view, then open the right sessions.</figcaption>
+  </figure>
 
   <h2>Step 1: the Chief of Staff plans the day</h2>
   <p>The first workspace is the planner, not the executor.</p>
@@ -79,8 +89,12 @@
   <p>That layer is intentionally lightweight. Internally I use a richer command-center model, but for the public repo I wanted something people could inspect instantly without inheriting extra machinery.</p>
 
   <h2>Step 3: open workstreams in parallel</h2>
-  <p>Once the plan exists, <code>start-day.sh</code> opens one <code>cmux</code> workspace per selected workstream. Each workspace gets a startup prompt that points it back to its own folder and current objective, so it is not starting from a blank slate.</p>
+  <p>Once the plan exists, <code>start-day</code> opens one <code>cmux</code> workspace per selected workstream. Each workspace gets a startup prompt that points it back to its own folder and current objective, so it is not starting from a blank slate.</p>
   <p>In practice, that state usually lives in two files: <code>workstreams/&lt;slug&gt;/CONTEXT.md</code> and <code>workstreams/&lt;slug&gt;/config.yaml</code>. The config file gives the launcher metadata. The context file gives the agent continuity.</p>
+  <figure>
+    <img src="images/ai-pm-os-cmux-surface.svg" alt="Mockup of the live CMUX surface with a command-center tab, active workstreams in the sidebar, and queue plus now state on the right.">
+    <figcaption>When the AI PM OS is live, the planner, active workstreams, and derived state all stay visible in one surface.</figcaption>
+  </figure>
 
   <h2>Step 4: let the files hold memory</h2>
   <p>This is the part that makes the whole system feel reliable. If the terminal dies, nothing important is lost.</p>

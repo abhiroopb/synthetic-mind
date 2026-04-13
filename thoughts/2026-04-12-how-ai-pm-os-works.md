@@ -14,11 +14,15 @@ What should be open right now, and how does each thread pick up from where it le
 
 ## The startup command
 
-Everything begins here:
+Everything begins with one command typed into Amp:
 
-```
-start-day
-```
+<div class="terminal-callout">
+  <div class="terminal-callout-header">
+    <span class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+    <span class="terminal-callout-label">Typed into Amp</span>
+  </div>
+  <pre><code><span class="prompt-sign">$</span> start-day</code></pre>
+</div>
 
 In the public `ai-pm-os` repo, the `start-day` launcher does a small number of deliberate things:
 
@@ -30,6 +34,10 @@ In the public `ai-pm-os` repo, the `start-day` launcher does a small number of d
 6. opens the selected workstreams
 
 That is the entire control loop.
+
+![Workflow diagram showing how `start-day` moves from the Chief of Staff planner to `today-plan.json`, derives `queue.json` and `now.json`, and then opens focused workspaces in `cmux`.](./images/ai-pm-os-start-day-flow.svg)
+
+*The public flow stays intentionally simple: plan first, derive a lightweight state view, then open the right sessions.*
 
 ## Step 1: the Chief of Staff plans the day
 
@@ -68,7 +76,7 @@ It's a good example of a design principle I keep coming back to: preserve the us
 
 ## Step 3: open workstreams in parallel
 
-Once the plan exists, `start-day.sh` loops through the shortlisted workstreams and opens one `cmux` workspace per item.
+Once the plan exists, `start-day` loops through the shortlisted workstreams and opens one `cmux` workspace per item.
 
 Each workspace gets a startup prompt that points it back to its own folder and current objective. That means the agent is not starting from a blank slate. It is starting from a saved narrative state.
 
@@ -78,6 +86,10 @@ In practice, that state usually lives in two files:
 - `workstreams/<slug>/config.yaml`
 
 The config file gives the launcher metadata. The context file gives the agent continuity.
+
+![Mockup of the live CMUX surface with a command-center tab, active workstreams in the sidebar, and queue plus now state on the right.](./images/ai-pm-os-cmux-surface.svg)
+
+*When the AI PM OS is live, the planner, active workstreams, and derived state all stay visible in one surface.*
 
 ## Step 4: let the files, not the terminal, hold memory
 
