@@ -27,10 +27,10 @@
       .kicker{font:600 13px Inter,Arial,sans-serif;fill:#93C5FD;letter-spacing:1.8px;text-transform:uppercase}
       .kicker-input{font:600 13px Inter,Arial,sans-serif;fill:#6EE7B7;letter-spacing:1.8px;text-transform:uppercase}
       .kicker-output{font:600 13px Inter,Arial,sans-serif;fill:#93C5FD;letter-spacing:1.8px;text-transform:uppercase}
-      .card-title{font:700 23px Inter,Arial,sans-serif;fill:#F8FAFC}
-      .card-copy{font:500 15px Inter,Arial,sans-serif;fill:#CBD5E1}
+      .card-title{font:700 22px Inter,Arial,sans-serif;fill:#F8FAFC}
+      .card-copy{font:500 14px Inter,Arial,sans-serif;fill:#CBD5E1}
       .small-title{font:700 19px Inter,Arial,sans-serif;fill:#F8FAFC}
-      .small-copy{font:500 14px Inter,Arial,sans-serif;fill:#94A3B8}
+      .small-copy{font:500 13px Inter,Arial,sans-serif;fill:#94A3B8}
       .mono{font:600 12px 'JetBrains Mono',monospace;fill:#BFDBFE}
       .mono-input{font:600 12px 'JetBrains Mono',monospace;fill:#A7F3D0}
       .mono-output{font:600 12px 'JetBrains Mono',monospace;fill:#BFDBFE}
@@ -70,9 +70,9 @@
     <text x="450" y="304" class="kicker" fill="#DBEAFE">Planning layer</text>
     <text x="450" y="348" class="card-title">Chief of Staff</text>
     <text x="450" y="382" class="card-copy">Reads notes, routines,</text>
-    <text x="450" y="404" class="card-copy">and open workstreams.</text>
-    <text x="450" y="434" class="card-copy">Decides what deserves</text>
-    <text x="450" y="456" class="card-copy">attention now.</text>
+    <text x="450" y="402" class="card-copy">and active threads.</text>
+    <text x="450" y="430" class="card-copy">Decides what matters</text>
+    <text x="450" y="450" class="card-copy">right now.</text>
     <text x="450" y="482" class="mono-input">User command: start-day</text>
     <text x="450" y="502" class="mono-output">Planner output: today-plan.json</text>
   </g>
@@ -80,9 +80,9 @@
   <g filter="url(#shadow)">
     <rect x="840" y="214" width="290" height="126" rx="18" fill="url(#panel)" stroke="#2A3342"/>
     <text x="870" y="258" class="small-title">CMUX workspaces</text>
-    <text x="870" y="286" class="small-copy">command-center, meetings,</text>
-    <text x="870" y="306" class="small-copy">comms-triage,</text>
-    <text x="870" y="326" class="small-copy">checkout-ux</text>
+    <text x="870" y="286" class="small-copy">command-center</text>
+    <text x="870" y="304" class="small-copy">meetings, comms-triage</text>
+    <text x="870" y="322" class="small-copy">checkout-ux</text>
 
     <rect x="840" y="352" width="290" height="118" rx="18" fill="url(#panel)" stroke="#2A3342"/>
     <text x="870" y="396" class="small-title">Durable context</text>
@@ -93,9 +93,8 @@
     <text x="870" y="534" class="small-title">Derived state</text>
     <text x="870" y="562" class="mono">queue.json</text>
     <text x="870" y="590" class="mono">now.json</text>
-    <text x="870" y="618" class="small-copy">A quick view of what is live</text>
-    <text x="870" y="638" class="small-copy">plus what should happen</text>
-    <text x="870" y="658" class="small-copy">next.</text>
+    <text x="870" y="618" class="small-copy">Live state plus</text>
+    <text x="870" y="636" class="small-copy">the next move.</text>
   </g>
 
   <g filter="url(#shadow)">

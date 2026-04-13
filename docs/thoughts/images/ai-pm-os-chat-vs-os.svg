@@ -19,10 +19,10 @@
       .title{font:700 38px Inter,Arial,sans-serif;fill:#F8FAFC}
       .subtitle{font:500 18px Inter,Arial,sans-serif;fill:#94A3B8}
       .kicker{font:600 13px Inter,Arial,sans-serif;fill:#93C5FD;letter-spacing:1.8px;text-transform:uppercase}
-      .panel{font:700 28px Inter,Arial,sans-serif;fill:#F8FAFC}
-      .copy{font:500 17px Inter,Arial,sans-serif;fill:#CBD5E1}
-      .mini{font:500 15px Inter,Arial,sans-serif;fill:#94A3B8}
-      .mono{font:600 14px 'JetBrains Mono',monospace;fill:#BFDBFE}
+      .panel{font:700 27px Inter,Arial,sans-serif;fill:#F8FAFC}
+      .copy{font:500 15px Inter,Arial,sans-serif;fill:#CBD5E1}
+      .mini{font:500 14px Inter,Arial,sans-serif;fill:#94A3B8}
+      .mono{font:600 13px 'JetBrains Mono',monospace;fill:#BFDBFE}
     </style>
   </defs>
 
@@ -37,39 +37,41 @@
   <g filter="url(#shadow)">
     <rect x="72" y="214" width="520" height="470" rx="28" fill="url(#left)" stroke="#3B1D2A"/>
     <text x="108" y="274" class="panel">Single chat thread</text>
-    <text x="108" y="308" class="copy">Helpful for a question. Fragile for an operating day.</text>
+    <text x="108" y="308" class="copy">Helpful for a question.</text>
+    <text x="108" y="332" class="copy">Fragile for an operating day.</text>
 
     <rect x="108" y="346" width="448" height="96" rx="16" fill="#2A1B23" stroke="#4A2938"/>
-    <text x="134" y="380" class="copy">One thread mixes strategy, comms,</text>
-    <text x="134" y="406" class="copy">docs, and follow-up.</text>
+    <text x="134" y="380" class="copy">One thread mixes strategy,</text>
+    <text x="134" y="404" class="copy">comms, docs, and follow-up.</text>
 
     <rect x="108" y="458" width="448" height="96" rx="16" fill="#2A1B23" stroke="#4A2938"/>
-    <text x="134" y="492" class="copy">Re-entry means reloading context</text>
-    <text x="134" y="518" class="copy">from memory and scrollback.</text>
+    <text x="134" y="492" class="copy">Re-entry means reloading</text>
+    <text x="134" y="516" class="copy">context from scrollback.</text>
 
     <rect x="108" y="570" width="448" height="96" rx="16" fill="#2A1B23" stroke="#4A2938"/>
-    <text x="134" y="604" class="copy">A crash or long gap can break the</text>
-    <text x="134" y="630" class="copy">thread and raise the cost to resume.</text>
+    <text x="134" y="604" class="copy">A crash or long gap can</text>
+    <text x="134" y="628" class="copy">break the thread.</text>
   </g>
 
   <g filter="url(#shadow)">
     <rect x="636" y="214" width="572" height="470" rx="28" fill="url(#right)" stroke="#1E3A5F"/>
     <text x="672" y="274" class="panel">The AI PM OS</text>
-    <text x="672" y="308" class="copy">A planner, multiple workspaces, and file-backed continuity.</text>
+    <text x="672" y="308" class="copy">A planner, multiple workspaces,</text>
+    <text x="672" y="332" class="copy">and file-backed continuity.</text>
 
-    <rect x="672" y="344" width="500" height="86" rx="18" fill="#10233F" stroke="#315A8D"/>
+    <rect x="672" y="352" width="500" height="78" rx="18" fill="#10233F" stroke="#315A8D"/>
     <text x="702" y="380" class="panel" font-size="22">Chief of Staff</text>
-    <text x="702" y="406" class="mini">The day opens with a planning pass, not a blank thread.</text>
+    <text x="702" y="404" class="mini">The day starts with a planning pass.</text>
 
-    <rect x="672" y="454" width="154" height="118" rx="18" fill="#0F1A2A" stroke="#2A415F"/>
+    <rect x="672" y="450" width="154" height="118" rx="18" fill="#0F1A2A" stroke="#2A415F"/>
     <text x="698" y="494" class="copy">Workstream A</text>
     <text x="698" y="520" class="mono">CONTEXT.md</text>
 
-    <rect x="862" y="454" width="154" height="118" rx="18" fill="#0F1A2A" stroke="#2A415F"/>
+    <rect x="862" y="450" width="154" height="118" rx="18" fill="#0F1A2A" stroke="#2A415F"/>
     <text x="888" y="494" class="copy">Workstream B</text>
     <text x="888" y="520" class="mono">CONTEXT.md</text>
 
-    <rect x="1052" y="454" width="120" height="118" rx="18" fill="#0F1A2A" stroke="#2A415F"/>
+    <rect x="1052" y="450" width="120" height="118" rx="18" fill="#0F1A2A" stroke="#2A415F"/>
     <text x="1076" y="494" class="copy">Routine</text>
     <text x="1076" y="520" class="mono">loop</text>
 

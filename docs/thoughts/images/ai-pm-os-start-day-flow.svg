@@ -22,10 +22,10 @@
       .title{font:700 38px Inter,Arial,sans-serif;fill:#F8FAFC}
       .subtitle{font:500 18px Inter,Arial,sans-serif;fill:#94A3B8}
       .kicker{font:600 13px Inter,Arial,sans-serif;fill:#93C5FD;letter-spacing:1.8px;text-transform:uppercase}
-      .step{font:700 22px Inter,Arial,sans-serif;fill:#F8FAFC}
-      .copy{font:500 16px Inter,Arial,sans-serif;fill:#CBD5E1}
-      .mono{font:600 15px 'JetBrains Mono',monospace;fill:#BFDBFE}
-      .mini{font:500 14px Inter,Arial,sans-serif;fill:#94A3B8}
+      .step{font:700 21px Inter,Arial,sans-serif;fill:#F8FAFC}
+      .copy{font:500 15px Inter,Arial,sans-serif;fill:#CBD5E1}
+      .mono{font:600 14px 'JetBrains Mono',monospace;fill:#BFDBFE}
+      .mini{font:500 13px Inter,Arial,sans-serif;fill:#94A3B8}
     </style>
   </defs>
 
@@ -46,14 +46,14 @@
     <rect x="304" y="236" width="226" height="118" rx="22" fill="url(#box)" stroke="#2A3342"/>
     <text x="336" y="284" class="kicker">Planner</text>
     <text x="336" y="320" class="step">command-center</text>
-    <text x="336" y="344" class="copy">Chief of Staff reviews notes,</text>
-    <text x="336" y="364" class="copy">routines, and workstreams.</text>
+    <text x="336" y="344" class="copy">Chief of Staff reviews</text>
+    <text x="336" y="362" class="copy">notes and workstreams.</text>
 
     <rect x="580" y="236" width="236" height="118" rx="22" fill="url(#box)" stroke="#2A3342"/>
     <text x="612" y="284" class="kicker">Plan file</text>
     <text x="612" y="320" class="mono">today-plan.json</text>
-    <text x="612" y="344" class="copy">Selected workstreams, prompts,</text>
-    <text x="612" y="364" class="copy">and a ranked day.</text>
+    <text x="612" y="344" class="copy">Selected threads, prompts,</text>
+    <text x="612" y="362" class="copy">and the ranked day.</text>
 
     <rect x="850" y="236" width="172" height="118" rx="22" fill="url(#box)" stroke="#2A3342"/>
     <text x="882" y="284" class="kicker">State</text>
@@ -75,24 +75,24 @@
   <g filter="url(#shadow)">
     <rect x="76" y="468" width="356" height="188" rx="22" fill="url(#box)" stroke="#2A3342"/>
     <text x="108" y="514" class="step">checkout-ux</text>
-    <text x="108" y="548" class="copy">Resume the product thread from</text>
-    <text x="108" y="574" class="mono">workstreams/checkout-ux/CONTEXT.md</text>
-    <text x="108" y="614" class="mini">Prompt: refine the next UX decision</text>
-    <text x="108" y="634" class="mini">and prep review questions</text>
+    <text x="108" y="548" class="copy">Resume from CONTEXT.md</text>
+    <text x="108" y="574" class="mono">checkout-ux</text>
+    <text x="108" y="612" class="mini">Refine the next UX decision</text>
+    <text x="108" y="630" class="mini">and prep the review.</text>
 
     <rect x="462" y="468" width="356" height="188" rx="22" fill="url(#box)" stroke="#2A3342"/>
     <text x="494" y="514" class="step">meetings</text>
-    <text x="494" y="548" class="copy">Prep the next meeting loop from</text>
-    <text x="494" y="574" class="mono">routines/meetings/CONTEXT.md</text>
-    <text x="494" y="614" class="mini">Prompt: build the brief, gather open</text>
-    <text x="494" y="634" class="mini">questions, capture follow-up</text>
+    <text x="494" y="548" class="copy">Resume from CONTEXT.md</text>
+    <text x="494" y="574" class="mono">meetings</text>
+    <text x="494" y="612" class="mini">Build the brief and gather</text>
+    <text x="494" y="630" class="mini">open questions.</text>
 
     <rect x="848" y="468" width="356" height="188" rx="22" fill="url(#box)" stroke="#2A3342"/>
     <text x="880" y="514" class="step">comms-triage</text>
-    <text x="880" y="548" class="copy">Run the recurring inbox loop from</text>
-    <text x="880" y="574" class="mono">routines/comms-triage/CONTEXT.md</text>
-    <text x="880" y="614" class="mini">Prompt: triage messages, draft replies,</text>
-    <text x="880" y="634" class="mini">keep the queue current</text>
+    <text x="880" y="548" class="copy">Resume from CONTEXT.md</text>
+    <text x="880" y="574" class="mono">comms-triage</text>
+    <text x="880" y="612" class="mini">Triage messages, draft replies,</text>
+    <text x="880" y="630" class="mini">keep the queue current.</text>
   </g>
 
   <path d="M676 354V420" stroke="#34D399" stroke-width="4" marker-end="url(#arrow)"/>
