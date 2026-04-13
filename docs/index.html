@@ -144,7 +144,7 @@
 
     /* ── Pillars (Under the Hood) ── */
     .pillars {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;
     }
     .pillar {
       background: var(--surface); border: 1px solid var(--border-subtle);
@@ -513,6 +513,7 @@
     <a href="./" class="nav-brand">🧠 synthetic-mind</a>
     <div class="nav-links">
       <a href="#about">About</a>
+      <a href="ai-pm-os/">AI PM OS</a>
       <a href="#thoughts">Thoughts</a>
       <a href="#skills">Projects</a>
       <a href="#under-the-hood">Setup</a>
@@ -530,7 +531,7 @@
   <p class="hero-subtitle">Product Leader · AI Builder</p>
   <p>I use AI to do my job better. This site documents how — from personally building 76 agent skills that automate my daily workflow, to writing about what actually works when you pair a product manager with an AI copilot.</p>
   <div class="hero-links">
-    <a href="ai-pm-os/" class="hero-link">🧭 The AI PM OS</a>
+    <a href="ai-pm-os/" class="hero-link">🧭 AI PM OS</a>
     <a href="#thoughts" class="hero-link">✍️ Thoughts</a>
     <a href="#skills" class="hero-link">🛠 Projects</a>
     <a href="https://github.com/abhiroopb/synthetic-mind" class="hero-link" target="_blank">↗ GitHub</a>
@@ -660,7 +661,7 @@
 <section id="ai-pm-os">
   <div class="container">
     <div class="section-header">
-      <h2>Featured Project: The AI PM OS</h2>
+      <h2>Featured Project: AI PM OS</h2>
       <p>An operating system for product work, built around a Chief of Staff agent, durable workstreams, and resumable parallel sessions.</p>
     </div>
     <div class="featured-grid">
@@ -946,6 +947,12 @@
       <p>The systems that make it all work</p>
     </div>
     <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon">🧭</div>
+        <h3>AI PM OS</h3>
+        <p>The full product-work operating system: Chief of Staff planning, durable workstreams, resumable CMUX sessions, and a public starter repo you can adapt.</p>
+        <a href="ai-pm-os/" class="pillar-link">Explore the system →</a>
+      </div>
       <div class="pillar">
         <div class="pillar-icon">🧠</div>
         <h3>Persistent Memory</h3>
