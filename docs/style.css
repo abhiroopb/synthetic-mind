@@ -238,7 +238,11 @@ footer a:hover { color: var(--text); }
   color: var(--text-muted); text-decoration: none; font-size: 0.875rem;
   font-weight: 500; margin-bottom: 2rem; transition: color 0.15s;
 }
-.back-link::before { content: '←'; }
+.back-link::before {
+  content: '←';
+  font-size: 0.8em;
+  line-height: 1;
+}
 .back-link:hover { color: var(--text); }
 
 .page-content h1 {
