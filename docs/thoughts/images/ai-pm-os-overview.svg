@@ -27,13 +27,13 @@
       .kicker{font:600 13px Inter,Arial,sans-serif;fill:#93C5FD;letter-spacing:1.8px;text-transform:uppercase}
       .kicker-input{font:600 13px Inter,Arial,sans-serif;fill:#6EE7B7;letter-spacing:1.8px;text-transform:uppercase}
       .kicker-output{font:600 13px Inter,Arial,sans-serif;fill:#93C5FD;letter-spacing:1.8px;text-transform:uppercase}
-      .card-title{font:700 24px Inter,Arial,sans-serif;fill:#F8FAFC}
-      .card-copy{font:500 16px Inter,Arial,sans-serif;fill:#CBD5E1}
+      .card-title{font:700 23px Inter,Arial,sans-serif;fill:#F8FAFC}
+      .card-copy{font:500 15px Inter,Arial,sans-serif;fill:#CBD5E1}
       .small-title{font:700 19px Inter,Arial,sans-serif;fill:#F8FAFC}
-      .small-copy{font:500 15px Inter,Arial,sans-serif;fill:#94A3B8}
-      .mono{font:600 13px 'JetBrains Mono',monospace;fill:#BFDBFE}
-      .mono-input{font:600 13px 'JetBrains Mono',monospace;fill:#A7F3D0}
-      .mono-output{font:600 13px 'JetBrains Mono',monospace;fill:#BFDBFE}
+      .small-copy{font:500 14px Inter,Arial,sans-serif;fill:#94A3B8}
+      .mono{font:600 12px 'JetBrains Mono',monospace;fill:#BFDBFE}
+      .mono-input{font:600 12px 'JetBrains Mono',monospace;fill:#A7F3D0}
+      .mono-output{font:600 12px 'JetBrains Mono',monospace;fill:#BFDBFE}
     </style>
   </defs>
 
@@ -66,33 +66,36 @@
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="404" y="244" width="388" height="236" rx="28" fill="url(#core)"/>
+    <rect x="396" y="238" width="404" height="248" rx="28" fill="url(#core)"/>
     <text x="450" y="304" class="kicker" fill="#DBEAFE">Planning layer</text>
     <text x="450" y="348" class="card-title">Chief of Staff</text>
-    <text x="450" y="382" class="card-copy">Reads notes, routines, and</text>
-    <text x="450" y="406" class="card-copy">open workstreams.</text>
-    <text x="450" y="436" class="card-copy">Decides what deserves attention now.</text>
-    <text x="450" y="466" class="mono-input">User command: start-day</text>
-    <text x="450" y="488" class="mono-output">Planner output: today-plan.json</text>
+    <text x="450" y="382" class="card-copy">Reads notes, routines,</text>
+    <text x="450" y="404" class="card-copy">and open workstreams.</text>
+    <text x="450" y="434" class="card-copy">Decides what deserves</text>
+    <text x="450" y="456" class="card-copy">attention now.</text>
+    <text x="450" y="482" class="mono-input">User command: start-day</text>
+    <text x="450" y="502" class="mono-output">Planner output: today-plan.json</text>
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="840" y="214" width="290" height="118" rx="18" fill="url(#panel)" stroke="#2A3342"/>
+    <rect x="840" y="214" width="290" height="126" rx="18" fill="url(#panel)" stroke="#2A3342"/>
     <text x="870" y="258" class="small-title">CMUX workspaces</text>
     <text x="870" y="286" class="small-copy">command-center, meetings,</text>
-    <text x="870" y="308" class="small-copy">comms-triage, checkout-ux</text>
+    <text x="870" y="306" class="small-copy">comms-triage,</text>
+    <text x="870" y="326" class="small-copy">checkout-ux</text>
 
     <rect x="840" y="352" width="290" height="118" rx="18" fill="url(#panel)" stroke="#2A3342"/>
     <text x="870" y="396" class="small-title">Durable context</text>
     <text x="870" y="424" class="small-copy">Each thread resumes from</text>
     <text x="870" y="446" class="mono">CONTEXT.md</text>
 
-    <rect x="840" y="490" width="290" height="152" rx="18" fill="url(#panel)" stroke="#2A3342"/>
+    <rect x="840" y="490" width="290" height="160" rx="18" fill="url(#panel)" stroke="#2A3342"/>
     <text x="870" y="534" class="small-title">Derived state</text>
     <text x="870" y="562" class="mono">queue.json</text>
     <text x="870" y="590" class="mono">now.json</text>
     <text x="870" y="618" class="small-copy">A quick view of what is live</text>
-    <text x="870" y="640" class="small-copy">and what should happen next.</text>
+    <text x="870" y="638" class="small-copy">plus what should happen</text>
+    <text x="870" y="658" class="small-copy">next.</text>
   </g>
 
   <g filter="url(#shadow)">
