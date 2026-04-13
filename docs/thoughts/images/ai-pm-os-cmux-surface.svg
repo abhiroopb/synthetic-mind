@@ -12,14 +12,14 @@
       <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#000000" flood-opacity="0.38"/>
     </filter>
     <style>
-      .title{font:700 38px Inter,Arial,sans-serif;fill:#F8FAFC}
-      .subtitle{font:500 18px Inter,Arial,sans-serif;fill:#94A3B8}
-      .kicker{font:600 13px Inter,Arial,sans-serif;fill:#93C5FD;letter-spacing:1.8px;text-transform:uppercase}
-      .tab{font:700 20px Inter,Arial,sans-serif;fill:#F8FAFC}
-      .copy{font:500 16px Inter,Arial,sans-serif;fill:#CBD5E1}
-      .mini{font:500 14px Inter,Arial,sans-serif;fill:#94A3B8}
-      .mono{font:600 14px 'JetBrains Mono',monospace;fill:#BFDBFE}
-      .terminal{font:500 15px 'JetBrains Mono',monospace;fill:#D1D5DB}
+      .title{font:700 42px Inter,Arial,sans-serif;fill:#F8FAFC}
+      .subtitle{font:500 22px Inter,Arial,sans-serif;fill:#94A3B8}
+      .kicker{font:600 15px Inter,Arial,sans-serif;fill:#93C5FD;letter-spacing:1.8px;text-transform:uppercase}
+      .tab{font:700 22px Inter,Arial,sans-serif;fill:#F8FAFC}
+      .copy{font:500 20px Inter,Arial,sans-serif;fill:#DBE4EF}
+      .mini{font:500 18px Inter,Arial,sans-serif;fill:#AAB7C9}
+      .mono{font:600 18px 'JetBrains Mono',monospace;fill:#BFDBFE}
+      .terminal{font:500 18px 'JetBrains Mono',monospace;fill:#D1D5DB}
     </style>
   </defs>
 
@@ -29,7 +29,7 @@
 
   <text x="72" y="78" class="kicker">Setup</text>
   <text x="72" y="126" class="title">A CMUX surface when the AI PM OS is live</text>
-  <text x="72" y="158" class="subtitle">A command-center tab at the top, active workstreams on the left, and live terminal plus state on the right.</text>
+  <text x="72" y="160" class="subtitle">A command-center tab at the top, active workstreams on the left, and live state on the right.</text>
 
   <g filter="url(#shadow)">
     <rect x="72" y="214" width="1136" height="550" rx="24" fill="url(#shell)" stroke="#223043"/>
@@ -39,61 +39,53 @@
     <circle cx="108" cy="242" r="7" fill="#FB7185"/>
     <circle cx="134" cy="242" r="7" fill="#FBBF24"/>
     <circle cx="160" cy="242" r="7" fill="#34D399"/>
-    <text x="560" y="248" class="mono">cmux • ai-pm-os</text>
-    <text x="1070" y="248" class="mono">Mon 09:14</text>
+    <text x="556" y="248" class="mono">cmux • ai-pm-os</text>
+    <text x="1060" y="248" class="mono">Mon 09:14</text>
 
-    <rect x="72" y="270" width="246" height="494" fill="#0E131A"/>
-    <rect x="318" y="270" width="890" height="494" fill="#090D14"/>
-    <line x1="318" y1="270" x2="318" y2="764" stroke="#1E293B"/>
+    <rect x="72" y="270" width="252" height="494" fill="#0E131A"/>
+    <rect x="324" y="270" width="884" height="494" fill="#090D14"/>
+    <line x1="324" y1="270" x2="324" y2="764" stroke="#1E293B"/>
 
-    <text x="102" y="306" class="kicker">Active workspaces</text>
+    <text x="102" y="308" class="kicker">Active workspaces</text>
 
-    <rect x="102" y="330" width="186" height="98" rx="16" fill="#1D335B" stroke="#5B8DFF"/>
-    <text x="122" y="366" class="tab" font-size="18">command-center</text>
-    <rect x="218" y="346" width="48" height="22" rx="11" fill="#29457A"/>
-    <text x="228" y="361" class="mono" fill="#DBEAFE">active</text>
-    <text x="122" y="394" class="mini">Review the queue, refresh</text>
-    <text x="122" y="416" class="mini">today-plan, decide what opens next.</text>
+    <rect x="102" y="334" width="192" height="102" rx="16" fill="#1D335B" stroke="#5B8DFF"/>
+    <text x="124" y="372" class="tab">command-center</text>
+    <text x="124" y="404" class="mini">Review the queue and</text>
+    <text x="124" y="430" class="mini">decide what opens next.</text>
 
-    <rect x="102" y="446" width="186" height="94" rx="16" fill="#151C25" stroke="#293241"/>
-    <text x="122" y="480" class="tab" font-size="18">meetings</text>
-    <rect x="218" y="462" width="54" height="22" rx="11" fill="#5C4414"/>
-    <text x="226" y="477" class="mono" fill="#FDE68A">waiting</text>
-    <text x="122" y="506" class="mini">Prep the next brief and gather</text>
-    <text x="122" y="528" class="mini">follow-ups from older notes.</text>
+    <rect x="102" y="456" width="192" height="96" rx="16" fill="#151C25" stroke="#293241"/>
+    <text x="124" y="492" class="tab">meetings</text>
+    <text x="124" y="522" class="mini">Prep the next brief and</text>
+    <text x="124" y="548" class="mini">capture follow-up.</text>
 
-    <rect x="102" y="558" width="186" height="94" rx="16" fill="#151C25" stroke="#293241"/>
-    <text x="122" y="592" class="tab" font-size="18">checkout-ux</text>
-    <rect x="224" y="574" width="46" height="22" rx="11" fill="#113F2D"/>
-    <text x="232" y="589" class="mono" fill="#86EFAC">review</text>
-    <text x="122" y="618" class="mini">Draft flows, capture open questions,</text>
-    <text x="122" y="640" class="mini">and prep the next decision doc.</text>
+    <rect x="102" y="572" width="192" height="96" rx="16" fill="#151C25" stroke="#293241"/>
+    <text x="124" y="608" class="tab">checkout-ux</text>
+    <text x="124" y="638" class="mini">Refine flows and prep</text>
+    <text x="124" y="664" class="mini">the next design review.</text>
 
-    <text x="350" y="308" class="kicker">Workspace: command-center</text>
-    <rect x="350" y="330" width="824" height="64" rx="16" fill="#111827" stroke="#273244"/>
-    <text x="376" y="370" class="mono">source: today-plan.json -> state</text>
-    <text x="834" y="370" class="mono">queue.json / now.json refreshed</text>
+    <text x="356" y="308" class="kicker">Workspace: command-center</text>
+    <rect x="356" y="332" width="812" height="66" rx="16" fill="#111827" stroke="#273244"/>
+    <text x="384" y="374" class="mono">source: today-plan.json -> queue.json / now.json</text>
 
-    <rect x="350" y="418" width="482" height="300" rx="18" fill="#101722" stroke="#273244"/>
-    <text x="378" y="452" class="kicker">Live terminal</text>
-    <text x="378" y="490" class="terminal" fill="#34D399">$ start-day</text>
-    <text x="378" y="526" class="terminal" fill="#6EE7B7">cmux ready • amp ready • chief-of-staff prompt sent</text>
-    <text x="378" y="562" class="terminal">Chief of Staff: reviewing 5 workstreams and 3 routines</text>
-    <text x="378" y="598" class="terminal">Chief of Staff: writing system/today-plan.json</text>
-    <text x="378" y="634" class="terminal" fill="#93C5FD">State: derived queue.json and now.json</text>
-    <text x="378" y="670" class="terminal">Launching: checkout-ux, comms-triage, meetings</text>
+    <rect x="356" y="420" width="470" height="306" rx="18" fill="#101722" stroke="#273244"/>
+    <text x="384" y="456" class="kicker">Live terminal</text>
+    <text x="384" y="500" class="terminal" fill="#34D399">$ start-day</text>
+    <text x="384" y="544" class="terminal" fill="#6EE7B7">cmux ready • chief-of-staff prompt sent</text>
+    <text x="384" y="588" class="terminal">Chief of Staff: reviewing workstreams</text>
+    <text x="384" y="632" class="terminal" fill="#93C5FD">State: queue.json and now.json refreshed</text>
+    <text x="384" y="676" class="terminal">Launching: checkout-ux, comms-triage, meetings</text>
 
-    <rect x="856" y="418" width="318" height="120" rx="18" fill="#161D29" stroke="#273244"/>
-    <text x="882" y="452" class="kicker">Now</text>
-    <text x="882" y="490" class="tab">checkout-ux</text>
-    <text x="882" y="520" class="copy">Refine the next UX decision and prep the design review thread.</text>
+    <rect x="850" y="420" width="318" height="126" rx="18" fill="#161D29" stroke="#273244"/>
+    <text x="878" y="456" class="kicker">Now</text>
+    <text x="878" y="494" class="tab">checkout-ux</text>
+    <text x="878" y="526" class="copy">Refine the next UX decision.</text>
 
-    <rect x="856" y="554" width="318" height="74" rx="18" fill="#161D29" stroke="#273244"/>
-    <text x="882" y="588" class="kicker">Queue</text>
-    <text x="882" y="614" class="mono">meetings -> comms-triage -> product-strategy</text>
+    <rect x="850" y="564" width="318" height="76" rx="18" fill="#161D29" stroke="#273244"/>
+    <text x="878" y="600" class="kicker">Queue</text>
+    <text x="878" y="626" class="mono">meetings -> comms-triage -> strategy</text>
 
-    <rect x="856" y="644" width="318" height="74" rx="18" fill="#161D29" stroke="#273244"/>
-    <text x="882" y="678" class="kicker">Continuity</text>
-    <text x="882" y="704" class="copy">Every tab resumes from its own context file.</text>
+    <rect x="850" y="658" width="318" height="68" rx="18" fill="#161D29" stroke="#273244"/>
+    <text x="878" y="692" class="kicker">Continuity</text>
+    <text x="878" y="718" class="copy">Every tab resumes from its own context file.</text>
   </g>
 </svg>

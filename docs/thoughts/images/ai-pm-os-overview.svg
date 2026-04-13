@@ -22,18 +22,18 @@
       <path d="M0 0L10 5L0 10V0Z" fill="#60A5FA"/>
     </marker>
     <style>
-      .title{font:700 38px Inter,Arial,sans-serif;fill:#F8FAFC}
-      .subtitle{font:500 18px Inter,Arial,sans-serif;fill:#94A3B8}
-      .kicker{font:600 13px Inter,Arial,sans-serif;fill:#93C5FD;letter-spacing:1.8px;text-transform:uppercase}
-      .kicker-input{font:600 13px Inter,Arial,sans-serif;fill:#6EE7B7;letter-spacing:1.8px;text-transform:uppercase}
-      .kicker-output{font:600 13px Inter,Arial,sans-serif;fill:#93C5FD;letter-spacing:1.8px;text-transform:uppercase}
-      .card-title{font:700 24px Inter,Arial,sans-serif;fill:#F8FAFC}
-      .card-copy{font:500 17px Inter,Arial,sans-serif;fill:#CBD5E1}
-      .small-title{font:700 19px Inter,Arial,sans-serif;fill:#F8FAFC}
-      .small-copy{font:500 15px Inter,Arial,sans-serif;fill:#94A3B8}
-      .mono{font:600 14px 'JetBrains Mono',monospace;fill:#BFDBFE}
-      .mono-input{font:600 14px 'JetBrains Mono',monospace;fill:#A7F3D0}
-      .mono-output{font:600 14px 'JetBrains Mono',monospace;fill:#BFDBFE}
+      .title{font:700 42px Inter,Arial,sans-serif;fill:#F8FAFC}
+      .subtitle{font:500 22px Inter,Arial,sans-serif;fill:#94A3B8}
+      .kicker{font:600 15px Inter,Arial,sans-serif;fill:#93C5FD;letter-spacing:1.8px;text-transform:uppercase}
+      .kicker-input{font:600 15px Inter,Arial,sans-serif;fill:#6EE7B7;letter-spacing:1.8px;text-transform:uppercase}
+      .kicker-output{font:600 15px Inter,Arial,sans-serif;fill:#93C5FD;letter-spacing:1.8px;text-transform:uppercase}
+      .card-title{font:700 30px Inter,Arial,sans-serif;fill:#F8FAFC}
+      .card-copy{font:500 22px Inter,Arial,sans-serif;fill:#DBE4EF}
+      .small-title{font:700 24px Inter,Arial,sans-serif;fill:#F8FAFC}
+      .small-copy{font:500 20px Inter,Arial,sans-serif;fill:#B8C4D6}
+      .mono{font:600 20px 'JetBrains Mono',monospace;fill:#BFDBFE}
+      .mono-input{font:600 20px 'JetBrains Mono',monospace;fill:#A7F3D0}
+      .mono-output{font:600 20px 'JetBrains Mono',monospace;fill:#BFDBFE}
     </style>
   </defs>
 
@@ -43,77 +43,74 @@
 
   <text x="72" y="78" class="kicker">Overview</text>
   <text x="72" y="126" class="title">From isolated skills to the AI PM OS</text>
-  <text x="72" y="158" class="subtitle">A planner, durable context, and parallel workspaces turn helpful tools into an operating model.</text>
-  <text x="72" y="196" class="kicker-input">Inputs Amp reads</text>
-  <text x="840" y="196" class="kicker-output">Outputs opened in CMUX</text>
+  <text x="72" y="160" class="subtitle">A planner, durable context, and parallel workspaces turn useful prompts into a repeatable system.</text>
+  <text x="72" y="200" class="kicker-input">Inputs Amp reads</text>
+  <text x="836" y="200" class="kicker-output">Outputs the system opens</text>
 
   <g filter="url(#shadow)">
-    <rect x="72" y="214" width="252" height="92" rx="18" fill="url(#panel)" stroke="#2A3342"/>
-    <text x="102" y="252" class="small-title">Inbox triage</text>
-    <text x="102" y="280" class="small-copy">Slack, Gmail, comments</text>
+    <rect x="72" y="220" width="262" height="98" rx="20" fill="url(#panel)" stroke="#2A3342"/>
+    <text x="104" y="260" class="small-title">Inbox triage</text>
+    <text x="104" y="292" class="small-copy">Slack, Gmail, comments</text>
 
-    <rect x="72" y="326" width="252" height="92" rx="18" fill="url(#panel)" stroke="#2A3342"/>
-    <text x="102" y="364" class="small-title">PRD writing</text>
-    <text x="102" y="392" class="small-copy">Notes, research, synthesis</text>
+    <rect x="72" y="334" width="262" height="98" rx="20" fill="url(#panel)" stroke="#2A3342"/>
+    <text x="104" y="374" class="small-title">PRD writing</text>
+    <text x="104" y="406" class="small-copy">Notes, research, synthesis</text>
 
-    <rect x="72" y="438" width="252" height="92" rx="18" fill="url(#panel)" stroke="#2A3342"/>
-    <text x="102" y="476" class="small-title">Research</text>
-    <text x="102" y="504" class="small-copy">Customer, market, docs</text>
+    <rect x="72" y="448" width="262" height="98" rx="20" fill="url(#panel)" stroke="#2A3342"/>
+    <text x="104" y="488" class="small-title">Research</text>
+    <text x="104" y="520" class="small-copy">Customers, market, docs</text>
 
-    <rect x="72" y="550" width="252" height="92" rx="18" fill="url(#panel)" stroke="#2A3342"/>
-    <text x="102" y="588" class="small-title">To-dos and follow-up</text>
-    <text x="102" y="616" class="small-copy">Capture, queue, reconcile</text>
+    <rect x="72" y="562" width="262" height="98" rx="20" fill="url(#panel)" stroke="#2A3342"/>
+    <text x="104" y="602" class="small-title">Follow-up queue</text>
+    <text x="104" y="634" class="small-copy">Capture, rank, reconcile</text>
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="414" y="254" width="360" height="216" rx="28" fill="url(#core)"/>
-    <text x="450" y="304" class="kicker" fill="#DBEAFE">Planning layer</text>
-    <text x="450" y="348" class="card-title">Chief of Staff</text>
-    <text x="450" y="384" class="card-copy">Reads notes, routines, and open workstreams.</text>
-    <text x="450" y="414" class="card-copy">Decides what deserves attention now.</text>
-    <text x="450" y="446" class="mono-input">User command: start-day</text>
-    <text x="450" y="468" class="mono-output">Planner output: today-plan.json</text>
+    <rect x="404" y="248" width="388" height="240" rx="30" fill="url(#core)"/>
+    <text x="442" y="298" class="kicker">Planning layer</text>
+    <text x="442" y="346" class="card-title">Chief of Staff</text>
+    <text x="442" y="388" class="card-copy">Reads notes, routines, and open workstreams.</text>
+    <text x="442" y="424" class="card-copy">Decides what deserves attention now.</text>
+    <text x="442" y="462" class="mono-input">start-day</text>
+    <text x="442" y="490" class="mono-output">today-plan.json</text>
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="840" y="214" width="290" height="118" rx="18" fill="url(#panel)" stroke="#2A3342"/>
-    <text x="870" y="258" class="small-title">CMUX workspaces</text>
-    <text x="870" y="286" class="small-copy">command-center, meetings,</text>
-    <text x="870" y="308" class="small-copy">comms-triage, checkout-ux</text>
+    <rect x="848" y="220" width="282" height="120" rx="20" fill="url(#panel)" stroke="#2A3342"/>
+    <text x="880" y="264" class="small-title">CMUX tabs</text>
+    <text x="880" y="296" class="small-copy">command-center, meetings,</text>
+    <text x="880" y="324" class="small-copy">comms, checkout-ux</text>
 
-    <rect x="840" y="352" width="290" height="118" rx="18" fill="url(#panel)" stroke="#2A3342"/>
-    <text x="870" y="396" class="small-title">Durable context</text>
-    <text x="870" y="424" class="small-copy">Each thread resumes from</text>
-    <text x="870" y="446" class="mono">CONTEXT.md</text>
+    <rect x="848" y="360" width="282" height="120" rx="20" fill="url(#panel)" stroke="#2A3342"/>
+    <text x="880" y="404" class="small-title">Context files</text>
+    <text x="880" y="436" class="small-copy">Every thread resumes from</text>
+    <text x="880" y="464" class="mono">CONTEXT.md</text>
 
-    <rect x="840" y="490" width="290" height="152" rx="18" fill="url(#panel)" stroke="#2A3342"/>
-    <text x="870" y="534" class="small-title">Derived state</text>
-    <text x="870" y="562" class="mono">queue.json</text>
-    <text x="870" y="590" class="mono">now.json</text>
-    <text x="870" y="618" class="small-copy">A quick view of what is live</text>
-    <text x="870" y="640" class="small-copy">and what should happen next.</text>
+    <rect x="848" y="500" width="282" height="160" rx="20" fill="url(#panel)" stroke="#2A3342"/>
+    <text x="880" y="544" class="small-title">State view</text>
+    <text x="880" y="580" class="mono">queue.json</text>
+    <text x="880" y="612" class="mono">now.json</text>
+    <text x="880" y="644" class="small-copy">A quick view of what is live</text>
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="414" y="514" width="160" height="128" rx="18" fill="url(#panel)" stroke="#2A3342"/>
-    <text x="444" y="558" class="small-title">Workstreams</text>
-    <text x="444" y="586" class="small-copy">Finite threads</text>
-    <text x="444" y="608" class="small-copy">with outcomes.</text>
+    <rect x="430" y="540" width="150" height="108" rx="18" fill="url(#panel)" stroke="#2A3342"/>
+    <text x="458" y="582" class="small-title">Workstreams</text>
+    <text x="458" y="614" class="small-copy">Finite threads</text>
 
-    <rect x="594" y="514" width="160" height="128" rx="18" fill="url(#panel)" stroke="#2A3342"/>
-    <text x="624" y="558" class="small-title">Routines</text>
-    <text x="624" y="586" class="small-copy">Recurring loops</text>
-    <text x="624" y="608" class="small-copy">that never end.</text>
+    <rect x="614" y="540" width="150" height="108" rx="18" fill="url(#panel)" stroke="#2A3342"/>
+    <text x="654" y="582" class="small-title">Routines</text>
+    <text x="642" y="614" class="small-copy">Recurring loops</text>
   </g>
 
-  <path d="M324 260C356 260 370 260 404 310" stroke="#34D399" stroke-width="3" marker-end="url(#inputArrow)"/>
-  <path d="M324 372C364 372 382 372 404 350" stroke="#34D399" stroke-width="3" marker-end="url(#inputArrow)"/>
-  <path d="M324 484C364 484 386 454 404 390" stroke="#34D399" stroke-width="3" marker-end="url(#inputArrow)"/>
-  <path d="M324 596C370 596 386 530 404 426" stroke="#34D399" stroke-width="3" marker-end="url(#inputArrow)"/>
+  <path d="M334 270C362 270 374 270 402 314" stroke="#34D399" stroke-width="4" marker-end="url(#inputArrow)"/>
+  <path d="M334 384C366 384 382 382 402 358" stroke="#34D399" stroke-width="4" marker-end="url(#inputArrow)"/>
+  <path d="M334 498C368 498 384 468 402 402" stroke="#34D399" stroke-width="4" marker-end="url(#inputArrow)"/>
+  <path d="M334 612C370 612 388 546 402 438" stroke="#34D399" stroke-width="4" marker-end="url(#inputArrow)"/>
 
-  <path d="M774 348C804 348 820 300 840 274" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
-  <path d="M774 348C804 348 820 394 840 410" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
-  <path d="M774 348C810 348 820 534 840 566" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
-  <path d="M594 470C594 492 494 500 494 514" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
-  <path d="M594 470C594 492 674 500 674 514" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
+  <path d="M792 358C820 358 832 306 848 280" stroke="#60A5FA" stroke-width="4" marker-end="url(#outputArrow)"/>
+  <path d="M792 358C820 358 832 396 848 420" stroke="#60A5FA" stroke-width="4" marker-end="url(#outputArrow)"/>
+  <path d="M792 358C824 358 834 540 848 584" stroke="#60A5FA" stroke-width="4" marker-end="url(#outputArrow)"/>
+  <path d="M598 488C598 518 504 522 504 540" stroke="#60A5FA" stroke-width="4" marker-end="url(#outputArrow)"/>
+  <path d="M598 488C598 518 688 522 688 540" stroke="#60A5FA" stroke-width="4" marker-end="url(#outputArrow)"/>
 </svg>
