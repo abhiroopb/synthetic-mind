@@ -145,10 +145,7 @@
       margin: 0;
     }
     .install-step-body {
-      display: grid;
-      grid-template-columns: minmax(0, 0.95fr) minmax(280px, 1.05fr);
-      gap: 1rem;
-      align-items: start;
+      display: block;
     }
     .install-step p {
       color: var(--text-muted);
@@ -166,6 +163,7 @@
       display: flex;
       gap: 0.6rem;
       flex-wrap: wrap;
+      margin-top: 0.25rem;
     }
     .install-link {
       display: inline-flex;
@@ -186,6 +184,7 @@
     }
     .install-command {
       margin-top: 0.85rem;
+      width: 100%;
       border-radius: 14px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.08);
@@ -208,6 +207,8 @@
       font-size: 0.78rem;
       line-height: 1.75;
       color: #d1d5db;
+      white-space: pre-wrap;
+      word-break: break-word;
     }
     .install-command .prompt {
       color: #34d399;
@@ -613,8 +614,7 @@
         grid-template-columns: 1fr;
       }
       .cmux-layout,
-      .cmux-main-grid,
-      .install-step-body {
+      .cmux-main-grid {
         grid-template-columns: 1fr;
       }
     }
