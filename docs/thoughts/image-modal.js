@@ -1,9 +1,10 @@
 const zoomableFigures = document.querySelectorAll('.image-modal-trigger')
 
 if (zoomableFigures.length > 0) {
-  const dialog = document.createElement('dialog')
-  dialog.className = 'image-modal'
-  dialog.innerHTML = `
+  const modal = document.createElement('div')
+  modal.className = 'image-modal'
+  modal.hidden = true
+  modal.innerHTML = `
     <figure class="image-modal-content">
       <button type="button" class="image-modal-close" aria-label="Close image preview">×</button>
       <img alt="">
@@ -11,24 +12,37 @@ if (zoomableFigures.length > 0) {
     </figure>
   `
 
-  const modalImage = dialog.querySelector('img')
-  const modalCaption = dialog.querySelector('figcaption')
-  const closeButton = dialog.querySelector('.image-modal-close')
+  const modalContent = modal.querySelector('.image-modal-content')
+  const modalImage = modal.querySelector('img')
+  const modalCaption = modal.querySelector('figcaption')
+  const closeButton = modal.querySelector('.image-modal-close')
 
   const closeModal = () => {
-    if (dialog.open) {
-      dialog.close()
-    }
+    modal.hidden = true
+    document.body.classList.remove('image-modal-open')
+  }
+
+  const openModal = () => {
+    modal.hidden = false
+    document.body.classList.add('image-modal-open')
   }
 
   closeButton.addEventListener('click', closeModal)
-  dialog.addEventListener('click', (event) => {
-    if (event.target === dialog) {
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      closeModal()
+    }
+  })
+  modalContent.addEventListener('click', (event) => {
+    event.stopPropagation()
+  })
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !modal.hidden) {
       closeModal()
     }
   })
 
-  document.body.appendChild(dialog)
+  document.body.appendChild(modal)
 
   zoomableFigures.forEach((trigger) => {
     const image = trigger.querySelector('img')
@@ -50,7 +64,7 @@ if (zoomableFigures.length > 0) {
         modalCaption.textContent = ''
       }
 
-      dialog.showModal()
+      openModal()
     })
   })
 }
