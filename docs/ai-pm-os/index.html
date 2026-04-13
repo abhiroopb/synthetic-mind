@@ -191,6 +191,10 @@
       background: #090b0f;
     }
     .install-command-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
       padding: 0.6rem 0.8rem;
       border-bottom: 1px solid rgba(255,255,255,0.06);
       background: rgba(255,255,255,0.03);
@@ -198,6 +202,34 @@
       color: var(--text-dim);
       text-transform: uppercase;
       letter-spacing: 0.05em;
+    }
+    .install-copy-btn {
+      appearance: none;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      color: var(--text-muted);
+      padding: 0.24rem 0.62rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: none;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+    .install-copy-btn:hover {
+      border-color: rgba(59,130,246,0.45);
+      color: #dbeafe;
+    }
+    .install-copy-btn:focus-visible {
+      outline: 2px solid rgba(96,165,250,0.9);
+      outline-offset: 2px;
+    }
+    .install-copy-btn.copied {
+      border-color: rgba(52,211,153,0.4);
+      color: #a7f3d0;
+      background: rgba(52,211,153,0.08);
     }
     .install-command pre {
       margin: 0;
@@ -763,7 +795,10 @@
             <p>Open Amp in the folder where you want the repo to live, then use one prompt to clone the project and install the lightweight local dependencies.</p>
           </div>
           <div class="install-command">
-            <div class="install-command-head">Typed into Amp</div>
+            <div class="install-command-head">
+              <span>Typed into Amp</span>
+              <button class="install-copy-btn" type="button">Copy</button>
+            </div>
             <pre><code>Clone https://github.com/abhiroopb/ai-pm-os into this directory.
 Install any missing local dependencies: jq and pyyaml.
 When that's done, tell me the repo is ready.</code></pre>
@@ -780,7 +815,10 @@ When that's done, tell me the repo is ready.</code></pre>
             <p>Start with one project. The point is to get a single durable thread running before you add more routines or automation.</p>
           </div>
           <div class="install-command">
-            <div class="install-command-head">Typed into Amp</div>
+            <div class="install-command-head">
+              <span>Typed into Amp</span>
+              <button class="install-copy-btn" type="button">Copy</button>
+            </div>
             <pre><code>Create workstreams/my-first-workstream from the templates.
 Copy the starter CONTEXT.md and config.yaml into that folder.
 Leave them ready for me to edit.</code></pre>
@@ -797,7 +835,10 @@ Leave them ready for me to edit.</code></pre>
             <p>Once Amp is inside the repo, have it do one dry run first. Then launch it for real. The planner will open, write the day plan, and spin up the recommended workspaces.</p>
           </div>
           <div class="install-command">
-            <div class="install-command-head">Typed into Amp</div>
+            <div class="install-command-head">
+              <span>Typed into Amp</span>
+              <button class="install-copy-btn" type="button">Copy</button>
+            </div>
             <pre><code>Run start-day --dry-run.
 If the dry run looks good, run start-day.
 Then tell me what opened and what needs attention first.</code></pre>
@@ -1201,39 +1242,64 @@ Then tell me what opened and what needs attention first.</code></pre>
   (() => {
     const tabs = Array.from(document.querySelectorAll('.cmux-tab[role="tab"]'))
     const panels = Array.from(document.querySelectorAll('.cmux-panel[role="tabpanel"]'))
+    const copyButtons = Array.from(document.querySelectorAll('.install-copy-btn'))
 
-    if (!tabs.length || !panels.length) return
+    if (tabs.length && panels.length) {
+      const activateTab = (tab) => {
+        const targetId = tab.getAttribute('aria-controls')
 
-    const activateTab = (tab) => {
-      const targetId = tab.getAttribute('aria-controls')
+        tabs.forEach((item) => {
+          const isActive = item === tab
+          item.classList.toggle('active', isActive)
+          item.setAttribute('aria-selected', String(isActive))
+          item.tabIndex = isActive ? 0 : -1
+        })
 
-      tabs.forEach((item) => {
-        const isActive = item === tab
-        item.classList.toggle('active', isActive)
-        item.setAttribute('aria-selected', String(isActive))
-        item.tabIndex = isActive ? 0 : -1
-      })
+        panels.forEach((panel) => {
+          panel.hidden = panel.id !== targetId
+        })
+      }
 
-      panels.forEach((panel) => {
-        panel.hidden = panel.id !== targetId
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => activateTab(tab))
+        tab.addEventListener('keydown', (event) => {
+          if (!['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return
+
+          event.preventDefault()
+
+          let nextIndex = index
+          if (event.key === 'Home') nextIndex = 0
+          else if (event.key === 'End') nextIndex = tabs.length - 1
+          else if (event.key === 'ArrowDown' || event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length
+          else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length
+
+          tabs[nextIndex].focus()
+          activateTab(tabs[nextIndex])
+        })
       })
     }
 
-    tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => activateTab(tab))
-      tab.addEventListener('keydown', (event) => {
-        if (!['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return
+    copyButtons.forEach((button) => {
+      button.addEventListener('click', async () => {
+        const command = button.closest('.install-command')?.querySelector('pre')?.textContent?.trim()
+        if (!command) return
 
-        event.preventDefault()
+        const originalLabel = button.textContent
 
-        let nextIndex = index
-        if (event.key === 'Home') nextIndex = 0
-        else if (event.key === 'End') nextIndex = tabs.length - 1
-        else if (event.key === 'ArrowDown' || event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length
-        else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length
-
-        tabs[nextIndex].focus()
-        activateTab(tabs[nextIndex])
+        try {
+          await navigator.clipboard.writeText(command)
+          button.textContent = 'Copied'
+          button.classList.add('copied')
+          window.setTimeout(() => {
+            button.textContent = originalLabel
+            button.classList.remove('copied')
+          }, 1600)
+        } catch {
+          button.textContent = 'Failed'
+          window.setTimeout(() => {
+            button.textContent = originalLabel
+          }, 1600)
+        }
       })
     })
   })()
