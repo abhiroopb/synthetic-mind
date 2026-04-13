@@ -66,15 +66,15 @@
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="396" y="238" width="404" height="248" rx="28" fill="url(#core)"/>
+    <rect x="396" y="238" width="404" height="272" rx="28" fill="url(#core)"/>
     <text x="450" y="304" class="kicker" fill="#DBEAFE">Planning layer</text>
     <text x="450" y="348" class="card-title">Chief of Staff</text>
     <text x="450" y="382" class="card-copy">Reads notes, routines,</text>
     <text x="450" y="402" class="card-copy">and active threads.</text>
     <text x="450" y="430" class="card-copy">Decides what matters</text>
     <text x="450" y="450" class="card-copy">right now.</text>
-    <text x="450" y="482" class="mono-input">User command: start-day</text>
-    <text x="450" y="502" class="mono-output">Planner output: today-plan.json</text>
+    <text x="450" y="476" class="mono-input">Input: start-day</text>
+    <text x="450" y="494" class="mono-output">Output: today-plan.json</text>
   </g>
 
   <g filter="url(#shadow)">
@@ -98,12 +98,12 @@
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="414" y="514" width="160" height="128" rx="18" fill="url(#panel)" stroke="#2A3342"/>
+    <rect x="414" y="526" width="160" height="128" rx="18" fill="url(#panel)" stroke="#2A3342"/>
     <text x="444" y="558" class="small-title">Workstreams</text>
     <text x="444" y="586" class="small-copy">Finite threads</text>
     <text x="444" y="608" class="small-copy">with outcomes.</text>
 
-    <rect x="594" y="514" width="160" height="128" rx="18" fill="url(#panel)" stroke="#2A3342"/>
+    <rect x="594" y="526" width="160" height="128" rx="18" fill="url(#panel)" stroke="#2A3342"/>
     <text x="624" y="558" class="small-title">Routines</text>
     <text x="624" y="586" class="small-copy">Recurring loops</text>
     <text x="624" y="608" class="small-copy">that never end.</text>
@@ -117,6 +117,6 @@
   <path d="M792 364C818 364 826 308 840 278" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
   <path d="M792 364C818 364 828 396 840 414" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
   <path d="M792 364C824 364 828 532 840 566" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
-  <path d="M598 480C598 498 494 500 494 514" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
-  <path d="M598 480C598 498 674 500 674 514" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
+  <path d="M598 510C598 518 494 520 494 526" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
+  <path d="M598 510C598 518 674 520 674 526" stroke="#60A5FA" stroke-width="3" marker-end="url(#outputArrow)"/>
 </svg>
