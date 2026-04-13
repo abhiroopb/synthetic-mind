@@ -19,13 +19,13 @@
       <path d="M0 0L10 5L0 10V0Z" fill="#60A5FA"/>
     </marker>
     <style>
-      .title{font:700 42px Inter,Arial,sans-serif;fill:#F8FAFC}
-      .subtitle{font:500 22px Inter,Arial,sans-serif;fill:#94A3B8}
-      .kicker{font:600 15px Inter,Arial,sans-serif;fill:#93C5FD;letter-spacing:1.8px;text-transform:uppercase}
-      .step{font:700 28px Inter,Arial,sans-serif;fill:#F8FAFC}
-      .copy{font:500 20px Inter,Arial,sans-serif;fill:#DBE4EF}
-      .mono{font:600 20px 'JetBrains Mono',monospace;fill:#BFDBFE}
-      .mini{font:500 18px Inter,Arial,sans-serif;fill:#AAB7C9}
+      .title{font:700 38px Inter,Arial,sans-serif;fill:#F8FAFC}
+      .subtitle{font:500 18px Inter,Arial,sans-serif;fill:#94A3B8}
+      .kicker{font:600 13px Inter,Arial,sans-serif;fill:#93C5FD;letter-spacing:1.8px;text-transform:uppercase}
+      .step{font:700 22px Inter,Arial,sans-serif;fill:#F8FAFC}
+      .copy{font:500 16px Inter,Arial,sans-serif;fill:#CBD5E1}
+      .mono{font:600 15px 'JetBrains Mono',monospace;fill:#BFDBFE}
+      .mini{font:500 14px Inter,Arial,sans-serif;fill:#94A3B8}
     </style>
   </defs>
 
@@ -35,33 +35,35 @@
 
   <text x="72" y="78" class="kicker">Workflow</text>
   <text x="72" y="126" class="title">How the AI PM OS starts the day</text>
-  <text x="72" y="160" class="subtitle">The public flow is intentionally simple: plan first, derive state, then open the right sessions.</text>
+  <text x="72" y="158" class="subtitle">The public flow is simple on purpose: plan first, derive state, then open the right sessions.</text>
 
   <g filter="url(#shadow)">
     <rect x="76" y="236" width="178" height="118" rx="22" fill="url(#accent)"/>
-    <text x="108" y="284" class="kicker">Entry</text>
-    <text x="108" y="324" class="step">start-day</text>
-    <text x="108" y="350" class="mini">one command</text>
+    <text x="108" y="284" class="kicker" fill="#DBEAFE">Entry</text>
+    <text x="108" y="322" class="step">start-day</text>
+    <text x="108" y="348" class="mini">one command</text>
 
     <rect x="304" y="236" width="226" height="118" rx="22" fill="url(#box)" stroke="#2A3342"/>
     <text x="336" y="284" class="kicker">Planner</text>
-    <text x="336" y="322" class="step">command-center</text>
-    <text x="336" y="350" class="mini">Chief of Staff reviews the day.</text>
+    <text x="336" y="320" class="step">command-center</text>
+    <text x="336" y="344" class="copy">Chief of Staff reviews notes,</text>
+    <text x="336" y="364" class="copy">routines, and workstreams.</text>
 
     <rect x="580" y="236" width="236" height="118" rx="22" fill="url(#box)" stroke="#2A3342"/>
     <text x="612" y="284" class="kicker">Plan file</text>
-    <text x="612" y="324" class="mono">today-plan.json</text>
-    <text x="612" y="350" class="mini">Selected threads and prompts.</text>
+    <text x="612" y="320" class="mono">today-plan.json</text>
+    <text x="612" y="344" class="copy">Selected workstreams, prompts,</text>
+    <text x="612" y="364" class="copy">and a ranked day.</text>
 
     <rect x="850" y="236" width="172" height="118" rx="22" fill="url(#box)" stroke="#2A3342"/>
     <text x="882" y="284" class="kicker">State</text>
     <text x="882" y="320" class="mono">queue.json</text>
-    <text x="882" y="348" class="mono">now.json</text>
+    <text x="882" y="344" class="mono">now.json</text>
 
     <rect x="1072" y="236" width="132" height="118" rx="22" fill="url(#box)" stroke="#2A3342"/>
     <text x="1100" y="284" class="kicker">Surface</text>
-    <text x="1100" y="322" class="step">cmux</text>
-    <text x="1092" y="350" class="mini">parallel tabs</text>
+    <text x="1100" y="320" class="step">cmux</text>
+    <text x="1100" y="346" class="mini">parallel tabs</text>
   </g>
 
   <path d="M254 295H304" stroke="#60A5FA" stroke-width="4" marker-end="url(#arrow)"/>
@@ -73,21 +75,24 @@
   <g filter="url(#shadow)">
     <rect x="76" y="468" width="356" height="188" rx="22" fill="url(#box)" stroke="#2A3342"/>
     <text x="108" y="514" class="step">checkout-ux</text>
-    <text x="108" y="548" class="mono">workstreams/checkout-ux/CONTEXT.md</text>
-    <text x="108" y="590" class="copy">Refine the next UX decision.</text>
-    <text x="108" y="620" class="mini">Prep the review thread.</text>
+    <text x="108" y="548" class="copy">Resume the product thread from</text>
+    <text x="108" y="574" class="mono">workstreams/checkout-ux/CONTEXT.md</text>
+    <text x="108" y="614" class="mini">Prompt: refine the next UX decision</text>
+    <text x="108" y="634" class="mini">and prep review questions</text>
 
     <rect x="462" y="468" width="356" height="188" rx="22" fill="url(#box)" stroke="#2A3342"/>
     <text x="494" y="514" class="step">meetings</text>
-    <text x="494" y="548" class="mono">routines/meetings/CONTEXT.md</text>
-    <text x="494" y="590" class="copy">Build the next brief.</text>
-    <text x="494" y="620" class="mini">Gather open questions.</text>
+    <text x="494" y="548" class="copy">Prep the next meeting loop from</text>
+    <text x="494" y="574" class="mono">routines/meetings/CONTEXT.md</text>
+    <text x="494" y="614" class="mini">Prompt: build the brief, gather open</text>
+    <text x="494" y="634" class="mini">questions, capture follow-up</text>
 
     <rect x="848" y="468" width="356" height="188" rx="22" fill="url(#box)" stroke="#2A3342"/>
     <text x="880" y="514" class="step">comms-triage</text>
-    <text x="880" y="548" class="mono">routines/comms-triage/CONTEXT.md</text>
-    <text x="880" y="590" class="copy">Triage messages and draft replies.</text>
-    <text x="880" y="620" class="mini">Keep the queue current.</text>
+    <text x="880" y="548" class="copy">Run the recurring inbox loop from</text>
+    <text x="880" y="574" class="mono">routines/comms-triage/CONTEXT.md</text>
+    <text x="880" y="614" class="mini">Prompt: triage messages, draft replies,</text>
+    <text x="880" y="634" class="mini">keep the queue current</text>
   </g>
 
   <path d="M676 354V420" stroke="#34D399" stroke-width="4" marker-end="url(#arrow)"/>
