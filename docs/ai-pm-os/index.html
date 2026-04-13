@@ -102,6 +102,111 @@
       font-size: 0.92rem;
       line-height: 1.7;
     }
+    .install-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .install-step {
+      background: linear-gradient(180deg, rgba(20,20,20,0.96), rgba(12,13,17,0.96));
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.18);
+    }
+    .install-step-top {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 0.7rem;
+    }
+    .install-step-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .install-step h3 {
+      font-size: 1rem;
+      margin: 0;
+    }
+    .install-step p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      margin-bottom: 0.75rem;
+    }
+    .install-step ul {
+      margin: 0.2rem 0 0.85rem 1rem;
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      line-height: 1.7;
+    }
+    .install-links {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .install-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      padding: 0.38rem 0.7rem;
+      font-size: 0.82rem;
+      background: rgba(255,255,255,0.03);
+      transition: all 0.15s ease;
+    }
+    .install-link:hover {
+      border-color: rgba(59,130,246,0.45);
+      color: #dbeafe;
+    }
+    .install-command {
+      margin-top: 0.85rem;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #090b0f;
+    }
+    .install-command-head {
+      padding: 0.6rem 0.8rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .install-command pre {
+      margin: 0;
+      padding: 0.9rem 1rem;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      line-height: 1.75;
+      color: #d1d5db;
+    }
+    .install-command .prompt {
+      color: #34d399;
+    }
+    .install-note {
+      margin-top: 1rem;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      text-align: center;
+    }
     .visual-stage {
       display: grid;
       grid-template-columns: 1fr;
@@ -261,16 +366,32 @@
       letter-spacing: 0.06em;
       margin-bottom: 0.65rem;
     }
+    .cmux-tablist {
+      display: block;
+    }
     .cmux-tab {
+      appearance: none;
+      width: 100%;
+      text-align: left;
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 12px;
       padding: 0.7rem;
       margin-bottom: 0.55rem;
       background: rgba(255,255,255,0.025);
+      cursor: pointer;
+      transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+    }
+    .cmux-tab:hover {
+      border-color: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.045);
     }
     .cmux-tab.active {
       border-color: rgba(59,130,246,0.45);
       background: linear-gradient(180deg, rgba(59,130,246,0.16), rgba(59,130,246,0.06));
+    }
+    .cmux-tab:focus-visible {
+      outline: 2px solid rgba(96,165,250,0.9);
+      outline-offset: 2px;
     }
     .cmux-tab-top {
       display: flex;
@@ -309,6 +430,15 @@
     .cmux-main {
       padding: 0.8rem;
       background: radial-gradient(circle at top right, rgba(59,130,246,0.12), transparent 28%), #090b0f;
+    }
+    .cmux-hint {
+      margin-top: 0.5rem;
+      font-size: 0.71rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .cmux-panel[hidden] {
+      display: none;
     }
     .cmux-main-header {
       display: flex;
@@ -466,6 +596,7 @@
     }
     @media (max-width: 960px) {
       .snapshot,
+      .install-grid,
       .links-grid {
         grid-template-columns: 1fr;
       }
@@ -479,6 +610,7 @@
         font-size: 2.2rem;
       }
       .feature-grid,
+      .install-grid,
       .snapshot,
       .links-grid {
         grid-template-columns: 1fr;
@@ -573,6 +705,94 @@
 <section>
   <div class="container">
     <div class="section-header">
+      <h2>Install it in 5 steps</h2>
+      <p>If you want the shortest path: install the two tools, clone the repo, make one starter workstream, then run <code>start-day</code>.</p>
+    </div>
+    <div class="install-grid">
+      <div class="install-step">
+        <div class="install-step-top">
+          <span class="install-step-num">1</span>
+          <h3>Install cmux</h3>
+        </div>
+        <p>Install <code>cmux</code>, open it once, then turn on Automation access so the launcher can create and control workspaces.</p>
+        <ul>
+          <li>Open <code>Settings → Automation</code></li>
+          <li>Set <code>Socket Control Mode</code> to <code>Full open access</code></li>
+        </ul>
+        <div class="install-links">
+          <a href="https://cmux.dev" class="install-link" target="_blank">Get cmux ↗</a>
+        </div>
+      </div>
+      <div class="install-step">
+        <div class="install-step-top">
+          <span class="install-step-num">2</span>
+          <h3>Install Amp</h3>
+        </div>
+        <p>Install Amp CLI and make sure the <code>amp</code> command works in your shell. The AI PM OS uses Amp to run the Chief of Staff and each workspace session.</p>
+        <div class="install-links">
+          <a href="https://ampcode.com" class="install-link" target="_blank">Get Amp ↗</a>
+        </div>
+      </div>
+      <div class="install-step">
+        <div class="install-step-top">
+          <span class="install-step-num">3</span>
+          <h3>Clone the repo and install local deps</h3>
+        </div>
+        <p>This gets the public starter repo onto your machine and installs the small local dependencies it needs.</p>
+        <div class="install-command">
+          <div class="install-command-head">Typed into your terminal</div>
+          <pre><code><span class="prompt">$</span> git clone https://github.com/abhiroopb/ai-pm-os.git
+<span class="prompt">$</span> cd ai-pm-os
+<span class="prompt">$</span> brew install jq
+<span class="prompt">$</span> python3 -m pip install pyyaml</code></pre>
+        </div>
+      </div>
+      <div class="install-step">
+        <div class="install-step-top">
+          <span class="install-step-num">4</span>
+          <h3>Create your first workstream</h3>
+        </div>
+        <p>Start with one project. The point is to get a single durable thread running before you add more routines or automation.</p>
+        <div class="install-command">
+          <div class="install-command-head">Typed into your terminal</div>
+          <pre><code><span class="prompt">$</span> mkdir -p notes/daily workstreams/my-first-workstream
+<span class="prompt">$</span> cp templates/workstream-context.md workstreams/my-first-workstream/CONTEXT.md
+<span class="prompt">$</span> cp templates/workstream-config.yaml workstreams/my-first-workstream/config.yaml</code></pre>
+        </div>
+      </div>
+      <div class="install-step">
+        <div class="install-step-top">
+          <span class="install-step-num">5</span>
+          <h3>Run the AI PM OS</h3>
+        </div>
+        <p>From the repo root, do one dry run first. Then launch it for real. The planner will open, write the day plan, and spin up the recommended workspaces.</p>
+        <div class="install-command">
+          <div class="install-command-head">Typed into your terminal</div>
+          <pre><code><span class="prompt">$</span> start-day --dry-run
+<span class="prompt">$</span> start-day</code></pre>
+        </div>
+      </div>
+      <div class="install-step">
+        <div class="install-step-top">
+          <span class="install-step-num">+</span>
+          <h3>Then stop there</h3>
+        </div>
+        <p>You do not need calendar daemons, Slack automation, or a perfect setup on day one. Get one workstream running first, then tune the Chief of Staff prompt and add more routines later.</p>
+        <div class="install-links">
+          <a href="https://github.com/abhiroopb/ai-pm-os/blob/main/docs/installation.md" class="install-link" target="_blank">Full installation guide ↗</a>
+          <a href="https://github.com/abhiroopb/ai-pm-os" class="install-link" target="_blank">Open the repo ↗</a>
+        </div>
+      </div>
+    </div>
+    <p class="install-note">The public version is intentionally simple. Start with the local file workflow, then add more automation only after the core loop feels useful.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="container">
+    <div class="section-header">
       <h2>How a day runs</h2>
       <p>The whole system starts from one command, then fans out into a planner, a ranked queue, and live workspaces.</p>
     </div>
@@ -657,85 +877,237 @@
           <div class="cmux-layout">
             <aside class="cmux-sidebar">
               <div class="cmux-sidebar-label">Active workspaces</div>
-              <div class="cmux-tab active">
-                <div class="cmux-tab-top">
-                  <span class="cmux-tab-name">command-center</span>
-                  <span class="cmux-badge">active</span>
-                </div>
-                <p>Review the queue, refresh today-plan, and decide what opens next.</p>
+              <div class="cmux-tablist" role="tablist" aria-label="AI PM OS workspaces">
+                <button class="cmux-tab active" id="cmux-tab-command-center" role="tab" aria-selected="true" aria-controls="cmux-panel-command-center" data-workspace="command-center" type="button">
+                  <div class="cmux-tab-top">
+                    <span class="cmux-tab-name">command-center</span>
+                    <span class="cmux-badge">active</span>
+                  </div>
+                  <p>Review the queue, refresh today-plan, and decide what opens next.</p>
+                </button>
+                <button class="cmux-tab" id="cmux-tab-meetings" role="tab" aria-selected="false" aria-controls="cmux-panel-meetings" data-workspace="meetings" type="button" tabindex="-1">
+                  <div class="cmux-tab-top">
+                    <span class="cmux-tab-name">meetings</span>
+                    <span class="cmux-badge waiting">waiting</span>
+                  </div>
+                  <p>Prep for the next 1:1 and collect follow-ups from earlier notes.</p>
+                </button>
+                <button class="cmux-tab" id="cmux-tab-checkout-ux" role="tab" aria-selected="false" aria-controls="cmux-panel-checkout-ux" data-workspace="checkout-ux" type="button" tabindex="-1">
+                  <div class="cmux-tab-top">
+                    <span class="cmux-tab-name">checkout-ux</span>
+                    <span class="cmux-badge review">review</span>
+                  </div>
+                  <p>Draft flows, capture open questions, and prep the next decision doc.</p>
+                </button>
+                <button class="cmux-tab" id="cmux-tab-comms-triage" role="tab" aria-selected="false" aria-controls="cmux-panel-comms-triage" data-workspace="comms-triage" type="button" tabindex="-1">
+                  <div class="cmux-tab-top">
+                    <span class="cmux-tab-name">comms-triage</span>
+                    <span class="cmux-badge">active</span>
+                  </div>
+                  <p>Triage inbox, chat, and tracker updates without leaving the terminal.</p>
+                </button>
               </div>
-              <div class="cmux-tab">
-                <div class="cmux-tab-top">
-                  <span class="cmux-tab-name">meetings</span>
-                  <span class="cmux-badge waiting">waiting</span>
-                </div>
-                <p>Prep for the next 1:1 and collect follow-ups from earlier notes.</p>
-              </div>
-              <div class="cmux-tab">
-                <div class="cmux-tab-top">
-                  <span class="cmux-tab-name">checkout-ux</span>
-                  <span class="cmux-badge review">review</span>
-                </div>
-                <p>Draft flows, capture open questions, and prep the next decision doc.</p>
-              </div>
-              <div class="cmux-tab">
-                <div class="cmux-tab-top">
-                  <span class="cmux-tab-name">comms-triage</span>
-                  <span class="cmux-badge">active</span>
-                </div>
-                <p>Triage inbox, chat, and tracker updates without leaving the terminal.</p>
-              </div>
+              <p class="cmux-hint">Click a workspace to preview its terminal and state pane.</p>
             </aside>
             <div class="cmux-main">
-              <div class="cmux-main-header">
-                <span>workspace: command-center</span>
-                <span>source: today-plan.json → state</span>
-              </div>
-              <div class="cmux-main-grid">
-                <div class="terminal-pane">
-                  <div class="terminal-head">Live terminal</div>
-                  <div class="terminal-body">
-                    <div><span class="prompt">$</span> <span class="cmd">start-day</span></div>
-                    <div class="dim">validating prerequisites...</div>
-                    <div class="good">cmux ready • amp ready • chief-of-staff prompt sent</div>
-                    <br>
-                    <div><span class="accent">Chief of Staff:</span> Reviewing 5 workstreams and 3 routines</div>
-                    <div><span class="accent">Chief of Staff:</span> Writing <span class="cmd">system/today-plan.json</span></div>
-                    <div><span class="accent">State:</span> Derived <span class="cmd">queue.json</span> and <span class="cmd">now.json</span></div>
-                    <br>
-                    <div><span class="accent">Launching:</span> checkout-ux</div>
-                    <div><span class="accent">Launching:</span> comms-triage</div>
-                    <div><span class="accent">Launching:</span> meetings</div>
-                    <br>
-                    <div><span class="accent">Resume:</span> Read <span class="cmd">workstreams/checkout-ux/CONTEXT.md</span></div>
-                    <div class="good">Ready for focused work</div>
-                  </div>
+              <section class="cmux-panel" id="cmux-panel-command-center" role="tabpanel" aria-labelledby="cmux-tab-command-center">
+                <div class="cmux-main-header">
+                  <span>workspace: command-center</span>
+                  <span>source: today-plan.json → state</span>
                 </div>
-                <div class="state-pane">
-                  <div class="state-head">Current state</div>
-                  <div class="state-body">
-                    <div class="state-card">
-                      <div class="state-card-label">Now</div>
-                      <div class="state-card-title">checkout-ux</div>
-                      <p>Refine the next UX decision and prep the prompt for the design review thread.</p>
-                      <div class="state-chip-row">
-                        <span class="state-chip">priority: high</span>
-                        <span class="state-chip">driver: agent</span>
+                <div class="cmux-main-grid">
+                  <div class="terminal-pane">
+                    <div class="terminal-head">Live terminal</div>
+                    <div class="terminal-body">
+                      <div><span class="prompt">$</span> <span class="cmd">start-day</span></div>
+                      <div class="dim">validating prerequisites...</div>
+                      <div class="good">cmux ready • amp ready • chief-of-staff prompt sent</div>
+                      <br>
+                      <div><span class="accent">Chief of Staff:</span> Reviewing 5 workstreams and 3 routines</div>
+                      <div><span class="accent">Chief of Staff:</span> Writing <span class="cmd">system/today-plan.json</span></div>
+                      <div><span class="accent">State:</span> Derived <span class="cmd">queue.json</span> and <span class="cmd">now.json</span></div>
+                      <br>
+                      <div><span class="accent">Launching:</span> checkout-ux</div>
+                      <div><span class="accent">Launching:</span> comms-triage</div>
+                      <div><span class="accent">Launching:</span> meetings</div>
+                      <br>
+                      <div><span class="accent">Resume:</span> Read <span class="cmd">workstreams/checkout-ux/CONTEXT.md</span></div>
+                      <div class="good">Ready for focused work</div>
+                    </div>
+                  </div>
+                  <div class="state-pane">
+                    <div class="state-head">Current state</div>
+                    <div class="state-body">
+                      <div class="state-card">
+                        <div class="state-card-label">Now</div>
+                        <div class="state-card-title">checkout-ux</div>
+                        <p>Refine the next UX decision and prep the prompt for the design review thread.</p>
+                        <div class="state-chip-row">
+                          <span class="state-chip">priority: high</span>
+                          <span class="state-chip">driver: agent</span>
+                        </div>
+                      </div>
+                      <div class="state-card">
+                        <div class="state-card-label">Queue</div>
+                        <div class="state-card-title">meetings → comms-triage → product-strategy</div>
+                        <p>Three follow-on threads are queued, each with its own startup prompt and durable context file.</p>
+                      </div>
+                      <div class="state-card">
+                        <div class="state-card-label">Continuity</div>
+                        <div class="state-card-title">File-backed resume</div>
+                        <p>Every workspace can crash and reopen without losing the narrative state because the thread lives in files, not terminal history.</p>
                       </div>
                     </div>
-                    <div class="state-card">
-                      <div class="state-card-label">Queue</div>
-                      <div class="state-card-title">meetings → comms-triage → product-strategy</div>
-                      <p>Three follow-on threads are queued, each with its own startup prompt and durable context file.</p>
+                  </div>
+                </div>
+              </section>
+              <section class="cmux-panel" id="cmux-panel-meetings" role="tabpanel" aria-labelledby="cmux-tab-meetings" hidden>
+                <div class="cmux-main-header">
+                  <span>workspace: meetings</span>
+                  <span>source: routines/meetings/CONTEXT.md</span>
+                </div>
+                <div class="cmux-main-grid">
+                  <div class="terminal-pane">
+                    <div class="terminal-head">Live terminal</div>
+                    <div class="terminal-body">
+                      <div><span class="prompt">$</span> <span class="cmd">open meetings routine</span></div>
+                      <div class="dim">loading calendar context and prior notes...</div>
+                      <div class="good">calendar synced • notes bundle loaded • meeting brief ready</div>
+                      <br>
+                      <div><span class="accent">Meetings:</span> Reviewing tomorrow's 1:1 agenda</div>
+                      <div><span class="accent">Meetings:</span> Pulling action items from <span class="cmd">notes/</span> and recent docs</div>
+                      <div><span class="accent">Draft:</span> Writing talking points and open questions</div>
+                      <br>
+                      <div><span class="accent">Next:</span> Share brief with the design lead</div>
+                      <div><span class="accent">Next:</span> Capture follow-ups after the session</div>
+                      <br>
+                      <div class="good">Ready for meeting prep</div>
                     </div>
-                    <div class="state-card">
-                      <div class="state-card-label">Continuity</div>
-                      <div class="state-card-title">File-backed resume</div>
-                      <p>Every workspace can crash and reopen without losing the narrative state because the thread lives in files, not terminal history.</p>
+                  </div>
+                  <div class="state-pane">
+                    <div class="state-head">Current state</div>
+                    <div class="state-body">
+                      <div class="state-card">
+                        <div class="state-card-label">Now</div>
+                        <div class="state-card-title">Design lead 1:1 brief</div>
+                        <p>Prep the agenda, surface unresolved decisions, and collect the last round of follow-ups before tomorrow morning.</p>
+                        <div class="state-chip-row">
+                          <span class="state-chip">priority: medium</span>
+                          <span class="state-chip">driver: calendar</span>
+                        </div>
+                      </div>
+                      <div class="state-card">
+                        <div class="state-card-label">Queue</div>
+                        <div class="state-card-title">Staff sync → launch review → note cleanup</div>
+                        <p>Each meeting thread keeps its own prep notes, open questions, and expected follow-up in one place.</p>
+                      </div>
+                      <div class="state-card">
+                        <div class="state-card-label">Continuity</div>
+                        <div class="state-card-title">Meeting packet</div>
+                        <p>The routine reopens with the last brief, attendee context, and pending decisions already assembled.</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </section>
+              <section class="cmux-panel" id="cmux-panel-checkout-ux" role="tabpanel" aria-labelledby="cmux-tab-checkout-ux" hidden>
+                <div class="cmux-main-header">
+                  <span>workspace: checkout-ux</span>
+                  <span>source: workstreams/checkout-ux/CONTEXT.md</span>
+                </div>
+                <div class="cmux-main-grid">
+                  <div class="terminal-pane">
+                    <div class="terminal-head">Live terminal</div>
+                    <div class="terminal-body">
+                      <div><span class="prompt">$</span> <span class="cmd">resume checkout-ux</span></div>
+                      <div class="dim">reading context and latest design notes...</div>
+                      <div class="good">context loaded • prior decision log found • review thread queued</div>
+                      <br>
+                      <div><span class="accent">UX:</span> Comparing the two entry-point options</div>
+                      <div><span class="accent">UX:</span> Pulling trade-offs into the decision doc</div>
+                      <div><span class="accent">Draft:</span> Writing the design review prompt and open questions</div>
+                      <br>
+                      <div><span class="accent">Next:</span> Hand the summary to engineering for feasibility feedback</div>
+                      <div><span class="accent">Next:</span> Refresh <span class="cmd">CONTEXT.md</span> after the review</div>
+                      <br>
+                      <div class="good">Ready for product design review</div>
+                    </div>
+                  </div>
+                  <div class="state-pane">
+                    <div class="state-head">Current state</div>
+                    <div class="state-body">
+                      <div class="state-card">
+                        <div class="state-card-label">Now</div>
+                        <div class="state-card-title">Checkout entry-point decision</div>
+                        <p>Refine the next UX call, summarize trade-offs, and prepare the prompt for the cross-functional design review.</p>
+                        <div class="state-chip-row">
+                          <span class="state-chip">priority: high</span>
+                          <span class="state-chip">driver: design review</span>
+                        </div>
+                      </div>
+                      <div class="state-card">
+                        <div class="state-card-label">Queue</div>
+                        <div class="state-card-title">Eng feasibility → stakeholder notes → spec update</div>
+                        <p>The workstream can move from review to follow-up without losing the narrative thread between sessions.</p>
+                      </div>
+                      <div class="state-card">
+                        <div class="state-card-label">Continuity</div>
+                        <div class="state-card-title">Decision log</div>
+                        <p>Open questions, rejected options, and the next recommendation all live next to the workstream files.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section class="cmux-panel" id="cmux-panel-comms-triage" role="tabpanel" aria-labelledby="cmux-tab-comms-triage" hidden>
+                <div class="cmux-main-header">
+                  <span>workspace: comms-triage</span>
+                  <span>source: routines/comms-triage/CONTEXT.md</span>
+                </div>
+                <div class="cmux-main-grid">
+                  <div class="terminal-pane">
+                    <div class="terminal-head">Live terminal</div>
+                    <div class="terminal-body">
+                      <div><span class="prompt">$</span> <span class="cmd">run comms-triage</span></div>
+                      <div class="dim">loading inboxes, unread threads, and waiting items...</div>
+                      <div class="good">slack ready • gmail ready • follow-up queue refreshed</div>
+                      <br>
+                      <div><span class="accent">Triage:</span> Grouping new Slack threads by urgency</div>
+                      <div><span class="accent">Draft:</span> Preparing two replies and one handoff note</div>
+                      <div><span class="accent">Update:</span> Moving unresolved asks into the waiting queue</div>
+                      <br>
+                      <div><span class="accent">Next:</span> Post the high-priority response first</div>
+                      <div><span class="accent">Next:</span> Reconcile the tracker after inbox zero</div>
+                      <br>
+                      <div class="good">Ready for comms cleanup</div>
+                    </div>
+                  </div>
+                  <div class="state-pane">
+                    <div class="state-head">Current state</div>
+                    <div class="state-body">
+                      <div class="state-card">
+                        <div class="state-card-label">Now</div>
+                        <div class="state-card-title">Slack and inbox sweep</div>
+                        <p>Clear urgent messages first, draft follow-ups, and route anything that needs durable tracking back into the system.</p>
+                        <div class="state-chip-row">
+                          <span class="state-chip">priority: medium</span>
+                          <span class="state-chip">driver: inbox</span>
+                        </div>
+                      </div>
+                      <div class="state-card">
+                        <div class="state-card-label">Queue</div>
+                        <div class="state-card-title">Reply drafts → waiting items → tracker sync</div>
+                        <p>The routine keeps fast-response work separate from long-lived projects while still preserving context.</p>
+                      </div>
+                      <div class="state-card">
+                        <div class="state-card-label">Continuity</div>
+                        <div class="state-card-title">Inbox loop</div>
+                        <p>Unread threads, drafted responses, and unresolved asks can all survive a restart without rebuilding the queue.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
             </div>
           </div>
         </div>
@@ -788,6 +1160,48 @@
 <footer>
   <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
 </footer>
+
+<script>
+  (() => {
+    const tabs = Array.from(document.querySelectorAll('.cmux-tab[role="tab"]'))
+    const panels = Array.from(document.querySelectorAll('.cmux-panel[role="tabpanel"]'))
+
+    if (!tabs.length || !panels.length) return
+
+    const activateTab = (tab) => {
+      const targetId = tab.getAttribute('aria-controls')
+
+      tabs.forEach((item) => {
+        const isActive = item === tab
+        item.classList.toggle('active', isActive)
+        item.setAttribute('aria-selected', String(isActive))
+        item.tabIndex = isActive ? 0 : -1
+      })
+
+      panels.forEach((panel) => {
+        panel.hidden = panel.id !== targetId
+      })
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activateTab(tab))
+      tab.addEventListener('keydown', (event) => {
+        if (!['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return
+
+        event.preventDefault()
+
+        let nextIndex = index
+        if (event.key === 'Home') nextIndex = 0
+        else if (event.key === 'End') nextIndex = tabs.length - 1
+        else if (event.key === 'ArrowDown' || event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length
+        else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length
+
+        tabs[nextIndex].focus()
+        activateTab(tabs[nextIndex])
+      })
+    })
+  })()
+</script>
 
 </body>
 </html>
