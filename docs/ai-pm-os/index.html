@@ -718,7 +718,7 @@
   <div class="container">
     <div class="section-header">
       <h2>Install it in 5 steps</h2>
-      <p>If you want the shortest path: install the two tools, clone the repo, make one starter workstream, then run <code>start-day</code>.</p>
+      <p>Install the two tools first. After that, you can ask Amp to do the repo setup, create your first workstream, and launch <code>start-day</code> for you.</p>
     </div>
     <div class="install-grid">
       <div class="install-step">
@@ -756,51 +756,51 @@
       <div class="install-step">
         <div class="install-step-top">
           <span class="install-step-num">3</span>
-          <h3>Clone the repo and install local deps</h3>
+          <h3>Ask Amp to set up the repo</h3>
         </div>
         <div class="install-step-body">
           <div>
-            <p>This gets the public starter repo onto your machine and installs the small local dependencies it needs.</p>
+            <p>Open Amp in the folder where you want the repo to live, then use one prompt to clone the project and install the lightweight local dependencies.</p>
           </div>
           <div class="install-command">
-            <div class="install-command-head">Typed into your terminal</div>
-            <pre><code><span class="prompt">$</span> git clone https://github.com/abhiroopb/ai-pm-os.git
-<span class="prompt">$</span> cd ai-pm-os
-<span class="prompt">$</span> brew install jq
-<span class="prompt">$</span> python3 -m pip install pyyaml</code></pre>
+            <div class="install-command-head">Typed into Amp</div>
+            <pre><code>Clone https://github.com/abhiroopb/ai-pm-os into this directory.
+Install any missing local dependencies: jq and pyyaml.
+When that's done, tell me the repo is ready.</code></pre>
           </div>
         </div>
       </div>
       <div class="install-step">
         <div class="install-step-top">
           <span class="install-step-num">4</span>
-          <h3>Create your first workstream</h3>
+          <h3>Ask Amp to create your first workstream</h3>
         </div>
         <div class="install-step-body">
           <div>
             <p>Start with one project. The point is to get a single durable thread running before you add more routines or automation.</p>
           </div>
           <div class="install-command">
-            <div class="install-command-head">Typed into your terminal</div>
-            <pre><code><span class="prompt">$</span> mkdir -p notes/daily workstreams/my-first-workstream
-<span class="prompt">$</span> cp templates/workstream-context.md workstreams/my-first-workstream/CONTEXT.md
-<span class="prompt">$</span> cp templates/workstream-config.yaml workstreams/my-first-workstream/config.yaml</code></pre>
+            <div class="install-command-head">Typed into Amp</div>
+            <pre><code>Create workstreams/my-first-workstream from the templates.
+Copy the starter CONTEXT.md and config.yaml into that folder.
+Leave them ready for me to edit.</code></pre>
           </div>
         </div>
       </div>
       <div class="install-step">
         <div class="install-step-top">
           <span class="install-step-num">5</span>
-          <h3>Run the AI PM OS</h3>
+          <h3>Ask Amp to launch the AI PM OS</h3>
         </div>
         <div class="install-step-body">
           <div>
-            <p>From the repo root, do one dry run first. Then launch it for real. The planner will open, write the day plan, and spin up the recommended workspaces.</p>
+            <p>Once Amp is inside the repo, have it do one dry run first. Then launch it for real. The planner will open, write the day plan, and spin up the recommended workspaces.</p>
           </div>
           <div class="install-command">
-            <div class="install-command-head">Typed into your terminal</div>
-            <pre><code><span class="prompt">$</span> start-day --dry-run
-<span class="prompt">$</span> start-day</code></pre>
+            <div class="install-command-head">Typed into Amp</div>
+            <pre><code>Run start-day --dry-run.
+If the dry run looks good, run start-day.
+Then tell me what opened and what needs attention first.</code></pre>
           </div>
         </div>
       </div>
