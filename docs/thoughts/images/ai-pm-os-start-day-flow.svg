@@ -43,33 +43,33 @@
     <text x="108" y="322" class="step">start-day</text>
     <text x="108" y="348" class="mini">one command</text>
 
-    <rect x="304" y="236" width="226" height="118" rx="22" fill="url(#box)" stroke="#2A3342"/>
+    <rect x="286" y="236" width="246" height="118" rx="22" fill="url(#box)" stroke="#2A3342"/>
     <text x="336" y="284" class="kicker">Planner</text>
     <text x="336" y="320" class="step">command-center</text>
     <text x="336" y="344" class="copy">Chief of Staff reviews</text>
     <text x="336" y="362" class="copy">notes and workstreams.</text>
 
-    <rect x="580" y="236" width="236" height="118" rx="22" fill="url(#box)" stroke="#2A3342"/>
-    <text x="612" y="284" class="kicker">Plan file</text>
-    <text x="612" y="320" class="mono">today-plan.json</text>
-    <text x="612" y="344" class="copy">Selected threads, prompts,</text>
-    <text x="612" y="362" class="copy">and the ranked day.</text>
+    <rect x="566" y="236" width="260" height="118" rx="22" fill="url(#box)" stroke="#2A3342"/>
+    <text x="598" y="284" class="kicker">Plan file</text>
+    <text x="598" y="320" class="mono">today-plan.json</text>
+    <text x="598" y="344" class="copy">Selected threads</text>
+    <text x="598" y="362" class="copy">and ranked day.</text>
 
-    <rect x="850" y="236" width="172" height="118" rx="22" fill="url(#box)" stroke="#2A3342"/>
+    <rect x="854" y="236" width="164" height="118" rx="22" fill="url(#box)" stroke="#2A3342"/>
     <text x="882" y="284" class="kicker">State</text>
-    <text x="882" y="320" class="mono">queue.json</text>
-    <text x="882" y="344" class="mono">now.json</text>
+    <text x="882" y="318" class="mono">queue.json</text>
+    <text x="882" y="340" class="mono">now.json</text>
 
-    <rect x="1072" y="236" width="132" height="118" rx="22" fill="url(#box)" stroke="#2A3342"/>
-    <text x="1100" y="284" class="kicker">Surface</text>
-    <text x="1100" y="320" class="step">cmux</text>
-    <text x="1100" y="346" class="mini">parallel tabs</text>
+    <rect x="1080" y="236" width="118" height="118" rx="22" fill="url(#box)" stroke="#2A3342"/>
+    <text x="1098" y="284" class="kicker">Surface</text>
+    <text x="1098" y="320" class="step">cmux</text>
+    <text x="1096" y="346" class="mini">parallel tabs</text>
   </g>
 
-  <path d="M254 295H304" stroke="#60A5FA" stroke-width="4" marker-end="url(#arrow)"/>
-  <path d="M530 295H580" stroke="#60A5FA" stroke-width="4" marker-end="url(#arrow)"/>
-  <path d="M816 295H850" stroke="#60A5FA" stroke-width="4" marker-end="url(#arrow)"/>
-  <path d="M1022 295H1072" stroke="#60A5FA" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M254 295H286" stroke="#60A5FA" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M532 295H566" stroke="#60A5FA" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M826 295H854" stroke="#60A5FA" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M1018 295H1080" stroke="#60A5FA" stroke-width="4" marker-end="url(#arrow)"/>
 
   <text x="76" y="444" class="kicker">Opened from the plan</text>
   <g filter="url(#shadow)">
