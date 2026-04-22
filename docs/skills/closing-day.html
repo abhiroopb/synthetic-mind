@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PR Manager — Skills — synthetic-mind</title>
-  <meta name="description" content="Commit changes, create PRs, and manage pull requests with support for stacked workflows.">
+  <title>Closing Day — Skills — synthetic-mind</title>
+  <meta name="description" content="Wrap the day with a short carry-forward snapshot so tomorrow starts from a real handoff.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
@@ -52,45 +52,40 @@
 <div class="page-content">
   <a href="./" class="back-link">All skills</a>
 
-  <h1>PR Manager</h1>
+  <h1>Closing Day</h1>
   <div class="article-meta">
     <span class="article-tag">skill</span>
-    <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/skills/pr-manager" class="gh-link" target="_blank">
+    <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/skills/closing-day" class="gh-link" target="_blank">
       <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
       View on GitHub
     </a>
   </div>
 
-  <blockquote>Commit changes, create PRs, and manage pull requests with support for stacked workflows.</blockquote>
+  <blockquote>Wrap the day with a short carry-forward snapshot so tomorrow starts from a real handoff.</blockquote>
+
+  <p>This skill is the end-of-day counterpart to a start-of-day workflow. It reads today&#x27;s note plus the lightweight state layer, adds a compact <code>## End Of Day</code> section when needed, and captures the few things that matter tomorrow.</p>
 
   <h2>What it does</h2>
 
-  <p>PR Manager automates the Git/GitHub pull request workflow from branch creation to PR submission. It auto-detects whether to use Graphite (for stacked PRs) or standard Git, handles branch naming conventions, generates PR descriptions from templates, and always creates PRs in draft mode. It also preserves human edits when updating existing PR descriptions.</p>
-
-  <h2>Usage</h2>
-
-  <p>Invoke when you need to commit code, create a pull request, update an existing PR, or push changes for review. The skill auto-detects the best workflow — pass <code>&quot;use standard git&quot;</code> to skip Graphite.</p>
-
-  <p><strong>Trigger phrases:</strong></p>
-
   <ul>
-    <li>&quot;Commit and create a PR&quot;</li>
-    <li>&quot;Push this as a draft PR&quot;</li>
-    <li>&quot;Update the PR description&quot;</li>
-    <li>&quot;Submit this stack&quot;</li>
+    <li>reads today&#x27;s note in <code>notes/daily/</code></li>
+    <li>checks <code>system/state/now.json</code> and <code>system/state/queue.json</code> when available</li>
+    <li>appends a short <code>## End Of Day</code> section if it&#x27;s missing</li>
+    <li>captures what moved, what carries forward, what is waiting, and what to start with tomorrow</li>
   </ul>
 
-  <h2>Examples</h2>
+  <h2>When to use it</h2>
 
   <ul>
-    <li><code>&quot;Create a PR for this change with ticket LINEAR-123&quot;</code></li>
-    <li><code>&quot;Push and create a draft PR, use standard git&quot;</code></li>
-    <li><code>&quot;Update the existing PR description to reflect the new changes&quot;</code></li>
+    <li>&quot;end of day&quot;</li>
+    <li>&quot;close of day&quot;</li>
+    <li>&quot;wrap the day&quot;</li>
+    <li>&quot;leave me a snapshot for tomorrow&quot;</li>
   </ul>
 
-  <h2>Why it was created</h2>
+  <h2>Why it matters</h2>
 
-  <p>Managing PRs manually — especially stacked PRs with Graphite — involves many steps and easy-to-make mistakes like rebasing stacked branches from master. This skill automates the safe path and enforces draft mode to prevent accidental review requests.</p>
+  <p>The point is not journaling. The point is continuity. This turns a fuzzy memory of the day into a concrete next-starting point for the next session.</p>
 </div>
 
 <footer>

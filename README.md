@@ -21,6 +21,8 @@ It's the system behind things like:
 - a Chief of Staff agent that decides what deserves focus today
 - workstream folders with persistent `CONTEXT.md` files
 - `cmux` workspaces that spin up in parallel and resume from file-based state
+- a lightweight context-sync pass that refreshes the queue between sessions
+- a closing-day loop that leaves a carry-forward snapshot for tomorrow
 - routines for meetings, comms triage, and recurring PM operations
 
 If you want the overview first:
@@ -33,13 +35,13 @@ If you want the overview first:
 
 | Directory | Contents |
 |-----------|----------|
-| **[`/skills`](./skills)** | 97 AI agent skills — [browse the full catalog →](./skills/README.md) |
+| **[`/skills`](./skills)** | 99 AI agent skills — [browse the full catalog →](./skills/README.md) |
 | **[`/thoughts`](./thoughts)** | Write-ups on AI workflows, observations, and takeaways |
 | **[`/processes`](./processes)** | Documented processes for AI-augmented work |
 
 ## Skills at a Glance
 
-**97 skills** across 20+ categories:
+**99 skills** across 20+ categories:
 
 | Category | Skills | Examples |
 |----------|--------|----------|
@@ -58,10 +60,11 @@ If you want the overview first:
 | 🚀 **Deployment** | 1 | Static sites, prototypes |
 | 🔍 **Search** | 10 | Code search, enterprise knowledge, protos, ecom research |
 | 📋 **Project Mgmt** | 9 | Linear, Jira, project status, weekly summaries, roadmap audits |
+| ⏰ **Productivity** | 4 | Start-of-day, to-do capture, context sync, end-of-day wrap-up |
 | 🧪 **Testing** | 3 | Staging accounts, feature validation, test plans |
 | 🖥️ **System** | 3 | macOS control, disk cleanup, screenshots |
 | 🎨 **Design** | 1 | Figma file inspection |
-| + more | 6 | Calendar, browser automation, web research, etc. |
+| + more | 5 | Calendar, browser automation, web research, etc. |
 
 **[Browse the full catalog →](./skills/README.md)**
 
@@ -88,6 +91,8 @@ Or clone the repo and point Amp at the `skills/` directory. The `auto-pilot` ski
 
 | Date | Update |
 |------|--------|
+| 2026-04-22 | 🆕 2 new skills: [closing-day](./skills/closing-day/) and [syncing-context](./skills/syncing-context/) — small but useful PM OS loops for wrapping the day and refreshing the lightweight state layer |
+| 2026-04-21 | 🆕 AI PM OS refresh: public repo now includes repo-local context-sync and closing-day workflows, and the overview page reflects the full start → sync → close loop |
 | 2026-04-12 | 🆕 The AI PM OS landing page: [overview](https://abhiroopb.github.io/synthetic-mind/ai-pm-os/) — how the system works, what it automates, and how to install it |
 | 2026-04-12 | 📝 New thought: [I Built an AI PM OS](./thoughts/2026-04-12-ai-pm-os.md) — what the system is and why I built it |
 | 2026-04-12 | 📝 New thought: [How the AI PM OS Spins Up My Entire Workday](./thoughts/2026-04-12-how-ai-pm-os-works.md) — the mechanics behind the command center, workstreams, and routines |
