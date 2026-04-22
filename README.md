@@ -35,13 +35,13 @@ If you want the overview first:
 
 | Directory | Contents |
 |-----------|----------|
-| **[`/skills`](./skills)** | 99 AI agent skills — [browse the full catalog →](./skills/README.md) |
+| **[`/skills`](./skills)** | 100 AI agent skills — [browse the full catalog →](./skills/README.md) |
 | **[`/thoughts`](./thoughts)** | Write-ups on AI workflows, observations, and takeaways |
 | **[`/processes`](./processes)** | Documented processes for AI-augmented work |
 
 ## Skills at a Glance
 
-**99 skills** across 20+ categories:
+**100 skills** across 20+ categories:
 
 | Category | Skills | Examples |
 |----------|--------|----------|
@@ -60,7 +60,7 @@ If you want the overview first:
 | 🚀 **Deployment** | 1 | Static sites, prototypes |
 | 🔍 **Search** | 10 | Code search, enterprise knowledge, protos, ecom research |
 | 📋 **Project Mgmt** | 9 | Linear, Jira, project status, weekly summaries, roadmap audits |
-| ⏰ **Productivity** | 4 | Start-of-day, to-do capture, context sync, end-of-day wrap-up |
+| ⏰ **Productivity** | 5 | Start-of-day, to-do capture, context sync, end-of-day wrap-up, final judgment pass |
 | 🧪 **Testing** | 3 | Staging accounts, feature validation, test plans |
 | 🖥️ **System** | 3 | macOS control, disk cleanup, screenshots |
 | 🎨 **Design** | 1 | Figma file inspection |
@@ -91,6 +91,8 @@ Or clone the repo and point Amp at the `skills/` directory. The `auto-pilot` ski
 
 | Date | Update |
 |------|--------|
+| 2026-04-21 | 📝 New thought: [Start, Sync, Close: The AI Work Loop I Actually Needed](./thoughts/2026-04-21-start-sync-close-loop.md) — why the AI PM OS only started feeling stable once the workflow covered the middle and the end of the day too |
+| 2026-04-21 | 🆕 New skill: [checking-your-lens](./skills/checking-your-lens/) — a lightweight final judgment pass for making AI output sound more grounded, direct, and context-aware |
 | 2026-04-22 | 🆕 2 new skills: [closing-day](./skills/closing-day/) and [syncing-context](./skills/syncing-context/) — small but useful PM OS loops for wrapping the day and refreshing the lightweight state layer |
 | 2026-04-21 | 🆕 AI PM OS refresh: public repo now includes repo-local context-sync and closing-day workflows, and the overview page reflects the full start → sync → close loop |
 | 2026-04-12 | 🆕 The AI PM OS landing page: [overview](https://abhiroopb.github.io/synthetic-mind/ai-pm-os/) — how the system works, what it automates, and how to install it |

@@ -1,6 +1,6 @@
 # 🛠️ Skills Library
 
-**99 AI agent skills built for Amp — covering productivity, development, data, communication, and more.**
+**100 AI agent skills built for Amp — covering productivity, development, data, communication, and more.**
 
 Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. Skills are loaded via the `skill` tool or auto-routed by the `auto-pilot` skill.
 
@@ -115,6 +115,7 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 | 97 | [weekly-status-summary](./weekly-status-summary/) | 📋 Task & Project Management | Generate and post consolidated weekly status to Slack |
 | 98 | [closing-day](./closing-day/) | ⏰ Productivity | Leave a carry-forward snapshot at end of day |
 | 99 | [syncing-context](./syncing-context/) | ⏰ Productivity | Refresh the lightweight state layer from the current plan |
+| 100 | [checking-your-lens](./checking-your-lens/) | ⏰ Productivity | Give a final judgment pass so output sounds grounded and specific |
 
 ---
 
@@ -243,6 +244,7 @@ Each skill lives in its own folder with a `SKILL.md` that Amp loads on demand. S
 - [snagit](./snagit/) — Capture screenshots and recordings
 
 ### ⏰ Productivity
+- [checking-your-lens](./checking-your-lens/) — Give a final judgment pass so output sounds grounded and specific
 - [closing-day](./closing-day/) — Leave a short carry-forward snapshot at end of day
 - [start-of-day](./start-of-day/) — Morning triage of Slack, Gmail, and Calendar
 - [syncing-context](./syncing-context/) — Refresh the lightweight state layer from the current plan

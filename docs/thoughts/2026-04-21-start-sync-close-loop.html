@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Start, Sync, Close: The AI Work Loop I Actually Needed — synthetic-mind</title>
+  <meta name="description" content="The AI PM OS became more stable once the workflow had a full loop: start the day with a planner, sync the visible state between sessions, and close the day with a written carry-forward.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem; flex-wrap: wrap;
+    }
+    .article-date {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../#about">About</a>
+      <a href="../ai-pm-os/" class="active">AI PM OS</a>
+      <a href="../thoughts/">Thoughts</a>
+      <a href="../skills/">Projects</a>
+      <a href="../setup/">Setup</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All thoughts</a>
+
+  <h1>Start, Sync, Close: The AI Work Loop I Actually Needed</h1>
+  <div class="article-meta">
+    <span class="article-date">2026-04-21</span>
+    <span class="article-tag">ai-pm-os</span>
+    <span class="article-tag">workflow</span>
+    <span class="article-tag">operating-system</span>
+  </div>
+
+  <h2>TL;DR</h2>
+  <p>Most AI workflows over-focus on the start of the day and under-design everything that happens after the first burst of momentum. The loop that finally made my AI PM OS feel stable was simple: start the day with a planner, sync the system back to reality between sessions, and close the day with a written carry-forward. That turned the setup from a cool demo into an operating habit.</p>
+
+  <h2>Context</h2>
+  <p>For a while, the strongest part of my AI PM OS was the opening move. <code>start-day</code> worked. The Chief of Staff flow worked. The system could look at notes, workstreams, and routines, then open the right sessions.</p>
+  <p>But by the afternoon, or the next morning, reality had drifted a little. A workstream had moved. A plan had changed. I had answered something quickly in chat without updating the visible state. Some days I had a great start and a fuzzy finish.</p>
+  <p>That is when it clicked: the real unit of design was not the startup command. It was the full loop.</p>
+
+  <h2>The loop is only three moves</h2>
+  <p>The version I use now is simple enough to remember:</p>
+  <ol>
+    <li><strong>Start:</strong> decide what deserves attention.</li>
+    <li><strong>Sync:</strong> rebuild the visible state after things change.</li>
+    <li><strong>Close:</strong> leave a written handoff for tomorrow.</li>
+  </ol>
+  <p>Not more automation. Not a bigger planner. Just a cleaner loop.</p>
+
+  <h2>Start: planning is the opening move</h2>
+  <p>The day starts with the Chief of Staff flow. The important thing is not the file it writes. It is the decision it makes: what should be open right now?</p>
+  <p>Without that step, the rest of the system becomes a nicer version of tab chaos.</p>
+
+  <h2>Sync: reality changes faster than the plan</h2>
+  <p>This was the missing piece. Planning once in the morning is not enough if the system is going to be useful across a whole day.</p>
+  <p>The moment you reply to a stakeholder, re-rank a workstream, or pause a thread, the state the system shows you can start drifting from the work you are actually doing. That is why I added a lightweight sync pass.</p>
+  <p>In the public repo, that is intentionally small. It just rebuilds the visible queue and current recommendation from the latest plan. But the idea matters more than the implementation: the system should be able to recover its bearings without pretending the morning plan is still perfectly true.</p>
+
+  <h2>Close: tomorrow should not depend on memory</h2>
+  <p>The other weak point in AI workflows is the ending. A lot of systems just stop when you stop. The chats remain open, the tabs stay around, and tomorrow-you is expected to reverse-engineer what happened.</p>
+  <p>Closing the day does not need to be dramatic. Mine is usually just four things:</p>
+  <ul>
+    <li>what moved today</li>
+    <li>what carries forward</li>
+    <li>what is waiting on someone else</li>
+    <li>what I should pick up first tomorrow</li>
+  </ul>
+  <p>That tiny carry-forward snapshot lowers the re-entry cost and keeps the system from becoming a pile of half-finished context.</p>
+
+  <h2>Why the middle and the ending matter so much</h2>
+  <p>The start of the day gets all the attention because it is easy to demo. It is satisfying to show the planner opening the right workstreams. It looks smart. It feels like progress.</p>
+  <p>But stable workflows are not built on the best moment. They are built on how gracefully they survive drift and interruption.</p>
+  <p>That is why <code>sync</code> and <code>close</code> ended up mattering so much to me:</p>
+  <ul>
+    <li><code>start</code> gives you direction</li>
+    <li><code>sync</code> gives you trust</li>
+    <li><code>close</code> gives you continuity</li>
+  </ul>
+  <p>Once all three existed, the system stopped feeling like a morning trick and started feeling like infrastructure.</p>
+
+  <h2>The deeper lesson</h2>
+  <p>When people design AI systems for knowledge work, they often optimize for generation and under-invest in state management.</p>
+  <p>But real work is not just producing text. It is resuming, updating, handing off, deciding what changed, and deciding what still matters. Those are lifecycle problems, not just prompting problems.</p>
+
+  <h2>What I learned</h2>
+  <p><strong>A strong opening is not enough.</strong> If the system cannot recover after the day gets messy, it is still fragile.</p>
+  <p><strong>State refresh matters more than more intelligence.</strong> A small sync step often helps more than another layer of cleverness.</p>
+  <p><strong>Closeout is part of the product.</strong> If tomorrow starts with confusion, the workflow is unfinished.</p>
+  <p><strong>The best AI systems feel calm.</strong> Not magical. Not busy. Just reliable enough that you stop thinking about them and keep moving.</p>
+
+  <hr>
+  <p><em>Related: <a href="./2026-04-12-ai-pm-os">I Built an AI PM OS</a>, <a href="./2026-04-12-how-ai-pm-os-works">How the AI PM OS Spins Up My Entire Workday</a>, and <a href="./2026-04-12-why-ai-pm-os-is-powerful">Why the AI PM OS Feels More Powerful Than a Chatbot</a>.</em></p>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>
