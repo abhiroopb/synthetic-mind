@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The AI PM OS — synthetic-mind</title>
-  <meta name="description" content="The AI PM OS is an operating system for product work: a Chief of Staff agent, durable workstreams, resumable cmux sessions, and a public starter repo you can adapt.">
+  <meta name="description" content="The AI PM OS is a control plane for product work: durable policy, resumable workstreams, lightweight state, and a public starter repo you can adapt.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
@@ -690,24 +690,24 @@
 <section class="hero">
   <div class="eyebrow">Featured project</div>
   <h1>The AI PM OS</h1>
-  <p>An operating system for product work, built around a Chief of Staff agent, durable workstream context, resumable <code>cmux</code> sessions, and a start-of-day flow that decides what deserves attention before the day gets noisy.</p>
+  <p>A control plane for product work, built around durable policy, file-backed workstreams, resumable <code>cmux</code> sessions, and a planner that decides what deserves attention before the day gets noisy.</p>
   <div class="hero-actions">
     <a href="https://github.com/abhiroopb/ai-pm-os" class="btn btn-primary" target="_blank">View repo ↗</a>
-    <a href="../thoughts/2026-04-21-start-sync-close-loop" class="btn btn-ghost">Read the full loop</a>
+    <a href="../thoughts/2026-05-03-how-i-turned-my-ai-setup-into-a-real-control-plane" class="btn btn-ghost">Read the control-plane post</a>
     <a href="../thoughts/2026-04-12-how-ai-pm-os-works" class="btn btn-ghost">See how it works</a>
   </div>
   <div class="snapshot">
     <div class="snapshot-card">
-      <div class="snapshot-label">Planner</div>
-      <div class="snapshot-value">Chief of Staff agent</div>
+      <div class="snapshot-label">Policy owner</div>
+      <div class="snapshot-value">Repo-owned behavior</div>
     </div>
     <div class="snapshot-card">
       <div class="snapshot-label">Continuity</div>
-      <div class="snapshot-value">File-based <code>CONTEXT.md</code></div>
+      <div class="snapshot-value">File-backed <code>CONTEXT.md</code></div>
     </div>
     <div class="snapshot-card">
-      <div class="snapshot-label">Surface</div>
-      <div class="snapshot-value">Parallel <code>cmux</code> workspaces</div>
+      <div class="snapshot-label">Adaptation layer</div>
+      <div class="snapshot-value">Thin local adapters</div>
     </div>
     <div class="snapshot-card">
       <div class="snapshot-label">Lifecycle</div>
@@ -722,32 +722,32 @@
   <div class="container">
     <div class="section-header">
       <h2>What it is</h2>
-      <p>Not a chatbot, not a pile of prompts. More like a lightweight operating model for AI-assisted PM work.</p>
+      <p>Not a chatbot and not just a pile of prompts. More like a lightweight operating model for AI-assisted PM work.</p>
     </div>
     <div class="feature-grid">
       <div class="feature-card">
-        <h3>A morning planner, not just a responder</h3>
+        <h3>The repo owns the real behavior</h3>
+        <p>The durable rules live with the system, not in scattered local prompt files. That makes the operating model versioned, reviewable, and easier to debug when the setup drifts.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Home-directory files stay thin</h3>
+        <p>Local runtime config still matters, but it acts like an adapter layer. Machine-specific setup stays local without quietly redefining the shared system.</p>
+      </div>
+      <div class="feature-card">
+        <h3>A planner, not just a responder</h3>
         <p>The first workspace is a Chief of Staff agent that reviews notes, routines, and open workstreams, then writes a launch plan for the day. It decides what should be open before execution begins.</p>
       </div>
       <div class="feature-card">
         <h3>Durable context per thread</h3>
-        <p>Each workstream lives in its own folder with a living <code>CONTEXT.md</code>. The important state is stored on disk, so an interrupted session can resume cleanly without depending on chat history.</p>
+        <p>Each workstream lives in its own folder with a living <code>CONTEXT.md</code> and, when needed, live source snapshots. The important state is stored on disk, so an interrupted session can resume cleanly without depending on chat history.</p>
       </div>
       <div class="feature-card">
-        <h3>Parallel sessions with clear roles</h3>
-        <p>Once the plan exists, the launcher opens the right <code>cmux</code> workspaces in parallel. Planning, project execution, meeting prep, and routine loops can stay separate instead of collapsing into one thread.</p>
-      </div>
-      <div class="feature-card">
-        <h3>A quick sync between sessions</h3>
-        <p>A lightweight context-sync pass rebuilds the public queue and now-state from the current launch plan, so the system can recover its bearings without rerunning the whole morning workflow.</p>
+        <h3>Keep the hot path small</h3>
+        <p>The broader system uses a slim active runtime and promotes specialists when they are needed. That keeps routing fast without losing the depth of a bigger skill library.</p>
       </div>
       <div class="feature-card">
         <h3>A real closeout, not tab sprawl</h3>
-        <p>The newer loop includes an explicit closing-day step that writes a short carry-forward snapshot into the daily note. Tomorrow starts from a handoff, not guesswork.</p>
-      </div>
-      <div class="feature-card">
-        <h3>A public starter repo, not a black box</h3>
-        <p>The open-source version is sanitized, tool-agnostic, and intentionally lighter than the internal system. It keeps the useful shape while stripping away private integrations and extra machinery.</p>
+        <p>The loop includes explicit sync and closeout steps, so the system can recover after the day gets messy and tomorrow starts from a handoff instead of guesswork.</p>
       </div>
     </div>
   </div>
@@ -1217,26 +1217,31 @@ Then tell me what opened and what needs attention first.</code></pre>
   <div class="container">
     <div class="section-header">
       <h2>Read the full series</h2>
-      <p>If you want the philosophy, mechanics, and product framing, start here.</p>
+      <p>If you want the philosophy, mechanics, and control-plane framing, start here.</p>
     </div>
     <div class="links-grid">
-      <a href="../thoughts/2026-04-12-ai-pm-os" class="link-card">
+      <a href="../thoughts/2026-05-03-how-i-turned-my-ai-setup-into-a-real-control-plane" class="link-card">
         <div class="kicker">Thought 1</div>
+        <h3>How I Turned My AI Setup Into a Real Control Plane</h3>
+        <p>The ownership model behind repo policy, thin home adapters, archive-backed specialists, and file-backed state.</p>
+      </a>
+      <a href="../thoughts/2026-04-12-ai-pm-os" class="link-card">
+        <div class="kicker">Thought 2</div>
         <h3>I Built an AI PM OS</h3>
         <p>Why I moved from a collection of useful AI skills to a full operating system for product work.</p>
       </a>
       <a href="../thoughts/2026-04-12-how-ai-pm-os-works" class="link-card">
-        <div class="kicker">Thought 2</div>
+        <div class="kicker">Thought 3</div>
         <h3>How the AI PM OS Spins Up My Entire Workday</h3>
         <p>The technical walkthrough of the launcher, planner, state layer, and resumable workstreams.</p>
       </a>
       <a href="../thoughts/2026-04-12-why-ai-pm-os-is-powerful" class="link-card">
-        <div class="kicker">Thought 3</div>
+        <div class="kicker">Thought 4</div>
         <h3>Why the AI PM OS Feels More Powerful Than a Chatbot</h3>
         <p>Why the real leverage comes from orchestration, durable context, and system design around the model.</p>
       </a>
       <a href="../thoughts/2026-04-21-start-sync-close-loop" class="link-card">
-        <div class="kicker">Thought 4</div>
+        <div class="kicker">Thought 5</div>
         <h3>Start, Sync, Close</h3>
         <p>Why the system became much more dependable once the workflow covered the middle and the end of the day too.</p>
       </a>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Prepare-Then-Approve Pattern — synthetic-mind</title>
+  <meta name="description" content="Why useful AI workflows should prepare the exact action, corroborate inside a bounded lane, and pause for approval before the side effect.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem; flex-wrap: wrap;
+    }
+    .article-date {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../#about">About</a>
+      <a href="../ai-pm-os/">AI PM OS</a>
+      <a href="../thoughts/" class="active">Thoughts</a>
+      <a href="../skills/">Projects</a>
+      <a href="../setup/">Setup</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All thoughts</a>
+
+  <h1>The Prepare-Then-Approve Pattern</h1>
+  <div class="article-meta">
+    <span class="article-date">2026-05-03</span>
+    <span class="article-tag">workflow</span>
+    <span class="article-tag">safety</span>
+    <span class="article-tag">ai-agents</span>
+  </div>
+
+  <h2>TL;DR</h2>
+  <p>One of the most useful AI workflow patterns is simple: prepare the action completely, then ask for approval before the side effect happens. That means gathering context, checking claims against bounded sources, drafting the exact follow-through, and only then asking whether to send, post, file, or update. It keeps the agent useful without making it reckless.</p>
+
+  <h2>Context</h2>
+  <p>A lot of AI agent demos collapse two different jobs into one move. They gather context and take action at the same time.</p>
+  <p>That can look impressive. It can also create the wrong kind of confidence.</p>
+  <p>In real work, plenty of actions are easy to draft and expensive to do wrong: replying to a legal question, posting a status update, filing something into a system of record, or editing a shared doc that other people are already using.</p>
+  <p>The issue is not just safety theater. It is decision quality. If the agent acts too early, you lose the moment where a human can inspect the assumptions, the tone, and the evidence before the system commits to something public.</p>
+  <p>The pattern that held up better for me was a stricter split between preparation and approval.</p>
+
+  <h2>The idea</h2>
+  <p>The agent should do as much of the thinking and prep work as possible before it asks for a decision.</p>
+  <p>That usually means four steps.</p>
+
+  <h2>1. Pull the dropped artifact into context</h2>
+  <p>When someone drops a link, thread, email, or ticket into chat, the first job is not to answer yet. The first job is to understand what the artifact is really asking for.</p>
+  <p>That can mean pulling the surrounding Slack thread, the referenced doc, the linked issue, or the prior decision history. The point is to reconstruct the task, not just react to the URL.</p>
+
+  <h2>2. Corroborate inside a bounded lane</h2>
+  <p>The agent should check the claim, but not wander forever.</p>
+  <p>Bounded corroboration means choosing a small, relevant set of sources that can confirm or challenge the current draft. Enough to reduce obvious errors. Not so much that the system turns into a vague research spiral.</p>
+  <p>For a legal-style reply, that might mean the original message, the referenced policy or license terms, and one or two direct supporting sources. Not twenty tabs. Just enough to make the draft honest.</p>
+
+  <h2>3. Build the exact follow-through</h2>
+  <p>Once the agent has the context, it should prepare the real action. Not a vague summary. The actual thing.</p>
+  <p>That might be the reply message, the Jira comment, the Blueprint record fields, the proposed Slack post, or the change to a shared document.</p>
+  <p>This is what makes the pattern useful. The user is not approving a plan to go do more work later. They are approving the ready-to-send artifact.</p>
+
+  <h2>4. Pause at the boundary</h2>
+  <p>Only after the draft is concrete should the system ask for approval.</p>
+  <p>That pause matters because it creates a clean review surface. The human can challenge the assumptions, edit the tone, or decide the action should not happen at all.</p>
+  <p>The agent has already done the hard part. The user keeps the final say over the side effect.</p>
+
+  <h2>A non-proprietary example</h2>
+  <p>One recent case made this feel especially clear.</p>
+  <p>The incoming task was a legal-style question about whether a particular image license allowed modification. The useful version of the workflow was not to answer instantly. It was to prepare carefully.</p>
+  <p>The better sequence looked like this:</p>
+  <ol>
+    <li>read the question and the linked context</li>
+    <li>check the relevant license language directly</li>
+    <li>draft a response grounded in that exact language</li>
+    <li>present the message for approval before sending anything</li>
+  </ol>
+  <p>That kept the workflow fast, but it also kept it inspectable. The human decision happened at the right place, after the evidence and the draft existed, not before.</p>
+
+  <h2>Why this pattern scales</h2>
+  <p>Many agent tasks are not pure execution and not pure brainstorming. They live in the middle.</p>
+  <p>You want the agent to gather context, reduce the research burden, and draft the real next step, but you still want a human checkpoint before anything external changes.</p>
+  <p>That middle lane is where prepare-then-approve shines. It is fast enough to feel agentic, but controlled enough to trust.</p>
+
+  <h2>What I learned</h2>
+  <p><strong>Approval works better after the draft exists.</strong> People make better calls when they are reviewing the real artifact, not an abstract plan.</p>
+  <p><strong>Corroboration should be bounded.</strong> Enough evidence helps. Endless checking just hides uncertainty behind motion.</p>
+  <p><strong>Side effects need a clean boundary.</strong> Drafting and deciding are different jobs. Treating them separately improves both.</p>
+  <p><strong>The best safety pattern is still useful.</strong> If the workflow feels slower or more annoying than doing it manually, it will not survive.</p>
+  <p><strong>A lot of agent design is really review-surface design.</strong> The quality of the handoff before the action matters almost as much as the action itself.</p>
+
+  <hr>
+  <p><em>Related: <a href="./2026-05-03-how-i-turned-my-ai-setup-into-a-real-control-plane">How I Turned My AI Setup Into a Real Control Plane</a> and <a href="./2026-04-06-auto-pilot-skill">I Stopped Telling My Agent Which Tool to Use</a>.</em></p>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>

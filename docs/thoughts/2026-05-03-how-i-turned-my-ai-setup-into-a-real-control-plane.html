@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How I Turned My AI Setup Into a Real Control Plane — synthetic-mind</title>
+  <meta name="description" content="Why my AI setup got sturdier once the repo owned the durable behavior, home-directory files stayed thin, and specialist skills moved into an archive-backed runtime.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem; flex-wrap: wrap;
+    }
+    .article-date {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../#about">About</a>
+      <a href="../ai-pm-os/" class="active">AI PM OS</a>
+      <a href="../thoughts/">Thoughts</a>
+      <a href="../skills/">Projects</a>
+      <a href="../setup/">Setup</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All thoughts</a>
+
+  <h1>How I Turned My AI Setup Into a Real Control Plane</h1>
+  <div class="article-meta">
+    <span class="article-date">2026-05-03</span>
+    <span class="article-tag">ai-pm-os</span>
+    <span class="article-tag">control-plane</span>
+    <span class="article-tag">architecture</span>
+  </div>
+
+  <h2>TL;DR</h2>
+  <p>My AI setup got much better once I stopped treating it like a bag of prompts and started treating it like a control plane. The repo now owns the durable behavior, home-directory files stay thin and local, skills live in clear runtime tiers, and workstreams carry real state instead of making each session rediscover the world.</p>
+
+  <h2>Context</h2>
+  <p>For a while, the system worked, but it still felt a little improvised.</p>
+  <p>There were good workflows, good skills, useful notes, and solid routines. But the ownership model was fuzzy.</p>
+  <p>Some behavior lived in the repo. Some lived in the home directory. Some lived in setup glue that had grown over time. If something drifted, it was not always obvious which surface was supposed to own the fix.</p>
+  <p>That is usually the point where AI setups start feeling clever and fragile at the same time.</p>
+  <p>The breakthrough was not another model upgrade. It was deciding that the system needed a real control plane.</p>
+
+  <h2>The idea</h2>
+  <p>The control-plane model is simple.</p>
+  <p>The repo owns the durable behavior. The home directory owns the local adapters. Runtime state stays separate from both.</p>
+  <p>That one framing cleared up a lot.</p>
+
+  <h2>1. Put the real policy in the repo</h2>
+  <p>The shared <code>AGENTS.md</code> became the canonical place for durable rules, including instruction precedence, side-effect boundaries, routing defaults, workflow ownership, and writing norms.</p>
+  <p>The important part is not that everything lives in one file. It is that the file has a job.</p>
+  <p>If a rule should travel with the system, the repo owns it. That keeps behavior versioned, reviewable, and explainable.</p>
+
+  <h2>2. Keep home-directory files thin</h2>
+  <p>Home-directory config still matters, but now it acts more like an adapter layer.</p>
+  <p>That layer handles local runtime concerns, machine-specific setup, and startup behavior that should not redefine the shared system.</p>
+  <p>Once I started treating those files as adapters instead of alternate sources of truth, the setup got calmer. When something drifted, it was easier to answer a basic question: is this a repo behavior problem or a local runtime problem?</p>
+
+  <h2>3. Split the skill runtime by job, not by habit</h2>
+  <p>The skill library had grown big enough that the old model was doing too much in one place.</p>
+  <p>Now there are three clear layers:</p>
+  <ul>
+    <li>a shared runtime for broadly useful active skills</li>
+    <li>a project-local runtime for repo-specific behavior</li>
+    <li>an archive shelf for specialist skills that should stay out of the hot path until needed</li>
+  </ul>
+  <p>The archive is not deletion. It is cold storage with a promotion path. Specialists stay available without making every routing decision noisier.</p>
+
+  <h2>4. Let routing promote specialists on demand</h2>
+  <p>Once the archive existed, the router stopped needing the whole world in active memory.</p>
+  <p>The better pattern was simple: keep the active runtime small, look for a fit in the archive when needed, then promote the skill only when the policy says it is worth it.</p>
+  <p>That preserves breadth without paying the tax all the time. Promotion policy becomes a first-class control instead of an accidental side effect of dumping more files into the live runtime.</p>
+
+  <h2>5. Treat workstreams as state, not decoration</h2>
+  <p>The other half of a control plane is continuity.</p>
+  <p>Workstreams, <code>CONTEXT.md</code>, watched source snapshots, and lightweight state rebuilders matter because they make the system resumable. The terminal becomes a surface. The state lives in files.</p>
+  <p>Instead of asking what the model remembered, the better question becomes: what state did the system preserve?</p>
+
+  <h2>Why this feels different from a prompt stack</h2>
+  <p>A prompt stack can be useful. A bag of skills can be useful. A set of scripts can be useful.</p>
+  <p>But a control plane does something more specific. It tells you what owns behavior, what owns local adaptation, what state is durable, how specialists come into play, and where to fix drift when the system stops matching reality.</p>
+  <p>That is the difference between a neat setup and an operating environment.</p>
+
+  <h2>What I learned</h2>
+  <p><strong>Ownership beats cleverness.</strong> A system gets sturdier once every important rule has a clear home.</p>
+  <p><strong>Adapters should stay thin.</strong> Local files are useful when they connect the machine to the system, not when they quietly redefine it.</p>
+  <p><strong>A smaller hot path is a better default.</strong> Archive-backed promotion beats keeping every specialist live all the time.</p>
+  <p><strong>State matters more than session history.</strong> Workstreams, snapshots, and rebuilders make the setup feel reliable in a way chat transcripts never do.</p>
+  <p><strong>The real upgrade was architectural.</strong> The models helped, but the step-change came from deciding what this system actually is.</p>
+
+  <hr>
+  <p><em>Related: <a href="./2026-04-06-agents-md-reference">The File That Runs My Entire AI Setup</a>, <a href="./2026-04-21-start-sync-close-loop">Start, Sync, Close: The AI Work Loop I Actually Needed</a>, and <a href="./2026-04-12-how-ai-pm-os-works">How the AI PM OS Spins Up My Entire Workday</a>.</em></p>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>

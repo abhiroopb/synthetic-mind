@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Skills Catalog — synthetic-mind</title>
-  <meta name="description" content="99 reusable AI agent skills for Slack, Gmail, Calendar, Linear, Snowflake, Figma, and more. Install in one command.">
+  <meta name="description" content="A curated front door to the 100 public AI agent skills in synthetic-mind, spanning control-plane behavior, PM workflows, engineering, data, and docs.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
@@ -49,7 +49,7 @@
 
 <div class="page-header">
   <h1>Skills Catalog</h1>
-  <p>Plug-in instruction sets that teach AI agents to use your everyday tools</p>
+  <p>A curated front door to the 100 public skills in this repo. For the full markdown catalog, use <a href="https://github.com/abhiroopb/synthetic-mind/blob/main/skills/README.md" target="_blank" style="color:var(--accent);text-decoration:none">skills/README.md</a>.</p>
 </div>
 
 <section class="skills-section">
@@ -112,7 +112,7 @@
       <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">✅</div><div class="skill-name">code-review-general</div></div><div class="skill-desc">Address code review feedback — prioritize human comments, verify changes.</div><div class="skill-example">"fix the review feedback"</div></div>
       <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🔀</div><div class="skill-name">rebasing-git-branches</div></div><div class="skill-desc">Rebase branches onto upstream targets, resolve conflicts.</div><div class="skill-example">"rebase my branch onto main"</div></div>
       <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🌳</div><div class="skill-name">git-worktree</div></div><div class="skill-desc">Manage git worktrees for working on multiple branches simultaneously.</div><div class="skill-example">"create a worktree for the hotfix"</div></div>
-      <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🗺️</div><div class="skill-name">walkthrough</div></div><div class="skill-desc">Explore and visualize codebase architecture with diagrams.</div><div class="skill-example">"walk me through the payment flow"</div></div>
+      <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🔎</div><div class="skill-name">codesearch</div></div><div class="skill-desc">Search code patterns across company repositories to find implementations, owners, and related usage.</div><div class="skill-example">"find every place we validate JWT headers"</div></div>
       <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🔧</div><div class="skill-name">check-ci</div></div><div class="skill-desc">Check, debug, and fix CI builds and test failures. Loops until green.</div><div class="skill-example">"fix the CI failure"</div></div>
       <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">📦</div><div class="skill-name">cloning-squareup-repos</div></div><div class="skill-desc">Clone repositories using the correct SSH remote and conventions.</div><div class="skill-example">"clone the repo"</div></div>
       <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">📦</div><div class="skill-name">hermit</div></div><div class="skill-desc">Manage hermetic developer tool packages per-repository.</div><div class="skill-example">"install the tool via hermit"</div></div>
@@ -199,7 +199,7 @@ function filterCards() {
     card.classList.toggle('hidden', !show);
     if (show) visible++;
   });
-  countEl.textContent = `Showing ${visible} of ${cards.length} skills`;
+  countEl.textContent = `Showing ${visible} of ${cards.length} highlighted skills`;
 }
 
 tabs.forEach(tab => {

@@ -8,28 +8,29 @@ AI thoughts, processes, skills, and experiments — a showcase of AI-augmented w
 
 ## What is this?
 
-A living collection of learnings from working deeply with AI agents, LLMs, and automation. Each entry captures something useful — a workflow that clicked, a skill that shipped, or a process worth sharing.
+A living collection of learnings from working deeply with AI agents, LLMs, and automation. Each entry captures something useful: a workflow that clicked, a control-plane decision that made the system sturdier, or a skill worth reusing.
 
-Built primarily with [Amp](https://ampcode.com), these skills power a PM's daily workflow — from morning triage to PRD writing to data analysis to deploying prototypes. Everything here is real, battle-tested, and actively used.
+Built primarily with [Amp](https://ampcode.com), these skills and routines power a PM's daily workflow, from morning triage to PRD writing to data analysis to deploying prototypes. Everything here is real, battle-tested, and actively used.
 
 ## Featured Project: The AI PM OS
 
-One of the bigger things I've built recently is **the AI PM OS**: an operating system for product management built around AI agents, durable workstream context, and a start-of-day command center.
+One of the bigger things I've built recently is **the AI PM OS**: a control plane for product work built around AI agents, durable workstream context, and a clear ownership model for how the system behaves.
 
-It's the system behind things like:
+The current version is organized around a few durable ideas:
 
+- repo-owned behavior in `AGENTS.md`, with home-directory files kept thin and adapter-like
 - a Chief of Staff agent that decides what deserves focus today
-- workstream folders with persistent `CONTEXT.md` files
+- workstream folders with persistent `CONTEXT.md` files and live source snapshots
 - `cmux` workspaces that spin up in parallel and resume from file-based state
-- a lightweight context-sync pass that refreshes the queue between sessions
-- a closing-day loop that leaves a carry-forward snapshot for tomorrow
+- a lightweight state layer that can be rebuilt instead of trusted blindly
+- an archive-backed skill model, where specialized skills can stay off the hot path until they are needed
 - routines for meetings, comms triage, and recurring PM operations
 
 If you want the overview first:
 
 - **Landing page:** [Overview of the AI PM OS](https://abhiroopb.github.io/synthetic-mind/ai-pm-os/)
 - **Repo:** [abhiroopb/ai-pm-os](https://github.com/abhiroopb/ai-pm-os)
-- **Thoughts:** [what it is](./thoughts/2026-04-12-ai-pm-os.md), [how it works](./thoughts/2026-04-12-how-ai-pm-os-works.md), [why it matters](./thoughts/2026-04-12-why-ai-pm-os-is-powerful.md)
+- **Thoughts:** [the control plane model](./thoughts/2026-05-03-how-i-turned-my-ai-setup-into-a-real-control-plane.md), [what it is](./thoughts/2026-04-12-ai-pm-os.md), [how it works](./thoughts/2026-04-12-how-ai-pm-os-works.md), [why it matters](./thoughts/2026-04-12-why-ai-pm-os-is-powerful.md)
 
 ## Structure
 
@@ -41,30 +42,16 @@ If you want the overview first:
 
 ## Skills at a Glance
 
-**100 skills** across 20+ categories:
+**100 public skills**, organized as a working system rather than a flat pile of prompts:
 
-| Category | Skills | Examples |
-|----------|--------|----------|
-| 🤖 **Agent Behavior** | 3 | Auto-pilot routing, swarm exploration, requirement clarification |
-| 🧠 **Memory & Context** | 5 | Cross-session memory, knowledge distillation, voice profiling |
-| 🔬 **Methodology** | 7 | RPI (Research → Plan → Implement), multi-model review loops |
-| 📊 **Data & Analytics** | 7 | Snowflake, Databricks, Looker, Datadog, Airtable |
-| 🔀 **Git & PRs** | 10 | PR creation, code review, CI analysis, PR monitoring, stacked PRs |
-| 📝 **Product** | 9 | PRDs, specs, feature requests, feedback tracking |
-| 💬 **Communication** | 6 | Slack, Gmail, manager summaries, saved message triage |
-| ✍️ **Writing** | 4 | Brand voice, communication coaching, performance feedback |
-| 📄 **Documents** | 6 | Google Drive, Notion, dev guides, doc drafting, video summaries |
-| 🧪 **Experimentation** | 1 | LaunchDarkly flags |
-| 📱 **Mobile** | 3 | iOS/Android simulators, release trains |
-| ☁️ **Cloud & Infra** | 3 | Cloud workstations, go/ links, Hermit package manager |
-| 🚀 **Deployment** | 1 | Static sites, prototypes |
-| 🔍 **Search** | 10 | Code search, enterprise knowledge, protos, ecom research |
-| 📋 **Project Mgmt** | 9 | Linear, Jira, project status, weekly summaries, roadmap audits |
-| ⏰ **Productivity** | 5 | Start-of-day, to-do capture, context sync, end-of-day wrap-up, final judgment pass |
-| 🧪 **Testing** | 3 | Staging accounts, feature validation, test plans |
-| 🖥️ **System** | 3 | macOS control, disk cleanup, screenshots |
-| 🎨 **Design** | 1 | Figma file inspection |
-| + more | 5 | Calendar, browser automation, web research, etc. |
+| Area | What it covers |
+|------|----------------|
+| **Control plane** | `auto-pilot`, memory, distillation, final judgment, and the routing layer that keeps the environment coherent |
+| **Daily PM loops** | start-of-day, closing-day, syncing-context, project status, roadmap intake, comms triage |
+| **Execution workflows** | RPI planning and implementation, PR management, CI repair, repo cloning, cloud workstations |
+| **Data and validation** | Snowflake, Databricks, Looker, Datadog, LaunchDarkly, feature validation |
+| **Comms and docs** | Slack, Gmail, Google Drive, Notion, drafting-docs, manager summaries, writing feedback |
+| **Specialists** | Merchant lookup, code search, protos, release tracking, ecommerce research, mobile simulators, browser automation |
 
 **[Browse the full catalog →](./skills/README.md)**
 
@@ -91,6 +78,9 @@ Or clone the repo and point Amp at the `skills/` directory. The `auto-pilot` ski
 
 | Date | Update |
 |------|--------|
+| 2026-05-03 | 📝 New thought: [How I Turned My AI Setup Into a Real Control Plane](./thoughts/2026-05-03-how-i-turned-my-ai-setup-into-a-real-control-plane.md) — the ownership model behind repo policy, home adapters, and archive-backed specialization |
+| 2026-05-03 | 📝 New thought: [The Prepare-Then-Approve Pattern](./thoughts/2026-05-03-the-prepare-then-approve-pattern.md) — why bounded corroboration and prebuilt follow-through beats letting agents act first |
+| 2026-05-03 | 🧹 Site refresh: homepage, AI PM OS overview, and skills front door now reflect the control-plane story and current 100-skill public catalog |
 | 2026-04-21 | 📝 New thought: [Start, Sync, Close: The AI Work Loop I Actually Needed](./thoughts/2026-04-21-start-sync-close-loop.md) — why the AI PM OS only started feeling stable once the workflow covered the middle and the end of the day too |
 | 2026-04-21 | 🆕 New skill: [checking-your-lens](./skills/checking-your-lens/) — a lightweight final judgment pass for making AI output sound more grounded, direct, and context-aware |
 | 2026-04-22 | 🆕 2 new skills: [closing-day](./skills/closing-day/) and [syncing-context](./skills/syncing-context/) — small but useful PM OS loops for wrapping the day and refreshing the lightweight state layer |

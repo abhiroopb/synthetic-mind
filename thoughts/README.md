@@ -8,6 +8,8 @@ Write-ups on AI workflows, observations, experiments, and takeaways from buildin
 
 | # | Title | Date | Tags |
 |---|-------|------|------|
+| 15 | [How I Turned My AI Setup Into a Real Control Plane](./2026-05-03-how-i-turned-my-ai-setup-into-a-real-control-plane.md) | 2026-05-03 | ai-pm-os, control-plane, agents-md, skills, architecture |
+| 14 | [The Prepare-Then-Approve Pattern](./2026-05-03-the-prepare-then-approve-pattern.md) | 2026-05-03 | workflow, bounded-corroboration, triage-links, safety, ai-agents |
 | 13 | [Start, Sync, Close: The AI Work Loop I Actually Needed](./2026-04-21-start-sync-close-loop.md) | 2026-04-21 | ai-pm-os, workflow, operating-system, continuity |
 | 12 | [Why the AI PM OS Feels More Powerful Than a Chatbot](./2026-04-12-why-ai-pm-os-is-powerful.md) | 2026-04-12 | ai-pm-os, workflow, orchestration, product-management |
 | 11 | [How the AI PM OS Spins Up My Entire Workday](./2026-04-12-how-ai-pm-os-works.md) | 2026-04-12 | ai-pm-os, workflow, cmux, chief-of-staff |

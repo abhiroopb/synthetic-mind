@@ -672,25 +672,25 @@
   <div class="container">
     <div class="section-header">
       <h2>Featured Project: AI PM OS</h2>
-      <p>An operating system for product work, built around a Chief of Staff agent, durable workstreams, and resumable parallel sessions.</p>
+      <p>A control plane for product work, built around durable policy, resumable workstreams, and clear boundaries between shared behavior, local adapters, and runtime state.</p>
     </div>
     <div class="featured-grid">
       <a href="ai-pm-os/" class="featured-card">
         <div class="thought-date">Landing page</div>
         <h3>See the full system</h3>
-        <p>A walkthrough of the operating model: start-of-day planning, <code>CONTEXT.md</code> continuity, lightweight derived state, and the public starter repo.</p>
+        <p>A walkthrough of the operating model: repo-owned policy, <code>CONTEXT.md</code> continuity, lightweight derived state, and the public starter repo.</p>
         <span class="thought-tag">overview</span>
       </a>
       <a href="https://github.com/abhiroopb/ai-pm-os" class="featured-card" target="_blank">
         <div class="thought-date">GitHub repo</div>
         <h3>Clone the public export</h3>
-        <p>A sanitized, tool-agnostic version of the system with starter workstreams, repo-local skills, and a simpler <code>today-plan.json</code>-driven state model.</p>
+        <p>A sanitized, tool-agnostic version of the system with starter workstreams, repo-local skills, and a simpler state model you can adapt without importing the private machinery.</p>
         <span class="thought-tag">open source</span>
       </a>
-      <a href="thoughts/2026-04-21-start-sync-close-loop" class="featured-card">
+      <a href="thoughts/2026-05-03-how-i-turned-my-ai-setup-into-a-real-control-plane" class="featured-card">
         <div class="thought-date">Latest thought</div>
-        <h3>Read the full loop</h3>
-        <p>Why the AI PM OS got much better once it stopped being just a startup flow and became a full start, sync, and close operating loop.</p>
+        <h3>Read the control-plane shift</h3>
+        <p>Why the system got sturdier once policy, adapters, skill runtime, and workstream state each had a clear owner.</p>
         <span class="thought-tag">thoughts</span>
       </a>
     </div>
@@ -711,6 +711,20 @@
       <p>Notes on building with AI — what works, what doesn't, and what I've learned</p>
     </div>
     <div class="thoughts-grid">
+
+      <a href="thoughts/2026-05-03-how-i-turned-my-ai-setup-into-a-real-control-plane" class="thought-card">
+        <div class="thought-date">2026-05-03</div>
+        <h3>How I Turned My AI Setup Into a Real Control Plane</h3>
+        <p>The shift from a clever stack of prompts to a system with clear ownership for repo policy, local adapters, runtime state, and archive-backed specialization.</p>
+        <span class="thought-tag">control-plane</span>
+      </a>
+
+      <a href="thoughts/2026-05-03-the-prepare-then-approve-pattern" class="thought-card">
+        <div class="thought-date">2026-05-03</div>
+        <h3>The Prepare-Then-Approve Pattern</h3>
+        <p>Why the best agent workflows prepare the exact action, corroborate inside a bounded lane, and pause before the side effect.</p>
+        <span class="thought-tag">workflow</span>
+      </a>
 
       <a href="thoughts/2026-04-21-start-sync-close-loop" class="thought-card">
         <div class="thought-date">2026-04-21</div>
@@ -752,12 +766,6 @@
         <p>A practical guide to building 35+ AI agent skills that automate morning triage, email, project management, and more — no engineering degree required.</p>
         <span class="thought-tag">workflow</span>
       </a>
-      <a href="thoughts/2026-03-23-amp-mem-noise-reduction" class="thought-card">
-        <div class="thought-date">2026-03-23</div>
-        <h3>Cutting 80% of the Noise from My AI Memory System</h3>
-        <p>After distilling 2,718 observations, found ~90% were noise. Seven plugin changes cut volume by ~80% while preserving signal.</p>
-        <span class="thought-tag">memory-system</span>
-      </a>
       <a href="thoughts/2026-04-06-auto-pilot-skill" class="thought-card">
         <div class="thought-date">2026-04-06</div>
         <h3>I Stopped Telling My Agent Which Tool to Use</h3>
@@ -784,7 +792,7 @@
   <div class="container">
     <div class="section-header">
       <h2>What I've Built</h2>
-      <p>Original skills I created for my daily PM workflow — <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/skills" style="color:var(--accent);text-decoration:none">76 total on GitHub</a></p>
+      <p>A curated front door to <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/skills" style="color:var(--accent);text-decoration:none">100 public skills on GitHub</a>, from daily PM loops to archive-ready specialists.</p>
     </div>
 
     <div class="search-wrap">
@@ -837,7 +845,7 @@
       <!-- Code (non-featured) -->
       <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">💬</div><div class="skill-name">address-pr-comments</div></div><div class="skill-desc">Fix unresolved PR comments, commit per-comment, resolve threads.</div><div class="skill-example">"address PR comments"</div></div>
       <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">✅</div><div class="skill-name">code-review-general</div></div><div class="skill-desc">Address code review feedback — prioritize human comments, verify changes.</div><div class="skill-example">"fix the review feedback"</div></div>
-      <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🗺️</div><div class="skill-name">walkthrough</div></div><div class="skill-desc">Explore and visualize codebase architecture with diagrams.</div><div class="skill-example">"walk me through the payment flow"</div></div>
+      <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🔎</div><div class="skill-name">codesearch</div></div><div class="skill-desc">Search code patterns across company repositories to find implementations, owners, and related usage.</div><div class="skill-example">"find every place we validate JWT headers"</div></div>
       <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">🔧</div><div class="skill-name">check-ci</div></div><div class="skill-desc">Check, debug, and fix CI builds and test failures. Loops until green.</div><div class="skill-example">"fix the CI failure"</div></div>
       <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">📦</div><div class="skill-name">cloning-squareup-repos</div></div><div class="skill-desc">Clone repositories using the correct SSH remote and conventions.</div><div class="skill-example">"clone the repo"</div></div>
       <div class="skill-card cat-code" data-cat="code"><div class="skill-card-header"><div class="skill-icon">📦</div><div class="skill-name">hermit</div></div><div class="skill-desc">Manage hermetic developer tool packages per-repository.</div><div class="skill-example">"install the tool via hermit"</div></div>
@@ -868,7 +876,7 @@
       <div class="skill-card cat-adv" data-cat="adv"><div class="skill-card-header"><div class="skill-icon">🎫</div><div class="skill-name">jira</div></div><div class="skill-desc">Manage Jira issues, transitions, sprints, and workflows.</div><div class="skill-example">"show my open Jira tickets"</div></div>
     </div>
     <div style="text-align:center;margin-top:2rem;">
-      <a href="skills/" class="btn btn-primary">View all 100 skills →</a>
+      <a href="skills/" class="btn btn-primary">Browse the skills front door →</a>
     </div>
   </div>
 </section>
