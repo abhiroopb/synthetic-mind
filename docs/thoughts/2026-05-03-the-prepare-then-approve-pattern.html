@@ -34,7 +34,7 @@
       <a href="../#about">About</a>
       <a href="../ai-pm-os/">AI PM OS</a>
       <a href="../thoughts/" class="active">Thoughts</a>
-      <a href="../skills/">Projects</a>
+      <a href="../skills/">Skills</a>
       <a href="../setup/">Setup</a>
     </div>
     <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
@@ -90,7 +90,13 @@
 
   <h2>A non-proprietary example</h2>
   <p>One recent case made this feel especially clear.</p>
-  <p>The incoming task was a legal-style question about whether a particular image license allowed modification. The useful version of the workflow was not to answer instantly. It was to prepare carefully.</p>
+  <p>The incoming task was a legal-style question about whether a licensed marketing image could be cropped and annotated for a blog post. The useful version of the workflow was not to answer instantly. It was to prepare carefully.</p>
+  <p>The bounded source bundle was small on purpose:</p>
+  <ul>
+    <li>the original request</li>
+    <li>the license terms for the image source</li>
+    <li>one supporting help page clarifying modification rights</li>
+  </ul>
   <p>The better sequence looked like this:</p>
   <ol>
     <li>read the question and the linked context</li>
@@ -99,6 +105,9 @@
     <li>present the message for approval before sending anything</li>
   </ol>
   <p>That kept the workflow fast, but it also kept it inspectable. The human decision happened at the right place, after the evidence and the draft existed, not before.</p>
+  <p>The prepared draft looked more like this than a vague summary:</p>
+  <blockquote>The license allows modification, so cropping and light annotation are fine as long as the other license terms still hold. The safer answer is yes, with the note that we should keep attribution and reuse conditions aligned with the original source.</blockquote>
+  <p>That is the pattern in miniature: gather, verify, draft the actual answer, then pause.</p>
 
   <h2>Why this pattern scales</h2>
   <p>Many agent tasks are not pure execution and not pure brainstorming. They live in the middle.</p>

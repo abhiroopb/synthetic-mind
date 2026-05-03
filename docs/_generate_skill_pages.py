@@ -50,7 +50,7 @@ TEMPLATE = '''\
       <a href="../#about">About</a>
       <a href="../ai-pm-os/">AI PM OS</a>
       <a href="../thoughts/">Thoughts</a>
-      <a href="./" class="active">Projects</a>
+      <a href="./" class="active">Skills</a>
       <a href="../setup/">Setup</a>
     </div>
     <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">

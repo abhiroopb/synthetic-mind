@@ -37,7 +37,7 @@
       <a href="../#about">About</a>
       <a href="../ai-pm-os/">AI PM OS</a>
       <a href="../thoughts/">Thoughts</a>
-      <a href="../skills/" class="active">Projects</a>
+      <a href="../skills/" class="active">Skills</a>
       <a href="../setup/">Setup</a>
     </div>
     <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
@@ -50,6 +50,7 @@
 <div class="page-header">
   <h1>Skills Catalog</h1>
   <p>A curated front door to the 100 public skills in this repo. For the full markdown catalog, use <a href="https://github.com/abhiroopb/synthetic-mind/blob/main/skills/README.md" target="_blank" style="color:var(--accent);text-decoration:none">skills/README.md</a>.</p>
+  <p style="font-size:0.9rem;color:var(--text-dim);margin-top:0.75rem;">Skills with a full site page open here. The rest fall back to the source folder on GitHub.</p>
 </div>
 
 <section class="skills-section">
@@ -62,7 +63,7 @@
     <div class="tabs" id="category-tabs">
       <button class="tab active" data-cat="all">All</button>
       <button class="tab" data-cat="comm">🗣️ Communication</button>
-      <button class="tab" data-cat="proj">📋 Projects</button>
+      <button class="tab" data-cat="proj">📋 Project Work</button>
       <button class="tab" data-cat="code">💻 Code</button>
       <button class="tab" data-cat="data">📊 Data</button>
       <button class="tab" data-cat="infra">🔧 Infra</button>
@@ -188,6 +189,78 @@ const cards = document.querySelectorAll('.skill-card');
 const searchInput = document.getElementById('skill-search');
 const countEl = document.getElementById('skill-count');
 let activeCat = 'all';
+const detailedSkillPages = new Set([
+  'address-pr-comments',
+  'agent-browser',
+  'airtable',
+  'android-emulator',
+  'auto-pilot',
+  'checking-your-lens',
+  'closing-day',
+  'code-review-general',
+  'controlling-computer',
+  'converting-gdocs-to-markdown',
+  'data-analyst',
+  'databricks',
+  'datadog',
+  'feedback-searcher',
+  'free-disk-space',
+  'gcal',
+  'gdrive',
+  'gh-pr-read',
+  'git-worktree',
+  'gmail',
+  'historical-info',
+  'ios-simulator',
+  'kb-distill',
+  'kb-promote',
+  'kb-style-matrix',
+  'launchdarkly-cli',
+  'linear',
+  'linear-to-execution',
+  'logging-feature-requests',
+  'looker',
+  'memory',
+  'notion',
+  'plan-to-linear',
+  'pr-manager',
+  'product',
+  'project-status',
+  'prototype-builder',
+  'push-pr',
+  'ralph-loop',
+  'rebasing-git-branches',
+  'reflect',
+  'reviewing-calendar',
+  'rpi',
+  'rpi-implement',
+  'rpi-iterate',
+  'rpi-plan',
+  'rpi-research',
+  'skill-management',
+  'slack',
+  'snagit',
+  'snowflake',
+  'spec-creator',
+  'start-of-day',
+  'summarize-video',
+  'swarm',
+  'syncing-context',
+  'test-plan-creator',
+  'todo',
+  'viewing-figma-files',
+  'web-research',
+  'writing-feedback',
+  'writing-requirements-docs'
+]);
+
+function resolveSkillHref(name) {
+  if (detailedSkillPages.has(name)) {
+    return `./${name}.html`;
+  }
+
+  return `https://github.com/abhiroopb/synthetic-mind/tree/main/skills/${name}`;
+}
 
 function filterCards() {
   const q = searchInput.value.toLowerCase().trim();
@@ -199,7 +272,7 @@ function filterCards() {
     card.classList.toggle('hidden', !show);
     if (show) visible++;
   });
-  countEl.textContent = `Showing ${visible} of ${cards.length} highlighted skills`;
+  countEl.textContent = `Showing ${visible} of ${cards.length} skills on this page`;
 }
 
 tabs.forEach(tab => {
@@ -216,7 +289,9 @@ searchInput.addEventListener('input', filterCards);
 cards.forEach(card => {
   card.addEventListener('click', () => {
     const name = card.querySelector('.skill-name')?.textContent?.trim();
-    if (name) window.location.href = name;
+    if (name) {
+      window.location.href = resolveSkillHref(name);
+    }
   });
 });
 

@@ -102,6 +102,63 @@
       font-size: 0.92rem;
       line-height: 1.7;
     }
+    .control-plane-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      align-items: stretch;
+    }
+    .control-plane-card {
+      background: linear-gradient(180deg, rgba(20,20,20,0.96), rgba(12,13,17,0.96));
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 1.35rem;
+    }
+    .control-plane-kicker {
+      font-size: 0.72rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.55rem;
+      font-weight: 700;
+    }
+    .control-plane-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.55rem;
+    }
+    .control-plane-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 0.8rem;
+    }
+    .control-plane-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.45rem;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+    .control-plane-list li code {
+      color: var(--text);
+    }
+    .control-plane-flow {
+      margin-top: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.1rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.75;
+      text-align: center;
+    }
+    .control-plane-flow code {
+      color: var(--text);
+    }
     .install-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -654,6 +711,7 @@
       .hero h1 {
         font-size: 2.2rem;
       }
+      .control-plane-grid,
       .feature-grid,
       .snapshot,
       .links-grid {
@@ -677,7 +735,7 @@
       <a href="../#about">About</a>
       <a href="../ai-pm-os/" class="active">AI PM OS</a>
       <a href="../thoughts/">Thoughts</a>
-      <a href="../skills/">Projects</a>
+      <a href="../skills/">Skills</a>
       <a href="../setup/">Setup</a>
     </div>
     <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
@@ -749,6 +807,52 @@
         <h3>A real closeout, not tab sprawl</h3>
         <p>The loop includes explicit sync and closeout steps, so the system can recover after the day gets messy and tomorrow starts from a handoff instead of guesswork.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>How the control plane is split</h2>
+      <p>The important shift was not just adding more skills. It was making ownership obvious.</p>
+    </div>
+    <div class="control-plane-grid">
+      <div class="control-plane-card">
+        <div class="control-plane-kicker">Layer 1</div>
+        <h3>Repo policy</h3>
+        <p>The repo owns the durable behavior: what the system should do, what it should not do, and which workflows belong where.</p>
+        <ul class="control-plane-list">
+          <li><code>AGENTS.md</code> defines the stable rules</li>
+          <li>Shared scripts and state rebuilders live with the repo</li>
+          <li>Changes here are versioned, reviewable, and portable</li>
+        </ul>
+      </div>
+      <div class="control-plane-card">
+        <div class="control-plane-kicker">Layer 2</div>
+        <h3>Local adapters</h3>
+        <p>Machine-specific setup stays local. This layer connects your laptop, shell, and installed tools to the shared operating model without redefining it.</p>
+        <ul class="control-plane-list">
+          <li>Home-directory config stays thin on purpose</li>
+          <li>Local skills and startup hooks act like adapters</li>
+          <li>The job is wiring, not alternate policy</li>
+        </ul>
+      </div>
+      <div class="control-plane-card">
+        <div class="control-plane-kicker">Layer 3</div>
+        <h3>Runtime state</h3>
+        <p>The current day lives in files, not terminal history. That is what makes the system resumable after interruptions, crashes, and long gaps.</p>
+        <ul class="control-plane-list">
+          <li><code>today-plan.json</code> and <code>system/state/</code> show the current recommendation</li>
+          <li><code>workstreams/*/CONTEXT.md</code> preserves thread-level continuity</li>
+          <li>Live source snapshots keep long-running work grounded in fresh docs</li>
+        </ul>
+      </div>
+    </div>
+    <div class="control-plane-flow">
+      <strong>In practice:</strong> repo policy decides the rules, local adapters connect the machine, and runtime state captures what is true right now. That split is what makes the setup feel calm instead of fragile.
     </div>
   </div>
 </section>

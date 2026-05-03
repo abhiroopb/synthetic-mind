@@ -87,7 +87,13 @@ The agent has already done the hard part. The user keeps the final say over the 
 
 One recent case made this feel especially clear.
 
-The incoming task was a legal-style question about whether a particular image license allowed modification. The useful version of the workflow was not to answer instantly. It was to prepare carefully.
+The incoming task was a legal-style question about whether a licensed marketing image could be cropped and annotated for a blog post. The useful version of the workflow was not to answer instantly. It was to prepare carefully.
+
+The bounded source bundle was small on purpose:
+
+- the original request
+- the license terms for the image source
+- one supporting help page clarifying modification rights
 
 The better sequence looked like this:
 
@@ -99,6 +105,12 @@ The better sequence looked like this:
 That kept the workflow fast, but it also kept it inspectable.
 
 The human decision happened at the right place, after the evidence and the draft existed, not before.
+
+The prepared draft looked more like this than a vague summary:
+
+> The license allows modification, so cropping and light annotation are fine as long as the other license terms still hold. The safer answer is yes, with the note that we should keep attribution and reuse conditions aligned with the original source.
+
+That is the pattern in miniature: gather, verify, draft the actual answer, then pause.
 
 ## Why this pattern scales
 

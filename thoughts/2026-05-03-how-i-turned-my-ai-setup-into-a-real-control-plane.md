@@ -20,6 +20,12 @@ The breakthrough was not another model upgrade.
 
 It was deciding that the system needed a real control plane.
 
+One concrete example made the problem obvious.
+
+I would tweak a startup behavior locally to get my machine unstuck, then later make a repo-level workflow change that looked like it covered the same problem. A week after that, the system would behave one way on my laptop, another way in the public repo, and a third way in my head. Nothing was fully broken. It was worse than that. The ownership was ambiguous, so debugging meant opening too many instruction surfaces and guessing which one was actually in charge.
+
+That was the moment the problem stopped feeling like "prompt tuning" and started feeling architectural.
+
 ## The idea
 
 The control-plane model is simple.
@@ -57,6 +63,8 @@ Once I started treating those files as adapters instead of alternate sources of 
 When something drifted, it was easier to answer a basic question:
 
 Is this a repo behavior problem or a local runtime problem?
+
+That sounds small, but it changes the maintenance loop a lot. You stop fixing symptoms in random places and start repairing the right layer.
 
 ### 3. Split the skill runtime by job, not by habit
 

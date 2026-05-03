@@ -34,7 +34,7 @@
       <a href="../#about">About</a>
       <a href="../ai-pm-os/" class="active">AI PM OS</a>
       <a href="../thoughts/">Thoughts</a>
-      <a href="../skills/">Projects</a>
+      <a href="../skills/">Skills</a>
       <a href="../setup/">Setup</a>
     </div>
     <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
@@ -64,6 +64,10 @@
   <p>Some behavior lived in the repo. Some lived in the home directory. Some lived in setup glue that had grown over time. If something drifted, it was not always obvious which surface was supposed to own the fix.</p>
   <p>That is usually the point where AI setups start feeling clever and fragile at the same time.</p>
   <p>The breakthrough was not another model upgrade. It was deciding that the system needed a real control plane.</p>
+  <p>One concrete example made the problem obvious.</p>
+  <p>I would tweak a startup behavior locally to get my machine unstuck, then later make a repo-level workflow change that looked like it covered the same problem. A week after that, the system would behave one way on my laptop, another way in the public repo, and a third way in my head.</p>
+  <p>Nothing was fully broken. It was worse than that. The ownership was ambiguous, so debugging meant opening too many instruction surfaces and guessing which one was actually in charge.</p>
+  <p>That was the moment the problem stopped feeling like prompt tuning and started feeling architectural.</p>
 
   <h2>The idea</h2>
   <p>The control-plane model is simple.</p>
@@ -79,6 +83,7 @@
   <p>Home-directory config still matters, but now it acts more like an adapter layer.</p>
   <p>That layer handles local runtime concerns, machine-specific setup, and startup behavior that should not redefine the shared system.</p>
   <p>Once I started treating those files as adapters instead of alternate sources of truth, the setup got calmer. When something drifted, it was easier to answer a basic question: is this a repo behavior problem or a local runtime problem?</p>
+  <p>That sounds small, but it changes the maintenance loop a lot. You stop fixing symptoms in random places and start repairing the right layer.</p>
 
   <h2>3. Split the skill runtime by job, not by habit</h2>
   <p>The skill library had grown big enough that the old model was doing too much in one place.</p>
