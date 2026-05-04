@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roadmap Project Update — Skills — synthetic-mind</title>
+  <meta name="description" content="Draft a weekly project update for any project lead. Start from the project record, gather evidence only from resources already linked on that project, synthesize **Progress / Problems / Plans** intern">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    .gh-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; padding: 0.5rem 1rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--surface); transition: all 0.15s;
+    }
+    .gh-link:hover { color: var(--text); border-color: var(--text-dim); }
+    .gh-link svg { width: 16px; height: 16px; fill: currentColor; }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../#about">About</a>
+      <a href="../ai-pm-os/">AI PM OS</a>
+      <a href="../thoughts/">Thoughts</a>
+      <a href="./" class="active">Skills</a>
+      <a href="../setup/">Setup</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All skills</a>
+
+  <h1>Roadmap Project Update</h1>
+  <div class="article-meta">
+    <span class="article-tag">skill</span>
+    <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/skills/blueprint-project-update" class="gh-link" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+  </div>
+
+  <pre><code>Draft a weekly project update for any project lead. Start from the project record, gather evidence only from resources already linked on that project, synthesize **Progress / Problems / Plans** internally, then map that into the project tracking system&#x27;s `Weekly Status`, `Update`, and `Risks/Blockers` fields.
+
+**Scope:** Weekly updates for one selected project at a time. This skill does not replace full GTM readiness work, broad project investigation, or batch portfolio syncing.
+
+## Prerequisites
+
+**STOP** if any of these are not met:
+
+- Airtable access to the project tracking base is unavailable
+- The project cannot be uniquely resolved from the user input
+
+Before gathering evidence, confirm you can access the linked systems that appear on the project record. If a linked source such as Linear, GitHub, Slack, Google Drive, or feature flags is unavailable, note the gap and continue with the evidence you do have.
+
+## Core Workflow
+
+### Step 1: Identify the Current User
+
+- [ ] Determine the current user&#x27;s email address from session context; fall back to Slack `get_user_info` with username `me`
+- [ ] Look up the user in the People Database table by filtering on the `Email` field
+- [ ] Store the matching People record ID for the `Submitted - By` field
+- [ ] If no match is found, warn the user and continue
+
+### Step 2: Resolve the Project
+
+- [ ] Search the Projects table using the project name, Airtable URL, or record ID from `$ARGUMENTS`
+- [ ] If multiple matches are found, show a disambiguation list
+- [ ] Fetch the full project record and show a brief summary: project name, status, DRI, owning org, and linked resources
+
+### Step 3: Gather Recent Evidence
+
+- [ ] Read the 2-3 most recent status updates linked to this project for context
+- [ ] Follow only the resources already linked on the project record
+- [ ] Use the last 7 days as the default evidence window
+- [ ] Do not do broad org-wide searches — continue with available evidence
+
+### Step 4: Draft Progress / Problems / Plans
+
+- [ ] Build an internal PPP view from the evidence
+- [ ] Keep `Progress` limited to work completed or meaningfully advanced in the last 7 days
+- [ ] Include `Problems` only when backed by evidence
+- [ ] Keep `Plans` focused on the next 1-2 concrete outcomes
+
+### Step 5: Map the Draft into Fields
+
+- `Weekly Status`: 🟢 (on track) / 🟡 (risk or dependency) / 🔴 (blocked or slipping)
+- `Update`: Concise summary of what moved this week and what happens next
+- `Risks/Blockers`: Leave empty when no material risks; otherwise summarize plainly
+
+### Step 6: Review in Chat Before Writing
+
+- [ ] Show the user the exact proposed diff before writing
+- [ ] Revise the draft in chat if the user wants changes
+- [ ] Stop here unless the user explicitly approves the write
+
+### Step 7: Create the Status Update Record
+
+- [ ] Create a new record in the Status Updates table
+- [ ] Link it to the project record
+- [ ] Set the `Submitted - By` field to the resolved People record ID
+- [ ] Never overwrite a prior status-update record
+- [ ] Confirm the new record was created and summarize what was written
+
+## Output Rules
+
+- Always show the draft directly in chat first
+- Keep the final `Update` concise and recent
+- Prefer summaries over verbatim quotes from Slack or docs
+- Do not include secrets, credentials, or unnecessary PII
+- If evidence is thin, say so clearly instead of inventing confidence
+
+## Related Skills
+
+- **blueprint-status-update** — Batch update sweep rather than single-project drafts
+- **gh-pr-read** — When a linked resource is a GitHub PR
+- **launch-a-product** — Broader GTM readiness workflow
+- **project-status** — Wider multi-system project investigation</code></pre>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>

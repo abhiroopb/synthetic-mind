@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roadmap Status Update — Skills — synthetic-mind</title>
+  <meta name="description" content="Audits and updates roadmap project statuses by pulling from Connected Resources (Linear, Slack, Jira, etc.), up-leveling into PM-friendly format, and writing to the project tracker with user approval.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    .gh-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; padding: 0.5rem 1rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--surface); transition: all 0.15s;
+    }
+    .gh-link:hover { color: var(--text); border-color: var(--text-dim); }
+    .gh-link svg { width: 16px; height: 16px; fill: currentColor; }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../#about">About</a>
+      <a href="../ai-pm-os/">AI PM OS</a>
+      <a href="../thoughts/">Thoughts</a>
+      <a href="./" class="active">Skills</a>
+      <a href="../setup/">Setup</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All skills</a>
+
+  <h1>Roadmap Status Update</h1>
+  <div class="article-meta">
+    <span class="article-tag">skill</span>
+    <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/skills/blueprint-status-update" class="gh-link" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+  </div>
+
+  <pre><code>Audits and updates roadmap project statuses by pulling from Connected Resources (Linear, Slack, Jira, etc.), up-leveling into PM-friendly format, and writing to the project tracker with user approval.
+
+**STOP** if any of these are missing — the skill cannot function without them:
+- Airtable API token (see `SETUP.md`)
+- Linear API key (see `SETUP.md`)
+- Slack skill installed and authenticated
+
+## Prerequisites
+
+- Linear API key environment variable must be set (see `SETUP.md`)
+- Airtable token configured (see `SETUP.md`)
+- Slack skill authenticated with full scopes (for DM nudges and reading channels)
+- Mapping DB at `~/.config/amp/project-linear-map.json` (auto-discovered on first run)
+
+## Workflow
+
+Load `references/workflow.md` for the full step-by-step workflow.
+
+### High-Level Steps
+
+1. **Load Projects** — Query Airtable for active projects where you are DRI
+2. **Gather Connected Resources** — Pull linked Linear projects, Slack channels, Jira epics
+3. **Check for Fresh Updates** — Query each source for recent activity (last 7 days)
+4. **Run Health Audit** — Flag stale updates, overdue dates, status mismatches, missing fields
+5. **Present Findings** — Show one project at a time with proposed update for user approval
+6. **Write Approved Updates** — Create status update records in Airtable
+7. **Nudge Missing Updates** — Send Slack DMs to project leads who haven&#x27;t posted updates
+8. **Demo Proposals** — Suggest demo-worthy items from shipped work with eng lead names
+9. **Final Summary** — Report what was updated, nudged, skipped, and health issues found
+
+&gt; **Tip:** After running this skill, use `weekly-status-summary` to assemble a consolidated Slack message from the approved updates.
+
+## Key Rules
+
+- Always show a diff of proposed changes before writing — never auto-write without approval
+- Present one project at a time — don&#x27;t batch approvals
+- Use `- ` (dash) for bullets in updates, NOT `•` — the project tracker renders `- ` as proper bullets
+- Remove internal eng jargon but keep enough technical context for comprehension
+- Frame progress in terms of user/customer impact where possible
+- Preserve dates, percentages, metrics, and platform breakdowns
+
+## Reference Files
+
+- `references/workflow.md` — Full update cycle step-by-step
+- `references/field-ids.md` — Airtable base, table, and field IDs
+- `references/update-format.md` — Formatting guidelines and template</code></pre>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>

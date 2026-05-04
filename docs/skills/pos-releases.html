@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POS Releases — Skills — synthetic-mind</title>
+  <meta name="description" content="Answers questions about Square Point of Sale release train schedules by querying the official POS Releases Notion page (go/posreleases) and recent Slack updates.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    .gh-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; padding: 0.5rem 1rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--surface); transition: all 0.15s;
+    }
+    .gh-link:hover { color: var(--text); border-color: var(--text-dim); }
+    .gh-link svg { width: 16px; height: 16px; fill: currentColor; }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../#about">About</a>
+      <a href="../ai-pm-os/">AI PM OS</a>
+      <a href="../thoughts/">Thoughts</a>
+      <a href="./" class="active">Skills</a>
+      <a href="../setup/">Setup</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All skills</a>
+
+  <h1>POS Releases</h1>
+  <div class="article-meta">
+    <span class="article-tag">skill</span>
+    <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/skills/pos-releases" class="gh-link" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+  </div>
+
+  <pre><code>Answers questions about Square Point of Sale release train schedules by querying the official POS Releases Notion page (go/posreleases) and recent Slack updates.
+
+**STOP** if the local CSV files (`references/2026-ios-release-schedule.csv`, `references/2026-android-release-schedule.csv`) are missing and the Notion page is unreachable.
+
+## Data Sources
+
+### Slack Channels (primary source for live/recent data)
+Search these channels using the `slack` skill for real-time release info:
+- **#pos-release-train** — Primary channel for branch cut announcements, beta drops, rollout updates, blockers, and train status changes
+- **#release-foundation-discuss** — Cross-platform release infrastructure discussions, tooling changes, and process updates
+- **#squid-release-train** — SQUID-specific release train updates (device software tied to POS releases)
+
+### Local CSV Data (exported from Notion — source of truth for projected dates)
+- **iOS schedule:** `references/2026-ios-release-schedule.csv`
+  - Columns: Release, Release Train, Branch Cut, Beta, App Store Submission, 1%, 2%, 5%, 10%, 20%, 50%, 100%, Notes
+- **Android schedule:** `references/2026-android-release-schedule.csv`
+  - Columns: Release Version, Release Train, Branch Cut, Beta, 10%, 25%, 50%, 100%, Notes
+
+Read these CSVs to answer any schedule question. They contain the full 2026 projected schedule through Jan 2027.
+
+### Notion Page (for live/updated data if CSVs become stale)
+- **Parent page:** `https://www.notion.so/db5acde38502482790fba31398686382`
+- **iOS database:** `https://www.notion.so/2df70293beed802e8a39d9224044a843`
+- **Android database:** `https://www.notion.so/2df70293beed80e89488e7394c221d12`
+
+## Workflow
+
+- [ ] **Read the CSV schedule first** — read `references/2026-ios-release-schedule.csv` and/or `references/2026-android-release-schedule.csv` to get the projected dates. Filter to relevant rows based on today&#x27;s date or the user&#x27;s question.
+- [ ] **Search Slack for live status** — load the `slack` skill and run `scripts/get-release-status.sh` or search the channels for recent updates:
+   - For branch cuts: search `&quot;branch cut&quot; in:#pos-release-train`
+   - For betas: search `&quot;beta&quot; in:#pos-release-train`
+   - For rollout/GA: search `&quot;rollout&quot; OR &quot;GA&quot; OR &quot;100%&quot; in:#pos-release-train`
+   - For blockers/issues: search `&quot;blocker&quot; OR &quot;blocked&quot; in:#pos-release-train`
+   - Channel IDs: #pos-release-train = C02FFLH8H, SQUID updates = CAMTTU16D
+- [ ] **Synthesize** — combine CSV (projected schedule) with Slack (actual/live status). If Slack shows a date change, blocker, or delay, note it alongside the projected date.
+- [ ] **Present results as a markdown table** — always include a clear, well-formatted table. Include the most relevant columns:
+   - For schedule questions: Release, Branch Cut, Beta, key rollout dates (1%/10%, 100%)
+   - For &quot;when&quot; questions: focus on the specific milestone asked about
+- [ ] **Add context** — note whether dates are projected or confirmed via Slack. Recommend `#pos-release-train` for live updates.
+
+## Important Notes
+- All dates are **projected** and subject to change.
+- See `references/platform-details.md` for rollout percentages, channel IDs, and platform-specific behavior.
+
+## Scripts
+
+- **`scripts/get-release-status.sh [ios|android|all] [days_back]`** — Fetches recent messages from #pos-release-train and the SQUID updates channel to show current train status. Run this first for any status question.
+
+## Release Cadence
+
+- **Branch cuts happen every Friday** (weekly)
+- **Even versions** (6.88, 6.90, …) are real iOS/Android release trains; **odd versions** (6.89, 6.91, …) are DRY RUN (practice cuts)
+- Actual releases ship **biweekly** (every other Friday&#x27;s branch cut)
+
+## Example Queries &amp; Responses
+
+**User:** &quot;When is the next branch cut?&quot;
+→ Run `scripts/get-release-status.sh` to get current state, then derive next Friday&#x27;s branch cut version. Present both DRY RUN and real train dates.
+
+**User:** &quot;What version is going to beta next?&quot;
+→ Search Slack for the latest beta rolling announcement, identify the next version in the pipeline.
+
+**User:** &quot;Show me the Q1 2026 iOS release schedule&quot;
+→ Fetch iOS schedule from Notion, supplement with Slack for actual status.
+
+**User:** &quot;What&#x27;s currently live?&quot;
+→ Run `scripts/get-release-status.sh` and look for the most recent &quot;100% GA&quot; announcement.</code></pre>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>

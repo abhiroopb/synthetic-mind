@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monitor Open PRs — Skills — synthetic-mind</title>
+  <meta name="description" content="Continuously monitor all open PRs authored by you. Detect new review comments and CI failures, then automatically address them: respond to comments, fix code, commit, and push.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    .gh-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; padding: 0.5rem 1rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--surface); transition: all 0.15s;
+    }
+    .gh-link:hover { color: var(--text); border-color: var(--text-dim); }
+    .gh-link svg { width: 16px; height: 16px; fill: currentColor; }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../#about">About</a>
+      <a href="../ai-pm-os/">AI PM OS</a>
+      <a href="../thoughts/">Thoughts</a>
+      <a href="./" class="active">Skills</a>
+      <a href="../setup/">Setup</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All skills</a>
+
+  <h1>Monitor Open PRs</h1>
+  <div class="article-meta">
+    <span class="article-tag">skill</span>
+    <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/skills/monitoring-prs" class="gh-link" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+  </div>
+
+  <pre><code>Continuously monitor all open PRs authored by you. Detect new review comments and CI failures, then automatically address them: respond to comments, fix code, commit, and push.
+
+**STOP** — Before proceeding, verify prerequisites:
+- Run `gh auth status` to confirm GitHub CLI is authenticated.
+- Run `gh api user --jq &#x27;.login&#x27;` to confirm user identity.
+
+## Step 1: Poll Open PRs
+
+Run the polling script to find PRs with actionable items. This checks for:
+- **New unresolved review comments** (from other authors, since last check)
+- **CI failures**
+
+If no PRs have actionable items, report &quot;All PRs are clean ✅&quot; and stop.
+
+## Step 2: Process Each PR
+
+### Priority 1: CI Failures
+
+If CI is failing:
+
+1. **Clone/navigate to the repo** — `cd` to the repo if locally available, otherwise clone it
+2. **Checkout the PR branch**: `gh pr checkout &lt;PR_URL&gt;`
+3. **Load the `check-ci` skill** to analyze and fix CI failures
+4. The check-ci skill will loop: analyze → fix → commit → push → re-check until green or max retries
+5. After CI is addressed, continue to comments
+
+### Priority 2: Review Comments
+
+For each unresolved comment thread, evaluate and act:
+
+#### Evaluation Guidelines
+
+- **Is the feedback valid?** Not all comments are correct
+- **Bot comments** deserve extra scrutiny — automated tools can be pedantic
+- **Is there a better approach** that addresses the underlying concern?
+
+#### Action: Fix Code
+
+If the comment requests a valid code change:
+
+1. Read the file and surrounding context
+2. Make the fix
+3. Verify the change makes sense in context
+4. Commit with a descriptive message referencing the feedback
+
+#### Action: Reply to Comment
+
+After fixing, reply to the comment thread:
+
+```bash
+gh api &quot;repos/$OWNER/$REPO/pulls/$PR_NUMBER/comments&quot; \
+  -f body=&quot;Addressed — updated by AI Agent 🤖&quot; \
+  -F in_reply_to=&lt;COMMENT_ID&gt;
+```
+
+If you disagree with the suggestion, reply with technical reasoning instead.
+
+#### Action: Resolve Thread
+
+After addressing a comment, resolve the thread via GraphQL:
+
+```bash
+gh api graphql -f query=&#x27;
+mutation {
+  resolveReviewThread(input: {threadId: &quot;&lt;THREAD_ID&gt;&quot;}) {
+    thread { id }
+  }
+}&#x27;
+```
+
+## Step 3: Push Changes
+
+After all comments on a PR are addressed:
+
+```bash
+git push
+```
+
+Push once after all fixes for a given PR, not after each individual commit.
+
+## Step 4: Report
+
+```
+## PR Monitor Summary
+
+### PR #123 — &quot;Add feature support&quot; (org/repo)
+- ✅ CI: Fixed compile error, pushed, CI now green
+- ✅ Comments: Addressed 3 review comments, replied to 1 question
+
+### PR #456 — &quot;Update checkout flow&quot; (org/repo)
+- ✅ Comments: Addressed 2 review comments
+- ⏭️ CI: Already passing
+```
+
+## Continuous Mode
+
+If asked to &quot;keep monitoring&quot; or &quot;watch continuously&quot;:
+
+1. Run the full poll → process → report cycle
+2. Sleep 5 minutes
+3. Loop back to Step 1
+4. Report only **changes** since last cycle
+5. Exit after 1 hour or when the user interrupts
+
+## Important Notes
+
+- **One commit per comment** — don&#x27;t bundle multiple fixes into one commit
+- **Always push** — changes aren&#x27;t useful until pushed
+- **Reply signing** — all replies must end with `— AI Agent 🤖`
+- **GraphQL for resolution** — REST API doesn&#x27;t support resolving threads
+- **State tracking** — track last-check timestamps to avoid re-processing old comments</code></pre>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saving Cash Rounding Feedback — Skills — synthetic-mind</title>
+  <meta name="description" content="Appends seller feedback to the Feature Feedback tracking table in Google Docs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    .gh-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; padding: 0.5rem 1rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--surface); transition: all 0.15s;
+    }
+    .gh-link:hover { color: var(--text); border-color: var(--text-dim); }
+    .gh-link svg { width: 16px; height: 16px; fill: currentColor; }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../#about">About</a>
+      <a href="../ai-pm-os/">AI PM OS</a>
+      <a href="../thoughts/">Thoughts</a>
+      <a href="./" class="active">Skills</a>
+      <a href="../setup/">Setup</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All skills</a>
+
+  <h1>Saving Cash Rounding Feedback</h1>
+  <div class="article-meta">
+    <span class="article-tag">skill</span>
+    <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/skills/saving-cash-rounding-feedback" class="gh-link" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+  </div>
+
+  <pre><code>Appends seller feedback to the Feature Feedback tracking table in Google Docs.
+
+&gt; **STOP** if the `gdrive` skill is not available or the tracking doc cannot be accessed. Also stop if the feedback text or seller identity (email or merchant token) is missing — ask the user to provide them.
+
+## Target Document
+
+- **Doc ID**: `1WAPVMavQbnmnU83AWY7T1vGOCo92oZqSbhBMI6ZPhHE`
+- **Tab ID**: `t.yg7h7jh60g59` (this is the **&quot;Post-Launch&quot; child tab** under &quot;Seller feedback&quot;)
+- **URL**: https://docs.google.com/document/d/YOUR_DOC_ID/edit
+- **Important**: When using `docs get`, you MUST use `--include-tabs` to see child/sub-tabs. The Post-Launch tab is a child of the &quot;Seller feedback&quot; tab and won&#x27;t appear in the top-level tab list. Use `find_tab` recursively through `childTabs`.
+
+## Workflow
+
+When the user says to save feature feedback, follow these steps:
+
+### Step 1: Identify the feedback source
+
+The feedback can come from **two sources**:
+
+#### Option A: Email
+The user will provide (or you&#x27;ll extract from the current context):
+- The **feedback text** (verbatim, word for word — do NOT modify it)
+- The **seller&#x27;s email address**
+
+If either is missing, ask the user.
+
+#### Option B: Slack link
+The user will provide a Slack message URL (e.g., `https://your-org.slack.com/archives/CXXXXXX/pXXXXXXXXXX`).
+
+1. Load the `slack` skill and read the message using `get-channel-messages` with the channel ID and thread timestamp extracted from the URL. Use `--full-text` to avoid truncation.
+2. Extract the **feedback text** verbatim from the message.
+3. If a merchant token (e.g., `MT: XXXXX` or similar) is mentioned in the message, extract it directly — skip the Regulator lookup in Step 2.
+4. The **Source** column should be the raw Slack link (not &quot;Email from…&quot;).
+
+### Step 2: Look up merchant token from Regulator
+
+**Skip this step if the merchant token was already extracted from the Slack message.**
+
+Search Regulator for the seller using their email address.
+
+**Method 1: GraphQL omniSearch**
+
+```bash
+sq curl -s -X POST &#x27;https://graphql-gateway.internal.example.com/graphql&#x27; \
+  -H &#x27;Content-Type: application/json&#x27; \
+  -H &#x27;apollographql-client-name: amp-regulator-skill&#x27; \
+  -H &#x27;apollographql-client-version: 1.0.0&#x27; \
+  -d &#x27;{&quot;query&quot;: &quot;query { omniSearch(query: \&quot;&lt;EMAIL_ADDRESS&gt;\&quot;) { merchantToken } }&quot;}&#x27;
+```
+
+**Method 2: Regulator Advanced Search UI (fallback)**
+
+If the API returns null, provide the user with the Regulator advanced search link so they can look it up manually:
+
+```
+https://regulator.internal.example.com/o/advanced-search?searchParams=%7B%22email%22%3A%22&lt;URL_ENCODED_EMAIL&gt;%22%7D&amp;searchTarget=email
+```
+
+Note: The advanced search is a client-side UI and cannot be queried via API. Always try the API first, then provide the link.
+
+Extract the `merchantToken` from the result. If no merchant is found, note &quot;Not found&quot; in the merchant token column, provide the Regulator search link, and inform the user.
+
+### Step 3: Read the current document structure
+
+Get the document structure to find the table and its indices:
+
+```bash
+cd ~/.agents/skills/gdrive &amp;&amp; uv run gdrive-cli.py docs get 1WAPVMavQbnmnU83AWY7T1vGOCo92oZqSbhBMI6ZPhHE
+```
+
+Find the table in the tab `t.yg7h7jh60g59`. Identify:
+- The table&#x27;s element index
+- The last row index (to insert after it)
+- The cell start indices for each column
+
+### Step 4: Add a new row to the table
+
+Insert a new row at the bottom of the table:
+
+```bash
+cd ~/.agents/skills/gdrive &amp;&amp; uv run gdrive-cli.py docs batch-update 1WAPVMavQbnmnU83AWY7T1vGOCo92oZqSbhBMI6ZPhHE \
+  --requests &#x27;[{&quot;insertTableRow&quot;: {&quot;tableCellLocation&quot;: {&quot;tableStartLocation&quot;: {&quot;index&quot;: &lt;TABLE_INDEX&gt;}, &quot;rowIndex&quot;: &lt;LAST_ROW_INDEX&gt;, &quot;columnIndex&quot;: 0}, &quot;insertBelow&quot;: true}}]&#x27;
+```
+
+### Step 5: Populate the new row cells
+
+After inserting the row, re-read the doc structure to get updated indices, then populate the three columns:
+
+1. **Column 1 — Feedback**: Copy/paste the feedback text **verbatim** (do not change anything)
+2. **Column 2 — Merchant Token**: The merchant token from Regulator lookup
+3. **Column 3 — Source**: &quot;Email from &lt;email_address&gt;&quot; (for emails) or the raw Slack link (for Slack messages)
+
+Use batch-update with insertText requests to populate each cell:
+
+```bash
+cd ~/.agents/skills/gdrive &amp;&amp; uv run gdrive-cli.py docs batch-update 1WAPVMavQbnmnU83AWY7T1vGOCo92oZqSbhBMI6ZPhHE \
+  --requests &#x27;[
+    {&quot;insertText&quot;: {&quot;location&quot;: {&quot;index&quot;: &lt;COL1_INDEX&gt;}, &quot;text&quot;: &quot;&lt;FEEDBACK_TEXT&gt;&quot;}},
+    {&quot;insertText&quot;: {&quot;location&quot;: {&quot;index&quot;: &lt;COL2_INDEX&gt;}, &quot;text&quot;: &quot;&lt;MERCHANT_TOKEN&gt;&quot;}},
+    {&quot;insertText&quot;: {&quot;location&quot;: {&quot;index&quot;: &lt;COL3_INDEX&gt;}, &quot;text&quot;: &quot;&lt;SOURCE&gt;&quot;}}
+  ]&#x27;
+```
+
+**Important**: When inserting text into multiple cells in a single batch, process the cells in **reverse index order** (highest index first) so earlier insertions don&#x27;t shift the indices of later ones.
+
+### Step 6: Confirm
+
+Tell the user:
+&gt; ✅ Saved feedback to the Feature Feedback tracking doc.
+&gt; - **Merchant token**: &lt;token&gt;
+&gt; - **Source**: &lt;source (email or Slack link)&gt;
+&gt; - **Doc**: [link to doc]
+
+## Notes
+
+- Always copy the feedback **word for word** — never summarize, clean up, or rephrase.
+- If the Regulator lookup returns multiple merchants, list them and ask the user to confirm which one.
+- The tab ID `t.yg7h7jh60g59` is important — make sure you&#x27;re looking at the right tab when reading the doc structure.</code></pre>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>

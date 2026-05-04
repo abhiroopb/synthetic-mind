@@ -50,7 +50,7 @@
 <div class="page-header">
   <h1>Skills Catalog</h1>
   <p>A curated front door to the 100 public skills in this repo. For the full markdown catalog, use <a href="https://github.com/abhiroopb/synthetic-mind/blob/main/skills/README.md" target="_blank" style="color:var(--accent);text-decoration:none">skills/README.md</a>.</p>
-  <p style="font-size:0.9rem;color:var(--text-dim);margin-top:0.75rem;">Skills with a full site page open here. The rest fall back to the source folder on GitHub.</p>
+  <p style="font-size:0.9rem;color:var(--text-dim);margin-top:0.75rem;">Every card here opens a local detail page. For the full repo inventory, use the markdown catalog.</p>
 </div>
 
 <section class="skills-section">
@@ -183,76 +183,14 @@
   <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
 </footer>
 
+<script src="./manifest.js"></script>
 <script>
 const tabs = document.querySelectorAll('.tab');
 const cards = document.querySelectorAll('.skill-card');
 const searchInput = document.getElementById('skill-search');
 const countEl = document.getElementById('skill-count');
 let activeCat = 'all';
-const detailedSkillPages = new Set([
-  'address-pr-comments',
-  'agent-browser',
-  'airtable',
-  'android-emulator',
-  'auto-pilot',
-  'checking-your-lens',
-  'closing-day',
-  'code-review-general',
-  'controlling-computer',
-  'converting-gdocs-to-markdown',
-  'data-analyst',
-  'databricks',
-  'datadog',
-  'feedback-searcher',
-  'free-disk-space',
-  'gcal',
-  'gdrive',
-  'gh-pr-read',
-  'git-worktree',
-  'gmail',
-  'historical-info',
-  'ios-simulator',
-  'kb-distill',
-  'kb-promote',
-  'kb-style-matrix',
-  'launchdarkly-cli',
-  'linear',
-  'linear-to-execution',
-  'logging-feature-requests',
-  'looker',
-  'memory',
-  'notion',
-  'plan-to-linear',
-  'pr-manager',
-  'product',
-  'project-status',
-  'prototype-builder',
-  'push-pr',
-  'ralph-loop',
-  'rebasing-git-branches',
-  'reflect',
-  'reviewing-calendar',
-  'rpi',
-  'rpi-implement',
-  'rpi-iterate',
-  'rpi-plan',
-  'rpi-research',
-  'skill-management',
-  'slack',
-  'snagit',
-  'snowflake',
-  'spec-creator',
-  'start-of-day',
-  'summarize-video',
-  'swarm',
-  'syncing-context',
-  'test-plan-creator',
-  'todo',
-  'viewing-figma-files',
-  'web-research',
-  'writing-feedback',
-  'writing-requirements-docs'
-]);
+const detailedSkillPages = new Set(window.DETAILED_SKILL_PAGES || []);
 
 function resolveSkillHref(name) {
   if (detailedSkillPages.has(name)) {
@@ -272,7 +210,7 @@ function filterCards() {
     card.classList.toggle('hidden', !show);
     if (show) visible++;
   });
-  countEl.textContent = `Showing ${visible} of ${cards.length} skills on this page`;
+  countEl.textContent = `Showing ${visible} of ${cards.length} catalog entries on this page`;
 }
 
 tabs.forEach(tab => {
