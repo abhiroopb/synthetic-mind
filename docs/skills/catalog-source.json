@@ -1,0 +1,757 @@
+{
+  "page": {
+    "title": "Skills Catalog",
+    "description": "A curated front door to the 100 public AI agent skills in synthetic-mind, spanning control-plane behavior, PM workflows, engineering, data, and docs.",
+    "intro": "A curated front door to the 100 public skills in this repo. For the full markdown catalog, use <a href=\"https://github.com/abhiroopb/synthetic-mind/blob/main/skills/README.md\" target=\"_blank\" style=\"color:var(--accent);text-decoration:none\">skills/README.md</a>.",
+    "subintro": "Every card here opens a local detail page. For the full repo inventory, use the markdown catalog."
+  },
+  "tabs": [
+    {
+      "id": "all",
+      "label": "All",
+      "active": true
+    },
+    {
+      "id": "comm",
+      "label": "🗣️ Communication",
+      "active": false
+    },
+    {
+      "id": "proj",
+      "label": "📋 Project Work",
+      "active": false
+    },
+    {
+      "id": "code",
+      "label": "💻 Code",
+      "active": false
+    },
+    {
+      "id": "data",
+      "label": "📊 Data",
+      "active": false
+    },
+    {
+      "id": "infra",
+      "label": "🔧 Infra",
+      "active": false
+    },
+    {
+      "id": "test",
+      "label": "🧪 Testing",
+      "active": false
+    },
+    {
+      "id": "prod",
+      "label": "📝 Product",
+      "active": false
+    },
+    {
+      "id": "adv",
+      "label": "🧠 Advanced",
+      "active": false
+    }
+  ],
+  "skills": [
+    {
+      "cat": "comm",
+      "icon": "💬",
+      "name": "start-of-day",
+      "desc": "Morning triage: Slack → Gmail → Calendar. Surfaces unreads, drafts replies, shows schedule.",
+      "example": "\"start my day\""
+    },
+    {
+      "cat": "comm",
+      "icon": "💬",
+      "name": "slack",
+      "desc": "Search, read, and post messages across Slack workspaces.",
+      "example": "\"search Slack for project updates\""
+    },
+    {
+      "cat": "comm",
+      "icon": "📅",
+      "name": "gcal",
+      "desc": "Create, update, RSVP, and check availability on Google Calendar.",
+      "example": "\"what meetings do I have tomorrow?\""
+    },
+    {
+      "cat": "comm",
+      "icon": "📅",
+      "name": "reviewing-calendar",
+      "desc": "Visual weekly calendar with conflict detection and color coding.",
+      "example": "\"review my calendar this week\""
+    },
+    {
+      "cat": "comm",
+      "icon": "📄",
+      "name": "gdrive",
+      "desc": "Read/write Google Docs, Sheets, Slides. Search and manage Drive files.",
+      "example": "\"create a Google Doc titled Q1 Plan\""
+    },
+    {
+      "cat": "comm",
+      "icon": "📝",
+      "name": "gmail",
+      "desc": "Search, read, send, draft, and manage emails, labels, and filters.",
+      "example": "\"draft a reply to the latest email from Sarah\""
+    },
+    {
+      "cat": "comm",
+      "icon": "📓",
+      "name": "notion",
+      "desc": "Read, search, create, and update pages in your Notion workspace.",
+      "example": "\"search Notion for the roadmap\""
+    },
+    {
+      "cat": "comm",
+      "icon": "🪞",
+      "name": "reflect",
+      "desc": "Guided reflection for performance reviews. Asks questions, synthesizes responses.",
+      "example": "\"start a reflection\""
+    },
+    {
+      "cat": "comm",
+      "icon": "✍️",
+      "name": "writing-feedback",
+      "desc": "Draft performance feedback — self-reflections, peer reviews, manager evaluations.",
+      "example": "\"draft my self-reflection\""
+    },
+    {
+      "cat": "comm",
+      "icon": "🖥️",
+      "name": "controlling-computer",
+      "desc": "Control macOS via AppleScript — apps, windows, volume, dark mode.",
+      "example": "\"turn on dark mode\""
+    },
+    {
+      "cat": "comm",
+      "icon": "🎨",
+      "name": "viewing-figma-files",
+      "desc": "Inspect Figma files, view structure, export images, read comments.",
+      "example": "\"inspect the checkout frame in this Figma\""
+    },
+    {
+      "cat": "comm",
+      "icon": "📄",
+      "name": "drafting-docs",
+      "desc": "Draft and format Google Docs with consistent styling.",
+      "example": "\"draft a strategy doc\""
+    },
+    {
+      "cat": "comm",
+      "icon": "📬",
+      "name": "cash-rounding-responder",
+      "desc": "Triage and draft replies to feature feedback emails.",
+      "example": "\"respond to feature feedback emails\""
+    },
+    {
+      "cat": "comm",
+      "icon": "📣",
+      "name": "shipped-announcements",
+      "desc": "Craft and post launch announcements to Slack.",
+      "example": "\"write a shipped post\""
+    },
+    {
+      "cat": "comm",
+      "icon": "📑",
+      "name": "slack-saved-triage",
+      "desc": "Prioritize and group Slack saved messages. Triage your save-for-later queue.",
+      "example": "\"triage my saved messages\""
+    },
+    {
+      "cat": "comm",
+      "icon": "👥",
+      "name": "manager-slack-summary",
+      "desc": "Weekly summary of Slack conversations with your manager. Groups by topic.",
+      "example": "\"summarize my slack with my manager\""
+    },
+    {
+      "cat": "proj",
+      "icon": "📌",
+      "name": "linear",
+      "desc": "Create, search, update issues and projects in Linear.",
+      "example": "\"create a Linear issue for the login bug\""
+    },
+    {
+      "cat": "proj",
+      "icon": "📋",
+      "name": "plan-to-linear",
+      "desc": "Convert a structured plan into Linear issues and projects in bulk.",
+      "example": "\"convert this plan into Linear tickets\""
+    },
+    {
+      "cat": "proj",
+      "icon": "▶️",
+      "name": "linear-to-execution",
+      "desc": "Pick up a Linear issue and prepare for implementation.",
+      "example": "\"work on PROJ-42\""
+    },
+    {
+      "cat": "proj",
+      "icon": "📊",
+      "name": "project-status",
+      "desc": "Aggregate project status from Slack, Drive, GitHub, and feature flags.",
+      "example": "\"what's the project status?\""
+    },
+    {
+      "cat": "proj",
+      "icon": "🕰️",
+      "name": "historical-info",
+      "desc": "Search across sources to find what you've been working on.",
+      "example": "\"what have I worked on this week?\""
+    },
+    {
+      "cat": "proj",
+      "icon": "📥",
+      "name": "logging-feature-requests",
+      "desc": "Digest feature requests from Slack and log them to a tracking sheet.",
+      "example": "\"log this as a feature request\""
+    },
+    {
+      "cat": "proj",
+      "icon": "🗺️",
+      "name": "blueprint-intake",
+      "desc": "Create roadmap projects from Slack threads or pasted context.",
+      "example": "\"turn this thread into a roadmap project\""
+    },
+    {
+      "cat": "proj",
+      "icon": "🔍",
+      "name": "blueprint-project-status",
+      "desc": "Audit and update project statuses in bulk. Cross-reference connected resources.",
+      "example": "\"audit project statuses\""
+    },
+    {
+      "cat": "proj",
+      "icon": "📝",
+      "name": "blueprint-project-update",
+      "desc": "Draft and add weekly project updates from connected resources.",
+      "example": "\"write a project update\""
+    },
+    {
+      "cat": "proj",
+      "icon": "🔄",
+      "name": "blueprint-status-update",
+      "desc": "Sync project statuses from Linear, Slack, and Jira.",
+      "example": "\"sync project statuses\""
+    },
+    {
+      "cat": "proj",
+      "icon": "📊",
+      "name": "weekly-status-summary",
+      "desc": "Generate consolidated weekly summary from project updates and post to Slack.",
+      "example": "\"post weekly status summary\""
+    },
+    {
+      "cat": "proj",
+      "icon": "🛣️",
+      "name": "roadmap-intake",
+      "desc": "Create roadmap projects from Slack threads, docs, or links.",
+      "example": "\"file this into the roadmap\""
+    },
+    {
+      "cat": "proj",
+      "icon": "👀",
+      "name": "monitoring-prs",
+      "desc": "Watch open PRs for new comments and CI failures. Auto-fix and respond.",
+      "example": "\"monitor my PRs\""
+    },
+    {
+      "cat": "proj",
+      "icon": "🪞",
+      "name": "checking-your-lens",
+      "desc": "Add a final judgment pass so the output sounds grounded, direct, and context-aware.",
+      "example": "\"give this one last pass\""
+    },
+    {
+      "cat": "proj",
+      "icon": "🌙",
+      "name": "closing-day",
+      "desc": "Wrap the day with a short carry-forward snapshot so tomorrow starts from a real handoff.",
+      "example": "\"close the day\""
+    },
+    {
+      "cat": "proj",
+      "icon": "🧭",
+      "name": "syncing-context",
+      "desc": "Refresh the lightweight state layer after a plan change or before a follow-on session.",
+      "example": "\"sync PM OS\""
+    },
+    {
+      "cat": "code",
+      "icon": "🔍",
+      "name": "gh-pr-read",
+      "desc": "Read and summarize GitHub pull requests using the gh CLI.",
+      "example": "\"summarize PR #4521\""
+    },
+    {
+      "cat": "code",
+      "icon": "🚀",
+      "name": "pr-manager",
+      "desc": "Commit changes, create/update PRs. Supports Graphite stacked PRs.",
+      "example": "\"commit and create a PR\""
+    },
+    {
+      "cat": "code",
+      "icon": "⬆️",
+      "name": "push-pr",
+      "desc": "Quick push branch and create a draft PR with AI-generated description.",
+      "example": "\"push pr\""
+    },
+    {
+      "cat": "code",
+      "icon": "💬",
+      "name": "address-pr-comments",
+      "desc": "Fix unresolved PR comments, commit per-comment, resolve threads.",
+      "example": "\"address PR comments\""
+    },
+    {
+      "cat": "code",
+      "icon": "✅",
+      "name": "code-review-general",
+      "desc": "Address code review feedback — prioritize human comments, verify changes.",
+      "example": "\"fix the review feedback\""
+    },
+    {
+      "cat": "code",
+      "icon": "🔀",
+      "name": "rebasing-git-branches",
+      "desc": "Rebase branches onto upstream targets, resolve conflicts.",
+      "example": "\"rebase my branch onto main\""
+    },
+    {
+      "cat": "code",
+      "icon": "🌳",
+      "name": "git-worktree",
+      "desc": "Manage git worktrees for working on multiple branches simultaneously.",
+      "example": "\"create a worktree for the hotfix\""
+    },
+    {
+      "cat": "code",
+      "icon": "🔎",
+      "name": "codesearch",
+      "desc": "Search code patterns across company repositories to find implementations, owners, and related usage.",
+      "example": "\"find every place we validate JWT headers\""
+    },
+    {
+      "cat": "code",
+      "icon": "🔧",
+      "name": "check-ci",
+      "desc": "Check, debug, and fix CI builds and test failures. Loops until green.",
+      "example": "\"fix the CI failure\""
+    },
+    {
+      "cat": "code",
+      "icon": "📦",
+      "name": "cloning-squareup-repos",
+      "desc": "Clone repositories using the correct SSH remote and conventions.",
+      "example": "\"clone the repo\""
+    },
+    {
+      "cat": "code",
+      "icon": "📦",
+      "name": "hermit",
+      "desc": "Manage hermetic developer tool packages per-repository.",
+      "example": "\"install the tool via hermit\""
+    },
+    {
+      "cat": "code",
+      "icon": "🔗",
+      "name": "protos",
+      "desc": "Search and inspect protocol buffer definitions, messages, services, and enums.",
+      "example": "\"find the proto definition\""
+    },
+    {
+      "cat": "data",
+      "icon": "❄️",
+      "name": "snowflake",
+      "desc": "Run SQL queries on Snowflake with SSO authentication.",
+      "example": "\"query conversion rates\""
+    },
+    {
+      "cat": "data",
+      "icon": "🧱",
+      "name": "databricks",
+      "desc": "Run SQL on Databricks Lakehouse. Search tables and catalogs.",
+      "example": "\"search for the payments table\""
+    },
+    {
+      "cat": "data",
+      "icon": "📊",
+      "name": "looker",
+      "desc": "Interact with Looker dashboards, tiles, queries, explores, and models.",
+      "example": "\"run Looker dashboard 1234\""
+    },
+    {
+      "cat": "data",
+      "icon": "📈",
+      "name": "data-analyst",
+      "desc": "Full analysis pipeline with follow-up questions, charts, and visualizations.",
+      "example": "\"analyze abandonment trends\""
+    },
+    {
+      "cat": "data",
+      "icon": "📑",
+      "name": "airtable",
+      "desc": "Manage Airtable bases, tables, records with filtering and sorting.",
+      "example": "\"search Airtable for Q1 features\""
+    },
+    {
+      "cat": "data",
+      "icon": "🕸️",
+      "name": "graphql-schema-discovery",
+      "desc": "Discover and navigate GraphQL schemas via MCP or introspection.",
+      "example": "\"inspect this GraphQL schema\""
+    },
+    {
+      "cat": "infra",
+      "icon": "🐕",
+      "name": "datadog",
+      "desc": "Query logs, metrics, traces, monitors, RUM, and CI visibility.",
+      "example": "\"check Datadog for service errors\""
+    },
+    {
+      "cat": "infra",
+      "icon": "🚩",
+      "name": "launchdarkly-cli",
+      "desc": "Create, toggle, list, and manage LaunchDarkly feature flags.",
+      "example": "\"list flags with 'checkout' in the name\""
+    },
+    {
+      "cat": "infra",
+      "icon": "🧪",
+      "name": "pos-releases",
+      "desc": "Query release train schedules, branch cuts, and rollout dates.",
+      "example": "\"when does this POS release ship?\""
+    },
+    {
+      "cat": "infra",
+      "icon": "📸",
+      "name": "snagit",
+      "desc": "Capture screenshots and recordings from macOS.",
+      "example": "\"take a screenshot\""
+    },
+    {
+      "cat": "infra",
+      "icon": "🧹",
+      "name": "free-disk-space",
+      "desc": "Survey and clean up disk space on macOS.",
+      "example": "\"free up disk space\""
+    },
+    {
+      "cat": "test",
+      "icon": "📱",
+      "name": "ios-simulator",
+      "desc": "Manage iOS simulators — start, stop, create devices for testing.",
+      "example": "\"start an iPhone 15 simulator\""
+    },
+    {
+      "cat": "test",
+      "icon": "🤖",
+      "name": "android-emulator",
+      "desc": "Manage Android emulators (AVDs) for testing.",
+      "example": "\"list available Android AVDs\""
+    },
+    {
+      "cat": "test",
+      "icon": "🌐",
+      "name": "agent-browser",
+      "desc": "Browser automation — navigate, click, fill forms, take screenshots.",
+      "example": "\"open the page and take a screenshot\""
+    },
+    {
+      "cat": "prod",
+      "icon": "📝",
+      "name": "writing-requirements-docs",
+      "desc": "Write PRDs from rough notes with auto-sourced evidence.",
+      "example": "\"write a PRD from these notes\""
+    },
+    {
+      "cat": "prod",
+      "icon": "📐",
+      "name": "spec-creator",
+      "desc": "Create product specs using structured templates, synced to Linear.",
+      "example": "\"create spec for new feature\""
+    },
+    {
+      "cat": "prod",
+      "icon": "📦",
+      "name": "product",
+      "desc": "Search product docs, requirements, and reference material.",
+      "example": "\"find the product spec\""
+    },
+    {
+      "cat": "prod",
+      "icon": "🔎",
+      "name": "feedback-searcher",
+      "desc": "Search and synthesize user feedback across multiple sources.",
+      "example": "\"what are users saying about onboarding?\""
+    },
+    {
+      "cat": "prod",
+      "icon": "🧲",
+      "name": "feature-request-scanner",
+      "desc": "Daily scan of feedback channels for product feature requests.",
+      "example": "\"scan for feature requests\""
+    },
+    {
+      "cat": "prod",
+      "icon": "🚀",
+      "name": "launch-a-product",
+      "desc": "Guide PMs through GTM launch readiness and rollout prep.",
+      "example": "\"check launch readiness\""
+    },
+    {
+      "cat": "prod",
+      "icon": "🧩",
+      "name": "prototype-builder",
+      "desc": "Scaffold and build interactive HTML prototypes for product features.",
+      "example": "\"build prototype for the new flow\""
+    },
+    {
+      "cat": "prod",
+      "icon": "✅",
+      "name": "test-plan-creator",
+      "desc": "Generate test plans and acceptance criteria from product specs.",
+      "example": "\"create test plan for the redesign\""
+    },
+    {
+      "cat": "prod",
+      "icon": "🌍",
+      "name": "web-research",
+      "desc": "Search the web for competitors, trends, and best practices.",
+      "example": "\"research competitor onboarding flows\""
+    },
+    {
+      "cat": "prod",
+      "icon": "🏪",
+      "name": "ecom-great-stores",
+      "desc": "Search and surface example seller sites by industry, feature, or use case.",
+      "example": "\"show me bakery site examples\""
+    },
+    {
+      "cat": "prod",
+      "icon": "🔬",
+      "name": "ecom-research",
+      "desc": "Search seller research insights: quotes, site reviews, competitive analysis, CSAT.",
+      "example": "\"what do sellers say about ordering?\""
+    },
+    {
+      "cat": "prod",
+      "icon": "💾",
+      "name": "saving-cash-rounding-feedback",
+      "desc": "Save feature feedback into the tracking doc for later triage.",
+      "example": "\"save this feedback\""
+    },
+    {
+      "cat": "prod",
+      "icon": "🛡️",
+      "name": "trust-feature-validation",
+      "desc": "Validate feature behavior during rollouts. Spot-check users, audit data.",
+      "example": "\"validate the feature rollout\""
+    },
+    {
+      "cat": "prod",
+      "icon": "🏗️",
+      "name": "staging-account-builder",
+      "desc": "Provision full staging accounts with payments, catalog, orders, and labor data.",
+      "example": "\"create a test restaurant account\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🤖",
+      "name": "auto-pilot",
+      "desc": "Routes any request to the right skill(s) automatically.",
+      "example": "(always active)"
+    },
+    {
+      "cat": "adv",
+      "icon": "🧠",
+      "name": "synthetic-mind",
+      "desc": "Publish thoughts, processes, and updates into this repo.",
+      "example": "\"publish this thought\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🛠️",
+      "name": "skill-management",
+      "desc": "List, inspect, add, remove, and update skills.",
+      "example": "\"show installed skills\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🔬",
+      "name": "rpi",
+      "desc": "Research → Plan → Implement for complex, multi-step tasks.",
+      "example": "\"rpi: refactor the auth module\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🔍",
+      "name": "rpi-research",
+      "desc": "Deep-dive research phase — understand existing code and systems.",
+      "example": "\"research how auth tokens work\""
+    },
+    {
+      "cat": "adv",
+      "icon": "📋",
+      "name": "rpi-plan",
+      "desc": "Create phased implementation plans with success criteria.",
+      "example": "\"plan the API redesign\""
+    },
+    {
+      "cat": "adv",
+      "icon": "⚡",
+      "name": "rpi-implement",
+      "desc": "Execute approved plans phase by phase with verification.",
+      "example": "\"implement phase 1\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🔄",
+      "name": "rpi-iterate",
+      "desc": "Update plans based on feedback or new requirements.",
+      "example": "\"update plan — add rate limiting\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🐝",
+      "name": "swarm",
+      "desc": "Multi-perspective investigation with adversarial challenge and consensus.",
+      "example": "\"investigate the latency spike\""
+    },
+    {
+      "cat": "adv",
+      "icon": "♻️",
+      "name": "ralph-loop",
+      "desc": "Iterative work-review loop using two AI models.",
+      "example": "(complex revision tasks)"
+    },
+    {
+      "cat": "adv",
+      "icon": "🧠",
+      "name": "memory",
+      "desc": "Persistent cross-session memory — captures observations, generates summaries.",
+      "example": "\"search memory for auth decisions\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🧬",
+      "name": "kb-distill",
+      "desc": "Distill raw observations into structured knowledge notes.",
+      "example": "\"distill my recent work\""
+    },
+    {
+      "cat": "adv",
+      "icon": "📈",
+      "name": "kb-promote",
+      "desc": "Promote durable notes into rules, memory, or reusable skills.",
+      "example": "\"promote this note\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🎯",
+      "name": "kb-style-matrix",
+      "desc": "Build a communication voice profile from your actual writing.",
+      "example": "\"analyze my writing style\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🗣️",
+      "name": "communication-coach",
+      "desc": "Concise, high-signal coaching for internal communication.",
+      "example": "\"tighten this message\""
+    },
+    {
+      "cat": "adv",
+      "icon": "💬",
+      "name": "jack-guidance",
+      "desc": "Concise, direct coaching for internal communication. High-signal, low-fluff.",
+      "example": "\"jack guidance on this status update\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🤖",
+      "name": "eng-ai-chat",
+      "desc": "Search internal knowledge grounded in app context. AI-powered answers.",
+      "example": "\"how does the auth service work?\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🔎",
+      "name": "enterprise-search",
+      "desc": "Search the internal knowledge base, chat with AI, and read docs.",
+      "example": "\"search internal docs\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🔍",
+      "name": "glean",
+      "desc": "Search internal knowledge via enterprise search tooling.",
+      "example": "\"search Glean for this topic\""
+    },
+    {
+      "cat": "adv",
+      "icon": "☁️",
+      "name": "blox",
+      "desc": "Delegate work to cloud workstations. Launch, provision, and manage remote dev environments.",
+      "example": "\"run this on a cloud workstation\""
+    },
+    {
+      "cat": "adv",
+      "icon": "📚",
+      "name": "dev-guides",
+      "desc": "Search and browse internal developer documentation and guides.",
+      "example": "\"find the setup guide\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🔗",
+      "name": "go-link",
+      "desc": "Resolve internal go/ shortlinks to full URLs.",
+      "example": "\"what does go/oncall point to?\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🎫",
+      "name": "jira",
+      "desc": "Manage Jira issues, transitions, sprints, and workflows.",
+      "example": "\"show my open Jira tickets\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🏪",
+      "name": "merchant-lookup",
+      "desc": "Query merchant and customer data via internal admin tools.",
+      "example": "\"look up this merchant\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🛡️",
+      "name": "regulator",
+      "desc": "Query merchant data and admin state via internal tools.",
+      "example": "\"inspect this account state\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🧾",
+      "name": "converting-gdocs-to-markdown",
+      "desc": "Convert Google Docs into markdown for repo-friendly publishing.",
+      "example": "\"convert this doc to markdown\""
+    },
+    {
+      "cat": "adv",
+      "icon": "🎥",
+      "name": "summarize-video",
+      "desc": "Summarize videos with transcript highlights and quotes.",
+      "example": "\"summarize this meeting recording\""
+    },
+    {
+      "cat": "proj",
+      "icon": "✅",
+      "name": "todo",
+      "desc": "Persistent to-do list with proactive reminders. Auto-captures from Slack, Gmail, Calendar, Linear.",
+      "example": "\"add a to-do to review the spec\""
+    }
+  ]
+}

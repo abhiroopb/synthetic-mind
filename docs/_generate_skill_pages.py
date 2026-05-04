@@ -8,6 +8,8 @@ import html as html_mod
 
 SKILLS_SRC = os.path.join(os.path.dirname(__file__), '..', 'skills')
 SKILLS_OUT = os.path.join(os.path.dirname(__file__), 'skills')
+CATALOG_SOURCE = os.path.join(SKILLS_OUT, 'catalog-source.json')
+CATALOG_INDEX_OUT = os.path.join(SKILLS_OUT, 'index.html')
 MANIFEST_OUT = os.path.join(SKILLS_OUT, 'manifest.js')
 
 TEMPLATE = '''\
@@ -80,6 +82,141 @@ TEMPLATE = '''\
 <footer>
   <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
 </footer>
+
+</body>
+</html>'''
+
+CATALOG_TEMPLATE = '''\
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{page_title} — synthetic-mind</title>
+  <meta name="description" content="{meta_description}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .page-header {{
+      padding: 8rem 2rem 3rem; text-align: center; max-width: 800px; margin: 0 auto;
+    }}
+    .page-header h1 {{
+      font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #fff 0%, #a3a3a3 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }}
+    .page-header p {{ font-size: 1.1rem; color: var(--text-muted); }}
+    .skills-section {{ padding: 0 0 4rem; }}
+    .skill-count {{
+      text-align: center; font-size: 0.8rem; color: var(--text-dim);
+      margin-top: 1.5rem; font-family: 'JetBrains Mono', monospace;
+    }}
+    @media (max-width: 768px) {{
+      .page-header h1 {{ font-size: 1.8rem; }}
+    }}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../#about">About</a>
+      <a href="../ai-pm-os/">AI PM OS</a>
+      <a href="../thoughts/">Thoughts</a>
+      <a href="../skills/" class="active">Skills</a>
+      <a href="../setup/">Setup</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>{page_title}</h1>
+  <p>{intro_html}</p>
+  <p style="font-size:0.9rem;color:var(--text-dim);margin-top:0.75rem;">{subintro_html}</p>
+</div>
+
+<section class="skills-section">
+  <div class="container">
+    <div class="search-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
+      <input type="text" id="skill-search" placeholder="Search skills...">
+    </div>
+
+    <div class="tabs" id="category-tabs">
+{tabs_html}
+    </div>
+
+    <div class="skills-page-grid" id="skills-grid">
+{cards_html}
+    </div>
+
+    <div class="skill-count" id="skill-count"></div>
+  </div>
+</section>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+<script src="./manifest.js"></script>
+<script>
+const tabs = document.querySelectorAll('.tab');
+const cards = document.querySelectorAll('.skill-card');
+const searchInput = document.getElementById('skill-search');
+const countEl = document.getElementById('skill-count');
+let activeCat = 'all';
+const detailedSkillPages = new Set(window.DETAILED_SKILL_PAGES || []);
+
+function resolveSkillHref(name) {{
+  if (detailedSkillPages.has(name)) {{
+    return `./${{name}}.html`;
+  }}
+
+  return `https://github.com/abhiroopb/synthetic-mind/tree/main/skills/${{name}}`;
+}}
+
+function filterCards() {{
+  const q = searchInput.value.toLowerCase().trim();
+  let visible = 0;
+  cards.forEach(card => {{
+    const matchesCat = activeCat === 'all' || card.dataset.cat === activeCat;
+    const matchesSearch = !q || card.textContent.toLowerCase().includes(q);
+    const show = matchesCat && matchesSearch;
+    card.classList.toggle('hidden', !show);
+    if (show) visible++;
+  }});
+  countEl.textContent = `Showing ${{visible}} of ${{cards.length}} catalog entries on this page`;
+}}
+
+tabs.forEach(tab => {{
+  tab.addEventListener('click', () => {{
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    activeCat = tab.dataset.cat;
+    filterCards();
+  }});
+}});
+
+searchInput.addEventListener('input', filterCards);
+
+cards.forEach(card => {{
+  card.addEventListener('click', () => {{
+    const name = card.querySelector('.skill-name')?.textContent?.trim();
+    if (name) {{
+      window.location.href = resolveSkillHref(name);
+    }}
+  }});
+}});
+
+filterCards();
+</script>
 
 </body>
 </html>'''
@@ -304,8 +441,52 @@ def write_manifest(skill_names):
         f.write(manifest)
 
 
+def load_catalog_source():
+    with open(CATALOG_SOURCE, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
+def render_catalog_tabs(tabs):
+    rendered = []
+    for tab in tabs:
+        active = ' active' if tab.get('active') else ''
+        rendered.append(
+            f'      <button class="tab{active}" data-cat="{escape(tab["id"])}">{escape(tab["label"])}</button>'
+        )
+    return '\n'.join(rendered)
+
+
+def render_catalog_cards(skills):
+    rendered = []
+    for skill in skills:
+        rendered.append(
+            '      '
+            f'<div class="skill-card cat-{escape(skill["cat"])}" data-cat="{escape(skill["cat"])}">'
+            f'<div class="skill-card-header"><div class="skill-icon">{escape(skill["icon"])}</div>'
+            f'<div class="skill-name">{escape(skill["name"])}</div></div>'
+            f'<div class="skill-desc">{escape(skill["desc"])}</div>'
+            f'<div class="skill-example">{escape(skill["example"])}</div>'
+            '</div>'
+        )
+    return '\n'.join(rendered)
+
+
+def write_catalog_index(catalog):
+    rendered = CATALOG_TEMPLATE.format(
+        page_title=escape(catalog['page']['title']),
+        meta_description=escape(catalog['page']['description']),
+        intro_html=catalog['page']['intro'],
+        subintro_html=escape(catalog['page']['subintro']),
+        tabs_html=render_catalog_tabs(catalog['tabs']),
+        cards_html=render_catalog_cards(catalog['skills']),
+    )
+    with open(CATALOG_INDEX_OUT, 'w', encoding='utf-8') as f:
+        f.write(rendered)
+
+
 def main():
     os.makedirs(SKILLS_OUT, exist_ok=True)
+    catalog = load_catalog_source()
 
     entries = sorted(os.listdir(SKILLS_SRC))
     generated = []
@@ -331,6 +512,7 @@ def main():
             errors.append(f'ERROR {entry}: {e}')
             print(f'  ✗ {entry}: {e}')
 
+    write_catalog_index(catalog)
     write_manifest(generated_skill_names)
 
     print(f'\nGenerated: {len(generated)} pages')
