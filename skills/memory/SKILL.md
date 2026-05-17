@@ -1,6 +1,6 @@
 ---
-Skill name: memory
-Skill description: Persistent cross-session memory system. Automatically captures observations, generates semantic summaries, and makes them available to future sessions. Use when saving context, recalling past work, searching memory, or at session end to persist learnings.
+name: memory
+description: Persistent cross-session memory system. Automatically captures observations, generates semantic summaries, and makes them available to future sessions. Use when saving context, recalling past work, searching memory, or at session end to persist learnings.
 ---
 
 # Memory — Persistent Cross-Session Context
@@ -9,10 +9,10 @@ A claude-mem-inspired persistent memory system for Amp. Uses SQLite + FTS5 for s
 
 ## Architecture
 
-- **Database**: `~/.amp/memory/amp-mem.db` (SQLite + FTS5 full-text search)
+- **Database**: `~/.gemini/memory/amp-mem.db` (SQLite + FTS5 full-text search)
 - **CLI**: `~/bin/amp-mem` (all operations)
 - **Web viewer**: `amp-mem serve` → http://localhost:37777 (self-contained in CLI, no external files needed)
-- **Knowledge file**: `~/.amp/memory/knowledge.md` (also maintained for plain-text access)
+- **Knowledge file**: `~/.gemini/memory/knowledge.md` (also maintained for plain-text access)
 
 ## Observation Types
 
@@ -123,7 +123,7 @@ Features:
 
 ## Privacy
 
-- All data stays local in `~/.amp/memory/`
+- All data stays local in `~/.gemini/memory/`
 - No external APIs or network calls
 - User can directly edit/delete entries in the SQLite database
 - The knowledge.md file can be manually edited for quick corrections

@@ -24,9 +24,9 @@
 
 set -euo pipefail
 
-DB="$HOME/.amp/memory/amp-mem.db"
-SCHEMA="$HOME/.amp/memory/schema.sql"
-KNOWLEDGE_FILE="$HOME/.amp/memory/knowledge.md"
+DB="$HOME/.gemini/memory/amp-mem.db"
+SCHEMA="$HOME/.gemini/memory/schema.sql"
+KNOWLEDGE_FILE="$HOME/.gemini/memory/knowledge.md"
 
 # ── Helpers ──────────────────────────────────────────────────────────────
 
@@ -682,14 +682,14 @@ cmd_serve() {
 
     echo "🌐 Starting Amp Memory web viewer on http://localhost:$port"
     echo "   Press Ctrl+C to stop."
-    python3 "$HOME/.amp/memory/web/serve.py" "$port"
+    python3 "$HOME/.gemini/memory/web/serve.py" "$port"
 }
 
 cmd_migrate() {
     _ensure_db
 
     # Check if sessions.jsonl exists and has content
-    local jsonl="$HOME/.amp/memory/sessions.jsonl"
+    local jsonl="$HOME/.gemini/memory/sessions.jsonl"
     if [ ! -f "$jsonl" ] || [ ! -s "$jsonl" ]; then
         echo "ℹ️  No sessions.jsonl to migrate."
         return

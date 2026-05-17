@@ -5,7 +5,7 @@ description: "Persistent to-do list with proactive reminders. Auto-captures acti
 
 # To-Do List — Proactive Task Tracker
 
-A persistent to-do system stored at `~/.config/amp/todo.json`. The user rarely checks a list manually — **proactive prompting is the core feature**.
+A persistent to-do system stored at `~/.gemini/todo.json`. The user rarely checks a list manually — **proactive prompting is the core feature**.
 
 ## Data Schema
 
@@ -42,13 +42,13 @@ Each item in `items[]`:
 
 ## Reading and Writing the To-Do List
 
-Always use `python3` to read/write `~/.config/amp/todo.json`:
+Always use `python3` to read/write `~/.gemini/todo.json`:
 
 ```bash
 # Read all items
 python3 -c "
 import json
-with open('$HOME/.config/amp/todo.json') as f:
+with open('$HOME/.gemini/todo.json') as f:
     data = json.load(f)
 print(json.dumps(data, indent=2))
 "
@@ -59,7 +59,7 @@ print(json.dumps(data, indent=2))
 python3 -c "
 import json, uuid
 from datetime import datetime, timezone
-path = '$HOME/.config/amp/todo.json'
+path = '$HOME/.gemini/todo.json'
 with open(path) as f:
     data = json.load(f)
 item = {
@@ -87,7 +87,7 @@ print(f'✅ Added: {item[\"title\"]} (P{item[\"priority\"]})')
 python3 -c "
 import json
 from datetime import datetime, timezone
-path = '$HOME/.config/amp/todo.json'
+path = '$HOME/.gemini/todo.json'
 with open(path) as f:
     data = json.load(f)
 for item in data['items']:
@@ -105,7 +105,7 @@ with open(path, 'w') as f:
 # Snooze an item
 python3 -c "
 import json
-path = '$HOME/.config/amp/todo.json'
+path = '$HOME/.gemini/todo.json'
 with open(path) as f:
     data = json.load(f)
 for item in data['items']:
@@ -123,7 +123,7 @@ with open(path, 'w') as f:
 # Delete an item by ID
 python3 -c "
 import json
-path = '$HOME/.config/amp/todo.json'
+path = '$HOME/.gemini/todo.json'
 with open(path) as f:
     data = json.load(f)
 data['items'] = [i for i in data['items'] if i['id'] != '<ITEM_ID>']

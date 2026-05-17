@@ -34,8 +34,9 @@ amp-mem distill-dump --since 2026-02-01
 
 Read all dumped observations and identify:
 
-1. **Repeated patterns** — Actions performed 3+ times (e.g., "looked up user account via admin dashboard" appearing across sessions). These are rule candidates.
-2. **Topic clusters** — Groups of related observations that form a coherent knowledge area (e.g., "checkout flow debugging", "feature rollout feedback workflow").
+1. **Repeated patterns** — Actions performed 3+ times. These are rule candidates.
+2. **Topic clusters** — Groups of related observations that form a coherent knowledge area.
+   - **Hot Topic Identification**: Flag clusters with high frequency or critical impact as "Hot Topics." If a pattern suggests a systemic issue (e.g., repeated bugs in a specific module), prioritize it for a new `AGENTS.md` rule.
 3. **Decision chains** — Sequences where a decision was made, tested, and confirmed or revised.
 4. **One-off facts** — Individual observations worth preserving but not patterns.
 

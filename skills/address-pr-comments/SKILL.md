@@ -10,66 +10,35 @@ allowed-tools:
 
 # Address Pull Request Review Comments
 
-When the user asks you to address PR comments or review feedback, follow this process
-
-## Context (auto-fetched)
-
-### REPO_OWNER
-
-!`gh repo view --json owner --jq '.owner.login'`
-
-### REPO_NAME
-
-!`gh repo view --json name --jq '.name'`
-
-### PR_NUMBER
-
-!`gh pr view --json number --jq '.number'`
-
-### Unresolved PR Comments
-
-!`bash ~/.agents/skills/address-pr-comments/fetch-comments.sh`
+When the user asks you to address PR comments or review feedback, follow this process. **Prioritize human review comments over automated/bot comments.**
 
 ## Step 1: Review and Critically Evaluate Comments
 
-Read through the comments to understand what changes are being requested.
-
-Before implementing any changes, ask yourself: **"What would my tech lead say about this comment?"**
+Read through the comments to understand what changes are being requested. Before implementing any changes, ask yourself: **"What would my tech lead say about this comment?"**
 
 ### Critical Evaluation Guidelines
 
-1. **Question the feedback**: Not all comments are correct or necessary
-   - Does the suggested change actually improve the code?
-   - Are there trade-offs the reviewer didn't consider?
-   - Is there a better approach that addresses the underlying concern?
+1. **Question the feedback**: Not all comments are correct or necessary. Does it improve the code? Are there trade-offs?
+2. **Bot comments deserve extra scrutiny**: Automated review tools can be overly pedantic or miss context.
+3. **Evaluate consistency vs. correctness**: Is the existing code you're matching correct, or is it a bug being perpetuated?
 
-2. **Bot comments deserve extra scrutiny**: Automated review tools can be overly pedantic or miss context
-   - Check if the bot's concern is valid in this specific situation
-   - Consider whether the "violation" is actually appropriate here
-   - Don't blindly follow bot suggestions
+### Planning & Human Confirmation
 
-3. **Evaluate consistency vs. correctness**: If a comment suggests matching existing code for consistency
-   - Is the existing code correct, or is it a bug we're perpetuating?
-   - Would it be better to fix both places or discuss a broader refactor?
-   - Sometimes your approach is better and should be explained, not changed
-
-4. **When in doubt, reply with reasoning WITH THE USER'S PERMISSION**: If you think the current implementation is correct
-   - Explain your reasoning in a reply to the comment
-   - Provide technical justification (performance, semantics, maintainability)
-   - Keep the door open for discussion but don't assume you must change it
-   - Ask the user for permission to reply to the comment
+- **For simple/straightforward fixes** (e.g., variable renaming, typos, null checks): proceed directly.
+- **For complex or ambiguous changes** (e.g., architectural shifts, behavioral changes): list your plan and ask the user for confirmation before proceeding.
 
 ## Step 2: Make the Requested Changes
 
 For each comment or group of related comments:
 
-1. Read the relevant file and surrounding context
-2. Make the requested change using the Edit tool
-3. Ensure the change compiles and makes sense
+1. Read the relevant file and surrounding context.
+2. Make the requested change using the Edit tool.
+3. **Verify changes with a sub-agent** for non-trivial changes, refactors, or where correctness isn't immediately obvious.
+4. Ensure the change compiles and makes sense.
 
-## Step 3: Commit Changes
+## Step 3: Commit and Push Changes
 
-After addressing all comments, commit the changes. One commit per comment or issue. Don't bundle multiple comments or issues into a single commit.
+After addressing all comments, commit and push the changes. One commit per comment or issue. Don't bundle multiple comments or issues into a single commit.
 
 ## Step 4: Resolve Review Threads
 

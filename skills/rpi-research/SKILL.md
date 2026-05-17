@@ -176,6 +176,10 @@ Then wait for the user's research query.
    - Add a new section: `## Follow-up Research [timestamp]`
    - Spawn new sub-agents as needed for additional investigation
 
+## Memory Integration
+
+If you make a significant discovery, identify a root cause, or uncover non-obvious behavior during your research, **proactively save it to memory**. Use the `amp-mem save` command or Gemini's `save_memory` tool (scope: project) with the type `discovery` and high confidence. This ensures that the implementation phase can leverage these findings without re-exploring.
+
 ## Related Skills
 
 - `rpi-plan` — Planning phase (run after research)

@@ -4,12 +4,13 @@
 
 ### Static Site Sync
 
-Whenever content is added or changed in this repo (new thoughts, new skills, updated guides, README changes), **also update the static site under `docs/`** to reflect those changes:
+Whenever content is added or changed in this repo (new thoughts, new skills, updated guides, README changes), **automatically update the static site** by running:
 
-- **New thought/blog post** (`thoughts/*.md`) → Create corresponding `docs/thoughts/<slug>.html` using the article template pattern (see existing thought pages). Also add a card entry in `docs/thoughts/index.html` and the thoughts section of `docs/index.html`.
-- **New skill** (`skills/*/SKILL.md`) → Add a skill card to both `docs/skills/index.html` and `docs/index.html` (in the skills grid). Use the appropriate `cat-*` category class and `data-cat` attribute.
-- **Updated `amp-setup-guide.md`** → Sync changes to `docs/setup/index.html` and `docs/memory/index.html` as appropriate.
-- **Updated `README.md`** → Check if any content referenced on `docs/index.html` needs updating.
+```bash
+python3 docs/_generate_skill_pages.py
+```
+
+This script generates individual skill pages and updates the index from existing markdown files. Avoid manual HTML editing in the `docs/` folder for these items to prevent layout drift.
 
 ### Auto-Push
 
