@@ -34,6 +34,7 @@ Scans the local filesystem at `C:\Users\basua\Dropbox\Downloads`, identifies eac
 ## General Guidelines
 
 - **Naming:** Date format is always `YYYY-MM-DD`.
+- **Ignore Folders:** ALWAYS ignore folders within the Downloads directory. Only process files.
 - **Ignore Subfolders:** Only process files at the top level of the Downloads folder.
 - **Folder Creation:** Follow established patterns. Do NOT create year folders for Utilities or Zareen's medical bills.
 - **Description:** For medical/health bills, always include a brief description of the service (e.g., "Sutter Bill for Injured Elbow").
@@ -51,33 +52,55 @@ Scans the local filesystem at `C:\Users\basua\Dropbox\Downloads`, identifies eac
 ### Rule 3: Bank & Brokerage Statements
 - **Destination:** `C:\Users\basua\Dropbox\Money\Banks\{Bank Name}\{Account Folder}\Statements\`
 - **Naming:** `YYYY-MM-DD.pdf` (statement end date).
+- **Exceptions:** Do not use `\Statements` subfolders for:
+  - Chase DoorDash Card: `C:\Users\basua\Dropbox\Money\Banks\Chase\DoorDash Card (8900)\`
+  - Chase Amazon Card: `C:\Users\basua\Dropbox\Money\Banks\Chase\Amazon Card (9951)\`
+  - Chase CPC Checking: `C:\Users\basua\Dropbox\Money\Banks\Chase\CPC Checking (822920638)\`
+  - Chase CPC Savings: `C:\Users\basua\Dropbox\Money\Banks\Chase\CPC Savings (3760199860)\`
+- **Specific Account Mapping:**
+  - Charles Schwab: Check the suffix to map correctly (e.g. 123 -> `5003-4123 - AB Roth IRA\Statements`). Some folders use `\Statement` (singular) instead of `\Statements` (plural) based on precedent.
 
-### Rule 4: Utilities (2424 Tulare Ave)
+### Rule 4: Bill Payments
+- **Destination:** `C:\Users\basua\Dropbox\Money\Banks\{Bank Name}\{Account Folder}\Bill Payment\` (or `\Bill Payments\`)
+- **Naming:** `YYYY-MM-DD.pdf`
+- **Exception:** Do not add "- payment" or any other suffix. Only use the date the file was paid on.
+
+### Rule 5: E-Trade (RSU + ESPP)
+- **Statements:** `C:\Users\basua\Dropbox\Money\Banks\E-Trade\Statements\`
+- **Trade/Release/Payout Confirmations:** `C:\Users\basua\Dropbox\Money\Banks\E-Trade\RSU + ESPP\`
+- **Naming:** Ensure all confirmations have a unique name (e.g., `YYYY-MM-DD - Release - 100 shares.pdf` or `YYYY-MM-DD - Trade - 50 shares (2).pdf`).
+
+### Rule 6: Utilities (2424 Tulare Ave)
 - **Destination:** `C:\Users\basua\Dropbox\Documents\2424 Tulare Ave\Utilities\{Utility Name}\`
 - **Naming:** `YYYY-MM-DD.pdf`
 - **EBSAN:** `EBSAN\Statement\`.
-- **EBMUD:** `EBMUD/`.
-- **PG&E:** `PG&E/`.
-- **Sonic:** `Sonic/`.
+- **EBMUD:** `EBMUD\`.
+- **PG&E:** `PG&E\Electric and Gas Statements\`.
+- **Sonic:** `Sonic\`.
 
-### Rule 5: Pay Stubs & Employment
-- **Destination:** `C:\Users\basua\Dropbox\Money\Payslips\Abhi\{YEAR}\`
-- **Naming:** `YYYY-MM-DD.pdf`.
+### Rule 7: Home & Mortgage (2424 Tulare Ave)
+- **Mortgage Payments:** `C:\Users\basua\Dropbox\Documents\2424 Tulare Ave\Mortgage\Payments\`
+- **Home Insurance:** `C:\Users\basua\Dropbox\Documents\2424 Tulare Ave\Home Insurance\` (e.g., `YYYY-MM-DD - 2026 Policy Renewal.pdf`).
 
-### Rule 6: Car & Transport
-- **FasTrak:** `C:\Users\basua\Dropbox\Documents\Car\FasTrak\YYYY-MM-DD.pdf`.
-
-### Rule 7: Insurance & Health
-- **Dental EOBs (Abhi):** `C:\Users\basua\Dropbox\Documents\Health\Abhi\Dental\YYYY-MM-DD - Delta Dental.pdf` (No "EOB" in name).
+### Rule 8: Insurance & Health
 - **Aetna EOBs (Zareen):** `C:\Users\basua\Dropbox\Documents\Health\Zareen\Bill Payments\YYYY-MM-DD - Aetna EOB.pdf`.
+- **Aetna EOBs (Abhi):** `C:\Users\basua\Dropbox\Documents\Health\Abhi\Bills\YYYY-MM-DD - Aetna EOB.pdf`.
+- **Dental EOBs (Abhi):** `C:\Users\basua\Dropbox\Documents\Health\Abhi\Dental\YYYY-MM-DD - Delta Dental.pdf` (No "EOB" in name).
 - **Health Visits (Abhi):** `C:\Users\basua\Dropbox\Documents\Health\Abhi\Visits\YYYY-MM-DD - Description.pdf`.
 - **Bill Payments (Zareen):** `C:\Users\basua\Dropbox\Documents\Health\Zareen\Bill Payments\YYYY-MM-DD - Description.pdf`. (No "Health" prefix, no year folders).
 
-### Rule 8: Taxes
+### Rule 9: Pay Stubs & Employment
+- **Destination:** `C:\Users\basua\Dropbox\Money\Payslips\Abhi\{YEAR}\`
+- **Naming:** `YYYY-MM-DD.pdf`.
+
+### Rule 10: Car & Transport
+- **FasTrak:** `C:\Users\basua\Dropbox\Documents\Car\FasTrak\YYYY-MM-DD.pdf`.
+
+### Rule 11: Taxes
 - **Destination:** `C:\Users\basua\Dropbox\Money\Tax\Abhi\YA{YEAR}\Documents\`
 - **Naming:** Follow precedent: `{Owner} - {Entity} - {Form/Type}.pdf` (e.g., `Abhi - Fidelity (HSA) - 5498-SA.pdf`).
 
-### Rule 9: Travel
+### Rule 12: Travel
 - **Destination:** `C:\Users\basua\Dropbox\Travel\{YYYY-MM - Destination}\`
 - **Naming:** `YYYY-MM-DD - Description (Details).pdf`.
 - **Deduplication:** Always check if a flight confirmation is an update to an existing booking.
