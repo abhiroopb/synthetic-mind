@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trakt Skill — Skills — synthetic-mind</title>
+  <meta name="description" content="Interact with Trakt.tv for TV show and movie tracking via a local REST API running on port 7273 (part of AmpClaw).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    .gh-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; padding: 0.5rem 1rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--surface); transition: all 0.15s;
+    }
+    .gh-link:hover { color: var(--text); border-color: var(--text-dim); }
+    .gh-link svg { width: 16px; height: 16px; fill: currentColor; }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../#about">About</a>
+      <a href="../ai-pm-os/">AI PM OS</a>
+      <a href="../thoughts/">Thoughts</a>
+      <a href="./" class="active">Skills</a>
+      <a href="../setup/">Setup</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All skills</a>
+
+  <h1>Trakt Skill</h1>
+  <div class="article-meta">
+    <span class="article-tag">skill</span>
+    <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/skills/trakt" class="gh-link" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+  </div>
+
+  <pre><code>Interact with Trakt.tv for TV show and movie tracking via a local REST API running on port 7273 (part of AmpClaw).
+
+## Important
+
+**Trakt is already authenticated.** Do NOT ask the user for credentials, API keys, or tokens. All requests go through the local API which handles auth automatically.
+
+## API Base URL
+
+```
+http://localhost:7273
+```
+
+## Endpoints
+
+### Read Operations (GET)
+
+| Endpoint | Params | Description |
+|---|---|---|
+| `/trakt/stats` | — | User stats (total watched, minutes, etc.) |
+| `/trakt/watchlist` | `?type=movies\|shows` | Get watchlist items |
+| `/trakt/history` | `?type=movies\|shows&amp;limit=20` | Recently watched |
+| `/trakt/watched` | `?type=shows\|movies` | All watched shows/movies with progress |
+| `/trakt/up-next` | — | Next episodes to watch for in-progress shows |
+| `/trakt/calendar` | `?type=shows\|movies&amp;days=7` | Upcoming episodes/movies |
+| `/trakt/recommendations` | `?type=shows\|movies&amp;limit=10` | Personalized recommendations |
+| `/trakt/trending` | `?type=shows\|movies&amp;limit=10` | Currently trending |
+| `/trakt/popular` | `?type=shows\|movies&amp;limit=10` | Most popular |
+| `/trakt/search` | `?q=query&amp;type=movie\|show` | Search for shows/movies |
+| `/trakt/ratings` | `?type=movies\|shows` | User&#x27;s rated items |
+| `/trakt/collection` | `?type=shows\|movies` | User&#x27;s collection |
+| `/trakt/status` | — | API health check |
+
+### Write Operations (POST)
+
+#### Add to Watchlist
+```
+POST /trakt/watchlist
+{&quot;movies&quot;: [{&quot;ids&quot;: {&quot;trakt&quot;: 123}}], &quot;shows&quot;: [{&quot;ids&quot;: {&quot;trakt&quot;: 456}}]}
+```
+
+#### Remove from Watchlist
+```
+POST /trakt/watchlist/remove
+{&quot;movies&quot;: [{&quot;ids&quot;: {&quot;trakt&quot;: 123}}]}
+```
+
+#### Mark as Watched
+```
+POST /trakt/history
+{&quot;movies&quot;: [{&quot;ids&quot;: {&quot;trakt&quot;: 123}}], &quot;shows&quot;: [{&quot;ids&quot;: {&quot;trakt&quot;: 456}}]}
+```
+
+#### Rate an Item
+```
+POST /trakt/ratings
+{&quot;movies&quot;: [{&quot;ids&quot;: {&quot;trakt&quot;: 123}, &quot;rating&quot;: 10}]}
+```
+
+#### Check In (currently watching)
+```
+POST /trakt/checkin
+{&quot;movie&quot;: {&quot;ids&quot;: {&quot;trakt&quot;: 123}}}
+```
+
+## Usage with curl (via Bash tool)
+
+Always use `curl` via the Bash tool to call these endpoints. Examples:
+
+```bash
+# Get stats
+curl -s http://localhost:7273/trakt/stats
+
+# Search for a movie
+curl -s &quot;http://localhost:7273/trakt/search?q=Hail+Mary&amp;type=movie&quot;
+
+# Mark a movie as watched and rate it
+curl -s -X POST http://localhost:7273/trakt/history -H &quot;Content-Type: application/json&quot; -d &quot;{\&quot;movies\&quot;:[{\&quot;ids\&quot;:{\&quot;trakt\&quot;:12345}}]}&quot;
+curl -s -X POST http://localhost:7273/trakt/ratings -H &quot;Content-Type: application/json&quot; -d &quot;{\&quot;movies\&quot;:[{\&quot;ids\&quot;:{\&quot;trakt\&quot;:12345},\&quot;rating\&quot;:10}]}&quot;
+
+# Get what to watch next
+curl -s http://localhost:7273/trakt/up-next
+
+# Get watchlist
+curl -s http://localhost:7273/trakt/watchlist
+```
+
+## Workflow
+
+1. **To find an item:** Use `/trakt/search?q=...` to get the Trakt ID
+2. **To add/rate/mark watched:** Use the Trakt ID from search in POST requests
+3. **To browse:** Use watchlist, up-next, trending, recommendations, or calendar
+4. **Always use the `trakt` ID** from the `ids` object in search results (not imdb/tmdb)</code></pre>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>

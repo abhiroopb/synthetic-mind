@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organizing Downloads — Skills — synthetic-mind</title>
+  <meta name="description" content="Scans the local filesystem at `C:\Users\basua\Dropbox\Downloads`, identifies each file&#x27;s content, and moves/renames it according to the rules below.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    .gh-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; padding: 0.5rem 1rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--surface); transition: all 0.15s;
+    }
+    .gh-link:hover { color: var(--text); border-color: var(--text-dim); }
+    .gh-link svg { width: 16px; height: 16px; fill: currentColor; }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../#about">About</a>
+      <a href="../ai-pm-os/">AI PM OS</a>
+      <a href="../thoughts/">Thoughts</a>
+      <a href="./" class="active">Skills</a>
+      <a href="../setup/">Setup</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All skills</a>
+
+  <h1>Organizing Downloads</h1>
+  <div class="article-meta">
+    <span class="article-tag">skill</span>
+    <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/skills/organizing-downloads" class="gh-link" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+  </div>
+
+  <pre><code>Scans the local filesystem at `C:\Users\basua\Dropbox\Downloads`, identifies each file&#x27;s content, and moves/renames it according to the rules below.
+
+## Filesystem Strategy
+
+- **Use the local filesystem** (`run_shell_command` with PowerShell) for all scanning, moving, and renaming.
+- **Path Handling:** Always use absolute Windows paths with backslashes.
+- **Do NOT use the Dropbox MCP API** for file operations.
+
+## Execution Workflow
+
+1.  **Inventory:** List all files (top-level only) in `C:\Users\basua\Dropbox\Downloads`.
+2.  **Deep Inspection &amp; Contextual Discovery:**
+    - **Step A: Text Extraction.** Use `Select-String` or `Get-Content -Raw` to search for entity names (e.g., &quot;Sutter&quot;, &quot;Block&quot;, &quot;Fidelity&quot;, &quot;EBMUD&quot;), subjects (&quot;Health&quot;, &quot;Salary&quot;, &quot;Dividend&quot;), and confirmation codes.
+    - **Step B: Date Extraction.** Locate the **statement date**, **service date**, or **invoice date** in the content. Do NOT use the file modification date unless no other date exists.
+    - **Step C: Contextual Search.** If the file&#x27;s origin is unclear, search `C:\Users\basua\Dropbox` for subfolders matching extracted keywords to find the established home for such documents.
+    - **Step D: Precedent Check.** Once a destination is found, list the last 3-5 files in that folder. Use their naming convention as the absolute template for the new file.
+3.  **Deduplication &amp; Supplemental Check:**
+    - **Identical:** If hashes match, delete the download.
+    - **Supplemental/Update:** If the filename matches an existing file but the content differs (e.g., a seat upgrade in a flight confirmation, a revised invoice), **replace** the old file with the new one.
+    - **Signed vs Unsigned:** If an unsigned version exists at the destination and the download is signed, replace it.
+4.  **Summary &amp; Approval:**
+    - **MANDATORY:** Present a numbered table with columns: `#`, `Original Filename`, `New Name`, `Destination Folder`, and `Rationale` (why you chose this name/folder).
+    - **MANDATORY:** If replacing an existing file or creating a new folder, highlight this in the summary.
+    - **MANDATORY:** Wait for explicit user confirmation before proceeding.
+5.  **Action:** Upon user approval, `move`, `replace`, or `delete` files.
+
+## General Guidelines
+
+- **Naming:** Date format is always `YYYY-MM-DD`.
+- **Ignore Folders:** ALWAYS ignore folders within the Downloads directory. Only process files.
+- **Ignore Subfolders:** Only process files at the top level of the Downloads folder.
+- **Folder Creation:** Follow established patterns. Do NOT create year folders for Utilities or Zareen&#x27;s medical bills.
+- **Description:** For medical/health bills, always include a brief description of the service (e.g., &quot;Sutter Bill for Injured Elbow&quot;).
+
+## Rules
+
+### Rule 1: Purchase Receipts (Non-Home)
+- **Destination:** `C:\Users\basua\Dropbox\Money\Receipts\{YEAR}\`
+- **Naming:** `YYYY-MM-DD - Item Name (Business Name).pdf`
+
+### Rule 2: Home Contractor Documents (2424 Tulare Ave)
+- **Destination:** `C:\Users\basua\Dropbox\Documents\2424 Tulare Ave\Contractors\{Contractor Name}\`
+- **Naming:** `YYYY-MM-DD - Description.pdf`
+
+### Rule 3: Bank &amp; Brokerage Statements
+- **Destination:** `C:\Users\basua\Dropbox\Money\Banks\{Bank Name}\{Account Folder}\Statements\`
+- **Naming:** `YYYY-MM-DD.pdf` (statement end date).
+- **Exceptions:** Do not use `\Statements` subfolders for:
+  - Chase DoorDash Card: `C:\Users\basua\Dropbox\Money\Banks\Chase\DoorDash Card (8900)\`
+  - Chase Amazon Card: `C:\Users\basua\Dropbox\Money\Banks\Chase\Amazon Card (9951)\`
+  - Chase CPC Checking: `C:\Users\basua\Dropbox\Money\Banks\Chase\CPC Checking (822920638)\`
+  - Chase CPC Savings: `C:\Users\basua\Dropbox\Money\Banks\Chase\CPC Savings (3760199860)\`
+- **Specific Account Mapping:**
+  - Charles Schwab: Check the suffix to map correctly (e.g. 123 -&gt; `5003-4123 - AB Roth IRA\Statements`). Some folders use `\Statement` (singular) instead of `\Statements` (plural) based on precedent.
+
+### Rule 4: Bill Payments
+- **Destination:** `C:\Users\basua\Dropbox\Money\Banks\{Bank Name}\{Account Folder}\Bill Payment\` (or `\Bill Payments\`)
+- **Naming:** `YYYY-MM-DD.pdf`
+- **Exception:** Do not add &quot;- payment&quot; or any other suffix. Only use the date the file was paid on.
+
+### Rule 5: E-Trade (RSU + ESPP)
+- **Statements:** `C:\Users\basua\Dropbox\Money\Banks\E-Trade\Statements\`
+- **Trade/Release/Payout Confirmations:** `C:\Users\basua\Dropbox\Money\Banks\E-Trade\RSU + ESPP\`
+- **Naming:** Ensure all confirmations have a unique name (e.g., `YYYY-MM-DD - Release - 100 shares.pdf` or `YYYY-MM-DD - Trade - 50 shares (2).pdf`).
+
+### Rule 6: Utilities (2424 Tulare Ave)
+- **Destination:** `C:\Users\basua\Dropbox\Documents\2424 Tulare Ave\Utilities\{Utility Name}\`
+- **Naming:** `YYYY-MM-DD.pdf`
+- **EBSAN:** `EBSAN\Statement\`.
+- **EBMUD:** `EBMUD\`.
+- **PG&amp;E:** `PG&amp;E\Electric and Gas Statements\`.
+- **Sonic:** `Sonic\`.
+
+### Rule 7: Home &amp; Mortgage (2424 Tulare Ave)
+- **Mortgage Payments:** `C:\Users\basua\Dropbox\Documents\2424 Tulare Ave\Mortgage\Payments\`
+- **Home Insurance:** `C:\Users\basua\Dropbox\Documents\2424 Tulare Ave\Home Insurance\` (e.g., `YYYY-MM-DD - 2026 Policy Renewal.pdf`).
+
+### Rule 8: Insurance &amp; Health
+- **Aetna EOBs (Zareen):** `C:\Users\basua\Dropbox\Documents\Health\Zareen\Bill Payments\YYYY-MM-DD - Aetna EOB.pdf`.
+- **Aetna EOBs (Abhi):** `C:\Users\basua\Dropbox\Documents\Health\Abhi\Bills\YYYY-MM-DD - Aetna EOB.pdf`.
+- **Dental EOBs (Abhi):** `C:\Users\basua\Dropbox\Documents\Health\Abhi\Dental\YYYY-MM-DD - Delta Dental.pdf` (No &quot;EOB&quot; in name).
+- **Health Visits (Abhi):** `C:\Users\basua\Dropbox\Documents\Health\Abhi\Visits\YYYY-MM-DD - Description.pdf`.
+- **Bill Payments (Zareen):** `C:\Users\basua\Dropbox\Documents\Health\Zareen\Bill Payments\YYYY-MM-DD - Description.pdf`. (No &quot;Health&quot; prefix, no year folders).
+
+### Rule 9: Pay Stubs &amp; Employment
+- **Destination:** `C:\Users\basua\Dropbox\Money\Payslips\Abhi\{YEAR}\`
+- **Naming:** `YYYY-MM-DD.pdf`.
+
+### Rule 10: Car &amp; Transport
+- **FasTrak:** `C:\Users\basua\Dropbox\Documents\Car\FasTrak\YYYY-MM-DD.pdf`.
+
+### Rule 11: Taxes
+- **Destination:** `C:\Users\basua\Dropbox\Money\Tax\Abhi\YA{YEAR}\Documents\`
+- **Naming:** Follow precedent: `{Owner} - {Entity} - {Form/Type}.pdf` (e.g., `Abhi - Fidelity (HSA) - 5498-SA.pdf`).
+
+### Rule 12: Travel
+- **Destination:** `C:\Users\basua\Dropbox\Travel\{YYYY-MM - Destination}\`
+- **Naming:** `YYYY-MM-DD - Description (Details).pdf`.
+- **Deduplication:** Always check if a flight confirmation is an update to an existing booking.</code></pre>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>

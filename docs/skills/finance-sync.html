@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance Sync — Skills — synthetic-mind</title>
+  <meta name="description" content="Syncs account balance data between two Google Sheets:">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      color: var(--text-dim); font-size: 0.85rem;
+    }
+    .article-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 100px; background: var(--accent-dim); color: var(--accent);
+    }
+    .gh-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; padding: 0.5rem 1rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--surface); transition: all 0.15s;
+    }
+    .gh-link:hover { color: var(--text); border-color: var(--text-dim); }
+    .gh-link svg { width: 16px; height: 16px; fill: currentColor; }
+    @media (max-width: 768px) {
+      .page-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">🧠 synthetic-mind</a>
+    <div class="nav-links">
+      <a href="../#about">About</a>
+      <a href="../ai-pm-os/">AI PM OS</a>
+      <a href="../thoughts/">Thoughts</a>
+      <a href="./" class="active">Skills</a>
+      <a href="../setup/">Setup</a>
+    </div>
+    <a href="https://github.com/abhiroopb/synthetic-mind" class="nav-gh" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<div class="page-content">
+  <a href="./" class="back-link">All skills</a>
+
+  <h1>Finance Sync</h1>
+  <div class="article-meta">
+    <span class="article-tag">skill</span>
+    <a href="https://github.com/abhiroopb/synthetic-mind/tree/main/skills/finance-sync" class="gh-link" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+  </div>
+
+  <pre><code>Syncs account balance data between two Google Sheets:
+- **Source:** [Finances spreadsheet](https://docs.google.com/spreadsheets/d/1dNaTZ3igHWdxOlH2fTnLM5jxRxFCIlkifHyWz0wSFt0) — TOPLINE tab, column K (Total Amount in USD)
+- **Destination:** [Tiller Foundation Template](https://docs.google.com/spreadsheets/d/1-vZF7pME9SAYlqiXuzd57Hvlmq9haEWhN6WvtIqPa-8) — Balance History tab (sheetId: `1531277441`)
+
+## Prerequisites
+
+Load the `gdrive` skill first. All commands run from the gdrive skill directory.
+
+## Spreadsheet IDs
+
+- Finances: `1dNaTZ3igHWdxOlH2fTnLM5jxRxFCIlkifHyWz0wSFt0`
+- Tiller: `1-vZF7pME9SAYlqiXuzd57Hvlmq9haEWhN6WvtIqPa-8`
+
+## Account Mapping (Fixed — these accounts won&#x27;t change)
+
+| # | Tiller Account Name | Account # | Account ID | Institution | Type | Class | Finances Row (TOPLINE) |
+|---|---|---|---|---|---|---|---|
+| 1 | Apostrophe Collective | | manual:c84feaba-1562-4847-aee1-68c697cc0350 | Private Company | Investment | Asset | &quot;Private company&quot; row (col K) |
+| 2 | HSBC Holdings Plc | C0804209824 | manual:d726c5a3-090d-4821-8161-a3bae9e82eb3 | Computershare | Investment | Asset | &quot;Computershare&quot; row (col K) |
+| 3 | CPF - Medisave Account - AB | | manual:c490a26c-76a7-4902-a40b-695bd571e4f3 | CPF | Savings | Asset | CPF / S8860492Z / Medisave Account (col K) |
+| 4 | CPF - Medisave Account - ZI | | manual:57e4e202-b2eb-46fc-bec2-8b71cc4e15cc | CPF | Savings | Asset | CPF / S8636333Z / Medisave Account (col K) |
+| 5 | CPF - Ordinary Account - AB | | manual:652d17c9-2768-49e1-ae16-5fc7eda54c3f | CPF | Savings | Asset | CPF / S8860492Z / Ordinary Account (col K) |
+| 6 | CPF - Ordinary Account - ZI | | manual:35aca677-8497-4a96-840f-43c9cec9d30b | CPF | Savings | Asset | CPF / S8636333Z / Ordinary Account (col K) |
+| 7 | CPF - Special Account - AB | | manual:50b47fb5-2ebc-4b0a-8921-02175a8329ab | CPF | Savings | Asset | CPF / S8860492Z / Special Account (col K) |
+| 8 | CPF - Special Account - ZI | | manual:c13ce178-3982-439c-badb-20bd9893189f | CPF | Savings | Asset | CPF / S8636333Z / Special Account (col K) |
+| 9 | DBS - Fixed Deposit (0019) | 281611010019 | manual:956373c5-6a21-4523-b94f-11c3de9ce5fe | DBS Treasures | Savings | Asset | DBS Treasures / 281611010019 / FD (col K) |
+| 10 | DBS - Fixed Deposit (0028) | 281611010028 | manual:abff4ad1-6bfc-4a86-bc4c-a582f5289937 | DBS Treasures | Savings | Asset | DBS Treasures / 281611010028 / FD (col K) |
+| 11 | DBS - Fixed Deposit (0037) | 281611010037 | manual:f591ddb7-01bd-47f0-bb15-c7e3fbed24c0 | DBS Treasures | Savings | Asset | DBS Treasures / 281611010037 / FD (col K) |
+| 12 | DBS - Fixed Deposit (0046) | 281611010046 | manual:057995a2-62e1-464b-8af7-f5a04f0d2299 | DBS Treasures | Savings | Asset | DBS Treasures / 281611010046 / FD (col K) |
+| 13 | DBS - NRE (9466) | 828020099466 | manual:9121d6f7-6f5a-476d-8fb1-8a87aac1819d | DBS Treasures | Savings | Asset | DBS Treasures / 828020099466 / NRE (col K) |
+| 14 | DBS - NRO (9475) | 828010099475 | manual:4af6d29a-f648-486e-974f-6a8337be9b0b | DBS Treasures | Savings | Asset | DBS Treasures / 828010099475 / NRO (col K) |
+| 15 | POSB eSavings - ZI (3037) | xxxx3037 | manual:0bc2c455-db15-4003-a970-1a5fdfc36f5a | DBS | Savings | Asset | POSB eSavings / 137-54794-5 (col K) — Note: this is Zareen&#x27;s POSB |
+| 16 | POSB Savings - AB (7945) | xxxx7945 | manual:b7df416c-b0f9-456b-bcbf-a4c46e9231c7 | DBS | Savings | Asset | POSB Savings / 017-31303-7 (col K) — Note: this is Abhi&#x27;s POSB |
+
+## Workflow
+
+1. **Statement Pre-Processing:**
+   - Scan the `Dropbox/Money` folder for the latest PDF statements for specific accounts: POSB Savings (Abhi &amp; Zareen), DBS Treasures (NRE, NRO, FD), and CPF (Abhi &amp; Zareen).
+   - Extract the closing balances from these PDFs.
+   - Write the extracted **INR** balances to **Column I** and **SGD** balances to **Column J** of the Finances `TOPLINE` tab.
+2. **Read TOPLINE tab** from Finances spreadsheet (`TOPLINE!A1:K80`) to get current balances in column K.
+3. **Match accounts** using the mapping table above — match by account name (col A) + account number (col B).
+4. **Insert new rows** at the top of Balance History (after header) using `sheets batch-update` with `insertDimension` on sheetId `1531277441`.
+5. **Write rows** with current date/time, account metadata, and the balance from the Finances sheet.
+6. **Show summary table** to the user with: Account, Old Balance (from last Balance History entry), New Balance, Change.
+
+## Balance History Column Format
+
+| Col | Field | Example |
+|-----|-------|---------|
+| B | Date | 4/4/26 |
+| C | Time | 11:00 PM |
+| D | Account | HSBC Holdings Plc |
+| E | Account # | C0804209824 |
+| F | Account ID | manual:d726c5a3-... |
+| G | Balance ID | (leave blank for manual) |
+| H | Institution | Computershare |
+| I | Balance | $216,833.38 |
+| J | Month | 4/1/26 (first of current month) |
+| K | Week | 3/29/26 (most recent Saturday) |
+| L | Type | Investment / Savings |
+| M | Class | Asset |
+| N | Account Status | ACTIVE |
+| O | Date Added | 4/4/2026 |
+
+## Reverse Sync: Tiller Balances → Finances TOPLINE (Column H)
+
+Pull the latest balances from Tiller&#x27;s **Balances** tab and write them into column H of the Finances TOPLINE tab.
+
+| Tiller Account | Acct # | Finances Cell |
+|---|---|---|
+| Chase Checking | 0638 | H4 |
+| Chase Savings | 9860 | H5 |
+| Schwab Checking | 2413 | H6 |
+| Schwab Emergency | 8231 | H7 |
+| TreasuryDirect AB | 9305 | H14 |
+| TreasuryDirect Trust | 1268 | H15 |
+| TreasuryDirect ZI | 4883 | H16 |
+| Chase Brokerage | 0053 | H24 |
+| Schwab Personal | 5922 | H25 |
+| Schwab Brokerage | 1756 | H26 |
+| Vanguard | 1836 | H27 |
+| E-Trade SQ RSU | 2334 | H28 |
+| Fidelity 401K | 0207 | H31 |
+| Fidelity HSA | 9907 | H32 |
+| Schwab Rollover IRA ZI | 2468 | H33 |
+| Schwab Roth IRA AB | 4123 | H34 |
+| Schwab Roth IRA ZI | 4481 | H35 |
+| Mortgage | 1199 | H54 |
+
+## Asset Updates
+
+### Mazda CX-5 (Car)
+- **Source:** Kelly Blue Book (KBB) Fair Purchase Price — VIN: `JM3KFBDMXJ0335582` (2018 Grand Touring)
+- **Finances Cell:** `TOPLINE!H57`
+- **Tiller Account:** Mazda CX-5, Acct # `8CVW950`, Account ID `manual:5bd19a8b-184d-4c64-812d-c6da20b87cd8`, Institution: Car, Type: Other, Class: Asset
+
+### 2424 Tulare Ave (House)
+- **Source:** Zillow Zestimate
+- **Finances Cell:** `TOPLINE!H53`
+- **Tiller Account:** 2424 Tulare Ave, Account ID `manual:04feacf4-7d42-4e52-9505-cc02bcb6a471`, Institution: Home, Type: Other, Class: Asset
+- **Also update:** [Payments spreadsheet](https://docs.google.com/spreadsheets/d/1hu0tTq4xCq_O6HrHaDV8dWLi9gGUBQoEbg2xHC3jlvU) → `Mortgage (Refi)` tab → Column K (&quot;Est. Home Value&quot;) at the row for the current month
+
+## Sync Completion
+
+After all updates, write today&#x27;s date into `TOPLINE!T9` to mark the sync completion.
+
+## Technical Notes
+
+- Balance values from Finances are in **USD** (column K = &quot;Total Amount in USD&quot;)
+- Format balances as `$X,XXX.XX`
+- The Month column should be the 1st of the current month
+- The Week column should be the most recent Saturday
+- Always insert rows at the TOP of Balance History (after header row)
+- Column A is always blank (matches existing pattern)
+- **PowerShell mangles JSON args** — use temporary `.sh` scripts executed via Git Bash for reliable `gdrive-cli.py` calls:
+  ```bash
+  cmd /c &quot;C:\Progra~1\Git\bin\bash.exe&quot; &quot;c:/Users/basua/tmp_script.sh&quot;
+  ```
+  Script template:
+  ```bash
+  #!/bin/bash
+  cd /c/Users/basua/.agents/skills/gdrive
+  uv run gdrive-cli.py sheets write &lt;SPREADSHEET_ID&gt; --range &quot;&lt;RANGE&gt;&quot; --values &#x27;[[&quot;&lt;VALUE&gt;&quot;]]&#x27;
+  ```</code></pre>
+</div>
+
+<footer>
+  <p>Built by <a href="https://github.com/abhiroopb">Abhi Basu</a> · <a href="https://github.com/abhiroopb/synthetic-mind">View on GitHub</a> · Powered by <a href="https://ampcode.com">Amp</a></p>
+</footer>
+
+</body>
+</html>
