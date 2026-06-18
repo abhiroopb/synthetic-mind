@@ -118,7 +118,8 @@ After all updates, write today's date into `TOPLINE!T9` to mark the sync complet
 - Format balances as `$X,XXX.XX`
 - The Month column should be the 1st of the current month
 - The Week column should be the most recent Saturday
-- Always insert rows at the TOP of Balance History (after header row)
+- Always insert rows at the TOP of Balance History (after header row). You can use `sheets batch-update` to insert the blank rows.
+- **CRITICAL:** Do NOT use `batch-update` with `userEnteredValue` to write the actual row data containing dates/times, as it will bypass Google's date parsing and insert them as plain strings (with a leading apostrophe). Instead, after inserting the empty rows, use `sheets write` (which defaults to `USER_ENTERED` parsing) to fill the row data.
 - Column A is always blank (matches existing pattern)
 - **PowerShell mangles JSON args** — use temporary `.sh` scripts executed via Git Bash for reliable `gdrive-cli.py` calls:
   ```bash
