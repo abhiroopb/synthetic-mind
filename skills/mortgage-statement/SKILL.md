@@ -40,56 +40,45 @@ Process a Rocket Mortgage billing statement PDF and update the mortgage tracker 
 
 ### Finding the Correct Row
 
-The statement's **Due Date** determines which row to update:
-- Due Date "04/01/2026" → row with Date "1-Apr-2026"
-- Read `A60:B70` to find the matching row
-- The "Next Payment Breakdown" in the statement gives the values for that row
+The statement's **Due Date** and **Payment History** determine which rows to update:
+- **Upcoming Payment**: Use the "Due Date" (e.g., "07/01/2026") to find the matching row (1-Jul-2026). Update using values from **"Explanation of amount due"**.
+- **Current Payment (Backfill)**: Use the "Last paid" section to update the row for the *preceding* month (e.g., 1-Jun-2026). This is useful if the sync was missed the previous month.
 
 ### Data Extraction from PDF
 
-Extract from the Dropbox MCP `get_file_content` response or read the local PDF:
-- **Principal**: "Next Payment Breakdown" → Principal line
-- **Interest**: "Next Payment Breakdown" → Interest line  
-- **Taxes**: "Next Payment Breakdown" → Taxes line (under Escrow)
-- **Insurance**: "Next Payment Breakdown" → Insurance line (under Escrow)
-
-### Zillow Zestimate
-
-Look up the current Zestimate for **2424 Tulare Ave, El Cerrito, CA 94530** on Zillow.
-Use `web_search` or `read_web_page` on `https://www.zillow.com/homes/2424-Tulare-Ave-El-Cerrito-CA-94530_rb/`.
+Extract the following values:
+- **Statement Date**: For naming the file (`YYYY-MM-DD.pdf`).
+- **Due Date**: To identify the upcoming payment row.
+- **Explanation of amount due**: Principal and Interest for the upcoming row.
+- **Payment history (Last paid)**: Principal and Interest for the preceding month's row (to verify/backfill).
 
 ## Workflow
 
-### Step 1: Identify the Statement PDF
-Search Dropbox Downloads for the mortgage statement PDF.
+### Step 1: Locate the Statement PDF
+1. **Search Downloads**: Check `Dropbox/Downloads/` for any PDF matching "Mortgage".
+2. **Fallback to Records**: If no new statement is in Downloads, find the latest statement in `Dropbox/Documents/2424 Tulare Ave/Mortgage/Payments/`.
 
 ### Step 2: Extract Statement Data
-Use Dropbox MCP `get_file_content` to read the PDF and extract:
-- Statement Date (for filename)
-- Due Date (to find the correct spreadsheet row)
-- Next Payment Breakdown values (Principal, Interest, Taxes, Insurance)
+Extract data from the PDF (Principal, Interest, Due Date).
 
-### Step 3: Copy & Rename
-```
-cmd /c copy "C:\Users\basua\Dropbox\Downloads\<original filename>.pdf" "C:\Users\basua\Dropbox\Documents\2424 Tulare Ave\Mortgage\Payments\YYYY-MM-DD.pdf"
-```
+### Step 3: Copy, Rename & Link (Downloads Only)
+If the file was in Downloads:
+1. **Copy**: To `/Documents/2424 Tulare Ave/Mortgage/Payments/YYYY-MM-DD.pdf`.
+2. **Wait for Sync**: Poll metadata until the file is in the cloud.
+3. **Get Link**: Use the Dropbox `content_link` or generate a shared link.
 
-### Step 4: Wait for Dropbox Sync
-The file must sync to Dropbox cloud before getting a shareable link.
-- Poll with `get_file_metadata` using path `/Documents/2424 Tulare Ave/Mortgage/Payments/YYYY-MM-DD.pdf`
-- Files are in namespace `ns:8206295520`
-- Sync can take 5-30+ minutes; poll every 60 seconds
-- If the user says to wait, use `python -c "import time; time.sleep(N)"` (max ~240s per call to avoid timeout)
+### Step 4: Get Zillow Zestimate
+Look up the current Zestimate for **2424 Tulare Ave, El Cerrito, CA 94530**.
 
-### Step 5: Get Dropbox Shareable Link
-Use Dropbox MCP `get_file_content` on the synced file. The response includes a `content_link` field.
+### Step 5: Update the Google Sheet
 
-### Step 6: Get Zillow Zestimate
-Look up the current Zestimate value.
+Update **both** the preceding month (backfill) and the upcoming month (due date) rows if values are missing or need correction.
 
-### Step 7: Update the Google Sheet
+**For D, E, F, G, K columns** (Values):
+Use the gdrive CLI via a Python script to write values to the identified rows.
 
-**For D, E, F, G, K columns** — use the gdrive CLI via a Python script to avoid PowerShell escaping:
+**For I column** (Hyperlinks):
+The Link column uses **rich text hyperlinks**. Use the Google Sheets `batchUpdate` API to insert "Link" as a clickable text, or use `=HYPERLINK("URL", "Link")` as a fallback.
 
 ```python
 import subprocess, json, os

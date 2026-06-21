@@ -94,18 +94,25 @@ Load the `gdrive` skill first. All commands run from the gdrive skill directory.
 | 14 | DBS - NRO (9475) | 828010099475 | manual:4af6d29a-f648-486e-974f-6a8337be9b0b | DBS Treasures | Savings | Asset | DBS Treasures / 828010099475 / NRO (col K) |
 | 15 | POSB eSavings - ZI (3037) | xxxx3037 | manual:0bc2c455-db15-4003-a970-1a5fdfc36f5a | DBS | Savings | Asset | POSB eSavings / 137-54794-5 (col K) — Note: this is Zareen&#x27;s POSB |
 | 16 | POSB Savings - AB (7945) | xxxx7945 | manual:b7df416c-b0f9-456b-bcbf-a4c46e9231c7 | DBS | Savings | Asset | POSB Savings / 017-31303-7 (col K) — Note: this is Abhi&#x27;s POSB |
+| 17 | Mazda CX-5 | 8CVW950 | manual:5bd19a8b-184d-4c64-812d-c6da20b87cd8 | Car | Other | Asset | &quot;Mazda CX-5&quot; row (col K) |
+| 18 | 2424 Tulare Ave | | manual:04feacf4-7d42-4e52-9505-cc02bcb6a471 | Home | Other | Asset | &quot;2424 Tulare Ave&quot; row (col K) |
 
 ## Workflow
 
-1. **Statement Pre-Processing:**
-   - Scan the `Dropbox/Money` folder for the latest PDF statements for specific accounts: POSB Savings (Abhi &amp; Zareen), DBS Treasures (NRE, NRO, FD), and CPF (Abhi &amp; Zareen).
-   - Extract the closing balances from these PDFs.
-   - Write the extracted **INR** balances to **Column I** and **SGD** balances to **Column J** of the Finances `TOPLINE` tab.
-2. **Read TOPLINE tab** from Finances spreadsheet (`TOPLINE!A1:K80`) to get current balances in column K.
-3. **Match accounts** using the mapping table above — match by account name (col A) + account number (col B).
-4. **Insert new rows** at the top of Balance History (after header) using `sheets batch-update` with `insertDimension` on sheetId `1531277441`.
-5. **Write rows** with current date/time, account metadata, and the balance from the Finances sheet.
-6. **Show summary table** to the user with: Account, Old Balance (from last Balance History entry), New Balance, Change.
+1. **Data Collection &amp; Finances Input:**
+   - **Statement Pre-Processing:**
+     - Scan the `Dropbox/Money` folder for the latest PDF statements for specific accounts: POSB Savings (Abhi &amp; Zareen), DBS Treasures (NRE, NRO, FD), and CPF (Abhi &amp; Zareen).
+     - Extract the closing balances from these PDFs and write them to Finances `TOPLINE` tab (INR to **Column I**, SGD to **Column J**). *Always use the Python `googleapiclient` method described in Technical Notes for writing.*
+   - **Asset Valuation:**
+     - **Mazda CX-5 (Car):** Fetch Kelly Blue Book (KBB) Fair Purchase Price for VIN: `JM3KFBDMXJ0335582` (2018 Grand Touring) and write to `TOPLINE!H57`.
+     - **2424 Tulare Ave (House):** Fetch Zillow Zestimate and write to `TOPLINE!H53`.
+     - **Payments Update:** Update [Payments spreadsheet](https://docs.google.com/spreadsheets/d/1hu0tTq4xCq_O6HrHaDV8dWLi9gGUBQoEbg2xHC3jlvU) → `Mortgage (Refi)` tab → Column K (&quot;Est. Home Value&quot;) at the row for the current month with the Zestimate.
+2. **Forward Sync: Finances → Tiller**
+   - **Read TOPLINE tab** from Finances spreadsheet (`TOPLINE!A1:K80`) to get current balances in column K.
+   - **Match accounts** using the mapping table above (including the assets) — match by account name (col A) + account number (col B).
+   - **Insert new rows** at the top of Balance History (after header) using `sheets batch-update` with `insertDimension` on sheetId `1531277441`.
+   - **Write rows** with current date/time, account metadata, and the balance from the Finances sheet. *Always use the Python `googleapiclient` method described in Technical Notes for writing.*
+   - **Show summary table** to the user with: Account, Old Balance (from last Balance History entry), New Balance, Change.
 
 ## Balance History Column Format
 
@@ -128,7 +135,8 @@ Load the `gdrive` skill first. All commands run from the gdrive skill directory.
 
 ## Reverse Sync: Tiller Balances → Finances TOPLINE (Column H)
 
-Pull the latest balances from Tiller&#x27;s **Balances** tab and write them into column H of the Finances TOPLINE tab.
+Pull the latest balances from Tiller&#x27;s **Balances** tab and write them into column H of the Finances TOPLINE tab. 
+**IMPORTANT**: Do not attempt to update the entire column `H4:H35` as a single block array, as this will shift empty values into incorrect cells. Always target the specific mapped cells explicitly.
 
 | Tiller Account | Acct # | Finances Cell |
 |---|---|---|
@@ -151,22 +159,12 @@ Pull the latest balances from Tiller&#x27;s **Balances** tab and write them into
 | Schwab Roth IRA ZI | 4481 | H35 |
 | Mortgage | 1199 | H54 |
 
-## Asset Updates
-
-### Mazda CX-5 (Car)
-- **Source:** Kelly Blue Book (KBB) Fair Purchase Price — VIN: `JM3KFBDMXJ0335582` (2018 Grand Touring)
-- **Finances Cell:** `TOPLINE!H57`
-- **Tiller Account:** Mazda CX-5, Acct # `8CVW950`, Account ID `manual:5bd19a8b-184d-4c64-812d-c6da20b87cd8`, Institution: Car, Type: Other, Class: Asset
-
-### 2424 Tulare Ave (House)
-- **Source:** Zillow Zestimate
-- **Finances Cell:** `TOPLINE!H53`
-- **Tiller Account:** 2424 Tulare Ave, Account ID `manual:04feacf4-7d42-4e52-9505-cc02bcb6a471`, Institution: Home, Type: Other, Class: Asset
-- **Also update:** [Payments spreadsheet](https://docs.google.com/spreadsheets/d/1hu0tTq4xCq_O6HrHaDV8dWLi9gGUBQoEbg2xHC3jlvU) → `Mortgage (Refi)` tab → Column K (&quot;Est. Home Value&quot;) at the row for the current month
 
 ## Sync Completion
 
-After all updates, write today&#x27;s date into `TOPLINE!T9` to mark the sync completion.
+After all updates are finished:
+1. Write today&#x27;s date into `TOPLINE!T9` to mark the sync completion.
+2. **Execute the Mortgage Statement Skill:** Immediately trigger the `mortgage-statement` skill to process any recent mortgage payments and ensure the home tracking is fully up to date.
 
 ## Technical Notes
 
@@ -175,17 +173,32 @@ After all updates, write today&#x27;s date into `TOPLINE!T9` to mark the sync co
 - The Month column should be the 1st of the current month
 - The Week column should be the most recent Saturday
 - Always insert rows at the TOP of Balance History (after header row). You can use `sheets batch-update` to insert the blank rows.
-- **CRITICAL:** Do NOT use `batch-update` with `userEnteredValue` to write the actual row data containing dates/times, as it will bypass Google&#x27;s date parsing and insert them as plain strings (with a leading apostrophe). Instead, after inserting the empty rows, use `sheets write` (which defaults to `USER_ENTERED` parsing) to fill the row data.
+- **CRITICAL:** Do NOT use `batch-update` with `userEnteredValue` to write the actual row data containing dates/times, as it will bypass Google&#x27;s date parsing and insert them as plain strings. Instead, after inserting the empty rows, use the Sheets API `values().batchUpdate()` to fill the row data.
 - Column A is always blank (matches existing pattern)
-- **PowerShell mangles JSON args** — use temporary `.sh` scripts executed via Git Bash for reliable `gdrive-cli.py` calls:
-  ```bash
-  cmd /c &quot;C:\Progra~1\Git\bin\bash.exe&quot; &quot;c:/Users/basua/tmp_script.sh&quot;
-  ```
-  Script template:
-  ```bash
-  #!/bin/bash
-  cd /c/Users/basua/.agents/skills/gdrive
-  uv run gdrive-cli.py sheets write &lt;SPREADSHEET_ID&gt; --range &quot;&lt;RANGE&gt;&quot; --values &#x27;[[&quot;&lt;VALUE&gt;&quot;]]&#x27;
+- **Updating Google Sheets safely**: To completely avoid PowerShell JSON mangling and bash variable expansion issues (where `$19,432.80` gets truncated to `$432.80` because of the comma), **do not use the gdrive-cli via subprocess**. Instead, write a temporary Python script that directly uses `googleapiclient.discovery` utilizing the existing credentials at `~/.config/gdrive-skill/credentials.json`.
+
+  Example Safe Python script:
+  ```python
+  import json, os
+  from google.oauth2.credentials import Credentials
+  from googleapiclient.discovery import build
+
+  TOKEN_PATH = os.path.join(os.path.expanduser(&#x27;~&#x27;), &#x27;.config&#x27;, &#x27;gdrive-skill&#x27;, &#x27;credentials.json&#x27;)
+  with open(TOKEN_PATH) as f:
+      token_data = json.load(f)
+
+  creds = Credentials(**token_data)
+  service = build(&#x27;sheets&#x27;, &#x27;v4&#x27;, credentials=creds)
+
+  data = [
+      {&#x27;range&#x27;: &#x27;TOPLINE!H24&#x27;, &#x27;values&#x27;: [[&#x27;$667,208.27&#x27;]]},
+      {&#x27;range&#x27;: &#x27;TOPLINE!H25&#x27;, &#x27;values&#x27;: [[&#x27;$319,406.00&#x27;]]}
+  ]
+
+  service.spreadsheets().values().batchUpdate(
+      spreadsheetId=&#x27;1dNaTZ3igHWdxOlH2fTnLM5jxRxFCIlkifHyWz0wSFt0&#x27;,
+      body={&#x27;valueInputOption&#x27;: &#x27;USER_ENTERED&#x27;, &#x27;data&#x27;: data}
+  ).execute()
   ```</code></pre>
 </div>
 

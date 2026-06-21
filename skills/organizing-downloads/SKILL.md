@@ -44,6 +44,7 @@ Scans the local filesystem at `C:\Users\basua\Dropbox\Downloads`, identifies eac
 ### Rule 1: Purchase Receipts (Non-Home)
 - **Destination:** `C:\Users\basua\Dropbox\Money\Receipts\{YEAR}\`
 - **Naming:** `YYYY-MM-DD - Item Name (Business Name).pdf`
+- **Note:** Verify items carefully from content text extraction (e.g. distinguishing a "Paisley Cotton Bandana" from a "Cotton Shirt" for Boggi Milano; using NordVPN, REI, SP Connect, or Sony/Best Buy as business/brand names).
 
 ### Rule 2: Home Contractor Documents (2424 Tulare Ave)
 - **Destination:** `C:\Users\basua\Dropbox\Documents\2424 Tulare Ave\Contractors\{Contractor Name}\`
@@ -52,6 +53,7 @@ Scans the local filesystem at `C:\Users\basua\Dropbox\Downloads`, identifies eac
 ### Rule 3: Bank & Brokerage Statements
 - **Destination:** `C:\Users\basua\Dropbox\Money\Banks\{Bank Name}\{Account Folder}\Statements\`
 - **Naming:** `YYYY-MM-DD.pdf` (statement end date).
+- **Note:** For the active/current year, statements are stored directly in the account root folder, while past completed years are grouped in `{YEAR}\` subfolders.
 - **Exceptions:** Do not use `\Statements` subfolders for:
   - Chase DoorDash Card: `C:\Users\basua\Dropbox\Money\Banks\Chase\DoorDash Card (8900)\`
   - Chase Amazon Card: `C:\Users\basua\Dropbox\Money\Banks\Chase\Amazon Card (9951)\`
@@ -92,9 +94,14 @@ Scans the local filesystem at `C:\Users\basua\Dropbox\Downloads`, identifies eac
 ### Rule 9: Pay Stubs & Employment
 - **Destination:** `C:\Users\basua\Dropbox\Money\Payslips\Abhi\{YEAR}\`
 - **Naming:** `YYYY-MM-DD.pdf`.
+- **Note:** For the active/current year, files are stored directly in the root of `Abhi\`, while completed past years are grouped in `{YEAR}\` subfolders.
 
 ### Rule 10: Car & Transport
 - **FasTrak:** `C:\Users\basua\Dropbox\Documents\Car\FasTrak\YYYY-MM-DD.pdf`.
+- **Tickets:** `C:\Users\basua\Dropbox\Documents\Car\Tickets\`
+  - **Naming:** `YYYY-MM-DD - Description (Vendor).pdf` or `YYYY-MM-DD - Traffic Ticket (Comune di Pienza).pdf` for parking/traffic violations.
+- **Travelers Auto Insurance:** `C:\Users\basua\Dropbox\Documents\Car\Travelers\`
+  - **Naming:** `YYYY-MM-DD - Premium payment {YEAR}.pdf` or `YYYY-MM-DD - Billing Notice.pdf`.
 
 ### Rule 11: Taxes
 - **Destination:** `C:\Users\basua\Dropbox\Money\Tax\Abhi\YA{YEAR}\Documents\`
@@ -104,3 +111,11 @@ Scans the local filesystem at `C:\Users\basua\Dropbox\Downloads`, identifies eac
 - **Destination:** `C:\Users\basua\Dropbox\Travel\{YYYY-MM - Destination}\`
 - **Naming:** `YYYY-MM-DD - Description (Details).pdf`.
 - **Deduplication:** Always check if a flight confirmation is an update to an existing booking.
+
+### Rule 13: Software Installers
+- **Destination:** `C:\Users\basua\Dropbox\Software\To Install\`
+- **Naming:** Keep original installer name (e.g. `Antigravity-x64.exe`).
+
+### Rule 14: Fog City Advisors
+- **Destination:** `C:\Users\basua\Dropbox\Money\Fog City Advisors\`
+- **Naming:** `YYYY-MM-DD - Invoice {Number}.pdf` or `YYYY-MM-DD - Payment receipt.pdf` for advisory fees.
