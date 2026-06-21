@@ -24,9 +24,10 @@
 
 set -euo pipefail
 
-DB="$HOME/.gemini/memory/amp-mem.db"
-SCHEMA="$HOME/.gemini/memory/schema.sql"
-KNOWLEDGE_FILE="$HOME/.gemini/memory/knowledge.md"
+GEMINI_DIR="${GEMINI_CLI_HOME:-$HOME/.gemini}"
+DB="$GEMINI_DIR/memory/amp-mem.db"
+SCHEMA="$GEMINI_DIR/memory/schema.sql"
+KNOWLEDGE_FILE="$GEMINI_DIR/memory/knowledge.md"
 
 # ── Helpers ──────────────────────────────────────────────────────────────
 
